@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html translate="no">
+ <head>
+  <meta charset="utf-8"/>
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon-32x32.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+  <title>Chatting Bot</title>
+  <meta name="author" content="Farid Fathoni N">
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+   <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@600&display=swap" rel="stylesheet"/>
+ </head>
+ <body id="body" class="body">
+  <h2 class="err">MAAF WEBSITE INI TIDAK TERSEDIA UNTUK VERSI DESKTOP</h2>
+  <div class="blurLayer" id="layer"></div>
+   <div class="containerAlert">
+    <div class="myAlert" id="jawaban">
+     <p class="infoAlert" id="myDescription">INFO !</p>
+     <p class="textAlert" >PESAN ALERT !</p>
+     <div class="cta-alert">
+      <button class="btn-alert" id="myButton">Ok</button>
+     </div>
+    </div>
+   </div>
+   <div class="container-my-popup">
+    <div class="my-popup">
+     <lord-icon src="https://cdn.lordicon.com/krenhavm.json" trigger="in" delay="500" stroke="bold" state="in-reveal" class="current-color" id="ico-koleksi"></lord-icon>
+     <p class="description_text" id="text-popup">Maaf fitur ini belum tersedia !!</p>
+    </div>
+   </div>
+   <audio id="audio-player" controls="true">
+    <source src="notif_1.mp3" type="audio/mpeg"/>
+   </audio>
+   <!-- <div class="container-loader">
+    <div class="loader"></div>
+    <div class="loader-loading"></div>
+    <div class="footer">
+      <p class="description_text">This website is made only for learning in development a website, FaBot-Chat 16 October Version.</p>
+      </div>
+   </div> -->
+   <div class="container-guide">
+    <div class="headerMenu">
+     <div class="arrow-button">
+      <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="toggleGuide()" ></ion-icon>
+     </div>
+     <ion-icon name="moon" class="main-icon" id="moon" onclick="switchTheme()"></ion-icon>
+     <ion-icon name="mail-sharp" class="main-icon" onclick="openEmail()"></ion-icon>
+     <ion-icon name="qr-code" class="main-icon" id="brush" onclick="handlePopup()"></ion-icon>
+    </div>
+    <div class="profileSection" id="profileSection">
+     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+       <path id="path_guide" fill="#0099ff" fill-opacity="1" d="M0,288L40,266.7C80,245,160,203,240,197.3C320,192,400,224,480,229.3C560,235,640,213,720,170.7C800,128,880,64,960,74.7C1040,85,1120,171,1200,224C1280,277,1360,299,1400,309.3L1440,320L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path>
+     </svg>
+     <div class="introduction_guide">
+      <p class="description_text">Fabot Guide</p>
+     </div>
+    </div>
+    <div class="content-guide">
+     <div class="box-guide">
+      <div class="container-chat-guide">
+       <div class="wrapper-chat-guide">
+        <div class="wrapper-overflow-chat">
+         <div class="padding-overflow">
+          <div class="containerChat">
+           <div id="chatPertanyaan" class="chatPertanyaans">
+            <div class="arrowQuest"></div>
+             <p id="textPertanyaan">jawaban bot</p>
+             <p id="timeQuestion">10.29</p>
+           </div>
+          </div>
+          <div class="containerChat">
+           <div class="chatJawaban styleAsk" id="chatJawaban">
+            <div class="arrowAsk"></div>
+              <p id="textJawaban">pertanyaan user</p>
+             <span>
+              <p id="timeAsk">05.06</p>
+              <ion-icon name="checkmark-done-sharp" id="check2" class="ceklisDua"></ion-icon>
+             </span>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="cta-koleksi">
+        <p class="description_text">Klik mengerti untuk melanjutkan.</p>
+        <button class="btn-koleksi" id="myButton" onclick="nextGuide()">Mengerti</button>
+       </div>
+      </div>
+      <div class="underline"></div>
+      <div class="box-note-guide">
+       <p id="bio" class="infoTxt"><ion-icon name="book"></ion-icon>&nbsp;Penjelasan</p>
+       <div class="wrapper-note-guide">
+        <div class="box_note_guide">
+         <p class="description_text" id="description_guide">Deskripsi 1</p>
+        </div>
+        <div class="box_note_guide">
+         <p class="description_text" id="description_guide">Deskripsi 2</p>
+        </div>
+         <div class="underline"></div>
+         <div class="box-path">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+           <path id="path_guide" fill="#0099ff" fill-opacity="1" d="M0,128L80,149.3C160,171,320,213,480,202.7C640,192,800,128,960,101.3C1120,75,1280,85,1360,90.7L1440,96L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+          </svg>
+         </div>
+        <div class="description_text_guide">
+         <p class="description_text">FaBot-Chat</p>
+         <p class="description_text">Description Guide</p>
+        </div>
+       </div>
+      </div>
+      <div class="wrap-description-guide">
+       <div class="box-note-personality">
+         <p class="description_text txt--lg"><strong>CATATAN</strong></p>
+         <p class="description_text">1. Saat kamu mengirimkan pesan kepada bot tolong ketikan kata kata yang baik.<br><br>2. Saat kamu mengetikan kata yang tidak pantas / berkata kasar maka bot akan automatis menyudahi chat dan merefresh paksa browser.<br><br>3. Saat kamu chat dengan bot tolong jangan bertanya hal hal yang aneh kepada bot. jawab saja apa yang dia katakan dalam chat.<br><br><br>Tolong di ingat bahwa bot yang ada di website ini hanyalah sebuah bot biasa dan bukan lah bot yang menggunakan AI untuk menjawab apa yang kamu pertanyakan.<br><br>Terimaksih atas perhatian nya | Developer.</p>
+       </div>
+      </div>
+     </div>
+    </div>
+     <div class="footer">
+      <p class="description_text">This website is made only for learning in development a website, FaBot-Chat 16 October Version.</p>
+     </div>
+   </div>
+   <div class="containerMail" id="containerId">
+    <div class="header-email" id="profileSection">
+     <div class="box-header-email">
+      <div class="bx-btn-exit" onclick="openEmail()">
+       <ion-icon name="arrow-back" class="sidebar-icon"></ion-icon>
+      </div>
+      <p  class="title-header-email">Contact Developer</p>
+     </div>
+    </div>
+     <div class="container-content-mail">
+      <div class="wrapper-content-header-email">
+       <div class="content-email">
+        <div class="boxEmail" >
+         <form class="form-email">
+          <div class="wrapper-input-email">
+           <label class="infoTitle">Judul Pesan</label>
+           <textarea class="title_email" placeholder="Tuliskan Judul" name="multilineText" rows="1" wrap="hard" maxlength="20" id="input_items"></textarea>
+          </div>
+          <div class="underline"></div>
+          <div class="wrapper-input-email">
+           <label class="infoTitle" >Isi Pesan</label>
+           <textarea class="value_email" placeholder="Tuliskan Pesan" name="multilineText" rows="1" wrap="hard" id="input_items"></textarea>
+          </div>
+          <div class="wrapper-cta-email">
+           <p class="description_text">Kirimkan sesuatu pesan kepada developer.</p>
+           <input class="submitEmail" type="submit" value="Kirim">
+          </div>
+         </form>
+       </div>
+       </div>
+       <div class="note-box">
+        <p class="description_text"><strong>Note&nbsp;:</strong>Kamu bebas ingin mengkritik/meroasting/memberi saran/ web chat bot ini, tapi tolong ketikan kata kata yang
+        baik saat mengirimkan pesan.</p>
+       </div>
+       <div class="underline" style="margin: 0;"></div>
+       <div class="bx-hs-info">
+        <p id="bio" class="infoTxt">History Message's</p>
+        <div class="info-icon-hs">
+         <p class="description_text" id="email_sending">0</p>
+         <lord-icon src="https://cdn.lordicon.com/wwmtsdzm.json" trigger="loop" delay="7000" stroke="bold" class="current-color" id="ico-koleksi"></lord-icon>
+        </div>
+       </div>
+      </div>
+     </div>
+      <div class="container-history-email">
+      <div class="padding-overflow">
+      <div class="bubbles"></div>
+      <p class="info_msg">ups! belum ada riwayat pesan disini</p>
+       <div class="wrap-bx-hs">
+        <div class="bx-hs-email">
+         <div class="bx-content-email">
+          <div class="bx-icon-email">
+           <lord-icon src="https://cdn.lordicon.com/aycieyht.json" trigger="loop" delay="5000" stroke="bold" class="current-color" id="ico-koleksi"></lord-icon>
+          </div>
+          <div class="bx-email-desc">
+           <div class="wrap-email-txt">
+            <p class="description_text">ini adalah pesan email saya untuk diri saya : ' saya berharap saya bisa terus belajar konsisten :) '</p>
+           </div>
+          </div>
+         </div>
+         <div class="underline"></div>
+         <div class="hs-info-email">
+           <p class="description_text" id="date_email">21 Nov 2023</p>
+           <p class="description_text"><lord-icon src="https://cdn.lordicon.com/qvyppzqz.json" trigger="loop" delay="10000" class="current-color" stroke="bold" state="hover-oscillate" id="ico-koleksi"></lord-icon>&nbsp;Time&nbsp;:&nbsp;<span id="time_email">23.11</span></p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="footer">
+      <p class="description_text">This website is made only for learning in development a website, FaBot-Chat 16 October Version.</p>
+     </div>
+    </div>
+   <div class="menu">
+    <div class="headerMenu">
+     <div class="arrow-button">
+      <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="DeveloperMenu()" ></ion-icon>
+     </div>
+     <ion-icon name="moon" class="main-icon" id="moon" onclick="switchTheme()"></ion-icon>
+     <ion-icon name="share-social" class="main-icon" id="qr" onclick="handlePopup()"></ion-icon>
+     <ion-icon name="qr-code" class="main-icon" id="brush" onclick="handlePopup()"></ion-icon>
+    </div>
+    <div class="profileSection" id="profileSection">
+     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+      <path id="path_guide" fill="#0099ff" fill-opacity="1" d="M0,288L40,266.7C80,245,160,203,240,197.3C320,192,400,224,480,229.3C560,235,640,213,720,170.7C800,128,880,64,960,74.7C1040,85,1120,171,1200,224C1280,277,1360,299,1400,309.3L1440,320L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z">
+      </path>
+     </svg>
+     <div class="profileImgBox">
+      <div class="blur-profile"></div>
+      <img src="developericon.webp" class="imgProfile" onclick="perbesarGambar()" alt="dev-icon">
+      <div class="userInfo">
+       <p class="nameUser">Farid Fn</p>
+       <p class="statusUser">Status</p>
+      </div>
+     </div>
+    </div>
+    <div class="contentMenu">
+     <div class="cards">
+      <p id="bio" class="infoTxt"><ion-icon name="person"></ion-icon>&nbsp;About Me</p>
+      <div class="description">
+       <div class="wrapper-text">
+        <p class="descriptionText" id="descriptionSatu" onclick="descriptionClick()">DESKRIPSI 1</p>
+       </div>
+      </div>
+      <div id="text1" class="description">
+       <div class="wrapper-text">
+        <div class="arrow"></div>
+        <p class="descriptionText" id="descriptionDua">DESKRIPSI 2</p>
+       </div>
+      </div>
+      <div id="text2" class="description">
+       <div class="wrapper-text">
+        <div class="arrow"></div>
+        <p class="descriptionText" id="descriptionTiga">DESKRIPSI 3</p>
+       </div>
+      </div>
+     </div>
+     <div class="underline"></div>
+     <p id="bio" class="infoTxt"><ion-icon name="sparkles"></ion-icon>&nbsp;Favorite Thing</p>
+     <div class="container-favorite">
+      <div class="cards-favorite">
+       <div class="favorite-items">
+        <div class="rowFav fav1" id="arrowFavorite"></div>
+        <div class="wrapperFav">
+         <lord-icon src="https://cdn.lordicon.com/frbjtwdl.json" trigger="click" class="current-color" stroke="bold" state="in-reveal">
+         </lord-icon>
+         <p class="favtxt" >Game</p>
+        </div>
+        <div class="descFav row1">
+         <p id="desc1">FAVORITE 1</p>
+        </div>
+       </div>
+       <div class="favorite-items">
+        <div class="rowFav fav2" id="arrowFavorite"></div>
+        <div class="wrapperFav">
+         <lord-icon src="https://cdn.lordicon.com/zxnjhqao.json" trigger="click" delay="5000" state="hover-bounce" class="current-color" stroke="bold">
+         </lord-icon>
+         <p class="favtxt" >Music</p>
+        </div>
+        <div class="descFav row2">
+         <p id="desc2">FAVORITE 2</p>
+        </div>
+       </div>
+       <div class="favorite-items">
+        <div class="rowFav fav3" id="arrowFavorite"></div>
+        <div class="wrapperFav">
+         <lord-icon src="https://cdn.lordicon.com/xynjytfp.json" trigger="click" state="morph-code" class="current-color" stroke="bold">
+         </lord-icon>
+         <p class="favtxt" >Coding</p>
+        </div>
+        <div class="descFav row2">
+         <p id="desc3">FAVORITE 3</p>
+        </div>
+       </div>
+       <div class="favorite-items">
+        <div class="rowFav fav4" id="arrowFavorite"></div>
+        <div class="wrapperFav">
+         <lord-icon src="https://cdn.lordicon.com/wzwygmng.json" trigger="click" class="current-color" state="hover-unfold" stroke="bold">
+         </lord-icon>
+         <p class="favtxt" >Sleep</p>
+        </div>
+        <div class="descFav row4">
+         <p id="desc4">FAVORITE 4</p>
+        </div>
+       </div>
+      </div>
+     </div>
+     <!--containerFavorite end-->
+     <div class="underline"></div>
+     <p id="bio" class="infoTxt"><ion-icon name="folder"></ion-icon>&nbsp;My Collection Website</p>
+     <div class="my-koleksi">
+      <div class="koleksi-box">
+       <div class="content-koleksi koleksi1">
+        <lord-icon src="https://cdn.lordicon.com/pbbsmkso.json" trigger="loop" delay="5000" stroke="light" state="loop-rotate" class="current-color" id="ico-koleksi">
+        </lord-icon>
+        <p class="title-koleksi" >Contoh Judul website</p>
+        <div class="container-deskripsi-koleksi">
+         <div class="box-deskripsi-koleksi-1" id="myDescription">
+          <p class="deskripsi-koleksi" id="deskripsi-1">deskripsi pertama</p>
+         </div>
+         <div class="box-deskripsi-koleksi-2" id="myDescription">
+          <div class="container-arrow-koleksi">
+           <div class="arrow-koleksi" id="myDescription"></div>
+          </div>
+          <div class="cards-deskripsi-2" id="myKoleksi">
+           <p class="deskripsi-koleksi" id="deskripsi-2">deskripsi ke dua</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="cta-koleksi">
+       <ion-icon name="chevron-back" class="ico-next" id="jawaban" onclick="undoKoleksi()"></ion-icon>
+       <button class="btn-koleksi" id="myButton">Launch !</button>
+       <ion-icon name="chevron-forward" class="ico-next" id="jawaban" onclick="nextKoleksi()"></ion-icon>
+      </div>
+     </div>
+     <div class="underline"></div>
+     <div class="footer-container">
+      <p id="bio" class="infoTxt"><ion-icon name="book"></ion-icon>&nbsp;Explore Propertiess</p>
+      <div class="footer-box">
+       <div class="wrapper-box-footer">
+        <div class="wrapper-footer">
+         <div class="footer-box-text" id="myDescription" onclick="footerBoxOne()">
+          <li class="footer-li">
+           <a class="footer-text" >About Me</a>
+          </li>
+         </div>
+         <div class="footer-box-text" id="myDescription" onclick="footerBoxSecond()">
+          <li class="footer-li">
+           <a class="footer-text" >Privacy Policy</a>
+          </li>
+         </div>
+         <div class="footer-box-text" id="myDescription" onclick="footerBoxThird()">
+          <li class="footer-li">
+           <a class="footer-text" >Description</a>
+          </li>
+         </div>
+        </div>
+        <div class="wrapper-footer-2">
+         <div class="footer-box-text" id="myDescription" onclick="footerBoxFour()">
+          <li class="footer-li">
+           <a class="footer-text" >Terms Of Service</a>
+          </li>
+         </div>
+         <div class="footer-box-text" id="myDescription" onclick="footerBoxFive()">
+          <li class="footer-li">
+           <a class="footer-text" >Contact Us</a>
+          </li>
+         </div>
+         <div class="footer-box-text" id="myDescription" onclick="footerBoxSix()">
+          <li class="footer-li">
+           <a class="footer-text" >Help</a>
+          </li>
+         </div>
+        </div>
+        <footer id="footers">
+         <p class="footer-class" >&copy;Copyrights 2023 All Rights Reserved.</p>
+        </footer>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="pembungkus-container">
+    <header>
+     <div class="headerBot">
+      <div class="imgboxs" id="imgBox" onclick="reactBot()">
+       <img src="boticon.webp" alt="FaBOT-icon" id="img"/>
+      </div>
+      <div class="botInfo">
+        <p class="nameBot">Fabot Chat</p>
+        <p class="botStatus">Online</p>
+      </div>
+       <ion-icon class="headerIcon" id="mail" name="mail-sharp" onclick="openEmail()"></ion-icon>
+       <ion-icon class="headerIcon" id="ellips" name="ellipsis-vertical-sharp"></ion-icon>
+     </div>
+    </header>
+    <div class="container" id="containerId">
+      <div class="container-linear"></div>
+      <div class="container-love"></div>
+     <div class="wrapper" id="container_input">
+      <div class="containerInput">
+        <textarea class="input-jawaban" id="jawaban" placeholder="Ketikan Pesan" onkeyup="checkInput()" autocomplete="off"></textarea>
+        <div class="barier"></div>
+        <button class="btn-bot" onclick="botStart()" id="myButton" disabled><ion-icon name="send-sharp"></ion-icon></button>
+      </div>
+       <div class="footer">
+         <p class="description_input">This website is made only for learning in development a website, FaBot-Chat <u>16 October
+         Version.</u></p>
+       </div>
+     </div>
+     <div class="container-sidebar" id="myKoleksi">
+      <div class="header-sidebar" id="blueHeaderUser">
+       <svg id="wave" style="transform:rotate(180deg); transition: 0.3s" viewBox="0 0 1440 340" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(243, 106, 62, 1)" offset="0%"></stop><stop stop-color="rgba(255, 179, 11, 1)" offset="100%"></stop></linearGradient></defs><path style="transform:translate(0, 0px); opacity:1" id="path_guide" fill="url(#sw-gradient-0)" d="M0,34L48,62.3C96,91,192,147,288,147.3C384,147,480,91,576,96.3C672,102,768,170,864,198.3C960,227,1056,215,1152,181.3C1248,147,1344,91,1440,56.7C1536,23,1632,11,1728,45.3C1824,79,1920,159,2016,209.7C2112,261,2208,283,2304,243.7C2400,204,2496,102,2592,68C2688,34,2784,68,2880,102C2976,136,3072,170,3168,158.7C3264,147,3360,91,3456,90.7C3552,91,3648,147,3744,153C3840,159,3936,113,4032,90.7C4128,68,4224,68,4320,96.3C4416,125,4512,181,4608,192.7C4704,204,4800,170,4896,153C4992,136,5088,136,5184,158.7C5280,181,5376,227,5472,221C5568,215,5664,159,5760,113.3C5856,68,5952,34,6048,22.7C6144,11,6240,23,6336,34C6432,45,6528,57,6624,79.3C6720,102,6816,136,6864,153L6912,170L6912,340L6864,340C6816,340,6720,340,6624,340C6528,340,6432,340,6336,340C6240,340,6144,340,6048,340C5952,340,5856,340,5760,340C5664,340,5568,340,5472,340C5376,340,5280,340,5184,340C5088,340,4992,340,4896,340C4800,340,4704,340,4608,340C4512,340,4416,340,4320,340C4224,340,4128,340,4032,340C3936,340,3840,340,3744,340C3648,340,3552,340,3456,340C3360,340,3264,340,3168,340C3072,340,2976,340,2880,340C2784,340,2688,340,2592,340C2496,340,2400,340,2304,340C2208,340,2112,340,2016,340C1920,340,1824,340,1728,340C1632,340,1536,340,1440,340C1344,340,1248,340,1152,340C1056,340,960,340,864,340C768,340,672,340,576,340C480,340,384,340,288,340C192,340,96,340,48,340L0,340Z"></path><defs><linearGradient id="sw-gradient-1" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(243, 106, 62, 1)" offset="0%"></stop><stop stop-color="rgba(255, 179, 11, 1)" offset="100%"></stop></linearGradient></defs><path style="transform:translate(0, 50px); opacity:0.9" id="path_guide" fill="url(#sw-gradient-1)" d="M0,306L48,283.3C96,261,192,215,288,181.3C384,147,480,125,576,124.7C672,125,768,147,864,130.3C960,113,1056,57,1152,56.7C1248,57,1344,113,1440,130.3C1536,147,1632,125,1728,113.3C1824,102,1920,102,2016,90.7C2112,79,2208,57,2304,51C2400,45,2496,57,2592,51C2688,45,2784,23,2880,17C2976,11,3072,23,3168,73.7C3264,125,3360,215,3456,260.7C3552,306,3648,306,3744,306C3840,306,3936,306,4032,306C4128,306,4224,306,4320,283.3C4416,261,4512,215,4608,175.7C4704,136,4800,102,4896,85C4992,68,5088,68,5184,85C5280,102,5376,136,5472,141.7C5568,147,5664,125,5760,107.7C5856,91,5952,79,6048,79.3C6144,79,6240,91,6336,119C6432,147,6528,193,6624,221C6720,249,6816,261,6864,266.3L6912,272L6912,340L6864,340C6816,340,6720,340,6624,340C6528,340,6432,340,6336,340C6240,340,6144,340,6048,340C5952,340,5856,340,5760,340C5664,340,5568,340,5472,340C5376,340,5280,340,5184,340C5088,340,4992,340,4896,340C4800,340,4704,340,4608,340C4512,340,4416,340,4320,340C4224,340,4128,340,4032,340C3936,340,3840,340,3744,340C3648,340,3552,340,3456,340C3360,340,3264,340,3168,340C3072,340,2976,340,2880,340C2784,340,2688,340,2592,340C2496,340,2400,340,2304,340C2208,340,2112,340,2016,340C1920,340,1824,340,1728,340C1632,340,1536,340,1440,340C1344,340,1248,340,1152,340C1056,340,960,340,864,340C768,340,672,340,576,340C480,340,384,340,288,340C192,340,96,340,48,340L0,340Z"></path><defs><linearGradient id="sw-gradient-2" x1="0" x2="0" y1="1" y2="0"><stop stop-color="rgba(243, 106, 62, 1)" offset="0%"></stop><stop stop-color="rgba(255, 179, 11, 1)" offset="100%"></stop></linearGradient></defs><path style="transform:translate(0, 100px); opacity:0.8" id="path_guide" fill="url(#sw-gradient-2)" d="M0,0L48,0C96,0,192,0,288,34C384,68,480,136,576,141.7C672,147,768,91,864,56.7C960,23,1056,11,1152,56.7C1248,102,1344,204,1440,204C1536,204,1632,102,1728,62.3C1824,23,1920,45,2016,85C2112,125,2208,181,2304,181.3C2400,181,2496,125,2592,136C2688,147,2784,227,2880,232.3C2976,238,3072,170,3168,164.3C3264,159,3360,215,3456,221C3552,227,3648,181,3744,153C3840,125,3936,113,4032,107.7C4128,102,4224,102,4320,96.3C4416,91,4512,79,4608,79.3C4704,79,4800,91,4896,124.7C4992,159,5088,215,5184,249.3C5280,283,5376,295,5472,255C5568,215,5664,125,5760,79.3C5856,34,5952,34,6048,28.3C6144,23,6240,11,6336,17C6432,23,6528,45,6624,73.7C6720,102,6816,136,6864,153L6912,170L6912,340L6864,340C6816,340,6720,340,6624,340C6528,340,6432,340,6336,340C6240,340,6144,340,6048,340C5952,340,5856,340,5760,340C5664,340,5568,340,5472,340C5376,340,5280,340,5184,340C5088,340,4992,340,4896,340C4800,340,4704,340,4608,340C4512,340,4416,340,4320,340C4224,340,4128,340,4032,340C3936,340,3840,340,3744,340C3648,340,3552,340,3456,340C3360,340,3264,340,3168,340C3072,340,2976,340,2880,340C2784,340,2688,340,2592,340C2496,340,2400,340,2304,340C2208,340,2112,340,2016,340C1920,340,1824,340,1728,340C1632,340,1536,340,1440,340C1344,340,1248,340,1152,340C1056,340,960,340,864,340C768,340,672,340,576,340C480,340,384,340,288,340C192,340,96,340,48,340L0,340Z"></path></svg>
+       <div class="box-header-user" >
+        <div class="img-box-user" >
+         <img src="profileicon.webp" class="img-user" alt="user-icon">
+        </div>
+       <div class="feature-sidebar">
+        <div class="menu-sidebar" onclick ="openSidebar()"></div>
+         <p class="sidebar-title" >USER FABOT</p>
+         <lord-icon
+          src="https://cdn.lordicon.com/awjihmup.json" trigger="loop" delay="1500" stroke="bold" class="current-color main-icon" onclick="switchTheme()">
+         </lord-icon>
+        </div>
+        <div class="box-info-user">
+         <div class="info-user">
+          <span class="text-usr say-user" >hallo,</span>
+          <span class="text-usr name-user" >unknown user</span>
+          <p class="user-email">unknown@gmail.com</p>
+         </div>
+        </div>
+       </div>
+       <div class="container-hobby-user">
+        <p class="text-hobby-user" >&nbsp;Favorite&nbsp;&nbsp;:</p>
+        <div class="wrapper-hobby-user">
+         <div class="box-hobby-user" id="box-hobby-clr">
+          <p class="text-hobby-user" >coding</p>
+         </div>
+         <div class="box-hobby-user" id="box-hobby-clr">
+          <p class="text-hobby-user" >game</p>
+         </div>
+         <div class="box-hobby-user" id="box-hobby-clr">
+          <p class="text-hobby-user" >Sleep</p>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="content-sidebar" id="myKoleksi">
+       <div class="wrapper-box-sidebar">
+        <div class="box-sidebar-items" onclick="openHome()">
+         <button class="btn-cta" disabled>
+         <ion-icon name="home" class="sidebar-icon" ></ion-icon>
+         <p class="text-sidebar" >Home</p>
+         </button>
+        </div>
+        <div class="box-sidebar-items" onclick="openProfile()">
+         <ion-icon name="person" class="sidebar-icon" ></ion-icon>
+         <p class="text-sidebar" >My Profile</p>
+        </div>
+        <div class="box-sidebar-items" onclick="toggleGuide()">
+         <ion-icon name="book" class="sidebar-icon" ></ion-icon>
+         <p class="text-sidebar" >ChatBot Guide</p>
+        </div> 
+        <div class="box-sidebar-items" onclick="DeveloperMenu()">
+         <ion-icon name="id-card" class="sidebar-icon" ></ion-icon>
+         <p class="text-sidebar" >About Developer</p>
+        </div>
+       </div>
+       <div class="box-social-media">
+        <p class="text-usr" >Social Media</p>
+        <div class="box-item-sosmed">
+         <a class="item-icon-sosmed" href="https://www.facebook.com/bayuan.754"><i class="fab fa-facebook" ></i></a>
+         <a class="item-icon-sosmed" href="https://www.instagram.com/fridfn_"><i class="fab fa-instagram" ></i></a>
+         <a class="item-icon-sosmed" href="https://t.me/ShirakamiFubuki7"><i class="fab fa-telegram" ></i></a>
+         <a class="item-icon-sosmed" href="https://tiktok.com/@frdfnz"><i class="fab fa-tiktok"
+         ></i></a>
+        </div>
+       </div>
+       <div class="signin-box" id="blueHeaderUser" onclick="loginValidation()">
+        <ion-icon name="log-in" class="sidebar-icon" ></ion-icon>
+        <p class="signin-text" >Login</p>
+       </div>
+      </div>
+     </div>
+      <div class="containerOpsi">
+       <div class="wrapperOpsi" id="myButton">
+        <div class="boxOpsi">
+         <p class="txtOpsi" onclick="fullScreen()"><lord-icon src="https://cdn.lordicon.com/ktpvefbv.json" trigger="loop" delay="3000" stroke="bold" class="current-color"></lord-icon>&nbsp;Full Screen</p>
+        </div>
+        <div class="boxOpsi">
+        <p class="txtOpsi" onclick="handlePopup()"><ion-icon name="settings-sharp" id="ico"></ion-icon>&nbsp;Pengaturan</p>
+        </div>
+        <div class="boxOpsi">
+         <p class="txtOpsi" onclick="handlePopup()"><ion-icon name="share-social" id="ico"></ion-icon>&nbsp;Bagikan</p>
+        </div>
+        <div class="boxOpsi">
+         <p class="txtOpsi" onclick="handlePopup()"><ion-icon name="trash" id="ico"></ion-icon>&nbsp;Bersihkan chat</p>
+        </div>
+       </div>
+      </div>
+     <div class="date">
+       <p>31 Mei 2023</p>
+     </div>
+     <div class="about">
+       <p><ion-icon name="lock-closed"></ion-icon> pesan dan riwayat chat terenkripsi secara end-to-end. tidak seorang pun di luar chat ini, termasuk developer yang dapat membaca atau melihatnya.</p>
+     </div>
+     <div class="containerChat" id="firstContentPertanyaan">
+      <div class="chatPertanyaans" id="firstChatPertanyaan">
+        <div class="arrowQuest"></div>
+         <p id="firstPertanyaan">pertanyaan</p>
+         <p id="timeQuestion"></p>
+        </div>
+      </div>
+     <div class="containerChat" id="contentJawaban">
+        <div class="chatJawaban styleAsk" id="chatJawaban">
+         <div class="arrowAsk"></div>
+           <p id="textJawaban">Jawaban</p>
+           <span>
+            <p id="timeAsk"></p>
+            <ion-icon name="checkmark-done-sharp" id="check2" class="ceklisDua"></ion-icon>
+           </span>
+         </div>
+      </div>
+     <div class="containerChat" id="contentPertanyaan">
+       <div id="chatPertanyaan" class="chatPertanyaans">
+        <div class="arrowQuest"></div>
+         <p id="textPertanyaan">pertanyaan kedua</p>
+         <p id="timeQuestion"></p>
+        </div>
+        <div class="sticker-chat">
+         <p class="time-sticker">05.06</p>
+        </div>
+        <div class="guess-picture">
+         <div class="forward-box">
+          <ion-icon name="arrow-redo"></ion-icon>
+         </div>
+        </div>
+      </div>
+     <div class="pathchat"></div>
+    </div>
+   </div>
+  <div class="container-personality-box">
+   <div class="wrapper-header-menu">
+    <div class="headerMenu">
+     <div class="arrow-button">
+      <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="togglePersonality()" ></ion-icon>
+     </div>
+     <p class="title-explore" >Personal Settings</p>
+     <div class="wrapper-header-icon">
+      <ion-icon name="moon" class="main-icon" id="moon" onclick="switchTheme()"></ion-icon>
+      <ion-icon name="save" class="main-icon" id="brush" onclick="savePersonality()"></ion-icon>
+     </div>
+    </div>
+   </div>
+   <div class="content-personality">
+    <div class="box-personality">
+     <div class="wrapper-content-section">
+      <div class="box-avatar-section">
+       <div class="wrapper-avatar">
+        <img src="personality.webp" alt="avatar" class="img-avatar">
+        <div class="wrapper-icon-avatar">
+         <ion-icon name="heart" class="main-icon"></ion-icon>
+         <ion-icon name="heart" class="main-icon"></ion-icon>
+         <ion-icon name="heart" class="main-icon" onclick="handlePopup()"></ion-icon>
+        </div>
+       </div>
+       <div class="wrapper-input-personality">
+        <div class="wrapper-box-personality">
+         <p class="title-personality-input">Nama Panggilan</p>
+         <div class="box-input-personality">
+          <ion-icon name="person" class="main-icon"></ion-icon>
+          <input type="text" placeholder="Kamu mau di panggil apa" class="input-login" autocomplete="off" name='Nama panggilan'>
+         </div>
+        </div>
+        <div class="wrapper-box-personality">
+         <p class="title-personality-input">Nama Lengkap / Nama Panjang</p>
+         <div class="box-input-personality">
+          <ion-icon name="person" class="main-icon"></ion-icon>
+          <input type="text" placeholder="Ketikan nama kamu" class="input-login" autocomplete="off" name='Nama lengkap'>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="wrapper-about-personality">
+       <div class="wrapper-box-personality">
+        <p class="title-personality-input">Tanggal Lahir</p>
+        <div class="box-input-personality">
+         <ion-icon name="calendar" class="main-icon"></ion-icon>
+         <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" name='Tanggal Lahir'>
+        </div>
+       </div>
+       <div class="wrapper-box-personality">
+        <p class="title-personality-input">Kelas</p>
+        <div class="box-input-personality">
+         <ion-icon name="school" class="main-icon"></ion-icon>
+         <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" name='Kelas'>
+        </div>
+       </div>
+       <div class="wrapper-box-personality">
+        <p class="title-personality-input">Favorite Song's</p>
+        <div class="box-input-personality">
+         <ion-icon name="musical-notes" class="main-icon"></ion-icon>
+         <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" name='Favorite lagu'>
+        </div>
+       </div>
+       <div class="wrapper-box-personality">
+        <p class="title-personality-input">Gender</p>
+        <div class="box-input-personality">
+         <ion-icon name="male-female" class="main-icon"></ion-icon>
+         <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" name='Gender'>
+        </div>
+       </div>
+       <div class="wrapper-box-personality">
+        <p class="title-personality-input">My Dream's</p>
+        <div class="box-input-personality">
+         <ion-icon name="star" class="main-icon"></ion-icon>
+         <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" name='My Dreams'>
+        </div>
+       </div>
+       <div class="wrapper-box-personality">
+        <p class="title-personality-input">Planet</p>
+        <div class="box-input-personality">
+         <ion-icon name="planet" class="main-icon"></ion-icon>
+         <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" name='Planet'>
+        </div>
+       </div>
+      </div>
+      <div class="wrapper-about-personality">
+        <div class="box-hobby-personality">
+         <div class="wrapper-box-personality">
+          <p class="title-personality-input">Hobby</p>
+          <div class="box-input-personality">
+           <ion-icon name="sparkles" class="main-icon"></ion-icon>
+           <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" maxlength="8" name='hobby 1'>
+          </div>
+         </div>
+         <div class="wrapper-box-personality">
+          <p class="title-personality-input">Hobby</p>
+          <div class="box-input-personality">
+           <ion-icon name="sparkles" class="main-icon"></ion-icon>
+           <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" maxlength="8" name='hobby 1'>
+          </div>
+         </div>
+         <div class="wrapper-box-personality">
+          <p class="title-personality-input">Hobby</p>
+          <div class="box-input-personality">
+           <ion-icon name="sparkles" class="main-icon"></ion-icon>
+           <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" maxlength="8" name='hobby 1'>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="wrapper-about-personality">
+         <div class="wrapper-box-personality" id="description-personal">
+          <p class="title-personality-input">Tuliskan Deskripsimu</p>
+          <div class="box-input-personality">
+           <ion-icon name="planet" class="main-icon"></ion-icon>
+           <textarea id="textarea-personality" class="input-login" placeholder="Ketikan sesuatu" wrap="hard" rows="5" maxlength="1000" name='deskripsi bio'></textarea>
+          </div>
+         </div>
+        </div>
+        <div class="box-note-personality">
+         <p class="description_text txt--lg"><strong>CATATAN</strong></p>
+         <p class="description_text">1. Informasi yang kamu ketikan diatas digunakan untuk bot mengenali tentang diri kamu.<br><br>2. Isilah input sesuai dengan judul input nya, agar ketika kamu chatting dengan bot topik / konteks yang di bicarakan nanti menjadi jelas.<br><br>3. Berikan kata kata yang sopan dan baik saat mengisikan input diatas, karna developer sangat melarang keras kata kata kasar saat mengisi input / membalas pesan dari bot nanti.<br><br>4. Setelah semua input diisi kamu bisa menyimpan nya dengan mengklik tombol save di kanan diatas, pastikan bahwa semua input diisi dengan benar.<br><br><br>Tolong di ingat bahwa apa yang kamu ketikan diatas hanyalah simulasi untuk developer belajar mengelola data dari apa yang user ketikan dalam input diatas dan informasi diatas digunakan hanya untuk bot mengenali pengguna nya.<br><br>Terimaksih atas perhatian nya | Developer.</p>
+       </div>
+      </div>
+     </div>
+     <footer id="footers">
+      <p class="footer-class" >&copy;Copyrights 2023 All Rights Reserved.</p>
+     </footer>
+    </div>
+   </div>
+  <div class="container-user-page" id="containerId">
+   <div class="content-user-page">
+    <div class="headerMenu">
+     <div class="arrow-button">
+      <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="openProfile()" ></ion-icon>
+     </div>
+     <ion-icon name="moon" class="main-icon" id="moon" onclick="switchTheme()"></ion-icon>
+     <ion-icon name="newspaper" class="main-icon" id="qr" onclick="togglePersonality()"></ion-icon>
+     <ion-icon name="qr-code" class="main-icon" id="brush" onclick="handlePopup()"></ion-icon>
+    </div>
+    <div class="profileSection" id="profileSection">
+     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+      <path id="path_guide" fill="#0099ff" fill-opacity="1" d="M0,320L34.3,304C68.6,288,137,256,206,250.7C274.3,245,343,267,411,261.3C480,256,549,224,617,186.7C685.7,149,754,107,823,106.7C891.4,107,960,149,1029,192C1097.1,235,1166,277,1234,272C1302.9,267,1371,213,1406,186.7L1440,160L1440,0L1405.7,0C1371.4,0,1303,0,1234,0C1165.7,0,1097,0,1029,0C960,0,891,0,823,0C754.3,0,686,0,617,0C548.6,0,480,0,411,0C342.9,0,274,0,206,0C137.1,0,69,0,34,0L0,0Z">
+      </path>
+     </svg>
+     <div class="wrapper-img">
+      <div class="profileImgBox">
+       <div class="blur-profile"></div>
+       <img src="profileicon.webp" class="imgProfile" onclick="perbesarGambar()" alt="user-icon">
+       <div class="userInfo">
+        <p class="nameUser">Name</p>
+        <p class="statusUser">Online</p>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="body-content-user-page">
+     <div class="wrapper-user-page">
+      <div class="box-user-page">
+       <p class="title-box-user-page">Personal Info</p>
+       <div class="wrapper-personal-box">
+        <div class="user-personal-box" >
+         <div class="user-personal-box-items">
+          <ion-icon name="person" class="main-icon"></ion-icon>
+          <div class="wrapper-txt-user-personal-box">
+           <p class="tiny-text">Full Name</p>
+           <p class="txt-user-personal-box">Farid Fathoni N</p>
+          </div>
+         </div>
+         <div class="user-personal-box-items">
+          <ion-icon name="calendar" class="main-icon"></ion-icon>
+          <div class="wrapper-txt-user-personal-box">
+           <p class="tiny-text">Tanggal Ultah</p>
+           <p class="txt-user-personal-box">29-October-2023</p>
+          </div>
+         </div>
+         <div class="user-personal-box-items">
+          <ion-icon name="star" class="main-icon"></ion-icon>
+          <div class="wrapper-txt-user-personal-box">
+           <p class="tiny-text">Your dreams</p>
+           <p class="txt-user-personal-box">I Want To Be Developer/Engineer</p>
+          </div>
+         </div>
+        </div>
+        <div class="user-personal-box" >
+         <div class="user-personal-box-items">
+          <ion-icon name="school" class="main-icon"></ion-icon>
+          <div class="wrapper-txt-user-personal-box">
+           <p class="tiny-text">Kelas</p>
+           <p class="txt-user-personal-box">X TKJ</p>
+          </div>
+         </div>
+         <div class="user-personal-box-items">
+          <ion-icon name="male-female" class="main-icon"></ion-icon>
+          <div class="wrapper-txt-user-personal-box">
+           <p class="tiny-text">Gender</p>
+           <p class="txt-user-personal-box">Cowok</p>
+          </div>
+         </div>
+         <div class="user-personal-box-items">
+          <ion-icon name="musical-notes" class="main-icon"></ion-icon>
+          <div class="wrapper-txt-user-personal-box">
+           <p class="tiny-text">Favorite Song</p>
+           <p class="txt-user-personal-box">Cash Cash - Hero</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="underline"></div>
+      <div class="box-user-page">
+       <div class="container-hobby-user">
+        <p class="text-hobby-user" >&nbsp;Hobby</p>
+        <div class="wrapper-hobby-user">
+         <div class="box-hobby-user" id="box-hobby-clr">
+          <p class="text-hobby-user" >Coding's</p>
+         </div>
+         <div class="box-hobby-user" id="box-hobby-clr">
+          <p class="text-hobby-user" >Game's</p>
+         </div>
+         <div class="box-hobby-user" id="box-hobby-clr">
+          <p class="text-hobby-user" >Sleep's</p>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="underline"></div>
+      <div class="box-user-page">
+       <div class="title-box-input-2">
+        <p class="title-text-input" >My Bio</p>
+       </div>
+       <div class="descriptionText" id="myDescription">
+        <p class="bio-user">contoh deskripsi untuk bio pengguna website ini. ini hanyalah sempel contoh text nya</p>
+       </div>
+      </div>
+      <div class="underline"></div>
+      <div class="footer-container">
+       <p id="bio" class="infoTxt"><ion-icon name="book"></ion-icon>&nbsp;Explore Propertiess</p>
+       <div class="footer-box">
+        <div class="wrapper-box-footer">
+         <div class="wrapper-footer">
+          <div class="footer-box-text" id="myDescription" onclick="footerBoxOne()">
+           <li class="footer-li">
+            <a class="footer-text" >About Me</a>
+           </li>
+          </div>
+          <div class="footer-box-text" id="myDescription" onclick="footerBoxSecond()">
+           <li class="footer-li">
+            <a class="footer-text" >Privacy Policy</a>
+           </li>
+          </div>
+          <div class="footer-box-text" id="myDescription" onclick="footerBoxThird()">
+           <li class="footer-li">
+            <a class="footer-text" >Description</a>
+           </li>
+          </div>
+         </div>
+         
+         <div class="wrapper-footer-2">
+          <div class="footer-box-text" id="myDescription" onclick="footerBoxFour()">
+           <li class="footer-li">
+            <a class="footer-text" >Terms Of Service</a>
+           </li>
+          </div>
+          <div class="footer-box-text" id="myDescription" onclick="footerBoxFive()">
+           <li class="footer-li">
+            <a class="footer-text" >Contact Us</a>
+           </li>
+          </div>
+          <div class="footer-box-text" id="myDescription" onclick="footerBoxSix()">
+           <li class="footer-li">
+            <a class="footer-text" >Help</a>
+           </li>
+          </div>
+         </div>
+         <footer id="footers">
+          <p class="footer-class" >&copy;Copyrights 2023 All Rights Reserved.</p>
+         </footer>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+   <div class="container-explore">
+    <div class="header-explore" id="profileSection">
+     <div class="header-explore-wrapper">
+      <p class="title-explore" >Explore Properties</p>
+      <div class="headerMenu">
+       <div class="arrow-button">
+        <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="DeveloperMenu()" ></ion-icon>
+       </div>
+       <ion-icon name="moon" class="main-icon" id="moon" onclick="switchTheme()"></ion-icon>
+       <ion-icon name="person-add" class="main-icon" id="qr" onclick="handlePopup()"></ion-icon>
+       <ion-icon name="heart" class="main-icon" id="brush" onclick="handlePopup()"></ion-icon>
+      </div>
+     </div>
+    </div>
+    <div class="body-explore" id="myDescription">
+     <div class="wrapper-explore-box">
+      <div class="explore-box" id="myKoleksi">
+       <div class="arrow-explore-left" id="blueHeaderUser"></div>
+       <p class="explore-text">Explore Text</p>
+      </div>
+      <div class="explore-box" id="myKoleksi">
+       <div class="arrow-explore-right" id="blueHeaderUser"></div>
+       <p class="explore-text">Explore Text</p>
+      </div>
+      <div class="explore-box" id="myKoleksi">
+       <div class="arrow-explore-left" id="blueHeaderUser"></div>
+       <p class="explore-text">Explore Text</p>
+      </div>
+      <div class="explore-box" id="myKoleksi">
+       <div class="arrow-explore-right" id="blueHeaderUser"></div>
+       <p class="explore-text">Explore Text</p>
+      </div>
+      <div class="explore-box" id="myKoleksi">
+       <p class="explore-text">Explore Text</p>
+      </div>
+     </div>
+     <div class="privacy-policy">
+      <p class="text-privacy-policy" id="myKoleksi">Text Privacy Policy</p>
+     </div>
+     <div class="container-terms-of-service">
+      <div class="terms-box">
+       <p class="terms-text" id="myKoleksi">Text Terms Of Service</p>
+      </div>
+     </div>
+     <div class="container-help">
+      <div class="box-help">
+       <p class="text-help" id="myKoleksi">Text Help</p>
+      </div>
+     </div>
+     <div class="container-contact-us">
+      <div class="box-contact-us">
+       <p class="text-contact-us" id="myKoleksi">text contact us</p>
+      </div>
+     </div>
+     <footer id="footers">
+      <p class="footer-class" >&copy;Copyrights 2023 All Rights Reserved.</p>
+     </footer>
+    </div>
+   </div>
+   <div class="container-home">
+    <div class="content-home">
+     <div id="background-home">
+      <div class="content-box-home" style="display: none;">
+       <div class="home-date-info" >
+        <div class="text-box-day">
+         
+        </div>
+        <div class="box-info-widget">
+         <div class="box-text-widget">
+          <ion-icon name="person-sharp"></ion-icon>&nbsp;
+          <p class="user-name-widget" ></p>
+         </div>
+         <div class="box-text-widget">
+          <ion-icon name="location"></ion-icon>&nbsp;
+          <p class="user-name-widget" ></p>
+         </div>
+         <div class="box-text-widget">
+          <ion-icon name="heart">&nbsp;</ion-icon>&nbsp;
+          <p class="user-name-widget" ></p>
+         </div>
+        </div>
+       </div>
+       <div class="title-text-home">
+        <p class="text-icon-day" >Welcome</p>
+        <p class="text-icon-day" >farid</p>
+       </div>
+      </div>
+      <div class="container-popup" style="display: none;">
+       <div class="box-img-popup">
+        <div class="profileImgBox">
+         <img src="developericon.webp" class="imgProfile" />
+        </div>
+       </div>
+       <div class="userInfo">
+        <p class="nameUser">Developer ~</p>
+        <p class="statusUser">text random</p>
+       </div>
+       <div class="cta-popup">
+        <button disabled onclick="shufflePopup()">
+         <lord-icon src="https://cdn.lordicon.com/fyxgoiep.json" trigger="click" class="current-color" stroke="bold" state="hover-pinch"></lord-icon>
+        </button>
+       </div>
+      </div>
+      <div class="box-header-home">
+       <div class="header-home">
+        <div class="box-icon-home">
+         <ion-icon name="logo-octocat" class="icon-home"></ion-icon>
+        </div>
+        <div class="nav-home">
+         <nav>
+          <ul>
+           <li><a href="#hints">About</a></li>
+           <li><a href="#skils">Skils</a></li>
+           <li class="dropdown">
+            <a href="#">Contact</a>
+            <ul class="dropdown-theme">
+             <li onclick="switchTheme(themeRed)"><a href="#">Red</a></li>
+             <li onclick="switchTheme(themeBlue)"><a href="#">Blue</a></li>
+             <li onclick="switchTheme(themeYellow)"><a href="#">Yellow</a></li>
+            </ul>
+           </li>
+           <li><button class="btn-login"><span><ion-icon name="person"></ion-icon>Signup</span></button></li>
+          </ul>
+         </nav>
+        </div>
+       </div>
+       <div class="header-content-home">
+        <div class="wrapper-header-time">
+         <p class="text-icon-date">00</p>
+         <p class="text-icon-date">00</p>
+         <p class="text-icon-day">17 Agustus 2023</p>
+        </div>
+        <div class="wrapper-content-home">
+         <div class="wrapper-box-article">
+          <div class="wrapper-cta-and-article">
+           <div style="display: flex; flex-direction: column; gap: 15px; width: 75%; border: 1px solid red;">
+            <div class="box-header-article">
+             <h1 class="title-header-home">welcome to my <span style="color: var(--theme-color-icon);">chatbot </span>web <span style="color: var(--theme-color-icon);">development</span> journey!</h1>
+             <p class="article-header">dolor ullamco do sint est anim ut ullamco duis consectetur ut voluptate occaecat laboris occaecat reprehenderit cillum elit ea consectetur voluptate nostrud nisi veniam duis.</p>
+            </div>
+            <div class="box-btn-article">
+             <button class="cta-article"><p>START CHAT</p><ion-icon name="arrow-back-sharp"></ion-icon></button>
+             <button class="cta-article"><p>MAIL ME</p><ion-icon name="mail"></ion-icon></button>
+            </div>
+           </div>
+           <div class="container-sidebar-home-feature">
+            <div class="wrapper-sidebar-home-feature">
+             <div class="box-sidebar-home-feature" onclick="switchTheme()">
+              <ion-icon name="eye-off" class=""></ion-icon>
+             </div>
+             <div class="box-sidebar-home-feature" onclick="openEmail()">
+              <ion-icon name="mail" class=""></ion-icon>
+             </div>
+             <div class="box-sidebar-home-feature">
+              <ion-icon name="help" class="" onclick="versionPage()"></ion-icon>
+             </div>
+             <div class="box-sidebar-home-feature" style="display: none;">
+              <ion-icon name="time" class="" onclick="checkLoginTime()"></ion-icon>
+              <div class="popup-time">
+               <p id="blueHeaderUser">User telah login 06 hari 05 jam 206 menit</p>
+               <div class="popup-time-arrow"></div>
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="box-medsos-home">
+          <a class="item-icon-sosmed" href="https://api.whatsapp.com/send?phone=+62 899-5247-491&text=Hi,%20kamu%20developer%20website%20fabot%20?" target="_blank"><i class="fab fa-whatsapp" ></i></a>
+          <a class="item-icon-sosmed" href="https://www.instagram.com/fridfn_" target="_blank"><i class="fab fa-instagram" ></i></a>
+          <a class="item-icon-sosmed" href="https://t.me/ShirakamiFubuki7" target="_blank"><i class="fab fa-telegram" ></i></a>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="box-website-review">
+       <div class="item-box-review">
+        <p class="title-txt-review">170+</p>
+        <p class="article-header">This is a simple chatbot </p>
+       </div>
+       <div class="item-box-review">
+        <p class="title-txt-review">170+</p>
+        <p class="article-header">This is a simple chatbot </p>
+       </div>
+       <div class="item-box-review">
+        <p class="title-txt-review">170+</p>
+        <p class="article-header">This is a simple chatbot </p>
+       </div>
+      </div>
+     </div>
+      <div class="header_title_content">
+       <h1 class="title-header-home">about the development</h1>
+       <p class="article-header">dolor ullamco do sint est anim ut ullamco duis consectetur ut voluptate occaecat laboris occaecat reprehenderit.</p>
+      </div>
+     <div class="container-box-hints" id="hints">
+      <div id="particles-js"></div>
+      <div class="wrapper-box-hints">
+       <div class="box-hints">
+        <div class="item-hints">
+         <div class="hint" data-position="4">
+          <span class="hint-dot" id="show-elem">Created</span>
+          <div class="hint-content hint-right">
+           <div class="overflow-padding">
+            <p id="txt-hint" class="hint-text">This website was first developed and created on June 1, 2023. FYI this it was ? months ago.<br><br>Developer : Farid Fathoni N</p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="box-hints">
+        <div class="item-hints">
+         <div class="hint" data-position="4">
+         <span class="hint-dot" id="show-elem">Description</span>
+          <div class="hint-content">
+           <div class="overflow-padding">
+            <p class="hint-text">This website is a simple chatbot website that is used only to learn to understand the basic JavaScript programming language.</p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="box-hints">
+        <div class="item-hints">
+         <div class="hint" data-position="4">
+          <span class="hint-dot" id="show-elem">About me</span>
+           <div class="hint-content hint-right">
+            <div class="overflow-padding">
+             <p class="hint-text">A b o u t&nbsp;&nbsp;D e v e l o p e r -><br><br>Name : Farid Fathoni N<br>Status : vocational high school<br>Favorite : code/ typing/ reading/ Music</p>
+            </div>
+           </div>
+          </div>
+         </div>
+       </div>
+       <div class="box-hints">
+        <div class="item-hints">
+         <div class="hint" data-position="4">
+         <span class="hint-dot" id="show-elem">conclusion</span>
+          <div class="hint-content">
+           <div class="overflow-padding">
+            <p class="hint-text">The conclusion is that this website was created only as a place for developers to learn about developing a website.</p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="container-cards-skils">
+      <div class="wrapper-card-box-skils">
+       <div class="header_title_content">
+        <h1 class="title-header-home">why should choose me?</h1>
+        <p class="article-header">dolor ullamco do sint est anim ut ullamco duis consectetur ut voluptate occaecat laboris occaecat reprehenderit.</p>
+       </div>
+       <div class="wrapper-cards-header" id="cards-excess">
+        <div class="items-cards-skils">
+         <div class="cards-skils">
+          <p class="header-text-cards"></p>
+          <ion-icon name="bulb" class="cards-icon"></ion-icon>
+          <div class="cta-cards-skils">
+           <div class="content-cards-skils">
+            <p class="body-cards-skils"></p>
+           </div>
+           <div class="box-cta-cards-skils">
+            <ion-icon name="caret-forward-outline"></ion-icon>
+            <p>MORE</p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="container-skill" id="skils">
+        <div class="skill-box">
+         <span class="span-title-skill">
+          <ion-icon name="logo-html5" class="main-icon" style="--clr: #e66200;"></ion-icon>
+          <span class="title">HTML</span>
+         </span>
+         <div class="skill-bar">
+          <span class="skill-per html" id="show-elem">
+           <span class="tooltip hint-text">70%</span>
+          </span>
+         </div>
+        </div>
+        <div class="skill-box">
+         <span class="span-title-skill">
+          <ion-icon name="logo-css3" class="main-icon" style="--clr: #005ee6; "></ion-icon>
+          <span class="title">CSS</span>
+         </span>
+          <div class="skill-bar">
+            <span class="skill-per css" id="show-elem">
+              <span class="tooltip hint-text">55%</span>
+            </span>
+          </div>
+        </div>
+        <div class="skill-box">
+         <span class="span-title-skill">
+          <ion-icon name="logo-javascript" class="main-icon" style="--clr: #ecd700;"></ion-icon>
+           <span class="title">JavaScript</span>
+          </span>
+          <div class="skill-bar">
+            <span class="skill-per javascript" id="show-elem">
+              <span class="tooltip hint-text">45%</span>
+            </span>
+          </div>
+        </div>
+       </div>
+      </div>
+      <div class="wrapper-card-box-skils">
+       <div class="header_title_content">
+        <h1 class="title-header-home">what are my shortcomings?</h1>
+        <p class="article-header">dolor ullamco do sint est anim ut ullamco duis consectetur ut voluptate occaecat laboris occaecat reprehenderit.</p>
+       </div>
+       <div class="wrapper-cards-header" id="cards-lack"></div>
+      </div>
+     </div>
+     <div class="footer-section">
+      <footer class="footer">
+       <p class="footer-class">This website is made only for learning in development a website, FaBot-Chat
+        <u>16 October Version.</u>♡</p>
+      </footer>
+      <div class="box-path">
+       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path fill="var(--iconColor)" fill-opacity=".7" d="M0,32L60,32C120,32,240,32,360,58.7C480,85,600,139,720,133.3C840,128,960,64,1080,37.3C1200,11,1320,21,1380,26.7L1440,32L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+        </svg>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="container-bot-ver" id="containerId">
+    <header>
+     <div class="arrow-button">
+      <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="versionPage()" ></ion-icon>
+     </div>
+     <p class="title">About This Website</p>
+    </header>
+    <div class="wrapper-desc-ver">
+     <p id="bio" class="infoTxt"><lord-icon src="https://cdn.lordicon.com/lenjvibx.json" trigger="loop" delay="3000" stroke="bold" state="hover-flutter" class="current-color" id="ico-koleksi"></lord-icon>&nbsp;Description this version</p>
+     <div class="underline" ></div>
+     <div class="box-desc-ver" id="blueHeaderUser">
+      <div class="gap-overflow">
+       <p class="descriptionText" id="descVer">chat bot project with a User Interface (UI) such as replying to messages between users and bots~<br><br><br><a href="https://chatbot.faridfathonin.repl.co/">https://chatbot.faridfathonin.repl.co/</a></p>
+      </div>
+     </div>
+     <div class="underline" ></div>
+     <p id="bio" class="infoTxt"><lord-icon src="https://cdn.lordicon.com/pbbsmkso.json" trigger="loop" delay="3000" stroke="bold" state="loop-rotate" class="current-color" id="ico-koleksi"></lord-icon>&nbsp;About this version</p>
+     <div class="wrapper-user-page">
+      <div class="box-user-page">
+       <p class="title-box-user-page">Website Info</p>
+       <div class="wrapper-personal-box">
+        <div class="user-personal-box" >
+         <div class="user-personal-box-items">
+          <div class="wrapper-txt-user-personal-box">
+           <p class="tiny-text">Tanggal Update</p>
+           <p class="txt-user-personal-box" id="infoVer">16 Oktober 2023</p>
+          </div>
+         </div>
+         <div class="user-personal-box-items">
+          <div class="wrapper-txt-user-personal-box">
+           <p class="tiny-text">Fitur Tambahan</p>
+           <p class="txt-user-personal-box" id="infoVer">Sidebar, homebar, dashboard, randokmize song, generate bot password crack</p>
+          </div>
+         </div>
+        </div>
+        <div class="user-personal-box" >
+         <div class="user-personal-box-items">
+          <div class="wrapper-txt-user-personal-box">
+           <p class="tiny-text">Versi Website</p>
+           <p class="txt-user-personal-box" id="infoVer">V 1.3.3</p>
+          </div>
+         </div>
+         <div class="user-personal-box-items">
+          <div class="wrapper-txt-user-personal-box">
+           <p class="tiny-text">Kelas</p>
+           <p class="txt-user-personal-box" id="infoVer">X TKJ</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="underline" ></div>
+      <p id="bio" class="infoTxt"><lord-icon src="https://cdn.lordicon.com/dmgxtuzn.json" trigger="loop" delay="3000" stroke="bold" state="hover-machine" class="current-color" id="ico-koleksi"></lord-icon>&nbsp;Made with</p>
+      <div class="box-user-page">
+       <div class="container-hobby-user">
+        <div class="wrapper-hobby-user">
+         <div class="box-hobby-user" id="box-hobby-clr">
+          <ion-icon name="logo-html5" class="main-icon" style="--clr: #e66200;"></ion-icon>
+          <p class="text-hobby-user" >HTML 5</p>
+         </div>
+         <div class="box-hobby-user" id="box-hobby-clr">
+          <ion-icon name="logo-css3" class="main-icon" style="--clr: #005ee6;"></ion-icon>
+          <p class="text-hobby-user" >CSS 3</p>
+         </div>
+         <div class="box-hobby-user" id="box-hobby-clr">
+          <ion-icon name="logo-javascript" class="main-icon" style="--clr: #ecd700;"></ion-icon>
+          <p class="text-hobby-user" >Javascript</p>
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="underline" ></div>
+     </div>
+    </div>
+    <nav class="navbar-ver" id="blueHeaderUser">
+     <div class="wrapper-box-ver">
+      <div class="box-ver">
+       <a class="ver_box_bot" href="#">V 1.1.2</a>
+      </div>
+     </div>
+     <div class="footer" >
+      <p >This website is made only for learning in development a website, FaBot-Chat <u>16 October
+        Version.</u></p>
+     </div>
+    </nav>
+   </div>
+   <div class="container-login">
+    <div class="box-login">
+     <div class="pembungkus-login-page">
+      <div class="header-login">
+       <ion-icon name="arrow-back" class="main-icon" onclick="closeLogin()"></ion-icon>
+      </div>
+      <div class="login-page">
+       <lord-icon src="https://cdn.lordicon.com/vcuhguff.json" trigger="loop" state="hover-wink" delay="7000" class="current-color">
+       </lord-icon>
+       <p class="title-login-text" >Wellcome To Fabot</p>
+       <div class="box-info-login-text" id="myDescription">
+        <p class="info-login-text"><strong>Tujuan website ini di buat adalah sebagai berikut :</strong><br><br>1. tempat
+         untuk belajar mengembangkan simulasi chat antara user dan bot menggunakan bahasa pemrograman dasar dari javaScript
+         yang saya pahami.<br><br>2. untuk belajar mengembangkan / memahami logika dan algoritma dalam sebuah program yang
+         saya buat.<br><br>3. dan untuk belajar membuat fitur fitur umum yang ada dalam sebuah website.<br><br></p>
+       </div>
+       <div class="login-box-text" >
+        <p class="login-text" id="myDescription">Next</p>
+       </div>
+       <p class="deskripsi-login-text">kamu harus login terlebih dahulu untuk bisa mencoba chat bot ini</p>
+      </div>
+     </div>
+     <div class="pembungkus-login-page">
+      <div class="login-page">
+       <div class="header-login">
+        <ion-icon name="arrow-back" class="main-icon" onclick="loginUndo()"></ion-icon>
+       </div>
+       <lord-icon src="https://cdn.lordicon.com/bgebyztw.json" trigger="loop" delay="10000" class="current-color">
+       </lord-icon>
+       <p class="title-login-text" >Sign in Up</p>
+       <div class="box-input-login" id="jawaban">
+        <ion-icon name="person" class="main-icon"></ion-icon>
+        <input type="text" placeholder="Masukan Nama" class="input-login" autocomplete="off">
+        <ion-icon name="information" class="main-icon"></ion-icon>
+       </div>
+       <div class="box-input-login" id="jawaban">
+        <ion-icon name="mail" class="main-icon"></ion-icon>
+        <input type="text" placeholder="Masukan Email" class="input-login" autocomplete="off">
+        <ion-icon name="information" class="main-icon"></ion-icon>
+       </div>
+       <div class="box-input-login" id="jawaban">
+        <ion-icon name="lock-closed" class="main-icon"></ion-icon>
+        <input placeholder="Masukan Password" class="input-login" autocomplete="off" type="password" id="password_user">
+        <ion-icon name="eye-off-outline" class="main-icon" onclick="togglePassword()" id="show-pass"></ion-icon>
+       </div>
+       <div class="login-box-text" >
+        <p class="login-text" id="myDescription">Login</p>
+       </div>
+       <p class="deskripsi-login-text">Ketikan nama, email dan password untuk profile mu di website ini</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  <script src="style.js"></script>
+  <script src="variabel.js"></script>
+  <script src="swapBg.js"></script>
+  <script src="swaptheme.js"></script>
+  <script src="coreBot.js"></script>
+  <script src="bubbles.js"></script>
+  <script src="dataSong.js"></script>
+  <script src="theme.js"></script>
+  <script src="particles.js" id="particle-script"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+  </script>
+  <script type="module" src="https://cdn.lordicon.com/lordicon-1.1.0.js"></script>
+  <script type="text/javascript">
+   (function(){
+      emailjs.init("yZzbJwytB-aSDSuZw");
+   })();
+  </script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+ </body>
+</html>
