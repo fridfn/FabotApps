@@ -7,6 +7,42 @@ const cl = console.log.bind(console);
 
 
 
+function handleFooter(page) {
+ switch(page) {
+  case 'help':
+   alert('help')
+   break;
+  case 'about':
+   alert('about')
+   
+   break;
+  case 'help':
+   alert('help')
+   
+   break;
+  case 'service':
+   alert('service')
+   
+   break;
+  case 'contact':
+   alert('contact')
+   
+   break;
+  case 'description':
+   alert('description')
+   
+   break;
+  case 'policy':
+   alert('policy')
+   
+   break;
+  default:
+  console.eror('gagal memuat page');
+ }
+}
+
+
+
 
 
 

@@ -6,12 +6,9 @@
 /* How to use? : Check the GitHub README
 /* v2.0.0
 /* ----------------------------------------------- */
-
-let valueSpeed = 4;
 let particleJs = document.getElementById('particles-js');
 
 var pJS = function(tag_id, params){
-
   var canvas_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el');
 
   /* particles.js variables with default values */
@@ -23,20 +20,20 @@ var pJS = function(tag_id, params){
     },
     particles: {
       number: {
-        value: 150,
+        value: 400,
         density: {
           enable: true,
-          value_area: 1300
+          value_area: 800
         }
       },
       color: {
-        value: theme === 'blue' ? '#5AFF00' : '#5dedff',
+        value: `#516fff`
       },
       shape: {
         type: 'circle',
         stroke: {
           width: 0,
-          color: theme === 'blue' ? '#991d09' : '#ffffff',
+          color: '#ff0000'
         },
         polygon: {
           nb_sides: 5
@@ -49,7 +46,7 @@ var pJS = function(tag_id, params){
       },
       opacity: {
         value: 1,
-        random: true,
+        random: false,
         anim: {
           enable: false,
           speed: 2,
@@ -62,7 +59,7 @@ var pJS = function(tag_id, params){
         random: false,
         anim: {
           enable: false,
-          speed: 4,
+          speed: 20,
           size_min: 0,
           sync: false
         }
@@ -70,13 +67,13 @@ var pJS = function(tag_id, params){
       line_linked: {
         enable: true,
         distance: 100,
-        color: theme === 'blue' ? '#991d09' : '#ffffff',
+        color: '#fff',
         opacity: 1,
         width: 1
       },
       move: {
         enable: true,
-        speed: `${valueSpeed}`,
+        speed: 2,
         direction: 'none',
         random: false,
         straight: false,
@@ -257,7 +254,7 @@ var pJS = function(tag_id, params){
     this.x = position ? position.x : Math.random() * pJS.canvas.w;
     this.y = position ? position.y : Math.random() * pJS.canvas.h;
 
-    /* check position - into the canvas */
+    /* check position  - into the canvas */
     if(this.x > pJS.canvas.w - this.radius*2) this.x = this.x - this.radius;
     else if(this.x < this.radius*2) this.x = this.x + this.radius;
     if(this.y > pJS.canvas.h - this.radius*2) this.y = this.y - this.radius;
@@ -379,6 +376,7 @@ var pJS = function(tag_id, params){
     }else{
       this.shape = shape_type;
     }
+
     if(this.shape == 'image'){
       var sh = pJS.particles.shape;
       this.img = {
@@ -393,7 +391,9 @@ var pJS = function(tag_id, params){
         }
       }
     }
+
     
+
   };
 
 
@@ -585,7 +585,7 @@ var pJS = function(tag_id, params){
 
       /* out of canvas modes */
       switch(pJS.particles.move.out_mode){
-        case 'Bounce':
+        case 'bounce':
           if (p.x + p.radius > pJS.canvas.w) p.vx = -p.vx;
           else if (p.x - p.radius < 0) p.vx = -p.vx;
           if (p.y + p.radius > pJS.canvas.h) p.vy = -p.vy;
@@ -1407,6 +1407,8 @@ var pJS = function(tag_id, params){
 
   pJS.fn.vendors.start();
   
+
+
 };
 /* ---------- global functions - vendors ------------ */
 
@@ -1534,89 +1536,171 @@ window.particlesJS.load = function(tag_id, path_config_json, callback){
     }
   };
   xhr.send();
+
 };
 
-function getColorName(colorCode) {
-  const ctx = document.createElement('canvas').getContext('2d');
-  ctx.fillStyle = colorCode;
-  return ctx.fillStyle;
-}
-
-function setupParticle(color) {
+function setupParticle(mode, color) {
   particleJs.style.opacity = '0';
+  c(mode)
   const iconColor = color.iconColor;
   setTimeout(() => particleJs.style.opacity =  '1', 1900);
- particlesJS("particles-js", {
-   particles: {
-     number: {
-       value: 180,
-       density: {
+  switch(mode) {
+   case 'line':
+   particlesJS("particles-js", {
+     particles: {
+       number: {
+         value: 180,
+         density: {
+           enable: true,
+           value_area: 1300,
+         },
+       },
+       color: {
+         value: `${iconColor}`,
+       },
+       shape: {
+         type: "circle",
+         stroke: {
+           width: 0,
+           color: "#00000",
+         },
+       },
+       opacity: {
+         value: 0.7,
+         random: true,
+         anim: {
+           enable: false,
+         },
+       },
+       size: {
+         value: 3,
+         random: true,
+         anim: {
+           enable: true,
+         },
+       },
+       line_linked: {
          enable: true,
-         value_area: 1300,
-       },
-     },
-     color: {
-       value: `${iconColor}`,
-     },
-     shape: {
-       type: "circle",
-       stroke: {
-         width: 0,
-         color: "#00000",
-       },
-     },
-     opacity: {
-       value: 0.7,
-       random: true,
-       anim: {
-         enable: false,
-       },
-     },
-     size: {
-       value: 3,
-       random: true,
-       anim: {
-         enable: true,
-       },
-     },
-     line_linked: {
-       enable: true,
-       distance: 100,
-       color: `${iconColor}`,
-       opacity: 0.9,
-       width: 1,
-     },
-   },
-   interactivity: {
-     detect_on: "canvas",
-     events: {
-       onhover: {
-         enable: true,
-         mode: "repulse",
-       },
-       onclick: {
-         enable: true,
-         mode: "push",
-       },
-     },
-     modes: {
-       repulse: {
          distance: 100,
-         duration: 0.4,
-       },
-       push: {
-         particles_nb: 2,
+         color: `${iconColor}`,
+         opacity: 0.9,
+         width: 1,
        },
      },
-   },
- });
+     interactivity: {
+       detect_on: "canvas",
+       events: {
+         onhover: {
+           enable: true,
+           mode: "repulse",
+         },
+         onclick: {
+           enable: true,
+           mode: "push",
+         },
+       },
+       modes: {
+         repulse: {
+           distance: 100,
+           duration: 0.4,
+         },
+         push: {
+           particles_nb: 2,
+         },
+       },
+     },
+   });
+  break;
+   case 'null':
+     particlesJS('particles-js', {
+    "particles": {
+      "number": {
+        "value": 100,
+        "density": {
+          "enable": true,
+          "value_area": 800
+        }
+      },
+      "color": {
+        "value": `${iconColor}`
+      },
+      "shape": {
+        "type": "circle",
+        "stroke": {
+          "width": 0,
+          "color": "#000000"
+        }
+      },
+      "opacity": {
+        "value": 0.5,
+        "random": false,
+        "anim": {
+          "enable": false,
+          "speed": 1,
+          "opacity_min": 0.1,
+          "sync": false
+        }
+      },
+      "size": {
+        "value": 5,
+        "random": true,
+        "anim": {
+          "enable": false,
+          "speed": 40,
+          "size_min": 0.1,
+          "sync": false
+        }
+      },
+      "line_linked": {
+        "enable": true,
+        "distance": 100,
+        "color": "#ffffff",
+        "opacity": 0,
+        "width": 0
+      },
+      "move": {
+        "enable": true,
+        "speed": 2,
+        "direction": "bottom",
+        "random": false,
+        "straight": false,
+        "out_mode": "out",
+        "bounce": false,
+        "attract": {
+          "enable": false,
+          "rotateX": 600,
+          "rotateY": 1200
+        }
+      }
+    },
+    "interactivity": {
+      "detect_on": "canvas",
+      "events": {
+        "onhover": {
+          "enable": true,
+          "mode": "grab"
+        }
+      },
+      "modes": {
+        "grab": {
+          "distance": 130,
+          "line_linked": {
+            "opacity": 0
+          }
+        }
+      }
+    }
+  });
+   break;
+   default:
+   console.log('masuk default particles');
+  }
 }
-
 
 document.addEventListener('DOMContentLoaded', function() {
  const savedTheme = JSON.parse(localStorage.getItem('setTheme'));
  
  const setTheme = (savedTheme) ? JSON.parse(localStorage.getItem('setTheme')) : JSON.parse(localStorage.getItem('defaultTheme'));
  
- setupParticle(setTheme);
+ setupParticle('null' ,setTheme);
 });
