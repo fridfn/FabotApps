@@ -870,6 +870,8 @@
    <div class="container-home">
     <div class="content-home">
      <div id="background-home">
+      <video class="animate-background" autoplay loop muted>
+      </video>
       <div class="content-box-home" style="display: none;">
        <div class="home-date-info" >
         <div class="text-box-day">
@@ -945,12 +947,12 @@
           <div class="wrapper-cta-and-article">
            <div style="display: flex; flex-direction: column; gap: 15px; width: 75%; border: 1px solid red;">
             <div class="box-header-article">
-             <h1 class="title-header-home">welcome to my <span style="color: var(--theme-color-icon);">chatbot </span>web <span style="color: var(--theme-color-icon);">development</span> journey!</h1>
+             <h1 class="title-header-home" style="font-size: 15px;">welcome to my <span style="color: var(--theme-color-icon);">chatbot </span>web <span style="color: var(--theme-color-icon);">development</span> journey!</h1>
              <p class="article-text">dolor ullamco do sint est anim ut ullamco duis consectetur ut voluptate occaecat laboris occaecat reprehenderit cillum elit ea consectetur voluptate nostrud nisi veniam duis.</p>
             </div>
             <div class="box-btn-article">
-             <button class="cta-article"><p>START CHAT</p><ion-icon name="arrow-back-sharp"></ion-icon></button>
-             <button class="cta-article"><p>MAIL ME</p><ion-icon name="mail"></ion-icon></button>
+             <button class="cta-article"><p>START CHAT</p><ion-icon name="arrow-forward"></ion-icon></button>
+             <button class="cta-article"><p>GUIDE</p><ion-icon name="bulb"></ion-icon></button>
             </div>
            </div>
            <div class="container-sidebar-home-feature">
@@ -1000,6 +1002,30 @@
       </div>
      <div class="container-box-hints" id="hints">
       <div id="particles-js"></div>
+      <div class="box-change-particle">
+       <div class="barier-change-particle"></div>
+       <button class="cta-particle">
+        <lord-icon src="https://cdn.lordicon.com/nsgykrsg.json" trigger="click" state="loop-cycle" stroke="light" colors="primary:#ff0000, secondary:#d6ff00" class="icon-change-particle">
+        </lord-icon>
+        <div class="box-cta-particle">
+         <p class="title-header-home">Particles Mode</p>
+         <div class="wrapper-change-particle">
+          <div class="box-sidebar-home-feature" onclick="switchTheme()">
+           <p class="particle-items">1</pclass>
+          </div>
+          <div class="box-sidebar-home-feature" onclick="switchTheme()">
+           <p class="particle-items">2</pclass>
+          </div>
+          <div class="box-sidebar-home-feature" onclick="switchTheme()">
+           <p class="particle-items">3</pclass>
+          </div>
+          <div class="box-sidebar-home-feature" onclick="switchTheme()">
+           <p class="particle-items">4</pclass>
+          </div>
+         </div>
+        </div>
+       </button>
+      </div>
       <div class="wrapper-box-hints">
        <div class="box-hints">
         <div class="item-hints">
@@ -1040,8 +1066,20 @@
        <div class="box-hints">
         <div class="item-hints">
          <div class="hint" data-position="4">
-         <span class="hint-dot" id="show-elem">conclusion</span>
+         <span class="hint-dot" id="show-elem">.......</span>
           <div class="hint-content">
+           <div class="overflow-padding">
+            <p class="hint-text">This website was created because it was inspired by someone.</p>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="box-hints">
+        <div class="item-hints">
+         <div class="hint" data-position="4">
+         <span class="hint-dot" id="show-elem">conclusion</span>
+          <div class="hint-content hint-right">
            <div class="overflow-padding">
             <p class="hint-text">The conclusion is that this website was created only as a place for developers to learn about developing a website.</p>
            </div>
@@ -1073,6 +1111,19 @@
           </div>
          </div>
         </div>
+       </div>
+      </div>
+      <div class="wrapper-card-box-skils">
+       <div class="header_title_content">
+        <h1 class="title-header-home">what are my shortcomings?</h1>
+        <p class="article-text">dolor ullamco do sint est anim ut ullamco duis consectetur ut voluptate occaecat laboris occaecat reprehenderit.</p>
+       </div>
+       <div class="wrapper-cards-header" id="cards-lack"></div>
+      </div>
+      <div class="wrapper-card-box-skils">
+       <div class="header_title_content">
+        <h1 class="title-header-home">programming languages.</h1>
+        <p class="article-text">dolor ullamco do sint est anim ut ullamco duis consectetur ut voluptate occaecat laboris occaecat reprehenderit.</p>
        </div>
        <div class="container-skill" id="skils">
         <div class="skill-box">
@@ -1110,12 +1161,20 @@
         </div>
        </div>
       </div>
-      <div class="wrapper-card-box-skils">
-       <div class="header_title_content">
-        <h1 class="title-header-home">what are my shortcomings?</h1>
-        <p class="article-text">dolor ullamco do sint est anim ut ullamco duis consectetur ut voluptate occaecat laboris occaecat reprehenderit.</p>
+     </div>
+     <div class="quote-section">
+      <div class="quote-box">
+       <div class="dontQuit-box" data-text="just">
+        <div class="dontquit-wrap">
+         <p class="dontquit-text" style="padding-right: 17%;"><span style="font-weight: 500;">DO</span><span style="animation: dont 8s infinite;">N'T</span></p>
+         <p class="dontquit-text" style=" padding-right: 38%;"><span style="animation: dont 8s infinite;">QU</span><span style="font-weight: 500; ">IT!</span></p>
+        </div>
        </div>
-       <div class="wrapper-cards-header" id="cards-lack"></div>
+       <p class="article-text" style="border-bottom: 1px solid var(--iconColor);">Bejalar coding aja dulu. pusingnya mh belakangan</p>
+       <p class="article-text" style="font-size: 11px; padding: 2px 0 0 0; border-bottom: 1px solid transparent;">Farid Fathoni N</p>
+      </div>
+      <div class="quote-box">
+       <p class="article-text" id="quote-text">Setiap baris kode adalah kesempatan untuk belajar sesuatu yang baru.</p>
       </div>
      </div>
      <div class="footer-section">
@@ -1151,11 +1210,11 @@
       <div class="box-footer-mail">
        <div style="display: flex; align-items: center; gap: 8px;">
         <p class="title-header-home" style="font-size: 8px; font-weight: 700">Contact Me&nbsp;&nbsp;&#10148;</p>
-        <p class="article-text"><span style="font-weight: 700;">+62 </span>9952 47 491</p>
+        <p class="article-text" onclick="window.open('https://api.whatsapp.com/send?phone=+62 899-5247-491&text=Hai')"><span style="font-weight: 500;">+62 </span>9952 47 491</p>
        </div>
        <div style="display: flex; align-items: center; gap: 8px;">
         <p class="title-header-home" style="font-size: 8px; font-weight: 650">Email&nbsp;&nbsp;&#10148;</p>
-        <p class="article-text"><span style="font-weight: 650;"><u>faridfathonin@gmail.com</u></span></span>
+        <p class="article-text"><span style="font-weight: 650;"><a onclick="window.open('mailto:faridfathonin@gmail.com')">faridfathonin@gmail.com</a></span></p>
        </div>
       </div>
       <footer class="footer">
