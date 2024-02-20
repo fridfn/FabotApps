@@ -2,18 +2,27 @@ const cl = console.log.bind(console);
 
 
 
-
-
-
+(function() {
+  let index = 0;
+  const lengthQuote = ['Setiap baris kode adalah kesempatan untuk belajar sesuatu yang baru.', 'Semangatmu menentukan seberapa jauh kemampuanmu berkembang.', 'Setiap program memiliki cerita, dan kamu adalah penulisnya.'];
+  const quoteText = document.querySelector('#quote-text');
+  
+  function tampilkanQuoteBerikutnya() {
+   index = (index + 1) % lengthQuote.length;
+   quoteText.textContent = lengthQuote[index];
+  }
+  
+  const intervalId = setInterval(tampilkanQuoteBerikutnya, 5000);
+})();
 
 
 function handleFooter(page) {
  switch(page) {
   case 'help':
-   alert('help')
+   alert(page)
    break;
   case 'about':
-   alert('about')
+   alert(page)
    
    break;
   case 'help':

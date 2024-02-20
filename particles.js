@@ -1539,158 +1539,158 @@ window.particlesJS.load = function(tag_id, path_config_json, callback){
 
 };
 
-function setupParticle(mode, color) {
+function setupParticle(color, mode) {
   particleJs.style.opacity = '0';
-  c(mode)
   const iconColor = color.iconColor;
+  c(iconColor)
   setTimeout(() => particleJs.style.opacity =  '1', 1900);
-  switch(mode) {
+  switch(color) {
    case 'line':
-   particlesJS("particles-js", {
-     particles: {
-       number: {
-         value: 180,
-         density: {
-           enable: true,
-           value_area: 1300,
-         },
-       },
-       color: {
-         value: `${iconColor}`,
-       },
-       shape: {
-         type: "circle",
-         stroke: {
-           width: 0,
-           color: "#00000",
-         },
-       },
-       opacity: {
-         value: 0.7,
-         random: true,
-         anim: {
-           enable: false,
-         },
-       },
-       size: {
-         value: 3,
-         random: true,
-         anim: {
-           enable: true,
-         },
-       },
-       line_linked: {
-         enable: true,
-         distance: 100,
-         color: `${iconColor}`,
-         opacity: 0.9,
-         width: 1,
-       },
-     },
-     interactivity: {
-       detect_on: "canvas",
-       events: {
-         onhover: {
-           enable: true,
-           mode: "repulse",
-         },
-         onclick: {
-           enable: true,
-           mode: "push",
-         },
-       },
-       modes: {
-         repulse: {
-           distance: 100,
-           duration: 0.4,
-         },
-         push: {
-           particles_nb: 2,
-         },
-       },
-     },
-   });
+    particlesJS("particles-js", {
+      particles: {
+        number: {
+          value: 180,
+          density: {
+            enable: true,
+            value_area: 1300,
+          },
+        },
+        color: {
+          value: `${iconColor}`,
+        },
+        shape: {
+          type: "circle",
+          stroke: {
+            width: 0,
+            color: "#00000",
+          },
+        },
+        opacity: {
+          value: 0.7,
+          random: true,
+          anim: {
+            enable: false,
+          },
+        },
+        size: {
+          value: 3,
+          random: true,
+          anim: {
+            enable: true,
+          },
+        },
+        line_linked: {
+          enable: true,
+          distance: 100,
+          color: `${iconColor}`,
+          opacity: 0.9,
+          width: 1,
+        },
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: {
+          onhover: {
+            enable: true,
+            mode: "repulse",
+          },
+          onclick: {
+            enable: true,
+            mode: "push",
+          },
+        },
+        modes: {
+          repulse: {
+            distance: 100,
+            duration: 0.4,
+          },
+          push: {
+            particles_nb: 2,
+          },
+        },
+      },
+    });
   break;
    case 'null':
-     particlesJS('particles-js', {
-    "particles": {
-      "number": {
-        "value": 100,
-        "density": {
-          "enable": true,
-          "value_area": 800
-        }
-      },
-      "color": {
-        "value": `${iconColor}`
-      },
-      "shape": {
-        "type": "circle",
-        "stroke": {
-          "width": 0,
-          "color": "#000000"
-        }
-      },
-      "opacity": {
-        "value": 0.5,
-        "random": false,
-        "anim": {
-          "enable": false,
-          "speed": 1,
-          "opacity_min": 0.1,
-          "sync": false
-        }
-      },
-      "size": {
-        "value": 5,
-        "random": true,
-        "anim": {
-          "enable": false,
-          "speed": 40,
-          "size_min": 0.1,
-          "sync": false
-        }
-      },
-      "line_linked": {
-        "enable": true,
-        "distance": 100,
-        "color": "#ffffff",
-        "opacity": 0,
-        "width": 0
-      },
-      "move": {
-        "enable": true,
-        "speed": 2,
-        "direction": "bottom",
-        "random": false,
-        "straight": false,
-        "out_mode": "out",
-        "bounce": false,
-        "attract": {
-          "enable": false,
-          "rotateX": 600,
-          "rotateY": 1200
-        }
-      }
-    },
-    "interactivity": {
-      "detect_on": "canvas",
-      "events": {
-        "onhover": {
-          "enable": true,
-          "mode": "grab"
-        }
-      },
-      "modes": {
-        "grab": {
-          "distance": 130,
-          "line_linked": {
-            "opacity": 0
-          }
-        }
-      }
-    }
-  });
+    particlesJS('particles-js', {
+   "particles": {
+     "number": {
+       "value": 100,
+       "density": {
+         "enable": true,
+         "value_area": 800
+       }
+     },
+     "color": {
+       "value": `${iconColor}`
+     },
+     "shape": {
+       "type": "circle",
+       "stroke": {
+         "width": 0,
+         "color": "#000000"
+       }
+     },
+     "opacity": {
+       "value": 0.5,
+       "random": false,
+       "anim": {
+         "enable": false,
+         "speed": 1,
+         "opacity_min": 0.1,
+         "sync": false
+       }
+     },
+     "size": {
+       "value": 5,
+       "random": true,
+       "anim": {
+         "enable": false,
+         "speed": 40,
+         "size_min": 0.1,
+         "sync": false
+       }
+     },
+     "line_linked": {
+       "enable": true,
+       "distance": 100,
+       "color": "#ffffff",
+       "opacity": 0,
+       "width": 0
+     },
+     "move": {
+       "enable": true,
+       "speed": 2,
+       "direction": "bottom",
+       "random": false,
+       "straight": false,
+       "out_mode": "out",
+       "bounce": false,
+       "attract": {
+         "enable": false,
+         "rotateX": 600,
+         "rotateY": 1200
+       }
+     }
+   },
+   "interactivity": {
+     "detect_on": "canvas",
+     "events": {
+       "onhover": {
+         "enable": true,
+         "mode": "grab"
+       }
+     },
+     "modes": {
+       "grab": {
+         "distance": 130,
+         "line_linked": {
+           "opacity": 0
+         }
+       }
+     }
+   }
+ });
    break;
    default:
    console.log('masuk default particles');
@@ -1702,5 +1702,5 @@ document.addEventListener('DOMContentLoaded', function() {
  
  const setTheme = (savedTheme) ? JSON.parse(localStorage.getItem('setTheme')) : JSON.parse(localStorage.getItem('defaultTheme'));
  
- setupParticle('null' ,setTheme);
+ setupParticle(setTheme);
 });
