@@ -137,12 +137,12 @@
          <form class="form-email">
           <div class="wrapper-input-email">
            <label class="infoTitle">Judul Pesan</label>
-           <textarea class="title_email" placeholder="Tuliskan Judul" name="multilineText" rows="1" wrap="hard" maxlength="20" id="input_items"></textarea>
+           <textarea class="title_email" placeholder="Tuliskan Judul" name="multilineText" rows="1" wrap="hard" maxlength="20" id="input_items_email"></textarea>
           </div>
           <div class="underline"></div>
           <div class="wrapper-input-email">
            <label class="infoTitle" >Isi Pesan</label>
-           <textarea class="value_email" placeholder="Tuliskan Pesan" name="multilineText" rows="1" wrap="hard" id="input_items"></textarea>
+           <textarea class="value_email" placeholder="Tuliskan Pesan" name="multilineText" rows="1" wrap="hard" id="input_items_email"></textarea>
           </div>
           <div class="wrapper-cta-email">
            <p class="description_text">Kirimkan sesuatu pesan kepada developer.</p>
@@ -811,11 +811,12 @@
    <div class="container-explore">
     <div class="header-explore" id="profileSection">
      <div class="header-explore-wrapper">
-      <p class="title-explore" >Explore Properties</p>
       <div class="headerMenu">
        <div class="arrow-button">
-        <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="DeveloperMenu()" ></ion-icon>
+        <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="handleFooter()"></ion-icon>
+        <span id="barier-element"></span>
        </div>
+       <p class="title-explore" >Explore Properties</p>
        <ion-icon name="moon" class="main-icon" id="moon" onclick="switchTheme()"></ion-icon>
        <ion-icon name="person-add" class="main-icon" id="qr" onclick="handlePopup()"></ion-icon>
        <ion-icon name="heart" class="main-icon" id="brush" onclick="handlePopup()"></ion-icon>
@@ -823,45 +824,15 @@
      </div>
     </div>
     <div class="body-explore" id="myDescription">
-     <div class="wrapper-explore-box">
-      <div class="explore-box" id="myKoleksi">
+     <div class="wrapper-box-explore">
+      <div class="explore-box">
        <div class="arrow-explore-left" id="blueHeaderUser"></div>
-       <p class="explore-text">Explore Text</p>
-      </div>
-      <div class="explore-box" id="myKoleksi">
-       <div class="arrow-explore-right" id="blueHeaderUser"></div>
-       <p class="explore-text">Explore Text</p>
-      </div>
-      <div class="explore-box" id="myKoleksi">
-       <div class="arrow-explore-left" id="blueHeaderUser"></div>
-       <p class="explore-text">Explore Text</p>
-      </div>
-      <div class="explore-box" id="myKoleksi">
-       <div class="arrow-explore-right" id="blueHeaderUser"></div>
-       <p class="explore-text">Explore Text</p>
-      </div>
-      <div class="explore-box" id="myKoleksi">
-       <p class="explore-text">Explore Text</p>
+       <p class="explore-text" id="wordsDev">words dev</p>
       </div>
      </div>
-     <div class="privacy-policy">
-      <p class="text-privacy-policy" id="myKoleksi">Text Privacy Policy</p>
-     </div>
-     <div class="container-terms-of-service">
-      <div class="terms-box">
-       <p class="terms-text" id="myKoleksi">Text Terms Of Service</p>
+      <div class="box-text-explore">
+       <p class="explore-text" id="exploreText">content explore text here</p>
       </div>
-     </div>
-     <div class="container-help">
-      <div class="box-help">
-       <p class="text-help" id="myKoleksi">Text Help</p>
-      </div>
-     </div>
-     <div class="container-contact-us">
-      <div class="box-contact-us">
-       <p class="text-contact-us" id="myKoleksi">text contact us</p>
-      </div>
-     </div>
      <footer id="footers">
       <p class="footer-class" >&copy;Copyrights 2023 All Rights Reserved.</p>
      </footer>
@@ -956,22 +927,58 @@
             </div>
            </div>
            <div class="container-sidebar-home-feature">
-            <div class="wrapper-sidebar-home-feature">
-             <div class="box-sidebar-home-feature" onclick="switchTheme()">
-              <ion-icon name="eye-off" class=""></ion-icon>
-             </div>
-             <div class="box-sidebar-home-feature" onclick="openEmail()">
-              <ion-icon name="mail" class=""></ion-icon>
-             </div>
-             <div class="box-sidebar-home-feature">
-              <ion-icon name="help" class="" onclick="versionPage()"></ion-icon>
-             </div>
-             <div class="box-sidebar-home-feature" style="display: none;">
-              <ion-icon name="time" class="" onclick="checkLoginTime()"></ion-icon>
-              <div class="popup-time">
-               <p id="blueHeaderUser">User telah login 06 hari 05 jam 206 menit</p>
-               <div class="popup-time-arrow"></div>
+            <div class="box-sidebar-home-feature" id="toggle-theme" onclick="uncheckRadio('radio-theme1')">
+             <ion-icon name="book" class=""></ion-icon>
+             <!-- container box theme -->
+            </div>
+            <div class="container-box-theme">
+             <div class="wrapper-box-theme">
+              <div class="box-theme">
+               <div class="box-type-theme">
+                <p class="secondary-text" id="title-theme" style="letter-spacing: 2px;">Dark</p>
+                <ion-icon name="moon" class="mini-icons"></ion-icon>
+               </div>
+               <div class="info-type-theme">
+                <p class="secondary-text">Select Theme</p>
+                <div class="box-wrapper-item">
+                 <div class="box-item-theme">
+                  <p id="template-name" style="font-size: 10px; font-weight: 500; text-transform: capitalize;">&nbsp;</p>
+                  <label class="container-label">
+                   <input type="checkbox" class="love-checkbox" onclick="lovingTheme()">
+                   <div class="checkmark">
+                     <svg viewBox="0 0 256 256">
+                     <rect fill="none" height="256" width="256"></rect>
+                     <path d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z" stroke-width="20px" stroke="none" fill="none"></path></svg>
+                   </div>
+                  </label>
+                 </div>
+                </div>
+               </div>
               </div>
+              <div class="wrapper-checkbox-theme">
+               <input type="radio" id="radio-theme1" onclick="uncheckRadio('radio-theme1')" name="radioGroup">
+               <label for="radio-theme1"></label>
+               
+               <input type="radio" id="radio-theme2" onclick="uncheckRadio('radio-theme2')" name="radioGroup">
+               <label for="radio-theme2"></label>
+               
+               <input type="radio" id="radio-theme3" onclick="uncheckRadio('radio-theme3')" name="radioGroup">
+               <label for="radio-theme3"></label>
+               
+              </div>
+             </div>
+            </div>
+            <div class="box-sidebar-home-feature" onclick="openEmail()">
+             <ion-icon name="mail" class=""></ion-icon>
+            </div>
+            <div class="box-sidebar-home-feature">
+             <ion-icon name="help" class="" onclick="versionPage()"></ion-icon>
+            </div>
+            <div class="box-sidebar-home-feature" style="display: none;">
+             <ion-icon name="time" class="" onclick="checkLoginTime()"></ion-icon>
+             <div class="popup-time">
+              <p id="blueHeaderUser">User telah login 06 hari 05 jam 206 menit</p>
+              <div class="popup-time-arrow"></div>
              </div>
             </div>
            </div>
@@ -1002,30 +1009,6 @@
       </div>
      <div class="container-box-hints" id="hints">
       <div id="particles-js"></div>
-      <div class="box-change-particle">
-       <div class="barier-change-particle"></div>
-       <button class="cta-particle">
-        <lord-icon src="https://cdn.lordicon.com/nsgykrsg.json" trigger="click" state="loop-cycle" stroke="light" colors="primary:#ff0000, secondary:#d6ff00" class="icon-change-particle">
-        </lord-icon>
-        <div class="box-cta-particle">
-         <p class="title-header-home">Particles Mode</p>
-         <div class="wrapper-change-particle">
-          <div class="box-sidebar-home-feature" onclick="switchTheme()">
-           <p class="particle-items">1</pclass>
-          </div>
-          <div class="box-sidebar-home-feature" onclick="switchTheme()">
-           <p class="particle-items">2</pclass>
-          </div>
-          <div class="box-sidebar-home-feature" onclick="switchTheme()">
-           <p class="particle-items">3</pclass>
-          </div>
-          <div class="box-sidebar-home-feature" onclick="switchTheme()">
-           <p class="particle-items">4</pclass>
-          </div>
-         </div>
-        </div>
-       </button>
-      </div>
       <div class="wrapper-box-hints">
        <div class="box-hints">
         <div class="item-hints">
@@ -1088,6 +1071,30 @@
         </div>
        </div>
       </div>
+      <div class="box-change-particle">
+       <div class="barier-change-particle"></div>
+       <button class="cta-particle">
+        <lord-icon src="https://cdn.lordicon.com/gzbtulzi.json" trigger="click" state="loop-pinch" stroke="bold" class="current-color" class="icon-change-particle">
+        </lord-icon>
+        <div class="box-cta-particle">
+         <p class="title-header-home">Particles Mode</p>
+         <div class="wrapper-change-particle">
+          <div class="box-sidebar-home-feature" onclick="modeParticle('line')">
+           <p class="particle-items">1</pclass>
+          </div>
+          <div class="box-sidebar-home-feature" onclick="modeParticle('snow')">
+           <p class="particle-items">2</pclass>
+          </div>
+          <div class="box-sidebar-home-feature" onclick="modeParticle('shape')">
+           <p class="particle-items">3</pclass>
+          </div>
+          <div class="box-sidebar-home-feature" onclick="modeParticle('image')">
+           <p class="particle-items">4</pclass>
+          </div>
+         </div>
+        </div>
+       </button>
+      </div>
      </div>
      <div class="container-cards-skils">
       <div class="wrapper-card-box-skils">
@@ -1120,12 +1127,12 @@
        </div>
        <div class="wrapper-cards-header" id="cards-lack"></div>
       </div>
-      <div class="wrapper-card-box-skils">
+      <div class="wrapper-card-box-skils" id="skils">
        <div class="header_title_content">
         <h1 class="title-header-home">programming languages.</h1>
         <p class="article-text">dolor ullamco do sint est anim ut ullamco duis consectetur ut voluptate occaecat laboris occaecat reprehenderit.</p>
        </div>
-       <div class="container-skill" id="skils">
+       <div class="container-skill">
         <div class="skill-box">
          <span class="span-title-skill">
           <ion-icon name="logo-html5" class="main-icon" style="--clr: #e66200;"></ion-icon>
@@ -1201,8 +1208,8 @@
        <div class="box-footer-link">
         <p class="title-header-home">&nbsp;</p>
         <ul>
-         <li class="article-text" onclick="handleFooter('description')">Guide</li>
-         <li class="article-text"  onclick="handleFooter('contact')">Description</li>
+         <li class="article-text" onclick="handleFooter('guide')">Guide</li>
+         <li class="article-text"  onclick="handleFooter('description')">Description</li>
          <li class="article-text"  onclick="handleFooter('policy')">Privacy Policy</li>
         </ul>
        </div>

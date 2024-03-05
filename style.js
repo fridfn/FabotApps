@@ -1,3 +1,6 @@
+
+ const cz = console.log.bind(console);
+
 let blurProfile = document.querySelectorAll('.blur-profile');
 let loaders = document.querySelector('.container-loader');
 let headerIcon = document.querySelectorAll('.headerIconll');
@@ -919,114 +922,121 @@ function openSidebar() {
  }
 }
 
+const objTextExplore = {
+ help: "<strong>Selamat datang di chatBot [ Fabot Chat ] - Chatting dengan bot !</strong><br><br><br>Bagian 'help' kami didesain untuk memberikan panduan lengkap dalam menggunakan chatBot [ Fabot Chat ]. Berikut adalah beberapa informasi yang akan Anda temukan di bagian 'help' kami:<br><br><br> 1. Cara Memulai: Panduan langkah demi langkah untuk memulai percakapan dengan chatBot [ Fabot Chat ]. Anda akan menemukan cara memulai percakapan, termasuk perintah awal yang dapat Anda berikan.<br><br> 2. Fitur Utama: Penjelasan mengenai fitur-fitur utama yang dapat digunakan dalam percakapan dengan chatBot [ Fabot Chat ]. Mulai dari pertanyaan umum, pencarian informasi, hingga melakukan tugas-tugas khusus.<br><br> 3. Perintah Khusus: Daftar perintah khusus yang dapat Anda gunakan untuk mengakses fitur-fitur tertentu dengan cepat. Kami menyediakan daftar perintah beserta contoh penggunaannya.<br><br> 4. Pertanyaan Umum: Jawaban atas pertanyaan-pertanyaan umum seputar chatBot [ Fabot Chat ] dan cara kerjanya. Jika Anda mengalami masalah atau kesulitan, Anda mungkin akan menemukan jawaban di sini.<br><br> 5. Kebijakan dan Privasi: Informasi tentang kebijakan kami terkait penggunaan data dan privasi Anda. Kami selalu mengutamakan keamanan dan privasi informasi pengguna.<br><br> 6. Kontak dan Dukungan: Informasi tentang cara menghubungi tim dukungan kami jika Anda mengalami masalah yang tidak teratasi oleh bagian 'help' kami.<br><br><br><br> Kami berharap bagian 'help' ini dapat membantu Anda dalam menjalankan percakapan dengan chatBot [ Fabot Chat ] dengan lancar dan menyenangkan. Jika Anda memiliki pertanyaan lebih lanjut, jangan ragu untuk menghubungi kami melalui bagian kontak yang telah disediakan. <strong>Terima kasih telah menggunakan chatBot [ Fabot Chat ] sebagai Chatting dengan bot !</strong>",
+ about: "**Footer About Chatbot**<br><br>Selamat datang di [Nama Chatbot]! Saya adalah proyek chatbot sederhana yang dikembangkan oleh seorang pelajar SMK yang antusias tentang bahasa pemrograman. Tujuan utama saya adalah membantu Anda dengan pertanyaan sederhana dan memberikan pengalaman belajar yang menyenangkan.<br><br>**Tentang Pengembang**<br><br>Saya dibuat oleh [Nama Pengembang], seorang pelajar SMK dengan minat dalam belajar bahasa pemrograman. Proses pengembangan saya adalah bagian dari perjalanan belajarnya dan eksplorasi di dunia teknologi.<br><br>**Fungsi Utama Saya**<br><br>- **Jawaban Pertanyaan Sederhana**: Saya siap memberikan jawaban untuk pertanyaan sederhana tentang [topik atau domain yang relevan].<br><br>- **Pertolongan Belajar**: Saya dirancang untuk membantu Anda memahami konsep dasar bahasa pemrograman.<br><br>- **Eksplorasi Bersama**: Mari kita belajar bersama! Saya ingin memotivasi dan memudahkan pemahaman tentang dunia pemrograman.<br><br>**Perjalanan Pembelajaran**<br><br>Saya masih dalam tahap pengembangan dan akan terus diperbarui seiring berjalannya waktu. Setiap pertanyaan dan umpan balik membantu saya tumbuh dan meningkatkan kemampuan saya.<br><br>**Kontak Pengembang**<br><br>Jika Anda ingin berbagi ide, memberikan masukan, atau sekadar menyapa, [Nama Pengembang] dapat dihubungi di [alamat email atau tautan formulir kontak].<br><br>Terima kasih telah menjelajahi [Nama Chatbot]. Semoga kita dapat belajar bersama!<br><br>Salam,[Nama Pengembang]",
+ policy: '<strong>Kebijakan Privasi ChatBot [ Fabot Chat ]</strong><br><br><br><strong>Selamat datang di [ Fabot Chat ]!</strong><br><br>Kami di [ Fabot Chat ] sangat memahami pentingnya privasi informasi pribadi Anda. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi data yang kami peroleh dari Anda saat Anda berinteraksi dengan ChatBot kami.<br><br><strong>**Informasi yang Kami Kumpulkan**</strong><br><br>Ketika Anda menggunakan [F abot Chat ], kami dapat mengumpulkan beberapa informasi pribadi yang Anda berikan secara sukarela selama sesi percakapan. Informasi ini dapat mencakup nama, alamat email, atau informasi kontak lainnya yang Anda berikan untuk membantu kami memahami dan merespons pertanyaan atau permintaan Anda dengan lebih baik.<br><br><strong>**Penggunaan Informasi**</strong><br><br>Informasi pribadi yang kami kumpulkan dari Anda digunakan secara eksklusif untuk memberikan layanan yang sesuai dan memberikan jawaban yang relevan dengan pertanyaan yang Anda ajukan kepada ChatBot kami. Kami tidak akan menggunakan informasi Anda untuk tujuan pemasaran atau penjualan ke pihak ketiga tanpa persetujuan Anda.<br><br><strong>**Perlindungan Informasi**</strong><br><br>Kami mengambil langkah-langkah untuk melindungi informasi pribadi Anda dari akses atau penggunaan yang tidak sah. Kami hanya menyimpan data pribadi yang diperlukan selama diperlukan untuk memberikan layanan percakapan dengan ChatBot kami.<br><br><strong>**Penggunaan Teknologi Pelacakan**</strong><br><br>[ Fabot Chat ] hanyalah ChatBot yang di buat hanya untuk bertujuan belajar membuat bot yang bisamembalas apa yang user katakan. jadi ChatBot ini hanyalah ChatBot biasa yang tidak sama seperti ChatBot yang menggunakan AI.<br><br><strong>**Kebijakan Privasi Pihak Ketiga**</strong><br><br>Harap dicatat bahwa Kebijakan Privasi ini hanya berlaku untuk ChatBot [ Fabot Chat ]. Kami tidak bertanggung jawab atas praktik privasi situs web pihak ketiga atau aplikasi yang mungkin Anda gunakan untuk mengakses ChatBot kami. Pastikan untuk membaca kebijakan privasi pihak ketiga tersebut sebelum memberikan informasi pribadi Anda kepada mereka.<br><br><strong>**Perubahan pada Kebijakan Privasi**</strong><br><br>Kami berhak untuk memperbarui Kebijakan Privasi ini dari waktu ke waktu untuk mencerminkan perubahan dalam layanan kami atau peraturan yang berlaku. Perubahan tersebut akan diberitahukan kepada Anda melalui pembaruan pada halaman ini.<br><br><strong>**Kontak Kami**</strong><br><br>Jika Anda memiliki pertanyaan, masukan, atau kekhawatiran terkait Kebijakan Privasi ini atau penggunaan ChatBot [ Fabot Chat ], silakan hubungi kami melalui:<br><br><u>[faridfathonin@gmail.com]</u><strong><br><br><br>Terima kasih telah menggunakan ChatBot [ Fabot Chat ]. Kami berkomitmen untuk melindungi privasi dan memberikan pengalaman percakapan yang bermanfaat bagi Anda.</strong><br><br>Tanggal dipublikasikan&nbsp;:&nbsp;[28 July 2023]<br>Tanggal terakhir diperbarui&nbsp;: [28 July 2023]',
+ service: '<strong>1. Pengertian:</strong> Terms of Service atau Syarat dan Ketentuan adalah dokumen hukum yang berisi perjanjian antara pengguna (user) dan pemilik website. Dokumen ini menetapkan persetujuan dan aturan yang mengatur bagaimana pengguna dapat menggunakan layanan yang diberikan oleh website tersebut.<br><br><strong>2. Penggunaan Layanan:</strong> Bagian ini menjelaskan tentang jenis layanan yang disediakan oleh website dan cara pengguna dapat mengakses serta menggunakan layanan tersebut. Juga mungkin mencakup persyaratan usia minimal atau persyaratan kelayakan lainnya untuk menjadi pengguna.<br><br><strong>3. Privasi dan Data Pengguna:</strong> Ini adalah bagian yang menjelaskan kebijakan privasi website, termasuk bagaimana data pengguna dikumpulkan, digunakan, disimpan, dan dilindungi. Biasanya mencakup informasi tentang cookies dan kebijakan pengumpulan data pribadi.<br><br><strong>4. Kekayaan Intelektual:</strong> Bagian ini mengatur hak kekayaan intelektual pemilik website, termasuk hak cipta, merek dagang, hak paten, dan hak kekayaan intelektual lainnya. Hal ini menetapkan batasan-batasan terkait penggunaan konten yang dimiliki oleh website.<br><br><strong>5. Kewajiban Pengguna:</strong> Menjelaskan tindakan atau perilaku yang dilarang atau diharamkan bagi pengguna saat menggunakan layanan. Misalnya, tindakan seperti pelanggaran hukum, penyebaran konten ilegal, atau penyalahgunaan layanan website.<br><br><strong>6. Tanggung Jawab Pihak Terkait:</strong> Bagian ini mengatur batasan tanggung jawab pihak-pihak yang terlibat dalam penyediaan layanan, termasuk pemilik website, mitra, dan penyedia layanan pihak ketiga.<br><br><strong>7. Pembatalan atau Pengakhiran Akun:</strong> Menjelaskan prosedur atau kriteria di mana pemilik website dapat membatalkan atau mengakhiri akun pengguna jika terjadi pelanggaran terhadap TOS atau alasan lain yang ditetapkan.<br><br><strong>8. Perubahan pada TOS:</strong> Menjelaskan bahwa pemilik website dapat mengubah TOS dari waktu ke waktu dan bagaimana perubahan tersebut akan diinformasikan kepada pengguna.<br><br><strong>9. Hukum yang Berlaku:</strong> Menentukan yurisdiksi dan hukum yang berlaku untuk penyelesaian sengketa atau permasalahan yang timbul dari penggunaan layanan website.<br><br><strong>10. Persetujuan Pengguna: </strong>Bagian terakhir biasanya meminta pengguna untuk menyetujui dan mengikatkan diri pada TOS sebelum mereka dapat menggunakan layanan yang disediakan oleh website.<br><br><br><br><strong>Penting bagi pengguna untuk membaca dan memahami TOS dengan seksama sebelum menggunakan layanan dari sebuah website.</strong> Dengan menerima TOS, pengguna menyetujui persyaratan dan aturan yang telah ditetapkan oleh pemilik website, dan ini dapat mempengaruhi hak dan kewajiban mereka selama menggunakan layanan tersebut.',
+ guides: '<strong>Kontak Kami - Tim Dukungan chatBot [ Fabot Chat ]</strong><br><br>Kami senang mendengar dari Anda! Jika Anda memiliki pertanyaan, masalah, atau umpan balik mengenai pengalaman Anda menggunakan chatBot [ Fabot Chat ], tim dukungan kami siap membantu. Berikut adalah beberapa opsi untuk menghubungi kami:<br><br><br><br>1. Formulir Kontak: Anda dapat mengisi formulir kontak yang telah kami sediakan. Jangan ragu untuk menjelaskan pertanyaan atau masalah Anda secara detail agar tim kami dapat memberikan bantuan yang tepat.<br><br><br>2. Email: Kirimkan email Anda ke support@chatBot [ Fabot Chat ].com dan tim dukungan kami akan merespons dalam waktu secepatnya.<br><br><br>3. Live Chat: Jika Anda mengalami masalah mendesak atau membutuhkan bantuan langsung, gunakan fitur live chat yang tersedia. Tim dukungan kami akan berusaha merespons dengan segera.<br><br><br>4. Media Sosial: Anda juga dapat menghubungi kami melalui media sosial kami. Kami aktif di platform-platform seperti Twitter, Facebook, dan Instagram. Cari akun kami dengan username @chatBot [ Fabot Chat ] untuk mendapatkan dukungan.<br><br><br><br>Kami mengutamakan kepuasan pengguna dan selalu siap membantu Anda dengan setiap pertanyaan dan masalah yang Anda hadapi. Tim dukungan kami terdiri dari tenaga ahli yang berpengalaman dalam mengatasi berbagai situasi. <u>Jangan ragu untuk menghubungi kami kapan saja, dan kami akan dengan senang hati memberikan bantuan terbaik kami.</u> <strong>Terima kasih telah memilih chatBot [ Fabot Chat ] sebagai Chatting dengan bot !</strong>',
+ guide: "**Guide - Panduan Pengguna Lengkap**<br><br>Selamat datang di Panduan Pengguna [Nama Aplikasi atau Platform]! Panduan ini dirancang untuk memberikan pemahaman mendalam tentang fitur-fitur kami dan memandu Anda melalui setiap langkah dengan rinci. Silakan ikuti petunjuk ini untuk memaksimalkan pengalaman Anda dengan [Nama Aplikasi atau Platform].<br><br><br><br>### **Daftar Isi:**<br><br>1. **Pengenalan**- **Tentang [Nama Aplikasi atau Platform]:** Sebuah visi menyeluruh tentang tujuan dan nilai inti yang kami pegang.<br>- **Tujuan Panduan Ini:** Mendefinisikan sasaran dan manfaat yang akan Anda dapatkan.<br><br>2. **Registrasi dan Masuk**<br><br>- **Membuat Akun Baru:** Langkah-demi-langkah untuk membuat akun baru dengan memasukkan informasi yang dibutuhkan.<br><br>- **Proses Masuk:** Petunjuk mendetail untuk mengakses akun Anda dengan aman.<br><br>3. **Navigasi Antarmuka**<br><br>- **Penjelasan Menu Utama:** Pemahaman mendalam tentang setiap elemen pada menu utama.<br><br>- **Tautan Penting:** Menyajikan tautan yang krusial untuk memudahkan navigasi.<br><br>4. **Profil Pengguna**<br><br>- **Mengelola Informasi Profil:** Cara memperbarui dan memodifikasi informasi pribadi Anda.<br><br>- **Pengaturan Keamanan Akun:** Panduan tentang bagaimana menjaga keamanan akun Anda.<br><br>5. **Memulai**<br><br>- **Langkah Awal untuk Pengguna Baru:** Serangkaian langkah awal untuk memandu pengguna baru dalam menggunakan platform.<br><br>- **Menyesuaikan Pengaturan:** Bagaimana menyesuaikan pengaturan sesuai preferensi Anda.<br><br>6. **Penggunaan Fitur Utama**<br><br>- **[Nama Fitur 1]: Cara Menggunakannya:** Tutorial rinci tentang penggunaan fitur utama pertama.<br><br>- **[Nama Fitur 2]: Cara Mengoptimalkannya:** Tips dan trik untuk memaksimalkan manfaat dari fitur kedua.<br><br>7. **Pertanyaan Umum (FAQ)**<br><br>- **Jawaban untuk Pertanyaan Umum Pengguna:** Sekumpulan jawaban lengkap untuk pertanyaan umum pengguna.<br><br>- **Solusi Masalah Umum:** Cara mengatasi kendala umum dengan solusi yang jelas.<br><br>8. **Dukungan Pelanggan**<br><br>- **Cara Menghubungi Dukungan Pelanggan:** Informasi kontak lengkap untuk mendapatkan bantuan.<br><br>- **Menyediakan Umpan Balik:** Cara memberikan umpan balik untuk membantu kami memperbaiki pengalaman Anda.<br><br><br><br>### **Tips dan Trik:**<br><br>- **Manfaatkan [Fitur Tertentu]:** Bagaimana menggunakan fitur tertentu untuk keuntungan maksimal.<br><br>- **Telusuri [Tempat Tertentu]:** Cara menemukan informasi penting di [Tempat Tertentu].<br><br>- **Eksplorasi [Fitur Lanjutan]:** Tips untuk menjelajahi fitur lanjutan demi pengalaman yang lebih kaya.<br><br><br><br>### **Kontak Dukungan:**<br><br>Jangan ragu untuk menghubungi tim dukungan kami di [Nomor Telepon] atau melalui [Alamat Email] jika Anda membutuhkan bantuan lebih lanjut.<br><br>Terima kasih telah memilih [Nama Aplikasi atau Platform]! Kami berharap panduan ini memberikan pandangan komprehensif dan mempermudah penggunaan platform kami.<br><br>Salam,<br><br>Tim Dukungan [Nama Aplikasi atau Platform]"
+};
+ 
+ 
+ 
+const devWords = ["sebagai seorang pelajar sekolah yang baru memasuki dunia pengembangan website, saya sedang menggali ilmu dan mempelajari dasar-dasar HTML, CSS, dan javascript untuk membuat website sederhana namun menarik. <br><br> Saat ini, saya tengah menjalani perjalanan menarik dalam belajar pengembangan website, di mana saya mengenal konsep dasar tentang bagaimana menggabungkan elemen-elemen visual dan fungsionalitas untuk membuat sebuah halaman web yang sederhana.", "Dengan semangat belajar yang tinggi, saya berusaha memahami struktur dasar sebuah website, seperti header, konten, dan footer, serta berlatih membuat tata letak yang responsif untuk meningkatkan kemampuan pengembangan saya. <br><br> Terkadang tantangan muncul, tetapi sebagai seorang pelajar yang berdedikasi, saya selalu mencari sumber daya tambahan dan mencari sumber belajar secara online untuk mengatasi rintangan dalam mengembangkan sebuah website yang saya buat.", "Dalam perjalanan belajar saya, saya sedang berlatih membuat website sederhana dengan desain yang menarik, menggabungkan warna dan tipografi secara tepat untuk menciptakan tampilan visual yang estetis. <br><br> Saya sangat antusias untuk mempelajari konsep-konsep baru dalam web development, seperti animasi CSS dan javascript, yang akan menambahkan sentuhan dinamis pada project website saya saat ini.", "Saya percaya bahwa belajar pengembangan website adalah investasi berharga bagi masa depan, karena website menjadi sarana penting dalam dunia digital untuk menyampaikan informasi dan berinteraksi dengan audiens. <br><br> Meskipun masih baru dalam dunia pengembangan website, saya terus mengasah keterampilan dengan project-project kecil dan berusaha mencari tantangan baru untuk menguji kemampuan saya.", "Saya yakin, dengan kerja keras dan dedikasi, perjalanan belajar saya dalam pengembangan website akan membuka peluang yang menarik dan menginspirasi saya untuk terus berkembang di bidang ini."];
+
+
 const containerExplore = document.querySelector('.container-explore');
-const exploreBox = document.querySelectorAll('.explore-box');
-const exploreText = document.querySelectorAll('.explore-text');
-const footerBoxText = document.querySelector('.footer-box-text');
+const description_box_dev = document.querySelector('.explore-box');
+const explore_text = document.querySelector('#exploreText');
 const titleExplore = document.querySelector('.title-explore');
+const textExplore = document.getElementById('explore-text');
+const wordsDev = document.getElementById('wordsDev');
+const barierElement = document.querySelector('#barier-element');
+const wrapperExploreBox = document.querySelector('.wrapper-box-explore');
 
-const privacyPolicy = document.querySelector('.privacy-policy');
-const wrapExploreBox = document.querySelector('.wrapper-explore-box');
-const textPrivacyPolicy = document.querySelector('.text-privacy-policy');
-
-const containerTerms = document.querySelector('.container-terms-of-service');
-const termsText = document.querySelector('.terms-text');
-
-const containerHelp = document.querySelector('.container-help');
-const textHelp = document.querySelector('.text-help');
-
-const containerContact = document.querySelector('.container-contact-us');
-const textContact = document.querySelector('.text-contact-us');
-
-textPrivacyPolicy.innerHTML = "<strong>Kebijakan Privasi ChatBot [ Fabot Chat ]</strong><br><br><br><strong>Selamat datang di [ Fabot Chat ]!</strong><br><br>Kami di [ Fabot Chat ] sangat memahami pentingnya privasi informasi pribadi Anda. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi data yang kami peroleh dari Anda saat Anda berinteraksi dengan ChatBot kami.<br><br><strong>**Informasi yang Kami Kumpulkan**</strong><br><br>Ketika Anda menggunakan [F abot Chat ], kami dapat mengumpulkan beberapa informasi pribadi yang Anda berikan secara sukarela selama sesi percakapan. Informasi ini dapat mencakup nama, alamat email, atau informasi kontak lainnya yang Anda berikan untuk membantu kami memahami dan merespons pertanyaan atau permintaan Anda dengan lebih baik.<br><br><strong>**Penggunaan Informasi**</strong><br><br>Informasi pribadi yang kami kumpulkan dari Anda digunakan secara eksklusif untuk memberikan layanan yang sesuai dan memberikan jawaban yang relevan dengan pertanyaan yang Anda ajukan kepada ChatBot kami. Kami tidak akan menggunakan informasi Anda untuk tujuan pemasaran atau penjualan ke pihak ketiga tanpa persetujuan Anda.<br><br><strong>**Perlindungan Informasi**</strong><br><br>Kami mengambil langkah-langkah untuk melindungi informasi pribadi Anda dari akses atau penggunaan yang tidak sah. Kami hanya menyimpan data pribadi yang diperlukan selama diperlukan untuk memberikan layanan percakapan dengan ChatBot kami.<br><br><strong>**Penggunaan Teknologi Pelacakan**</strong><br><br>[ Fabot Chat ] hanyalah ChatBot yang di buat hanya untuk bertujuan belajar membuat bot yang bisamembalas apa yang user katakan. jadi ChatBot ini hanyalah ChatBot biasa yang tidak sama seperti ChatBot yang menggunakan AI.<br><br><strong>**Kebijakan Privasi Pihak Ketiga**</strong><br><br>Harap dicatat bahwa Kebijakan Privasi ini hanya berlaku untuk ChatBot [ Fabot Chat ]. Kami tidak bertanggung jawab atas praktik privasi situs web pihak ketiga atau aplikasi yang mungkin Anda gunakan untuk mengakses ChatBot kami. Pastikan untuk membaca kebijakan privasi pihak ketiga tersebut sebelum memberikan informasi pribadi Anda kepada mereka.<br><br><strong>**Perubahan pada Kebijakan Privasi**</strong><br><br>Kami berhak untuk memperbarui Kebijakan Privasi ini dari waktu ke waktu untuk mencerminkan perubahan dalam layanan kami atau peraturan yang berlaku. Perubahan tersebut akan diberitahukan kepada Anda melalui pembaruan pada halaman ini.<br><br><strong>**Kontak Kami**</strong><br><br>Jika Anda memiliki pertanyaan, masukan, atau kekhawatiran terkait Kebijakan Privasi ini atau penggunaan ChatBot [ Fabot Chat ], silakan hubungi kami melalui:<br><br><u>[faridfathonin@gmail.com]</u><strong><br><br><br>Terima kasih telah menggunakan ChatBot [ Fabot Chat ]. Kami berkomitmen untuk melindungi privasi dan memberikan pengalaman percakapan yang bermanfaat bagi Anda.</strong><br><br>Tanggal dipublikasikan&nbsp;:&nbsp;[28 July 2023]<br>Tanggal terakhir diperbarui&nbsp;: [28 July 2023]";
-
-const firstExploreText = exploreText[0];
-firstExploreText.innerHTML = "sebagai seorang pelajar sekolah yang baru memasuki dunia pengembangan website, saya sedang menggali ilmu dan mempelajari dasar-dasar HTML, CSS, dan javascript untuk membuat website sederhana namun menarik. <br><br> Saat ini, saya tengah menjalani perjalanan menarik dalam belajar pengembangan website, di mana saya mengenal konsep dasar tentang bagaimana menggabungkan elemen-elemen visual dan fungsionalitas untuk membuat sebuah halaman web yang sederhana.";
-
-const secondExploreText = exploreText[1]
-secondExploreText.innerHTML = "Dengan semangat belajar yang tinggi, saya berusaha memahami struktur dasar sebuah website, seperti header, konten, dan footer, serta berlatih membuat tata letak yang responsif untuk meningkatkan kemampuan pengembangan saya. <br><br> Terkadang tantangan muncul, tetapi sebagai seorang pelajar yang berdedikasi, saya selalu mencari sumber daya tambahan dan mencari sumber belajar secara online untuk mengatasi rintangan dalam mengembangkan sebuah website yang saya buat.";
-
-const thirdExploreText = exploreText[2];
-thirdExploreText.innerHTML = "Dalam perjalanan belajar saya, saya sedang berlatih membuat website sederhana dengan desain yang menarik, menggabungkan warna dan tipografi secara tepat untuk menciptakan tampilan visual yang estetis. <br><br> Saya sangat antusias untuk mempelajari konsep-konsep baru dalam web development, seperti animasi CSS dan javascript, yang akan menambahkan sentuhan dinamis pada project website saya saat ini.";
-
-const fourExploreText = exploreText[3];
-fourExploreText.innerHTML = "Saya percaya bahwa belajar pengembangan website adalah investasi berharga bagi masa depan, karena website menjadi sarana penting dalam dunia digital untuk menyampaikan informasi dan berinteraksi dengan audiens. <br><br> Meskipun masih baru dalam dunia pengembangan website, saya terus mengasah keterampilan dengan project-project kecil dan berusaha mencari tantangan baru untuk menguji kemampuan saya.";
-
-const fiveExploreText = exploreText[4];
-fiveExploreText.innerHTML = "Saya yakin, dengan kerja keras dan dedikasi, perjalanan belajar saya dalam pengembangan website akan membuka peluang yang menarik dan menginspirasi saya untuk terus berkembang di bidang ini.";
-
-termsText.innerHTML = "<strong>1. Pengertian:</strong> Terms of Service atau Syarat dan Ketentuan adalah dokumen hukum yang berisi perjanjian antara pengguna (user) dan pemilik website. Dokumen ini menetapkan persetujuan dan aturan yang mengatur bagaimana pengguna dapat menggunakan layanan yang diberikan oleh website tersebut.<br><br><strong>2. Penggunaan Layanan:</strong> Bagian ini menjelaskan tentang jenis layanan yang disediakan oleh website dan cara pengguna dapat mengakses serta menggunakan layanan tersebut. Juga mungkin mencakup persyaratan usia minimal atau persyaratan kelayakan lainnya untuk menjadi pengguna.<br><br><strong>3. Privasi dan Data Pengguna:</strong> Ini adalah bagian yang menjelaskan kebijakan privasi website, termasuk bagaimana data pengguna dikumpulkan, digunakan, disimpan, dan dilindungi. Biasanya mencakup informasi tentang cookies dan kebijakan pengumpulan data pribadi.<br><br><strong>4. Kekayaan Intelektual:</strong> Bagian ini mengatur hak kekayaan intelektual pemilik website, termasuk hak cipta, merek dagang, hak paten, dan hak kekayaan intelektual lainnya. Hal ini menetapkan batasan-batasan terkait penggunaan konten yang dimiliki oleh website.<br><br><strong>5. Kewajiban Pengguna:</strong> Menjelaskan tindakan atau perilaku yang dilarang atau diharamkan bagi pengguna saat menggunakan layanan. Misalnya, tindakan seperti pelanggaran hukum, penyebaran konten ilegal, atau penyalahgunaan layanan website.<br><br><strong>6. Tanggung Jawab Pihak Terkait:</strong> Bagian ini mengatur batasan tanggung jawab pihak-pihak yang terlibat dalam penyediaan layanan, termasuk pemilik website, mitra, dan penyedia layanan pihak ketiga.<br><br><strong>7. Pembatalan atau Pengakhiran Akun:</strong> Menjelaskan prosedur atau kriteria di mana pemilik website dapat membatalkan atau mengakhiri akun pengguna jika terjadi pelanggaran terhadap TOS atau alasan lain yang ditetapkan.<br><br><strong>8. Perubahan pada TOS:</strong> Menjelaskan bahwa pemilik website dapat mengubah TOS dari waktu ke waktu dan bagaimana perubahan tersebut akan diinformasikan kepada pengguna.<br><br><strong>9. Hukum yang Berlaku:</strong> Menentukan yurisdiksi dan hukum yang berlaku untuk penyelesaian sengketa atau permasalahan yang timbul dari penggunaan layanan website.<br><br><strong>10. Persetujuan Pengguna: </strong>Bagian terakhir biasanya meminta pengguna untuk menyetujui dan mengikatkan diri pada TOS sebelum mereka dapat menggunakan layanan yang disediakan oleh website.<br><br><br><br><strong>Penting bagi pengguna untuk membaca dan memahami TOS dengan seksama sebelum menggunakan layanan dari sebuah website.</strong> Dengan menerima TOS, pengguna menyetujui persyaratan dan aturan yang telah ditetapkan oleh pemilik website, dan ini dapat mempengaruhi hak dan kewajiban mereka selama menggunakan layanan tersebut.";
-
-textHelp.innerHTML = "<strong>Selamat datang di chatBot [ Fabot Chat ] - Chatting dengan bot !</strong><br><br><br>Bagian 'help' kami didesain untuk memberikan panduan lengkap dalam menggunakan chatBot [ Fabot Chat ]. Berikut adalah beberapa informasi yang akan Anda temukan di bagian 'help' kami:<br><br><br> 1. Cara Memulai: Panduan langkah demi langkah untuk memulai percakapan dengan chatBot [ Fabot Chat ]. Anda akan menemukan cara memulai percakapan, termasuk perintah awal yang dapat Anda berikan.<br><br> 2. Fitur Utama: Penjelasan mengenai fitur-fitur utama yang dapat digunakan dalam percakapan dengan chatBot [ Fabot Chat ]. Mulai dari pertanyaan umum, pencarian informasi, hingga melakukan tugas-tugas khusus.<br><br> 3. Perintah Khusus: Daftar perintah khusus yang dapat Anda gunakan untuk mengakses fitur-fitur tertentu dengan cepat. Kami menyediakan daftar perintah beserta contoh penggunaannya.<br><br> 4. Pertanyaan Umum: Jawaban atas pertanyaan-pertanyaan umum seputar chatBot [ Fabot Chat ] dan cara kerjanya. Jika Anda mengalami masalah atau kesulitan, Anda mungkin akan menemukan jawaban di sini.<br><br> 5. Kebijakan dan Privasi: Informasi tentang kebijakan kami terkait penggunaan data dan privasi Anda. Kami selalu mengutamakan keamanan dan privasi informasi pengguna.<br><br> 6. Kontak dan Dukungan: Informasi tentang cara menghubungi tim dukungan kami jika Anda mengalami masalah yang tidak teratasi oleh bagian 'help' kami.<br><br><br><br> Kami berharap bagian 'help' ini dapat membantu Anda dalam menjalankan percakapan dengan chatBot [ Fabot Chat ] dengan lancar dan menyenangkan. Jika Anda memiliki pertanyaan lebih lanjut, jangan ragu untuk menghubungi kami melalui bagian kontak yang telah disediakan. <strong>Terima kasih telah menggunakan chatBot [ Fabot Chat ] sebagai Chatting dengan bot !</strong>";
-
-textContact.innerHTML = "<strong>Kontak Kami - Tim Dukungan chatBot [ Fabot Chat ]</strong><br><br>Kami senang mendengar dari Anda! Jika Anda memiliki pertanyaan, masalah, atau umpan balik mengenai pengalaman Anda menggunakan chatBot [ Fabot Chat ], tim dukungan kami siap membantu. Berikut adalah beberapa opsi untuk menghubungi kami:<br><br><br><br>1. Formulir Kontak: Anda dapat mengisi formulir kontak yang telah kami sediakan. Jangan ragu untuk menjelaskan pertanyaan atau masalah Anda secara detail agar tim kami dapat memberikan bantuan yang tepat.<br><br><br>2. Email: Kirimkan email Anda ke support@chatBot [ Fabot Chat ].com dan tim dukungan kami akan merespons dalam waktu secepatnya.<br><br><br>3. Live Chat: Jika Anda mengalami masalah mendesak atau membutuhkan bantuan langsung, gunakan fitur live chat yang tersedia. Tim dukungan kami akan berusaha merespons dengan segera.<br><br><br>4. Media Sosial: Anda juga dapat menghubungi kami melalui media sosial kami. Kami aktif di platform-platform seperti Twitter, Facebook, dan Instagram. Cari akun kami dengan username @chatBot [ Fabot Chat ] untuk mendapatkan dukungan.<br><br><br><br>Kami mengutamakan kepuasan pengguna dan selalu siap membantu Anda dengan setiap pertanyaan dan masalah yang Anda hadapi. Tim dukungan kami terdiri dari tenaga ahli yang berpengalaman dalam mengatasi berbagai situasi. <u>Jangan ragu untuk menghubungi kami kapan saja, dan kami akan dengan senang hati memberikan bantuan terbaik kami.</u> <strong>Terima kasih telah memilih chatBot [ Fabot Chat ] sebagai Chatting dengan bot !</strong>";
-
-function footerBoxOne() {
- descriptionClick();
- console.log('whwhwh')
-}
-
-function footerBoxSecond() {
- openExplore();
- privacyPolicy.style.display = "block";
- titleExplore.innerHTML = "Privacy Policy";
-}
+const arrRemoveItem = [];
 
 const fadeInBox = (index) => {
- if (index < exploreBox.length) {
-  exploreBox[index].style.opacity = '1';
+  const lastElem = wrapperExploreBox.lastElementChild;
+  const cloneExploreBox = document.querySelector('.explore-box').cloneNode(true);
   
-   if (index >= 2) {
-    exploreBox[index].scrollIntoView({ behavior: 'smooth' });
-   }
-  setTimeout(() => {
-   fadeInBox(index + 1);
-  }, 1500);
- }
+  if (index < devWords.length) {
+   document.querySelector('.explore-box').style.opacity = "1";
+    lastElem.querySelector('#wordsDev').innerHTML = devWords[index];
+    cloneExploreBox.style.opacity = "0";
+    barierElement.style.visibility = 'visible';
+    wrapperExploreBox.appendChild(cloneExploreBox);
+    
+    const indexStartElement = 0;
+    const elementToRemove = wrapperExploreBox.children.length;
+    
+    const itemElem = handleRemoveItem(indexStartElement, elementToRemove);
+    arrRemoveItem.push({
+     first: `${itemElem.startElement}`,
+     second: `${itemElem.removeElement}`
+    });
+    
+    lastElem.scrollIntoView({behavior: 'smooth'});
+    
+   setTimeout(() => {
+    fadeInBox(index + 1);
+    cloneExploreBox.style.opacity = "1";
+   }, 500);
+  } else {
+    barierElement.style.visibility = 'hidden';
+    wrapperExploreBox.removeChild(lastElem);
+  }
 }
 
-function footerBoxThird() {
- fadeInBox(0);
- openExplore();
- wrapExploreBox.style.display = "block";
- titleExplore.innerHTML = "Description This Website";
+function handleRemoveItem(start, remove) {
+ const startElement = start;
+ const removeElement = remove;
+ return { startElement, removeElement };
 }
 
-function footerBoxFour() {
- openExplore();
- containerTerms.style.display = "block";
- titleExplore.innerHTML = "Terms Of Service";
-}
-
-function footerBoxFive() {
- openExplore();
- titleExplore.innerHTML = "Contact Us";
- containerContact.style.display = "block";
-}
-function footerBoxSix() {
- openExplore();
- titleExplore.innerHTML = "Help Page";
- containerHelp.style.display = "block";
-}
-
-containerExplore.style.display = "none";
-
-const openExplore = () => {
- containerExplore.classList.add('containerExploreActive');
-
- footers[1].style.position = "fixed";
- containerExplore.style.display = "block"
-
- privacyPolicy.style.display = "none";
- containerHelp.style.display = "none";
- containerTerms.style.display = "none";
- wrapExploreBox.style.display = "none";
- containerContact.style.display = "none";
+function executeRemoveItem() {
+ const setRemoveItem = arrRemoveItem.length - 1;
+ const toStart = arrRemoveItem[setRemoveItem].first;
+ const toRemove = arrRemoveItem[setRemoveItem].second;
  
- if (profileImgBox[0].classList.contains('profileImgBesar')) {
-  profileImgBox[0].classList.remove('profileImgBesar');
+ if (wrapperExploreBox.children.length <= toRemove) {
+  for (let i = 3; i <= toRemove; i++) {
+   wrapperExploreBox.children[toStart].remove();
+  }
  }
+}
 
+
+function handleFooter(page) {
+ containerHome.classList.toggle('active');
+ containerExplore.classList.toggle('containerExploreActive');
+ document.querySelector('.box-text-explore').style.display = "block";
+ window.scrollTo(0, document.body.scrollHeight);
+
+ switch(page) {
+  case 'help':
+   explore_text.innerHTML = objTextExplore.help;
+   break;
+  case 'about':
+   explore_text.innerHTML = objTextExplore.about;
+   break;
+  case '':
+   alert('help')
+   explore_text.innerHTML = objTextExplore.about;
+   break;
+  case 'service':
+   explore_text.innerHTML = objTextExplore.service;
+   break;
+  case 'guide':
+   explore_text.innerHTML = objTextExplore.guide;
+   break;
+  case 'description':
+   fadeInBox(0);
+   document.querySelector('.box-text-explore').style.display = "none";
+   wrapperExploreBox.style.display = "block";
+   break;
+  case 'policy':
+   explore_text.innerHTML = objTextExplore.policy;
+   break;
+  default:
+  console.log('keluar')
+  executeRemoveItem();
+  wrapperExploreBox.style.display = "none";
+ }
+}
+
+/*
  if (activeFav) {
   activeFav.classList.remove('active');
   activeDesc.classList.remove('active');
@@ -1064,11 +1074,7 @@ const openExplore = () => {
  }
 
  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function closeExplore() {
- containerExplore.classList.remove('containerExploreActive');
-}
+}*/
 
 let genderCwo = [`laki laki`, `laki-laki`, `cowok`, `cowo`, `cwo`, `cwok`, `jantan`, `lakik`, `kakek`, `om`, `bapa`, `ayah`];
 

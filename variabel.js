@@ -1,7 +1,5 @@
 const cl = console.log.bind(console);
 
-
-
 (function() {
   let index = 0;
   const lengthQuote = ['Setiap baris kode adalah kesempatan untuk belajar sesuatu yang baru.', 'Semangatmu menentukan seberapa jauh kemampuanmu berkembang.', 'Setiap program memiliki cerita, dan kamu adalah penulisnya.'];
@@ -14,43 +12,6 @@ const cl = console.log.bind(console);
   
   const intervalId = setInterval(tampilkanQuoteBerikutnya, 5000);
 })();
-
-
-function handleFooter(page) {
- switch(page) {
-  case 'help':
-   alert(page)
-   break;
-  case 'about':
-   alert(page)
-   
-   break;
-  case 'help':
-   alert('help')
-   
-   break;
-  case 'service':
-   alert('service')
-   
-   break;
-  case 'contact':
-   alert('contact')
-   
-   break;
-  case 'description':
-   alert('description')
-   
-   break;
-  case 'policy':
-   alert('policy')
-   
-   break;
-  default:
-  console.eror('gagal memuat page');
- }
-}
-
-
 
 
 
@@ -227,7 +188,7 @@ const textPopup = clonedMyPopup.querySelector('#text-popup');
 
 
 function handlePopup() {
- clonedMyPopup.style.display = 'flex';
+ clonedMyPopup.style.dlay = 'flex';
  containerPopup.appendChild(clonedMyPopup.cloneNode(true));
  
  textPopup.textContent = 'Maaf fitur ini belum tersedia';
@@ -798,24 +759,234 @@ function openEmail() {
 
 
 
+const containerItemsTheme = document.querySelector('.container-box-theme');
+const boxTheme = document.querySelector('.box-theme');
+const wrapperBoxTheme = document.querySelector('.info-type-theme .box-wrapper-item')
+const itemsTheme = document.querySelector('.box-item-theme');
+const ctaTheme = document.getElementById('toggleTheme');
+const titleTheme = document.getElementById('title-theme');
+
+const themeJSON = () => {
+  return {
+   type: {
+    themeDark: [
+     {
+      templateName: 'deep ocean',
+      themeLoved: false
+     },
+     {
+      templateName: 'deep sunset',
+      themeLoved: 'nabilla'
+     },
+     {
+      templateName: 'deep night',
+      themeLoved: 'pasya'
+     }
+    ],
+    themeLight: [
+     {
+      templateName: 'light ocean',
+      themeLoved: false
+     },
+     {
+      templateName: 'light clouds',
+      themeLoved: false
+     },
+     {
+      templateName: 'light clouds',
+      themeLoved: false
+     }
+    ],
+    custom: [
+     {
+      templateName: 'set name 1',
+      themeLoved: false
+     },
+     {
+      templateName: 'set name 2',
+      themeLoved: false
+     },
+     {
+      templateName: 'set name 3',
+      themeLoved: false
+     }
+    ]
+   }
+  }
+ }
+ 
+ 
+
+ const outerLocalTheme = {
+  theme: '',
+  checkbox: Array(),
+  nameTheme: ''
+ }
+
+setTimeout(() => {
+ cl(outerLocalTheme)
+}, 2000);
+
+function uncheckRadio(radioId) {
+ let templateType, setLength, setThemeName, localTheme;
+ const radio = document.getElementById(radioId);
+ 
+ switch(radioId) {
+  case 'radio-theme1':
+   radio.checked = true;
+   localTheme = 'themeDark';
+   titleTheme.textContent = "Dark";
+   outerLocalTheme.theme = 'themeDark';
+   templateType = themeJSON().type.themeDark;
+   break;
+   
+  case 'radio-theme2':
+   localTheme = 'themeLight';
+   titleTheme.textContent = "Light";
+   outerLocalTheme.theme = 'themeLight';
+   templateType = themeJSON().type.themeLight;
+   break;
+   
+  case 'radio-theme3':
+   localTheme = 'custom';
+   titleTheme.textContent = "Custom";
+   outerLocalTheme.theme = 'custom';
+   templateType = themeJSON().type.custom;
+   break;
+    
+  default:
+   console.log('defaultt');
+   return;
+ }
+  const arrayName = [];
+  
+  function setTemplates(templateName) {
+   for (const templateKey in templateName) {
+    const template = templateType[templateKey];
+    const templateName = template.templateName;
+    const lovedTemplate = template.themeLoved;
+    
+    arrayName.push(templateName);
+    setLength = Object.keys(templateType).length;
+    regenerateItemsTheme(setLength);
+    setThemeProperty(templateType, setLength, arrayName, localTheme);
+   }
+   return templateName;
+  }
+  const newPropertyTheme = setTemplates(templateType);
+}
+  
+function setThemeProperty(type, length, name, localTheme) {
+ generateItemTheme(0, type, length, name, localTheme);
+}
 
 
+function generateItemTheme(index, typeTheme, itemsLengthTheme, setThemeName, localTheme) {
+const lastItem = wrapperBoxTheme.lastElementChild;
+
+ if (index < itemsLengthTheme) {
+  if (wrapperBoxTheme.children.length <= itemsLengthTheme) {
+    const cloneItemTheme = itemsTheme.cloneNode(true);
+    wrapperBoxTheme.appendChild(cloneItemTheme);
+    
+    const itemThemeTemplateName = document.querySelectorAll('#template-name');
+    const themeName = document.querySelectorAll('#template-name');
+    
+    generateItemTheme(index + 1, itemsLengthTheme, setThemeName);
+     
+     const itemToRemove = wrapperBoxTheme.children[itemsLengthTheme];
+     
+     if (itemToRemove) {
+      setTimeout(() => {
+       wrapperBoxTheme.removeChild(itemToRemove);
+       setTimeout(() => {
+        lastItem.style.opacity = "1";
+        itemThemeTemplateName.forEach((name, sort) => name.textContent = setThemeName[sort]);
+        lovedTheme(setThemeName, setThemeName, typeTheme, localTheme);
+       }, 500);
+      }, 1500);
+     }
+    }
+  }
+}
+
+function regenerateItemsTheme(setIndex) {
+ const items = document.querySelectorAll('.box-item-theme');
+ items.forEach((elem) => {
+  elem.style.opacity = "0";
+  setTimeout(() => {
+   wrapperBoxTheme.scrollTo({ top: 0, behavior: 'smooth' });
+   elem.style.opacity = "1";
+  }, 2000);
+ });
+}
+
+const arrayLoveTheme = {
+ checkbox: Array()
+};
+
+function lovedTheme(nameTheme, themeName, typeTheme, localTheme) {
+const getThemeJSON = JSON.parse(localStorage.getItem('data_favoriteTheme'));
+const setCheckboxLoved = document.querySelectorAll('.love-checkbox');
+const isLoved = [];
+
+ // mendapatkan love dari tema yang di sukai user
+ if (localStorage.getItem('keyTheme') === 'keyTheme') {
+   Object.entries(getThemeJSON.type).forEach((themeKey, index) => {
+    if (themeKey[0] === localTheme) {
+     themeKey[1].map((themes, index) => {
+      isLoved.push(themes.themeLoved);
+      isLoved.length = index + 1;
+     });
+    }
+   });
+  } else {
+   localStorage.setItem('data_favoriteTheme', JSON.stringify(themeJSON()));
+   localStorage.setItem('keyTheme', 'keyTheme');
+  }
+  
+  // mengatur theme menjadi loved
+  setTimeout(() => {
+   setCheckboxLoved.forEach((items, index) => {
+    items.checked = isLoved[index];
+    cl(isLoved[index])
+   });
+  }, 750);
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function lovingTheme() {
+  const dataLovedTheme = JSON.parse(localStorage.getItem('data_favoriteTheme'));
+  const checkbox = outerLocalTheme.checkbox;
+  const nameTheme = outerLocalTheme.nameTheme;
+  
+  const lovedCheckbox = document.querySelectorAll('.love-checkbox');
+  
+  arrayLoveTheme.length= nameTheme.length;
+  outerLocalTheme.checkbox.length = nameTheme.length;
+  lovedCheckbox.forEach((checkbox, index) => {
+   const objCheck = checkbox.checked;
+   arrayLoveTheme.checkbox[index] = objCheck;
+   outerLocalTheme.checkbox[index] = objCheck;
+  });
+  
+   const themeStorage = dataLovedTheme.type;
+   Object.entries(themeStorage).forEach((themeKey, index) => {
+   const setThemeJSON = themeJSON();
+   
+   Object.entries(dataLovedTheme.type).forEach((subject, index) => {
+    if (themeKey[0] === outerLocalTheme.theme) {
+     
+     if (subject[0] === outerLocalTheme.theme) {
+       subject[1].map((theme, index) => {
+        theme.themeLoved = outerLocalTheme.checkbox[index];
+        cl('ini adalah type tema :', outerLocalTheme.theme,'array value dari tema yang di love :', outerLocalTheme.checkbox);
+       });
+      }
+      
+     localStorage.setItem('data_favoriteTheme', JSON.stringify(dataLovedTheme));
+    }
+   });
+  });
+}
 

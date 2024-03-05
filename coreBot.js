@@ -60,10 +60,6 @@ imgPicture.setAttribute('alt','picture_images');
 let stickers = clonedContentPertanyaan.querySelector('.sticker-chat');
 let guessPicture = clonedContentPertanyaan.querySelector('.guess-picture');
 let clonedTimeSticker = stickers.querySelector('.time-sticker');
-
-console.log(stickers, 'stickers');
-console.log(clonedTimeSticker, 'clonedTimeSticker');
-
 let clonedTimeGuess = stickers.querySelector('.time-guess');
 
 guessPicture.appendChild(imgPicture);
