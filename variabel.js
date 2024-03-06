@@ -772,43 +772,104 @@ const themeJSON = () => {
     themeDark: [
      {
       templateName: 'deep ocean',
-      themeLoved: false
+      themeLoved: false,
+      keyColor: {
+       textColor: '#02ffc4',
+       iconColor: '#02ffc4',
+       backgroundPY: '0',
+       cardsColor: 'black',
+       borderColor: '#ff0000',
+       backgroundColor: 'black',
+       backgroundImage: 'url("/bg-home1.jpg")',
+       backgroundAnim: 'animate-background.mp4'
+      }
      },
      {
       templateName: 'deep sunset',
-      themeLoved: 'nabilla'
+      themeLoved: 'nabilla',
+      keyColor: {
+       textColor: '#02ffc4',
+       iconColor: '#02ffc4',
+       borderColor: '#ff0000',
+       cardsColor: 'black',
+       backgroundPY: '0',
+       backgroundColor: 'white',
+       backgroundImage: 'url("/animate-background.gift")'
+      }
      },
      {
       templateName: 'deep night',
-      themeLoved: 'pasya'
+      themeLoved: 'pasya',
+      keyColor: {
+       textColor: 'yellow',
+       iconColor: '#828200',
+       cardsColor: 'yellow',
+       backgroundPY: '50%',
+       borderColor: '#feff00',
+       backgroundColor: 'white',
+       backgroundImage: 'url("/bg-home3.jpg")'
+      }
      }
     ],
     themeLight: [
      {
       templateName: 'light ocean',
-      themeLoved: false
+      themeLoved: false,
+      keyColor: {
+       textColor: '#aeaeae',
+       iconColor: '#1bff41',
+       borderColor: 'light ocean',
+       backgroundColor: '#ff1b1b'
+      }
      },
      {
       templateName: 'light clouds',
-      themeLoved: false
+      themeLoved: false,
+      keyColor: {
+       textColor: '#aeaeae',
+       iconColor: '#ff1bee',
+       borderColor: 'light clouds',
+       backgroundColor: '#ff1b1b'
+      }
      },
      {
-      templateName: 'light clouds',
-      themeLoved: false
+      templateName: 'light beach',
+      themeLoved: false,
+      keyColor: {
+       textColor: '#aeaeae',
+       iconColor: '#1b47ff',
+       borderColor: 'light beach',
+       backgroundColor: '#ff1b1b'
+      }
      }
     ],
     custom: [
      {
       templateName: 'set name 1',
-      themeLoved: false
+      themeLoved: false,
+      keyColor: {
+       textColor: '#aeaeae',
+       borderColor: 'set theme 1',
+       backgroundColor: '#ff1b1b'
+      }
      },
      {
       templateName: 'set name 2',
-      themeLoved: false
+      themeLoved: false,
+      keyColor: {
+       textColor: '#aeaeae',
+       borderColor: 'set name 2',
+       backgroundColor: '#ff1b1b'
+      }
      },
      {
       templateName: 'set name 3',
-      themeLoved: false
+      themeLoved: false,
+      keyColor: {
+       textColor: '#aeaeae',
+       borderColor: 'set theme 3',
+       backgroundColor: '#ff1b1b'
+      }
      }
     ]
    }
@@ -891,6 +952,9 @@ const lastItem = wrapperBoxTheme.lastElementChild;
     
     const itemThemeTemplateName = document.querySelectorAll('#template-name');
     const themeName = document.querySelectorAll('#template-name');
+    const itemTheme = document.querySelectorAll('.box-item-theme');
+    
+    handleSwitchTheme(itemTheme, typeTheme);
     
     generateItemTheme(index + 1, itemsLengthTheme, setThemeName);
      
@@ -902,6 +966,7 @@ const lastItem = wrapperBoxTheme.lastElementChild;
        setTimeout(() => {
         lastItem.style.opacity = "1";
         itemThemeTemplateName.forEach((name, sort) => name.textContent = setThemeName[sort]);
+        
         lovedTheme(setThemeName, setThemeName, typeTheme, localTheme);
        }, 500);
       }, 1500);
@@ -909,6 +974,7 @@ const lastItem = wrapperBoxTheme.lastElementChild;
     }
   }
 }
+
 
 function regenerateItemsTheme(setIndex) {
  const items = document.querySelectorAll('.box-item-theme');
@@ -949,7 +1015,6 @@ const isLoved = [];
   setTimeout(() => {
    setCheckboxLoved.forEach((items, index) => {
     items.checked = isLoved[index];
-    cl(isLoved[index])
    });
   }, 750);
 }
@@ -961,6 +1026,12 @@ function lovingTheme() {
   const nameTheme = outerLocalTheme.nameTheme;
   
   const lovedCheckbox = document.querySelectorAll('.love-checkbox');
+  
+  document.querySelectorAll('.container-label').forEach(checkbox => {
+   checkbox.addEventListener('click', function(event) {
+     event.stopPropagation();
+   });
+  });
   
   arrayLoveTheme.length= nameTheme.length;
   outerLocalTheme.checkbox.length = nameTheme.length;
@@ -980,7 +1051,7 @@ function lovingTheme() {
      if (subject[0] === outerLocalTheme.theme) {
        subject[1].map((theme, index) => {
         theme.themeLoved = outerLocalTheme.checkbox[index];
-        cl('ini adalah type tema :', outerLocalTheme.theme,'array value dari tema yang di love :', outerLocalTheme.checkbox);
+        //cl('ini adalah type tema :', outerLocalTheme.theme,'array value dari tema yang di love :', outerLocalTheme.checkbox);
        });
       }
       
@@ -990,3 +1061,28 @@ function lovingTheme() {
   });
 }
 
+
+function handleSwitchTheme(itemTheme, typeTheme) {
+  itemTheme.forEach((items, id) => {
+   items.addEventListener('click', function() {
+     Object.entries(typeTheme[id].keyColor).forEach(([pseudo, color]) => {
+       const setTHEME = localStorage.setItem('setTHEME', JSON.stringify(typeTheme[id].keyColor));
+       
+       document.documentElement.style.setProperty(`--${pseudo}`, color);
+     });
+   });
+  });
+}
+
+
+(function() {
+ const savedTheme = JSON.parse(localStorage.getItem('setTHEME'));
+ const useTheme = (savedTheme) ? JSON.parse(localStorage.getItem('setTHEME')) : JSON.parse(localStorage.getItem('defaultTheme'));
+ 
+ const savedPJS = localStorage.getItem('pJSMode');
+ const setPJS = (savedPJS) ? localStorage.getItem('pJSMode') : localStorage.getItem('defaultModePJS');
+ cl()
+ Object.entries(useTheme).forEach(([pseudo, color]) => {
+  document.documentElement.style.setProperty(`--${pseudo}`, color);
+ });
+})();

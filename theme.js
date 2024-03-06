@@ -15,10 +15,10 @@ const defaultTheme = {
 }
 
 const themeRed = {
- textColor: '#02ffc4', // 
- iconColor: '#02ffc4', // 
- borderColor: '#ff0000', //red
- cardsColor: 'black', //
+ textColor: '#02ffc4',
+ iconColor: '#02ffc4',
+ borderColor: '#ff0000',
+ cardsColor: 'black',
  backgroundPY: '0',
  positionAnimBg: '-85px',
  backgroundColor: 'white',
@@ -28,11 +28,11 @@ const themeRed = {
 
 const themeBlue = {
  textColor: '#516fff',
- iconColor: '#516fff', // blue
+ iconColor: '#516fff',
  cardsColor: 'blue',
  backgroundPY: '100%',
  positionAnimBg: '50',
- borderColor: '#00ffff',// cyan
+ borderColor: '#00ffff',
  backgroundColor: 'white',
  backgroundImage: 'url("/bg-home2.jpg")',
  backgroundAnim: 'animate-background3.mp4'
@@ -40,11 +40,11 @@ const themeBlue = {
 
 const themeYellow = {
  textColor: 'yellow',
- iconColor: '#828200', // yellow dark
+ iconColor: '#828200',
  cardsColor: 'yellow',
  backgroundPY: '50%',
  positionAnimBg: '50',
- borderColor: '#feff00', // yellow
+ borderColor: '#feff00',
  backgroundColor: 'white',
  backgroundImage: 'url("/bg-home3.jpg")',
  backgroundAnim: ''
@@ -59,20 +59,7 @@ localStorage.setItem('defaultModePJS', defaultModePJS);
  videoSource.type = "video/mp4";
  video.appendChild(videoSource);
 
-(function() {
- const savedTheme = JSON.parse(localStorage.getItem('setTheme'));
- const setTheme = (savedTheme) ? JSON.parse(localStorage.getItem('setTheme')) : JSON.parse(localStorage.getItem('defaultTheme'));
- 
- const savedPJS = localStorage.getItem('pJSMode');
- const setPJS = (savedPJS) ? localStorage.getItem('pJSMode') : localStorage.getItem('defaultModePJS');
- const bgAnimate = setTheme.backgroundAnim;
- videoSource.src = bgAnimate;
- video.load();
- 
- Object.entries(setTheme).forEach(([subject, color]) => {
-  document.documentElement.style.setProperty(`--${subject}`, color);
- });
-})();
+
  
 function switchTheme(color) {
  setupParticle(color);
