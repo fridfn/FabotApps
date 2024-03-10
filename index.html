@@ -916,9 +916,9 @@
         <div class="wrapper-content-home">
          <div class="wrapper-box-article">
           <div class="wrapper-cta-and-article">
-           <div style="display: flex; flex-direction: column; gap: 15px; width: 75%; border: 1px solid red;">
+           <div id="hide-article" style="display: flex; flex-direction: column; gap: 15px; width: 75%;">
             <div class="box-header-article">
-             <h1 class="title-header-home" style="font-size: 15px;">welcome to my <span style="color: var(--theme-color-icon);">chatbot </span>web <span style="color: var(--theme-color-icon);">development</span> journey!</h1>
+             <h1 class="title-header-home" style="font-size: 15px;">welcome to my <span style="color: var(--secondaryText);">chatbot </span>web <span style="color: var(--secondaryText);">development</span> journey!</h1>
              <p class="article-text">dolor ullamco do sint est anim ut ullamco duis consectetur ut voluptate occaecat laboris occaecat reprehenderit cillum elit ea consectetur voluptate nostrud nisi veniam duis.</p>
             </div>
             <div class="box-btn-article">
@@ -928,45 +928,7 @@
            </div>
            <div class="container-sidebar-home-feature">
             <div class="box-sidebar-home-feature" id="toggle-theme" onclick="uncheckRadio('radio-theme1')">
-             <ion-icon name="book" class=""></ion-icon>
-             <!-- container box theme -->
-            </div>
-            <div class="container-box-theme">
-             <div class="wrapper-box-theme">
-              <div class="box-theme">
-               <div class="box-type-theme">
-                <p class="secondary-text" id="title-theme" style="letter-spacing: 2px;">Dark</p>
-                <ion-icon name="moon" class="mini-icons"></ion-icon>
-               </div>
-               <div class="info-type-theme">
-                <p class="secondary-text">Select Theme</p>
-                <div class="box-wrapper-item">
-                 <div class="box-item-theme">
-                  <p id="template-name" style="font-size: 10px; font-weight: 500; text-transform: capitalize;">&nbsp;</p>
-                  <label class="container-label">
-                   <input type="checkbox" class="love-checkbox" onclick="lovingTheme()">
-                   <div class="checkmark">
-                     <svg viewBox="0 0 256 256">
-                     <rect fill="none" height="256" width="256"></rect>
-                     <path d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z" stroke-width="20px" stroke="none" fill="none"></path></svg>
-                   </div>
-                  </label>
-                 </div>
-                </div>
-               </div>
-              </div>
-              <div class="wrapper-checkbox-theme">
-               <input type="radio" id="radio-theme1" onclick="uncheckRadio('radio-theme1')" name="radioGroup">
-               <label for="radio-theme1"></label>
-               
-               <input type="radio" id="radio-theme2" onclick="uncheckRadio('radio-theme2')" name="radioGroup">
-               <label for="radio-theme2"></label>
-               
-               <input type="radio" id="radio-theme3" onclick="uncheckRadio('radio-theme3')" name="radioGroup">
-               <label for="radio-theme3"></label>
-               
-              </div>
-             </div>
+              <ion-icon name="book" class=""></ion-icon>
             </div>
             <div class="box-sidebar-home-feature" onclick="openEmail()">
              <ion-icon name="mail" class=""></ion-icon>
@@ -1011,7 +973,7 @@
       <div id="particles-js"></div>
       <div class="wrapper-box-hints">
        <div class="box-hints">
-        <div class="item-hints">
+        <div class="item-hints" id="particles-view">
          <div class="hint" data-position="4">
           <span class="hint-dot" id="show-elem">Created</span>
           <div class="hint-content hint-right">
@@ -1070,30 +1032,6 @@
          </div>
         </div>
        </div>
-      </div>
-      <div class="box-change-particle">
-       <div class="barier-change-particle"></div>
-       <button class="cta-particle">
-        <lord-icon src="https://cdn.lordicon.com/gzbtulzi.json" trigger="click" state="loop-pinch" stroke="bold" class="current-color" class="icon-change-particle">
-        </lord-icon>
-        <div class="box-cta-particle">
-         <p class="title-header-home">Particles Mode</p>
-         <div class="wrapper-change-particle">
-          <div class="box-sidebar-home-feature" onclick="modeParticle('line')">
-           <p class="particle-items">1</pclass>
-          </div>
-          <div class="box-sidebar-home-feature" onclick="modeParticle('snow')">
-           <p class="particle-items">2</pclass>
-          </div>
-          <div class="box-sidebar-home-feature" onclick="modeParticle('shape')">
-           <p class="particle-items">3</pclass>
-          </div>
-          <div class="box-sidebar-home-feature" onclick="modeParticle('image')">
-           <p class="particle-items">4</pclass>
-          </div>
-         </div>
-        </div>
-       </button>
       </div>
      </div>
      <div class="container-cards-skils">
@@ -1168,6 +1106,73 @@
         </div>
        </div>
       </div>
+      <div class="wrapper-card-box-skils" id="skils">
+       <div class="header_title_content"  id="set-particles">
+        <h1 class="title-header-home">programming languages.</h1>
+        <p class="article-text">dolor ullamco do sint est anim ut ullamco duis consectetur ut voluptate occaecat laboris occaecat reprehenderit.</p>
+       </div>
+       <div class="container-box-theme">
+        <div class="wrapper-box-theme">
+         <div class="box-theme">
+          <div class="box-type-theme">
+           <p class="secondary-text" id="title-theme" style="letter-spacing: 2px;">Dark</p>
+           <ion-icon name="moon" class="mini-icons"></ion-icon>
+          </div>
+          <div class="info-type-theme">
+           <p class="secondary-text">Select Theme</p>
+           <div class="box-wrapper-item">
+            <div class="box-item-theme">
+             <p id="template-name" style="font-size: 10px; font-weight: 500; text-transform: capitalize;">&nbsp;</p>
+             <label class="container-label">
+              <input type="checkbox" class="love-checkbox" onclick="lovingTheme()">
+              <div class="checkmark">
+                <svg viewBox="0 0 256 256">
+                <rect fill="none" height="256" width="256"></rect>
+                <path d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z" stroke-width="20px" stroke="none" fill="none"></path></svg>
+              </div>
+             </label>
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="wrapper-checkbox-theme">
+          <input type="radio" id="radio-theme1" onclick="uncheckRadio('radio-theme1')" name="radioGroup">
+          <label for="radio-theme1"></label>
+          
+          <input type="radio" id="radio-theme2" onclick="uncheckRadio('radio-theme2')" name="radioGroup">
+          <label for="radio-theme2"></label>
+          
+          <input type="radio" id="radio-theme3" onclick="uncheckRadio('radio-theme3')" name="radioGroup">
+          <label for="radio-theme3"></label>
+          
+         </div>
+        </div>
+       </div>
+       <div class="box-change-particle">
+        <div class="box-cta-particle">
+         <p class="title-header-home" style="font-size: 11px;">Particles</p>
+         <div class="wrapper-change-particle">
+          <div class="box-sidebar-home-feature" onclick="modeParticle('line')">
+           <p class="particle-items">1</pclass>
+          </div>
+          <div class="box-sidebar-home-feature" onclick="modeParticle('snow')">
+           <p class="particle-items">2</pclass>
+          </div>
+          <div class="box-sidebar-home-feature" onclick="modeParticle('shape')">
+           <p class="particle-items">3</pclass>
+          </div>
+          <div class="box-sidebar-home-feature" onclick="modeParticle('image')">
+           <p class="particle-items">4</pclass>
+          </div>
+         </div>
+        </div>
+         <div class="btn-down-particle" onclick="goDownParticle()">
+          <div>
+           <ion-icon name="chevron-down" class="main-icon"></ion-icon>
+          </div>
+         </div>
+       </div>
+      </div>
      </div>
      <div class="quote-section">
       <div class="quote-box">
@@ -1187,7 +1192,7 @@
      <div class="footer-section">
       <div class="wrapper-article-footer">
        <div class="box-article-footer">
-        <p class="title-header-home"><ion-icon name="logo-octocat" class="icon-home"></ion-icon>dolor amet</p>
+        <p class="title-header-home"><ion-icon name="logo-octocat" class="icon-home" id="theme-see"></ion-icon>dolor amet</p>
         <p class="article-text">sit dolore officia ea ad aliquip laborum culpa pariatur irure ut sit sit minim ipsum</p>
         <p class="title-header-home" style="padding: 10px 0 5px 0; font-size: 10px;">Follow Us</p>
         <div class="box-medsos-home">
