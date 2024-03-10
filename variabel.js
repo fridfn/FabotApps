@@ -1,8 +1,35 @@
 const cl = console.log.bind(console);
+let userStatus = document.querySelectorAll('.statusUser');
+let statusUsers = userStatus[1];
+let statusDeveloper = userStatus[0];
+let containerHome = document.querySelector('.container-home');
+let backgroundHome = document.querySelector('#background-home');
+let forwardIcon = document.querySelector('.forward-box ion-icon');
+let nemBots = document.querySelector('.nameBot');
+let botStat = document.querySelector('.botStatus');
+let firstDescTxt = document.querySelector('.descriptionText:first-child');
+let arrowButon = document.querySelector('.arrow-button');
+let footer = document.querySelector('.footer');
+let input = document.querySelectorAll('#jawaban');
+let bgColor = document.querySelectorAll('#bgColor');
+let myButton = document.querySelectorAll('#myButton');
+let bio = document.querySelectorAll('.infoTxt');
+let containerInput = document.getElementById('container_input')
+let about = document.querySelector('.about');
+let favItem = document.querySelectorAll('.favorite-items');
+let chatUser = document.querySelector('.chatJawaban');
+let chatBot = document.querySelector('.chatPertanyaans');
+let imgBox = document.querySelector('#imgBox');
+let imgProfile = document.querySelectorAll('.imgProfile');
+let fablue = document.querySelector('.nameBot');
+let mail = document.getElementById('mail');
+let footers = document.querySelectorAll('#footers');
+let myKoleksi = document.querySelectorAll('#myKoleksi');
+let pjs = document.querySelector('#particles-js');
 
 (function() {
   let index = 0;
-  const lengthQuote = ['Setiap baris kode adalah kesempatan untuk belajar sesuatu yang baru.', 'Semangatmu menentukan seberapa jauh kemampuanmu berkembang.', 'Setiap program memiliki cerita, dan kamu adalah penulisnya.'];
+  const lengthQuote = ['Setiap baris kode adalah kesempatan untuk belajar sesuatu yang baru.', 'Semangatmu menentukan seberapa jauh kemampuanmu berkembang.', 'Setiap program memiliki cerita, dan kamu adalah penulisnya.', 'Coding adalah tempat di mana logika bertemu dengan imajinasi.', 'Tidak ada yang lebih menyenangkan daripada menulis dan memahami sebuah program.'];
   const quoteText = document.querySelector('#quote-text');
   
   function tampilkanQuoteBerikutnya() {
@@ -774,14 +801,18 @@ const themeJSON = () => {
       templateName: 'deep ocean',
       themeLoved: false,
       keyColor: {
-       textColor: '#02ffc4',
-       iconColor: '#02ffc4',
-       backgroundPY: '0',
-       cardsColor: 'black',
-       borderColor: '#ff0000',
-       backgroundColor: 'black',
-       backgroundImage: 'url("/bg-home1.jpg")',
-       backgroundAnim: 'animate-background.mp4'
+       iconColor: '#3f6bff',
+       textColor: '#b4ccff',
+       secondaryText: '#2563ff',
+       primaryColor: '#052659',
+       secondaryColor: '#5483B3',
+       primaryCards: '#0e1527',
+       secondaryCards: '#222c4ad1',
+       cardsColor: '#052659',
+       borderColor: '#436bff',
+       backgroundColor: '#000000',
+       backgroundPY: 'calc(100% + 80%)',
+       backgroundImage: 'url("dark_1.jpg")'
       }
      },
      {
@@ -792,9 +823,9 @@ const themeJSON = () => {
        iconColor: '#02ffc4',
        borderColor: '#ff0000',
        cardsColor: 'black',
-       backgroundPY: '0',
+       backgroundPY: '70%',
        backgroundColor: 'white',
-       backgroundImage: 'url("/animate-background.gift")'
+       backgroundImage: 'url("/assets/image/dark_2.jpg")'
       }
      },
      {
@@ -807,7 +838,33 @@ const themeJSON = () => {
        backgroundPY: '50%',
        borderColor: '#feff00',
        backgroundColor: 'white',
-       backgroundImage: 'url("/bg-home3.jpg")'
+       backgroundImage: 'url("/assets/image/dark_3.jpg")'
+      }
+     },
+     {
+      templateName: 'deep night',
+      themeLoved: 'pasya',
+      keyColor: {
+       textColor: 'yellow',
+       iconColor: '#97be8b',
+       cardsColor: 'yellow',
+       backgroundPY: '25%',
+       borderColor: '#feff00',
+       backgroundColor: 'white',
+       backgroundImage: 'url("/assets/image/dark_4.jpg")'
+      }
+     },
+     {
+      templateName: 'deep night',
+      themeLoved: 'pasya',
+      keyColor: {
+       textColor: 'yellow',
+       iconColor: '#9c9aff',
+       cardsColor: 'yellow',
+       backgroundPY: '50%',
+       borderColor: '#feff00',
+       backgroundColor: 'white',
+       backgroundImage: 'url("/assets/image/dark_5.jpg")'
       }
      }
     ],
@@ -818,8 +875,10 @@ const themeJSON = () => {
       keyColor: {
        textColor: '#aeaeae',
        iconColor: '#1bff41',
+       backgroundPY: '80%',
        borderColor: 'light ocean',
-       backgroundColor: '#ff1b1b'
+       backgroundColor: '#ff1b1b',
+       backgroundImage: 'url("/assets/image/light_1.jpg")'
       }
      },
      {
@@ -829,7 +888,8 @@ const themeJSON = () => {
        textColor: '#aeaeae',
        iconColor: '#ff1bee',
        borderColor: 'light clouds',
-       backgroundColor: '#ff1b1b'
+       backgroundColor: '#ff1b1b',
+       backgroundImage: 'url("/assets/image/light_2.jpg")'
       }
      },
      {
@@ -839,7 +899,8 @@ const themeJSON = () => {
        textColor: '#aeaeae',
        iconColor: '#1b47ff',
        borderColor: 'light beach',
-       backgroundColor: '#ff1b1b'
+       backgroundColor: '#ff1b1b',
+       backgroundImage: 'url("/assets/image/light_3.jpg")'
       }
      }
     ],
@@ -850,13 +911,15 @@ const themeJSON = () => {
       keyColor: {
        textColor: '#aeaeae',
        borderColor: 'set theme 1',
-       backgroundColor: '#ff1b1b'
+       backgroundColor: '#ff1b1b',
+       backgroundImage: 'url("/assets/image/background-image9.jpg")'
       }
      },
      {
       templateName: 'set name 2',
       themeLoved: false,
       keyColor: {
+       iconColor: '#317bbd',
        textColor: '#aeaeae',
        borderColor: 'set name 2',
        backgroundColor: '#ff1b1b'
@@ -866,6 +929,7 @@ const themeJSON = () => {
       templateName: 'set name 3',
       themeLoved: false,
       keyColor: {
+       iconColor: '#94f500',
        textColor: '#aeaeae',
        borderColor: 'set theme 3',
        backgroundColor: '#ff1b1b'
@@ -883,10 +947,6 @@ const themeJSON = () => {
   checkbox: Array(),
   nameTheme: ''
  }
-
-setTimeout(() => {
- cl(outerLocalTheme)
-}, 2000);
 
 function uncheckRadio(radioId) {
  let templateType, setLength, setThemeName, localTheme;
@@ -929,24 +989,28 @@ function uncheckRadio(radioId) {
     
     arrayName.push(templateName);
     setLength = Object.keys(templateType).length;
-    regenerateItemsTheme(setLength);
-    setThemeProperty(templateType, setLength, arrayName, localTheme);
+    generate(setLength)
    }
    return templateName;
   }
+  
+  function generate(setLength) {
+   generateThemes(templateType, setLength, arrayName, localTheme);
+  }
+   
   const newPropertyTheme = setTemplates(templateType);
 }
-  
-function setThemeProperty(type, length, name, localTheme) {
- generateItemTheme(0, type, length, name, localTheme);
-}
 
-
-function generateItemTheme(index, typeTheme, itemsLengthTheme, setThemeName, localTheme) {
-const lastItem = wrapperBoxTheme.lastElementChild;
-
- if (index < itemsLengthTheme) {
-  if (wrapperBoxTheme.children.length <= itemsLengthTheme) {
+function generateThemes(typeTheme, setLength, setThemeName, localTheme) {
+ let countLength = 1;
+ for (let i = 0; i <= setLength; i++) {
+  if (i < wrapperBoxTheme.children.length) {
+   wrapperBoxTheme.lastElementChild.remove();
+  }
+  countLength++;
+  if (countLength === setLength) {
+   for (let i = 0; i < setLength; i++) {
+    const lastItem = wrapperBoxTheme.lastElementChild;
     const cloneItemTheme = itemsTheme.cloneNode(true);
     wrapperBoxTheme.appendChild(cloneItemTheme);
     
@@ -956,24 +1020,22 @@ const lastItem = wrapperBoxTheme.lastElementChild;
     
     handleSwitchTheme(itemTheme, typeTheme);
     
-    generateItemTheme(index + 1, itemsLengthTheme, setThemeName);
-     
-     const itemToRemove = wrapperBoxTheme.children[itemsLengthTheme];
-     
-     if (itemToRemove) {
-      setTimeout(() => {
-       wrapperBoxTheme.removeChild(itemToRemove);
-       setTimeout(() => {
-        lastItem.style.opacity = "1";
-        itemThemeTemplateName.forEach((name, sort) => name.textContent = setThemeName[sort]);
-        
-        lovedTheme(setThemeName, setThemeName, typeTheme, localTheme);
-       }, 500);
-      }, 1500);
-     }
+    regenerateItemsTheme(setLength);
+    
+    const itemToRemove = wrapperBoxTheme.children[setLength];
+    
+    if (itemToRemove) {
+     setTimeout(() => {
+      lastItem.style.opacity = "1";
+      itemThemeTemplateName.forEach((name, sort) => name.textContent = setThemeName[sort]);
+      lovedTheme(setThemeName, setThemeName, typeTheme, localTheme);
+     }, 1500);
     }
+   }
   }
+ }
 }
+
 
 
 function regenerateItemsTheme(setIndex) {
@@ -1016,7 +1078,7 @@ const isLoved = [];
    setCheckboxLoved.forEach((items, index) => {
     items.checked = isLoved[index];
    });
-  }, 750);
+  }, 500);
 }
 
 
@@ -1025,38 +1087,37 @@ function lovingTheme() {
   const checkbox = outerLocalTheme.checkbox;
   const nameTheme = outerLocalTheme.nameTheme;
   
-  const lovedCheckbox = document.querySelectorAll('.love-checkbox');
-  
   document.querySelectorAll('.container-label').forEach(checkbox => {
    checkbox.addEventListener('click', function(event) {
      event.stopPropagation();
-   });
-  });
-  
-  arrayLoveTheme.length= nameTheme.length;
-  outerLocalTheme.checkbox.length = nameTheme.length;
-  lovedCheckbox.forEach((checkbox, index) => {
-   const objCheck = checkbox.checked;
-   arrayLoveTheme.checkbox[index] = objCheck;
-   outerLocalTheme.checkbox[index] = objCheck;
-  });
-  
-   const themeStorage = dataLovedTheme.type;
-   Object.entries(themeStorage).forEach((themeKey, index) => {
-   const setThemeJSON = themeJSON();
-   
-   Object.entries(dataLovedTheme.type).forEach((subject, index) => {
-    if (themeKey[0] === outerLocalTheme.theme) {
+    
+    arrayLoveTheme.length = nameTheme.length;
+    outerLocalTheme.checkbox.length = nameTheme.length;
+    
+    const lovedCheckbox = document.querySelectorAll('.love-checkbox');
+    lovedCheckbox.forEach((checkbox, index) => {
+     const objCheck = checkbox.checked;
+     arrayLoveTheme.checkbox[index] = objCheck;
+     outerLocalTheme.checkbox[index] = objCheck;
+    });
+    
+    const themeStorage = dataLovedTheme.type;
+    Object.entries(themeStorage).forEach((themeKey, index) => {
+     const setThemeJSON = themeJSON();
      
-     if (subject[0] === outerLocalTheme.theme) {
-       subject[1].map((theme, index) => {
-        theme.themeLoved = outerLocalTheme.checkbox[index];
-        //cl('ini adalah type tema :', outerLocalTheme.theme,'array value dari tema yang di love :', outerLocalTheme.checkbox);
-       });
+     Object.entries(dataLovedTheme.type).forEach((subject, index) => {
+      if (themeKey[0] === outerLocalTheme.theme) {
+       
+       if (subject[0] === outerLocalTheme.theme) {
+         subject[1].map((theme, index) => {
+          theme.themeLoved = outerLocalTheme.checkbox[index];
+          //cl('ini adalah type tema :', outerLocalTheme.theme,'array value dari tema yang di love :', outerLocalTheme.checkbox);
+         });
+        }
+       localStorage.setItem('data_favoriteTheme', JSON.stringify(dataLovedTheme));
       }
-      
-     localStorage.setItem('data_favoriteTheme', JSON.stringify(dataLovedTheme));
-    }
+     });
+    });
    });
   });
 }
@@ -1064,24 +1125,34 @@ function lovingTheme() {
 
 function handleSwitchTheme(itemTheme, typeTheme) {
   itemTheme.forEach((items, id) => {
+  items.setAttribute('onclick', "toSeeParticle('theme')");
+  
    items.addEventListener('click', function() {
-     Object.entries(typeTheme[id].keyColor).forEach(([pseudo, color]) => {
-       const setTHEME = localStorage.setItem('setTHEME', JSON.stringify(typeTheme[id].keyColor));
-       
-       document.documentElement.style.setProperty(`--${pseudo}`, color);
-     });
+    Object.entries(typeTheme[id].keyColor).forEach(([pseudo, color]) => {
+      const setTHEME = localStorage.setItem('setTHEME', JSON.stringify(typeTheme[id].keyColor));
+      
+      document.documentElement.style.setProperty(`--${pseudo}`, color);
+    });
    });
   });
 }
 
 
+
+const defaultTheme = themeJSON().type.themeDark[0].keyColor;
+
+localStorage.setItem('defaultTheme', JSON.stringify(defaultTheme));
+
 (function() {
+ uncheckRadio('radio-theme1');
+ const defaultModePJS = 'snow';
+ localStorage.setItem('defaultModePJS', defaultModePJS);
  const savedTheme = JSON.parse(localStorage.getItem('setTHEME'));
  const useTheme = (savedTheme) ? JSON.parse(localStorage.getItem('setTHEME')) : JSON.parse(localStorage.getItem('defaultTheme'));
  
  const savedPJS = localStorage.getItem('pJSMode');
- const setPJS = (savedPJS) ? localStorage.getItem('pJSMode') : localStorage.getItem('defaultModePJS');
- cl()
+ const setPJS = (savedPJS) ? savedPJS : localStorage.getItem('defaultModePJS');
+ 
  Object.entries(useTheme).forEach(([pseudo, color]) => {
   document.documentElement.style.setProperty(`--${pseudo}`, color);
  });

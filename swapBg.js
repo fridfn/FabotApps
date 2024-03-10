@@ -1,37 +1,11 @@
-// primary color
+/*
 let html = document.querySelector('body');
 let metaTheme = document.createElement('meta');
 metaTheme.setAttribute('name', 'theme-color');
 document.body.appendChild(metaTheme);
 
-let containerHome = document.querySelector('.container-home');
-let backgroundHome = document.querySelector('#background-home');
-let forwardIcon = document.querySelector('.forward-box ion-icon');
-let nemBots = document.querySelector('.nameBot');
-let botStat = document.querySelector('.botStatus');
-let firstDescTxt = document.querySelector('.descriptionText:first-child');
-let arrowButon = document.querySelector('.arrow-button');
-let userStatus = document.querySelectorAll('.statusUser');
-let statusUsers = userStatus[1];
-let statusDeveloper = userStatus[0];
-let footer = document.querySelector('.footer');
-let input = document.querySelectorAll('#jawaban');
-let bgColor = document.querySelectorAll('#bgColor');
-let myButton = document.querySelectorAll('#myButton');
-let bio = document.querySelectorAll('.infoTxt');
-let containerInput = document.getElementById('container_input')
-let about = document.querySelector('.about');
-let favItem = document.querySelectorAll('.favorite-items');
-let chatUser = document.querySelector('.chatJawaban');
-let chatBot = document.querySelector('.chatPertanyaans');
-let imgBox = document.querySelector('#imgBox');
-let imgProfile = document.querySelectorAll('.imgProfile');
-let fablue = document.querySelector('.nameBot');
-let mail = document.getElementById('mail');
-let footers = document.querySelectorAll('#footers');
-let myKoleksi = document.querySelectorAll('#myKoleksi');
-let pjs = document.querySelector('#particles-js');
-
+*/
+/*
 function applyTheme() {
  if(theme === "basic") {
  localStorage.setItem("theme", "basic");
@@ -92,4 +66,4 @@ function switchTheme() {
   document.getElementById('imgBox').appendChild(img);
   menu.classList.add('menuBg');
  }
-}
+}*/

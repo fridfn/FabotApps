@@ -1147,7 +1147,7 @@ var pJS = function(tag_id, params){
               pJS.tmp.repulse_finish = false;
               setTimeout(function(){
                 pJS.tmp.repulse_clicking = false;
-              }, pJS.interactivity.modes.repulse.duration*1000)
+              }, pJS.interactivitymodes.repulse.duration*1000)
             break;
 
           }
@@ -1550,16 +1550,46 @@ function modeParticle(mode) {
  const colorParticle = (JSONColor) ? JSONColor : JSON.parse(localStorage.getItem('defaultTheme'));
  
  localStorage.setItem('pJSMode', mode);
- console.log(colorParticle)
  const color = colorParticle.iconColor;
  handleParticle(mode, color);
+ toSeeParticle('particles');
+}
+
+const btnDown = document.querySelector('.btn-down-particle');
+
+function toSeeParticle(event) {
+  switch(event) {
+   case 'theme':
+    setTimeout(() => {
+     window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 1200);
+   break;
+   case 'particles':
+    document.getElementById('particles-view').scrollIntoView({ behavior: 'smooth'});
+    break;
+    default:
+     console.log('default');
+  }
+  
+  btnDown.style.display = "block";
+ setTimeout(() => {
+  btnDown.classList.add('block');
+  // menghilangkan button down
+  setTimeout(() => {
+   btnDown.classList.remove('block');
+  }, 7000);
+ }, 1500);
+}
+
+function goDownParticle() {
+ btnDown.style.display = "none";
+ document.getElementById('set-particles').scrollIntoView({ behavior: 'smooth'});
 }
 
 
 function handleParticle(mode, newParticleColor) {
  localStorage.setItem('pJSMode', mode);
  const pushModeParticle = localStorage.getItem('pJSMode', mode);
- c('generate new particle', pushModeParticle)
  
  const particleColor = newParticleColor;
  switch(mode) {
@@ -1601,7 +1631,7 @@ function handleParticle(mode, newParticleColor) {
           enable: true,
           distance: 100,
           color: `${particleColor}`,
-          opacity: 0.9,
+          opacity: 0.6,
           width: 1,
         },
       },
@@ -1800,9 +1830,9 @@ function handleParticle(mode, newParticleColor) {
            }
          },
          "bubble": {
-           "distance": 400,
-           "size": 8,
-           "duration": 1.5,
+           "distance": 100,
+           "size": 6,
+           "duration": 1,
            "opacity": 8,
            "speed": 3
          },
@@ -1851,10 +1881,10 @@ function handleParticle(mode, newParticleColor) {
          "value": 0.3,
          "random": true,
          "anim": {
-           "enable": false,
+           "enable": true,
            "speed": 1,
            "opacity_min": 0.05,
-           "sync": false
+           "sync": true
          }
        },
        "size": {
@@ -1863,7 +1893,7 @@ function handleParticle(mode, newParticleColor) {
          "anim": {
            "enable": false,
            "speed": 40,
-           "size_min": 4,
+           "size_min": 7,
            "sync": false
          }
        },
@@ -1880,9 +1910,9 @@ function handleParticle(mode, newParticleColor) {
          "direction": "none",
          "random": false,
          "straight": false,
-         "out_mode": "out",
+         "out_mode": "bounce",
          "attract": {
-           "enable": false,
+           "enable": true,
            "rotateX": 1000,
            "rotateY": 800
          }
@@ -1916,7 +1946,7 @@ function handleParticle(mode, newParticleColor) {
            "speed": 3
          },
          "repulse": {
-           "distance": 50
+           "distance": 150
          },
          "push": {
            "particles_nb": 4

@@ -1,18 +1,6 @@
 const c = console.log.bind(console);
+/*
 
-const defaultModePJS = 'snow';
-
-const defaultTheme = {
- textColor: '#02ffc4',
- iconColor: '#02ffc4',
- backgroundPY: '0',
- cardsColor: 'black',
- positionAnimBg: '50',
- borderColor: '#ff0000',
- backgroundColor: 'black',
- backgroundImage: 'url("/bg-home1.jpg")',
- backgroundAnim: 'animate-background.mp4'
-}
 
 const themeRed = {
  textColor: '#02ffc4',
@@ -51,7 +39,6 @@ const themeYellow = {
 }
 
 
-localStorage.setItem('defaultTheme', JSON.stringify(defaultTheme));
 localStorage.setItem('defaultModePJS', defaultModePJS);
 
  const videoSource = document.createElement('source');
@@ -72,4 +59,4 @@ function switchTheme(color) {
   Object.entries(color).forEach(([subject, color]) => {
    document.documentElement.style.setProperty(`--${subject}`, color);
   });
-}
+}*/
