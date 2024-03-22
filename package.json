@@ -1,12 +1,14 @@
 {
   "dependencies": {
-    "node.js": "^0.0.1-security"
+    "express": "^4.18.2",
+    "node.js": "^0.0.1-security",
+    "nodemon": "^3.1.0"
   },
   "name": "fabot-apps",
   "version": "1.0.0",
-  "main": "coreBot.js",
-  "devDependencies": {},
+  "main": "main.js",
   "scripts": {
+    "run": "nodemon main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
