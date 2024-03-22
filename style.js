@@ -2,7 +2,7 @@
  const cz = console.log.bind(console);
 
 let blurProfile = document.querySelectorAll('.blur-profile');
-let loaders = document.querySelector('.container-loader');
+let loaders = document.querySelector('#loader-web');
 let headerIcon = document.querySelectorAll('.headerIconll');
 const containerUserPage = document.querySelector('.container-user-page');
 const containerV = document.querySelector('.container-bot-ver');
@@ -22,7 +22,7 @@ let infoAlert = document.querySelector('.infoAlert');
 
 let boxDeskripsiKoleksi1 = document.querySelector('.box-deskripsi-koleksi-1');
 
-let footerEmail = document.querySelector('.info-login-text');
+let footerEmail = document.querySelector('.wrapper-cta-email .description_text');
 
 let header = document.querySelector('header');
 let arrowMenu = document.querySelector('.arrow-menu');
@@ -77,10 +77,6 @@ textareaElement.forEach(function(e) {
   e.rows = numberOfLines;
  });
 });
-
-let input_name = inputLogin[0];
-let input_email = inputLogin[1];
-let input_password = inputLogin[2];
 
 // validation for personal info input /
 let namaDepan;
@@ -308,11 +304,6 @@ function checkLoginTime() {
     }
    }, 800);
   }
-}
-
-function versionPage() {
- containerHome.classList.toggle('active');
- containerV.classList.toggle('active');
 }
 
 function openHome() {
@@ -975,6 +966,7 @@ const fadeInBox = (index) => {
    }, 500);
   } else {
     barierElement.style.visibility = 'hidden';
+    
     wrapperExploreBox.removeChild(lastElem);
   }
 }
@@ -1101,11 +1093,10 @@ let genderValidation = () => {
   img[1].src = 'https://iili.io/JHPVwKv.md.webp';
  } else {
   genderIs = "cowo/cewe";
-  genderSay = 'cantik/ganteng';
   img[0].src = 'at.webp';
   img[1].src = 'at.webp';
  }
- } else { console.log('perlu validasi gender') }
+ } else { genderSay = 'cantik/ganteng'; }
 }
 
 if (localStorage.getItem('sudahLogin') === "true") {
@@ -1147,7 +1138,6 @@ function checkInputLogin() {
   inputLogin.addEventListener("input", function () {
    if (inputLogin.value.length >= 4) {
     loginButton = true;
-    console.log(loginButton);
    } else {
     loginButton = false;
    }
@@ -1228,9 +1218,6 @@ const loginValidation = () => {
        loginPageInit = 1;
        inputUser.length = 0;
        
-       localStorage.setItem('userName', userName);
-       localStorage.setItem('userEmail', userEmail);
-       localStorage.setItem('userPass', userPass);
        
        if (['@gmail.com', '@icloud.com', '@yahoo.com'].some((kata) => userEmail.includes(kata))) {
         console.log("input email benar");
@@ -1382,11 +1369,9 @@ function openProfile() {
 }
 const signBtn = document.querySelector('.signin-text');
 
-let loaderTime;
 function userValidation() {
- if (localStorage.getItem('sudahLogin') === "true") {
   genderValidation();
-  loaderTime = 7500;
+ if (localStorage.getItem('sudahLogin') === "true") {
   signBtn.innerHTML = "Logout";
   // profile user info validation //
   
@@ -1430,7 +1415,6 @@ function userValidation() {
    }, 500);
   }, 1000);
  } else {
-  loaderTime = 15000;
   //localStorage.clear();
  }
  //setTimeout(() => { typeText(0) }, 2000);
@@ -1465,16 +1449,5 @@ function fullScreen() {
   }
 }
 
-/*
-window.addEventListener('load', function() {
- setTimeout(() => {
-  containerHome.classList.toggle('active');
-  setTimeout(() => {
-   pjs.style.opacity = "1";
-   containerHome.style.opacity = "1";
-  }, 1000);
-  loaders.style.display = "none";
- }, loaderTime);
-});*/
 
 userValidation();

@@ -26,10 +26,11 @@ let mail = document.getElementById('mail');
 let footers = document.querySelectorAll('#footers');
 let myKoleksi = document.querySelectorAll('#myKoleksi');
 let pjs = document.querySelector('#particles-js');
+let footerWeb = document.getElementById('footer-web').cloneNode(true);
 
 (function() {
   let index = 0;
-  const lengthQuote = ['Setiap baris kode adalah kesempatan untuk belajar sesuatu yang baru.', 'Semangatmu menentukan seberapa jauh kemampuanmu berkembang.', 'Setiap program memiliki cerita, dan kamu adalah penulisnya.', 'Coding adalah tempat di mana logika bertemu dengan imajinasi.', 'Tidak ada yang lebih menyenangkan daripada menulis dan memahami sebuah program.'];
+  const lengthQuote = ['Setiap baris kode adalah kesempatan untuk belajar sesuatu yang baru.','belajar memahami bahasa pemrograman lebih menyenangkan dari pada memahami rumus matematika', 'Semangatmu menentukan seberapa jauh kemampuanmu berkembang.', 'Setiap program memiliki cerita, dan kamu adalah penulisnya.', 'Coding adalah tempat di mana logika bertemu dengan imajinasi.', 'Tidak ada yang lebih menyenangkan daripada menulis dan memahami sebuah program.'];
   const quoteText = document.querySelector('#quote-text');
   
   function tampilkanQuoteBerikutnya() {
@@ -151,7 +152,7 @@ function scrollHints() {
  hints.forEach((hint) => {
   const hintsPosition = hint.getBoundingClientRect().top;
   const textPosition = hint.getBoundingClientRect().top;
-  const shouldShowHints = [hintsPosition, textPosition].every((items) => items  < window.innerHeight / 2);
+  const shouldShowHints = [hintsPosition, textPosition].every((items) => items  < window.innerHeight / 1.5);
   const boxHints = document.querySelectorAll('#show-elem');
   const hintsText = document.querySelectorAll('.hint-text');
   
@@ -214,11 +215,10 @@ const iconPopup = document.querySelector('.my-popup lord-icon');
 const textPopup = clonedMyPopup.querySelector('#text-popup');
 
 
-function handlePopup() {
- clonedMyPopup.style.dlay = 'flex';
+function handlePopup(text) {
+ textPopup.textContent = `${text}`;
+ clonedMyPopup.style.display = 'flex';
  containerPopup.appendChild(clonedMyPopup.cloneNode(true));
- 
- textPopup.textContent = 'Maaf fitur ini belum tersedia';
 }
 
 let targetPopup = document.querySelector('.container-my-popup');
@@ -360,6 +360,51 @@ function savePersonality() {
 
 
 
+const words = document.querySelectorAll('.word');
+
+// Animasi rotasi teks
+function rotateWords() {
+  let counter = 0;
+  let hiddenLoader;
+  const intervalLoader = setInterval(() => {
+   if (counter === 0 && !hiddenLoader) {
+    hiddenLoader = true;
+    words[0].style.transform = `translateY(40px)`;
+    setTimeout(() => {
+      words.forEach(e => e.style.opacity = '1');
+    }, 300);
+   }
+    words.forEach(word => {
+      const height = word.clientHeight;
+      word.style.transform = `translateY(-${height * counter}px)`;
+    });
+    counter++;
+    if (counter === words.length) {
+      counter = 0;
+      setTimeout(() => {
+       words.forEach(e => e.style.opacity = '0');
+      }, 600);
+      hiddenLoader = false;
+    }
+  }, 1000);
+  // clearInterval(interval);
+}
+
+document.addEventListener('DOMContentLoaded', rotateWords);
+
+
+
+window.addEventListener('load', () => {
+ const isLoader = JSON.parse(localStorage.getItem('loginJSON'));
+ const loaderTime = (isLoader && isLoader.flagLogin.isLogin === true) ? 10000 : 2000 ;
+ setTimeout(() => {
+  loadingAnimation({ active: containerHome, remove: [undefined], conditional: [undefined], action: 'active' });
+  loaders.style.display = "none";
+ }, loaderTime);
+});
+
+
+
 
 
 
@@ -413,7 +458,7 @@ const objectGuide = [
   {
    chatUser: 'gatau coba aja tebak',
    chatBot: `Umur kamu berapa ${sayGuide}?`,
-   note: ['saat kamu mengirimkan pesan tersebut bot akan menanyakan kembali pertanyaan nya. jika kamu tidak menjawab dan hanya mengirimkan pesan seperti diatas maka bot akan baper dan diam karna kamu tidak memberitahu apa yang dia tanyakan.', 'saat bot sudah seperti itu mau kamu men spam bot hingga 100x pesan chat. bot akan tetap diam jika kamu tidak menjawab apa yang dia tanyakan sebelumnya. solusinya adalah kamu harus menjawab apa yang bot tanyakan ketika bot sudah diam / tidak membalas chat kamu.']
+   note: ['saat kamu mengirimkan pesan tersebut bot akan menanyakan kembali pertanyaan nya. jika kamu tidak menjawab dan hanya mengirimkan pesan seperti diatas maka bot akan baper dan diam karna kamu tidak memberitahu apa yang dia tanyakan.', 'saat bot sudah seperti itu mau kamu men spam bot hingga 100x pesan chat. bot akan tetap diam jika kamu tidak menjawab apa yang dia tanyakan sebelumnya. solusinya adalah kamu harus menjawab apa yang bot tanyakan ketika bot sudah diam / tidak membalas chat kamu, walaupun terkadang dalam momen tertentu bot akan tetap diam.']
   },
   {
    chatUser: 'hllo jg fabot siapa yg buat km?',
@@ -422,14 +467,14 @@ const objectGuide = [
   },
   {
    chatUser: 'sok asik lo bngst!!',
-   chatBot: 'asik juga ya ngobrol sama kamu',
-   note: [`saat kamu mengetikan kata kata kasar diatas bot automatis akan menyudahi chat dengan kamu dan dia akan mereload browser secara paksa dan kedepan nya kamu '${sayGuide}' akan di cap sebagai user yang tidak ramah`, 'tolong di ingat ketika kamu mengetikan dan mengirim pesan di wajibkan menggunakan kata kata yang baik dan benar karna attitude diutamakan di website ini.']
+   chatBot: 'asik juga ya chatan sama kamu',
+   note: [`saat kamu mengetikan kata kata kasar seperti diatas bot automatis akan menyudahi chat dengan kamu dan dia akan mereload browser secara paksa dan kedepan nya kamu '${sayGuide}' akan di cap sebagai pengguna yang tidak ramah`, 'tolong di ingat ketika kamu mengetikan dan mengirim pesan di wajibkan menggunakan kata kata yang baik dan benar karna attitude diutamakan di website ini.']
   }
 ];
 
 window.addEventListener('scroll', function() {
  let scrollHeight = window.pageYOffset;
- const batasHeight = 85;
+ const batasHeight = 50;
  
  if (scrollHeight >= batasHeight) {
   wrapper_chat.style.opacity = '0';
@@ -739,6 +784,10 @@ if (mailText !== null) {
 }
 const mailEff = (index) => {
  if (index < emailItem.length) {
+  if (emailItem.length >= 3) {
+   const containerEmailItem = document.querySelector('.container-history-email .padding-overflow');
+   containerEmailItem.style.height = '67vh';
+  }
   emailItem[index].scrollIntoView({ behavior: 'smooth', block: 'end' });
   
   setTimeout(() => {
@@ -748,37 +797,12 @@ const mailEff = (index) => {
  }
 };
 
-function openEmail() {
-  emailItem.forEach(function(e) {
-   e.style.opacity = '0';
-  });
- 
-  const bubbles = document.querySelector('.bubbles');
-
-  for (let i = 0; i <= 30; i++) {
-   const bubble = document.createElement('div');
-   bubble.className = 'bubble';
-   bubbles.appendChild(bubble);
-  }
- 
-  containerHome.classList.toggle('active');
-  pageEmail.classList.toggle('active');
-  if (containerGuide.classList.contains('active')) {
-   pembungkusContainer.classList.toggle('active');
-  }
-  
-  containerGuide.classList.remove('active');
-  if (containerHome.classList.contains('active')) {
-   pembungkusContainer.classList.remove('active');
-   containerGuide.classList.remove('active');
-  }
+function showingEmail() {
+  emailItem.forEach((e) => e.style.opacity = '0');
   setTimeout(() => {
    mailEff(0);
   }, 500);
 }
-
-
-
 
 
 
@@ -798,72 +822,141 @@ const themeJSON = () => {
    type: {
     themeDark: [
      {
-      templateName: 'deep ocean',
+      templateName: 'ICE MOUNTAIN',
       themeLoved: false,
       keyColor: {
-       iconColor: '#3f6bff',
-       textColor: '#b4ccff',
-       secondaryText: '#2563ff',
+       primaryIconColor: '#436bff',
+       primaryTextColor: '#b4ccff',
+       primaryBorderColor: '#0034f7',
        primaryColor: '#052659',
-       secondaryColor: '#5483B3',
        primaryCards: '#0e1527',
-       secondaryCards: '#222c4ad1',
-       cardsColor: '#052659',
-       borderColor: '#436bff',
-       backgroundColor: '#000000',
+       primaryBackground: '#000000',
+       
+       secondaryIconColor: '#3f6bff',
+       secondaryTextColor: '#2563ff',
+       secondaryBorderColor: '#436bff',
+       secondaryColor: '#004efb',
+       secondaryCards: '#0f1a3dd1',
+       secondaryBackground: '#000000',
+       
+       bubbleUser: '#1c4fc7',
+       bubbleBot: '#132469',
+       shadowUser: '',
+       shadowBot: 'rgba(86,136,255,0.861)',
+       tinyText: '#b4ccff',
        backgroundPY: 'calc(100% + 80%)',
-       backgroundImage: 'url("dark_1.jpg")'
+       backgroundImage: 'url("/assets/image/dark_1.jpg")'
       }
      },
      {
-      templateName: 'deep sunset',
+      templateName: 'PURPLE NIGHT',
       themeLoved: 'nabilla',
       keyColor: {
-       textColor: '#02ffc4',
-       iconColor: '#02ffc4',
-       borderColor: '#ff0000',
-       cardsColor: 'black',
+       primaryIconColor: '#973cff',
+       primaryTextColor: '#d1aff5',
+       primaryColor: '#340559',
+       primaryCards: '#1d0e27',
+       primaryBorderColor: '#9b1eff',
+       primaryBackground: '#000000',
+       
+       secondaryIconColor: '#daa1fb',
+       secondaryTextColor: '#b10aff',
+       secondaryBorderColor: '#c255ff',
+       secondaryColor: '#5483B3',
+       secondaryCards: '#250c35',
+       secondaryBackground: '#000000',
+       
+       bubbleUser: '#59009c',
+       bubbleBot: '#351c49',
+       shadowUser: '',
+       shadowBot: '',
+       tinyText: '#c89cf7',
+       backgroundColor: '#000000',
        backgroundPY: '70%',
-       backgroundColor: 'white',
        backgroundImage: 'url("/assets/image/dark_2.jpg")'
       }
      },
      {
-      templateName: 'deep night',
+      templateName: 'DEEP SUNSET',
       themeLoved: 'pasya',
       keyColor: {
-       textColor: 'yellow',
-       iconColor: '#828200',
-       cardsColor: 'yellow',
+       primaryIconColor: '#ff5728',
+       primaryTextColor: '#efbfaa',
+       primaryColor: '#592605',
+       primaryCards: '#0c0c0c',
+       primaryBorderColor: '#efbfaa',
+       primaryBackground: '#000000',
+       
+       secondaryIconColor: '#ff4e3f',
+       secondaryTextColor: '#d42417',
+       secondaryBorderColor: '#ff7243',
+       secondaryColor: '#ff614a',
+       secondaryCards: '#350d0dd1',
+       secondaryBackground: '#000000',
+       
+       bubbleUser: '#c73c00',
+       bubbleBot: '#8d3c31',
+       shadowUser: '#ffffff',
+       shadowBot: '#ffffff',
+       tinyText: '#efbfaa',
+       primaryCards: '#592705',
+       backgroundColor: '#000000',
        backgroundPY: '50%',
-       borderColor: '#feff00',
-       backgroundColor: 'white',
        backgroundImage: 'url("/assets/image/dark_3.jpg")'
       }
      },
      {
-      templateName: 'deep night',
+      templateName: 'CYAN FOREST',
       themeLoved: 'pasya',
       keyColor: {
-       textColor: 'yellow',
-       iconColor: '#97be8b',
-       cardsColor: 'yellow',
+       primaryIconColor: '#18c6ff',
+       primaryColor: '#055950',
+       primaryTextColor: '#77f6ff',
+       primaryCards: '#082028',
+       primaryBorderColor: '#00b087',
+       primaryBackground: '#000000',
+       
+       secondaryIconColor: '#0091c0',
+       secondaryTextColor: '#25a4ff',
+       secondaryBorderColor: '#00a1a7',
+       secondaryColor: '#5483B3',
+       secondaryCards: '#092022d1',
+       secondaryBackground: '#000000',
+       
+       bubbleUser: '#0091c0',
+       bubbleBot: '#174f62',
+       shadowUser: '',
+       shadowBot: '',
+       tinyText: '#77f6ff',
        backgroundPY: '25%',
-       borderColor: '#feff00',
-       backgroundColor: 'white',
        backgroundImage: 'url("/assets/image/dark_4.jpg")'
       }
      },
      {
-      templateName: 'deep night',
+      templateName: 'GREEN TEA',
       themeLoved: 'pasya',
       keyColor: {
-       textColor: 'yellow',
-       iconColor: '#9c9aff',
-       cardsColor: 'yellow',
+       primaryIconColor: '#ba2108',
+       primaryTextColor: '#6bba46',
+       primaryColor: '#991d09',
+       primaryCards: '#1a0d08',
+       primaryBorderColor: '#991d09',
+       primaryBackground: '#000000',
+       
+       secondaryIconColor: '#6ec046',
+       secondaryTextColor: '#991d09',
+       secondaryBorderColor: '#b46d1c',
+       secondaryColor: '#cd742a',
+       secondaryCards: '#210909d1',
+       secondaryBackground: '#000000',
+       
+       bubbleUser: '',
+       bubbleBot: '',
+       shadowUser: '',
+       shadowBot: '',
+       tinyText: '#aeaeae',
+       backgroundColor: '#000000',
        backgroundPY: '50%',
-       borderColor: '#feff00',
-       backgroundColor: 'white',
        backgroundImage: 'url("/assets/image/dark_5.jpg")'
       }
      }
@@ -873,10 +966,10 @@ const themeJSON = () => {
       templateName: 'light ocean',
       themeLoved: false,
       keyColor: {
-       textColor: '#aeaeae',
-       iconColor: '#1bff41',
+       primaryTextColor: '#aeaeae',
+       primaryIconColor: '#1bff41',
        backgroundPY: '80%',
-       borderColor: 'light ocean',
+       primaryBorderColor: 'light ocean',
        backgroundColor: '#ff1b1b',
        backgroundImage: 'url("/assets/image/light_1.jpg")'
       }
@@ -885,9 +978,9 @@ const themeJSON = () => {
       templateName: 'light clouds',
       themeLoved: false,
       keyColor: {
-       textColor: '#aeaeae',
-       iconColor: '#ff1bee',
-       borderColor: 'light clouds',
+       primaryTextColor: '#aeaeae',
+       primaryIconColor: '#ff1bee',
+       primaryBorderColor: 'light clouds',
        backgroundColor: '#ff1b1b',
        backgroundImage: 'url("/assets/image/light_2.jpg")'
       }
@@ -896,9 +989,9 @@ const themeJSON = () => {
       templateName: 'light beach',
       themeLoved: false,
       keyColor: {
-       textColor: '#aeaeae',
-       iconColor: '#1b47ff',
-       borderColor: 'light beach',
+       primaryTextColor: '#aeaeae',
+       primaryIconColor: '#1b47ff',
+       primaryBorderColor: 'light beach',
        backgroundColor: '#ff1b1b',
        backgroundImage: 'url("/assets/image/light_3.jpg")'
       }
@@ -909,8 +1002,8 @@ const themeJSON = () => {
       templateName: 'set name 1',
       themeLoved: false,
       keyColor: {
-       textColor: '#aeaeae',
-       borderColor: 'set theme 1',
+       primaryTextColor: '#aeaeae',
+       primaryBorderColor: 'set theme 1',
        backgroundColor: '#ff1b1b',
        backgroundImage: 'url("/assets/image/background-image9.jpg")'
       }
@@ -919,9 +1012,9 @@ const themeJSON = () => {
       templateName: 'set name 2',
       themeLoved: false,
       keyColor: {
-       iconColor: '#317bbd',
-       textColor: '#aeaeae',
-       borderColor: 'set name 2',
+       primaryIconColor: '#317bbd',
+       primaryTextColor: '#aeaeae',
+       primaryBorderColor: 'set name 2',
        backgroundColor: '#ff1b1b'
       }
      },
@@ -929,9 +1022,9 @@ const themeJSON = () => {
       templateName: 'set name 3',
       themeLoved: false,
       keyColor: {
-       iconColor: '#94f500',
-       textColor: '#aeaeae',
-       borderColor: 'set theme 3',
+       primaryIconColor: '#94f500',
+       primaryTextColor: '#aeaeae',
+       primaryBorderColor: 'set theme 3',
        backgroundColor: '#ff1b1b'
       }
      }
@@ -940,7 +1033,8 @@ const themeJSON = () => {
   }
  }
  
- 
+
+const defaultTheme = themeJSON().type.themeDark[4].keyColor;
 
  const outerLocalTheme = {
   theme: '',
@@ -1041,9 +1135,9 @@ function generateThemes(typeTheme, setLength, setThemeName, localTheme) {
 function regenerateItemsTheme(setIndex) {
  const items = document.querySelectorAll('.box-item-theme');
  items.forEach((elem) => {
+ wrapperBoxTheme.scrollTo({ top: 0, behavior: 'smooth' });
   elem.style.opacity = "0";
   setTimeout(() => {
-   wrapperBoxTheme.scrollTo({ top: 0, behavior: 'smooth' });
    elem.style.opacity = "1";
   }, 2000);
  });
@@ -1103,15 +1197,13 @@ function lovingTheme() {
     
     const themeStorage = dataLovedTheme.type;
     Object.entries(themeStorage).forEach((themeKey, index) => {
-     const setThemeJSON = themeJSON();
+    const setThemeJSON = themeJSON();
      
      Object.entries(dataLovedTheme.type).forEach((subject, index) => {
       if (themeKey[0] === outerLocalTheme.theme) {
-       
        if (subject[0] === outerLocalTheme.theme) {
          subject[1].map((theme, index) => {
           theme.themeLoved = outerLocalTheme.checkbox[index];
-          //cl('ini adalah type tema :', outerLocalTheme.theme,'array value dari tema yang di love :', outerLocalTheme.checkbox);
          });
         }
        localStorage.setItem('data_favoriteTheme', JSON.stringify(dataLovedTheme));
@@ -1122,7 +1214,6 @@ function lovingTheme() {
   });
 }
 
-
 function handleSwitchTheme(itemTheme, typeTheme) {
   itemTheme.forEach((items, id) => {
   items.setAttribute('onclick', "toSeeParticle('theme')");
@@ -1130,20 +1221,24 @@ function handleSwitchTheme(itemTheme, typeTheme) {
    items.addEventListener('click', function() {
     Object.entries(typeTheme[id].keyColor).forEach(([pseudo, color]) => {
       const setTHEME = localStorage.setItem('setTHEME', JSON.stringify(typeTheme[id].keyColor));
+      const colorParticle = JSON.parse(localStorage.getItem('setTHEME'));
       
+      (() => {
+       if (!this.setupExecuted) {
+        setupParticle(colorParticle.primaryIconColor);
+        outerLocalTheme.colorParticle = colorParticle.primaryIconColor;
+        this.setupExecuted = true;
+       }
+      }).call(this);
       document.documentElement.style.setProperty(`--${pseudo}`, color);
     });
    });
   });
 }
 
-
-
-const defaultTheme = themeJSON().type.themeDark[0].keyColor;
-
 localStorage.setItem('defaultTheme', JSON.stringify(defaultTheme));
 
-(function() {
+(() => {
  uncheckRadio('radio-theme1');
  const defaultModePJS = 'snow';
  localStorage.setItem('defaultModePJS', defaultModePJS);
@@ -1157,3 +1252,178 @@ localStorage.setItem('defaultTheme', JSON.stringify(defaultTheme));
   document.documentElement.style.setProperty(`--${pseudo}`, color);
  });
 })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const signUpPage = document.querySelector('.container-login-page');
+const loginPages = document.querySelectorAll(' .wrapper-login-page .login-page .box-input-logins');
+
+const input_name = document.querySelector('.box-input-login #name');
+const input_email = document.querySelector('.box-input-login #email');
+const input_password = document.querySelector('.box-input-login #password_user');
+
+
+const loginJSON = () => {
+ return {
+  user: {
+   namaUser: null,
+   emailUser: null,
+   passwordUser: null
+  },
+  flagLogin: {
+   isLogin: false,
+   isStart: false
+  }
+ }
+}
+
+function toggleLogin(event) {
+  let login = JSON.parse(localStorage.getItem('loginJSON'));
+  loginPages.forEach((items) => {
+   items.style.display = 'none';
+   items.style.opacity = '0';
+  });
+  
+  if (!login) {
+    login = {
+      flagLogin: {
+       isLogin: false,
+       isStart: false
+      }
+    }
+  }
+  
+  let { isLogin, isStart } = login.flagLogin;
+  let alreadyLogin = isLogin;
+  let isStarting = isStart;
+  
+ switch(event) {
+  case 'start':
+   if (isStarting) {
+    handlePopup('kamu bisa start bot')
+   } else {
+    localStorage.setItem('loginJSON', JSON.stringify(loginJSON()));
+    loadingAnimation({ active: signUpPage, remove: [undefined], conditional: [undefined], action: 'active' });
+    loginPages[0].style.opacity = '1';
+    loginPages[0].style.display = 'flex';
+   }
+  break;
+  case 'undo':
+   login.flagLogin.isLogin = false;
+   loginPages[0].style.opacity = '1';
+   loginPages[0].style.display = 'flex';
+   
+   localStorage.setItem('loginJSON', JSON.stringify(login));
+  break;
+  case 'back':
+   signUpPage.classList.remove('active');
+  break;
+  case 'submit':
+   if (alreadyLogin) {
+    handlePopup('kamu sudah login')
+    login.flagLogin.isStart = true;
+    signUpPage.classList.remove('active');
+   } else {
+    let userName = input_name.value;
+    let userPass = input_password.value;
+    let userEmail = input_email.value.trim();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (emailPattern.test(userEmail) && userName.length >= 4) {
+     login.flagLogin.isLogin = true;
+     login.user.namaUser = userName;
+     login.user.emailUser = userEmail;
+     login.user.passwordUser = userPass;
+     loginPages[1].style.display = 'flex';
+     
+     setTimeout(() => {
+      loginPages[1].style.opacity = '1';
+     }, 1000);
+    } else {
+     handlePopup('TOLONG MASUKAN INPUT EMAIL DAN NAMA DENGAN BENAR!')
+    }
+   }
+   localStorage.setItem('loginJSON', JSON.stringify(login));
+  break;
+  default:
+  console.log('defaultt')
+  return;
+ }
+}
+
+
+const backGuide = document.querySelector('.container-guide .headerMenu .arrow-button .arrow-menu');
+const backEmail = document.querySelector('.box-header-email .bx-btn-exit');
+
+function togglePage(page) {
+ switch(page) {
+  case 'guideHome':
+   containerGuide.appendChild(footerWeb);
+   loadingAnimation({ active: containerGuide, remove: containerHome, conditional: [undefined], action: 'active' });
+   
+   backGuide.onclick = () => { togglePage('guideHome') };
+  break;
+  case 'guide':
+   arrowMenu.style.display = 'block';
+   containerGuide.appendChild(footerWeb);
+   loadingAnimation({ active: containerGuide, remove: containerHome, conditional: [undefined], action: 'active' });
+  break;
+  case 'email':
+   showingEmail();
+   loadingAnimation({ active: pageEmail, remove: containerHome, conditional: containerGuide, action: 'active' });
+   backEmail.onclick = () => { togglePage('email') };
+   break;
+   case 'emails':
+    showingEmail();
+    loadingAnimation({ active: pageEmail, remove: containerHome, conditional: [containerHome, containerGuide], action: 'active' });
+    backEmail.onclick = () => { togglePage('emails') };
+   break;
+   case 'version':
+    loadingAnimation({ active: containerV, remove: containerHome, conditional: [undefined], action: 'active' });
+   break;
+   default:
+   console.log('default')
+   return;
+ }
+}
+
+const loaderPage = document.getElementById('loader-page');
+
+function loadingAnimation(pages) {
+  loaderPage.classList.toggle('active');
+  const { active, remove, conditional, action } = pages;
+  
+  setTimeout(() => {
+   window.scrollTo({ top: 0, behavior: 'smooth' });
+   active.classList.toggle(action);
+   loaderPage.classList.toggle('active');
+   
+   try {
+    if ((typeof remove) === 'object') {
+     remove.classList.toggle(action);
+    } else { 
+     throw new Eror (remove, 'bukan object') 
+    }
+   } catch (err) { cl("eror logic")}
+   
+   if (Array.isArray(conditional)) {
+    conditional.forEach(element => {
+     if ((typeof element) === 'object') {
+      element.classList.toggle('active');
+     }
+    });
+   }
+  }, 1500);
+}

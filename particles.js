@@ -27,7 +27,7 @@ var pJS = function(tag_id, params){
         }
       },
       color: {
-        value: `#516fff`
+        value: '#fff'
       },
       shape: {
         type: 'circle',
@@ -125,7 +125,7 @@ var pJS = function(tag_id, params){
       },
       mouse:{}
     },
-    retina_detect: true,
+    retina_detect: false,
     fn: {
       interact: {},
       modes: {},
@@ -1147,7 +1147,7 @@ var pJS = function(tag_id, params){
               pJS.tmp.repulse_finish = false;
               setTimeout(function(){
                 pJS.tmp.repulse_clicking = false;
-              }, pJS.interactivitymodes.repulse.duration*1000)
+              }, pJS.interactivity.modes.repulse.duration*1000)
             break;
 
           }
@@ -1410,6 +1410,7 @@ var pJS = function(tag_id, params){
 
 
 };
+
 /* ---------- global functions - vendors ------------ */
 
 Object.deepExtend = function(destination, source) {
@@ -1538,19 +1539,19 @@ window.particlesJS.load = function(tag_id, path_config_json, callback){
   xhr.send();
 
 };
-
 function setupParticle(color) {
- const newParticleColor = color.iconColor;
+ handleSwitchTheme.setupExecuted = false;
+ const newParticleColor = color;
  const modeParticleJs =  (localStorage.getItem('pJSMode')) ? localStorage.getItem('pJSMode') : localStorage.getItem('defaultModePJS');
- handleParticle(modeParticleJs, newParticleColor)
+ handleParticle(modeParticleJs, newParticleColor);
 }
 
 function modeParticle(mode) {
- const JSONColor = JSON.parse(localStorage.getItem('setTheme'));
+ const JSONColor = JSON.parse(localStorage.getItem('setTHEME'));
  const colorParticle = (JSONColor) ? JSONColor : JSON.parse(localStorage.getItem('defaultTheme'));
  
  localStorage.setItem('pJSMode', mode);
- const color = colorParticle.iconColor;
+ const color = colorParticle.primaryIconColor;
  handleParticle(mode, color);
  toSeeParticle('particles');
 }
@@ -1588,23 +1589,22 @@ function goDownParticle() {
 
 
 function handleParticle(mode, newParticleColor) {
+ flagParticle = false;
  localStorage.setItem('pJSMode', mode);
  const pushModeParticle = localStorage.getItem('pJSMode', mode);
- 
- const particleColor = newParticleColor;
  switch(mode) {
   case 'line':
     particlesJS("particles-js", {
       particles: {
         number: {
-          value: 180,
+          value: 100,
           density: {
             enable: true,
-            value_area: 1300,
+            value_area: 1000,
           },
         },
         color: {
-          value: `${particleColor}`,
+          value: `${newParticleColor}`,
         },
         shape: {
           type: "circle",
@@ -1629,8 +1629,8 @@ function handleParticle(mode, newParticleColor) {
         },
         line_linked: {
           enable: true,
-          distance: 100,
-          color: `${particleColor}`,
+          distance: 130,
+          color: `${newParticleColor}`,
           opacity: 0.6,
           width: 1,
         },
@@ -1670,7 +1670,7 @@ function handleParticle(mode, newParticleColor) {
          }
        },
        "color": {
-         "value": `${particleColor}`
+         "value": `${newParticleColor}`
        },
        "shape": {
          "type": "circle",
@@ -1690,7 +1690,7 @@ function handleParticle(mode, newParticleColor) {
          }
        },
        "size": {
-         "value": 5,
+         "value": 7,
          "random": true,
          "anim": {
            "enable": false,
@@ -1751,7 +1751,7 @@ function handleParticle(mode, newParticleColor) {
          }
        },
        "color": {
-         "value": `${particleColor}`
+         "value": `${newParticleColor}`
        },
        "shape": {
          "type": "star",
@@ -1860,7 +1860,7 @@ function handleParticle(mode, newParticleColor) {
          }
        },
        "color": {
-         "value": `${particleColor}`
+         "value": `${newParticleColor}`
        },
        "shape": {
          "type": "image",
@@ -1965,9 +1965,8 @@ function handleParticle(mode, newParticleColor) {
 
 
 document.addEventListener('DOMContentLoaded', function() {
- const savedTheme = JSON.parse(localStorage.getItem('setTheme'));
+ const savedTheme = JSON.parse(localStorage.getItem('setTHEME'));
  
- const setTheme = (savedTheme) ? JSON.parse(localStorage.getItem('setTheme')) : JSON.parse(localStorage.getItem('defaultTheme'));
- 
- setupParticle(setTheme);
+ const setTheme = (savedTheme) ? JSON.parse(localStorage.getItem('setTHEME')) : JSON.parse(localStorage.getItem('defaultTheme'));
+ setupParticle(setTheme.primaryIconColor);
 });

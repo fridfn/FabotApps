@@ -29,23 +29,43 @@
      <p class="description_text" id="text-popup">Maaf fitur ini belum tersedia !!</p>
     </div>
    </div>
+   <div class="container-loader" id="loader-page">
+    <div class="spinner-container">
+     <div class="spinner">
+      <div class="spinner">
+       <div class="spinner">
+        <div class="spinner">
+         <div class="spinner">
+           <div class="spinner"></div>
+          </div>
+         </div>
+        </div>
+      </div>
+     </div>
+    </div>
+   </div>
    <audio id="audio-player" controls="true">
     <source src="notif_1.mp3" type="audio/mpeg"/>
    </audio>
-   <!-- <div class="container-loader">
-    <div class="loader"></div>
-    <div class="loader-loading"></div>
-    <div class="footer">
-      <p class="description_text">This website is made only for learning in development a website, FaBot-Chat 16 October Version.</p>
-      </div>
-   </div> -->
+   <div class="container-loader" id="loader-web">
+     <div class="loader">
+      <p>Loading</p>
+      <div class="words">
+       <span class="word">User</span>
+       <span class="word">Data</span>
+       <span class="word">Chat</span>
+       <span class="word">Page</span>
+       <span class="word">Bot</span>
+     </div>
+    </div>
+   </div>
    <div class="container-guide">
     <div class="headerMenu">
      <div class="arrow-button">
-      <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="toggleGuide()" ></ion-icon>
+      <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="togglePage('guide')" ></ion-icon>
      </div>
      <ion-icon name="moon" class="main-icon" id="moon" onclick="switchTheme()"></ion-icon>
-     <ion-icon name="mail-sharp" class="main-icon" onclick="openEmail()"></ion-icon>
+     <ion-icon name="mail-sharp" class="main-icon" onclick="togglePage('emails')"></ion-icon>
      <ion-icon name="qr-code" class="main-icon" id="brush" onclick="handlePopup()"></ion-icon>
     </div>
     <div class="profileSection" id="profileSection">
@@ -87,44 +107,38 @@
         <button class="btn-koleksi" id="myButton" onclick="nextGuide()">Mengerti</button>
        </div>
       </div>
-      <div class="underline"></div>
       <div class="box-note-guide">
-       <p id="bio" class="infoTxt"><ion-icon name="book"></ion-icon>&nbsp;Penjelasan</p>
-       <div class="wrapper-note-guide">
-        <div class="box_note_guide">
-         <p class="description_text" id="description_guide">Deskripsi 1</p>
-        </div>
-        <div class="box_note_guide">
-         <p class="description_text" id="description_guide">Deskripsi 2</p>
-        </div>
-         <div class="underline"></div>
-         <div class="box-path">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-           <path id="path_guide" fill="#0099ff" fill-opacity="1" d="M0,128L80,149.3C160,171,320,213,480,202.7C640,192,800,128,960,101.3C1120,75,1280,85,1360,90.7L1440,96L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
-          </svg>
-         </div>
-        <div class="description_text_guide">
-         <p class="description_text">FaBot-Chat</p>
-         <p class="description_text">Description Guide</p>
-        </div>
+       <div class="header_title_content"  id="set-particles">
+        <h1 class="title-header-home">panduan informasi</h1>
+        <p class="article-text">dibawah inu adalah pembahasan dan solusi saat sedang melakukan chat dengan bot.</p>
        </div>
-      </div>
-      <div class="wrap-description-guide">
+       <div class="wrapper-note-guide">
+        <div class="wrapper_box_note_guide">
+         <div class="box_note_guide">
+          <p class="description_text txt--lg"><strong>PEMBAHASAN&nbsp;&nbsp;&#10162;</strong></p>
+          <p class="description_text" id="description_guide">Deskripsi 1</p>
+         </div>
+         <div class="box_note_guide">
+          <p class="description_text txt--lg"><strong>SOLUSI&nbsp;&nbsp;&#10162;</strong></p>
+          <p class="description_text" id="description_guide">Deskripsi 2</p>
+         </div>
+        </div>
+        <div class="header_title_content"  id="set-particles">
+         <h1 class="title-header-home">notebook guide</h1>
+         <p class="article-text">tolong perlu di perhatikan poin poin di bawah ini saat melakukan chat.</p>
+        </div>
        <div class="box-note-personality">
-         <p class="description_text txt--lg"><strong>CATATAN</strong></p>
-         <p class="description_text">1. Saat kamu mengirimkan pesan kepada bot tolong ketikan kata kata yang baik.<br><br>2. Saat kamu mengetikan kata yang tidak pantas / berkata kasar maka bot akan automatis menyudahi chat dan merefresh paksa browser.<br><br>3. Saat kamu chat dengan bot tolong jangan bertanya hal hal yang aneh kepada bot. jawab saja apa yang dia katakan dalam chat.<br><br><br>Tolong di ingat bahwa bot yang ada di website ini hanyalah sebuah bot biasa dan bukan lah bot yang menggunakan AI untuk menjawab apa yang kamu pertanyakan.<br><br>Terimaksih atas perhatian nya | Developer.</p>
+         <p class="description_text">1. Saat kamu mengirimkan pesan kepada bot tolong ketikan kata kata yang baik.<br><br>2. Saat kamu mengetikan kata yang tidak pantas / berkata kasar maka bot akan automatis menyudahi chat dan merefresh paksa browser.<br><br>3. Saat kamu chat dengan bot tolong jangan bertanya hal hal yang aneh kepada bot. jawab saja apa yang dia katakan dalam chat.<br><br><br>Tolong di ingat bahwa bot yang ada di website ini hanyalah sebuah bot biasa dan bukan lah bot yang menggunakan AI untuk menjawab apa yang kamu pertanyakan.<br><br><br>Terimaksih atas perhatian nya | Developer.</p>
+       </div>
        </div>
       </div>
      </div>
     </div>
-     <div class="footer">
-      <p class="description_text">This website is made only for learning in development a website, FaBot-Chat 16 October Version.</p>
-     </div>
    </div>
    <div class="containerMail" id="containerId">
     <div class="header-email" id="profileSection">
      <div class="box-header-email">
-      <div class="bx-btn-exit" onclick="openEmail()">
+      <div class="bx-btn-exit" onclick="togglePage('email')">
        <ion-icon name="arrow-back" class="sidebar-icon"></ion-icon>
       </div>
       <p  class="title-header-email">Contact Developer</p>
@@ -139,27 +153,26 @@
            <label class="infoTitle">Judul Pesan</label>
            <textarea class="title_email" placeholder="Tuliskan Judul" name="multilineText" rows="1" wrap="hard" maxlength="20" id="input_items_email"></textarea>
           </div>
-          <div class="underline"></div>
           <div class="wrapper-input-email">
            <label class="infoTitle" >Isi Pesan</label>
            <textarea class="value_email" placeholder="Tuliskan Pesan" name="multilineText" rows="1" wrap="hard" id="input_items_email"></textarea>
           </div>
           <div class="wrapper-cta-email">
            <p class="description_text">Kirimkan sesuatu pesan kepada developer.</p>
-           <input class="submitEmail" type="submit" value="Kirim">
+           <input class="submitEmail" type="submit" value="Kirim&nbsp;&nbsp;&#10151;">
           </div>
          </form>
        </div>
        </div>
        <div class="note-box">
-        <p class="description_text"><strong>Note&nbsp;:</strong>Kamu bebas ingin mengkritik/meroasting/memberi saran/ web chat bot ini, tapi tolong ketikan kata kata yang
+        <p class="description_text"><strong style="color: var(--primaryTextColor);">Note&nbsp;:</strong>Kamu bebas ingin mengkritik/meroasting/memberi saran/ web chat bot ini, tapi tolong ketikan kata kata yang
         baik saat mengirimkan pesan.</p>
        </div>
-       <div class="underline" style="margin: 0;"></div>
        <div class="bx-hs-info">
         <p id="bio" class="infoTxt">History Message's</p>
         <div class="info-icon-hs">
-         <p class="description_text" id="email_sending">0</p>
+         <p id="email_sending" class="description_text" style="margin-top: 3px;">0</p>
+         <p class="description_text">&nbsp;&nbsp;&#10149;</p>
          <lord-icon src="https://cdn.lordicon.com/wwmtsdzm.json" trigger="loop" delay="7000" stroke="bold" class="current-color" id="ico-koleksi"></lord-icon>
         </div>
        </div>
@@ -442,7 +455,7 @@
          <ion-icon name="person" class="sidebar-icon" ></ion-icon>
          <p class="text-sidebar" >My Profile</p>
         </div>
-        <div class="box-sidebar-items" onclick="toggleGuide()">
+        <div class="box-sidebar-items" onclick="togglePage('guide')">
          <ion-icon name="book" class="sidebar-icon" ></ion-icon>
          <p class="text-sidebar" >ChatBot Guide</p>
         </div> 
@@ -645,7 +658,7 @@
         </div>
         <div class="box-note-personality">
          <p class="description_text txt--lg"><strong>CATATAN</strong></p>
-         <p class="description_text">1. Informasi yang kamu ketikan diatas digunakan untuk bot mengenali tentang diri kamu.<br><br>2. Isilah input sesuai dengan judul input nya, agar ketika kamu chatting dengan bot topik / konteks yang di bicarakan nanti menjadi jelas.<br><br>3. Berikan kata kata yang sopan dan baik saat mengisikan input diatas, karna developer sangat melarang keras kata kata kasar saat mengisi input / membalas pesan dari bot nanti.<br><br>4. Setelah semua input diisi kamu bisa menyimpan nya dengan mengklik tombol save di kanan diatas, pastikan bahwa semua input diisi dengan benar.<br><br><br>Tolong di ingat bahwa apa yang kamu ketikan diatas hanyalah simulasi untuk developer belajar mengelola data dari apa yang user ketikan dalam input diatas dan informasi diatas digunakan hanya untuk bot mengenali pengguna nya.<br><br>Terimaksih atas perhatian nya | Developer.</p>
+         <p class="description_text">1. Informasi yang kamu ketikan diatas digunakan untuk bot mengenali tentang diri kamu.<br><br>2. Isilah input sesuai dengan judul input nya, agar ketika kamu chatting dengan bot topik / konteks yang di bicarakan nanti menjadi jelas.<br><br>3. Berikan kata kata yang sopan dan baik saat mengisikan input diatas, karna developer sangat melarang keras kata kata kasar saat mengisi input / membalas pesan dari bot nanti.<br><br>4. Setelah semua input diisi kamu bisa menyimpan nya dengan mengklik tombol save di kanan diatas, pastikan bahwa semua input diisi dengan benar.<br><br><br>Tolong di ingat bahwa apa yang kamu ketikan diatas hanyalah simulasi untuk developer belajar mengelola data dari apa yang user ketikan dalam input diatas dan informasi diatas digunakan hanya untuk bot mengenali pengguna nya.<br><br><br>Terimaksih atas perhatian nya | Developer.</p>
        </div>
       </div>
      </div>
@@ -918,23 +931,23 @@
           <div class="wrapper-cta-and-article">
            <div id="hide-article" style="display: flex; flex-direction: column; gap: 15px; width: 75%;">
             <div class="box-header-article">
-             <h1 class="title-header-home" style="font-size: 15px;">welcome to my <span style="color: var(--secondaryText);">chatbot </span>web <span style="color: var(--secondaryText);">development</span> journey!</h1>
-             <p class="article-text">dolor ullamco do sint est anim ut ullamco duis consectetur ut voluptate occaecat laboris occaecat reprehenderit cillum elit ea consectetur voluptate nostrud nisi veniam duis.</p>
+             <h1 class="title-header-home" style="font-size: 15px;">welcome to my <span style="color: var(--secondaryTextColor);">chatbot </span>web <span style="color: var(--secondaryTextColor);">development</span> journey!</h1>
+             <p class="article-text">website ini adalah website chat bot sederhana yang menggunakan bahasa pemrograman javascript, </p>
             </div>
             <div class="box-btn-article">
-             <button class="cta-article"><p>START CHAT</p><ion-icon name="arrow-forward"></ion-icon></button>
-             <button class="cta-article"><p>GUIDE</p><ion-icon name="bulb"></ion-icon></button>
+             <button class="cta-article" onclick="toggleLogin('start')"><p>START CHAT</p><ion-icon name="arrow-forward"></ion-icon></button>
+             <button class="cta-article" onclick="togglePage('guideHome')"><p>GUIDE</p><ion-icon name="bulb"></ion-icon></p>
             </div>
            </div>
            <div class="container-sidebar-home-feature">
-            <div class="box-sidebar-home-feature" id="toggle-theme" onclick="uncheckRadio('radio-theme1')">
-              <ion-icon name="book" class=""></ion-icon>
+            <div class="box-sidebar-home-feature" id="toggle-theme" onclick="fullScreen()">
+              <ion-icon name="phone-portrait" class=""></ion-icon>
             </div>
-            <div class="box-sidebar-home-feature" onclick="openEmail()">
+            <div class="box-sidebar-home-feature" onclick="togglePage('email')">
              <ion-icon name="mail" class=""></ion-icon>
             </div>
             <div class="box-sidebar-home-feature">
-             <ion-icon name="help" class="" onclick="versionPage()"></ion-icon>
+             <ion-icon name="help" onclick="togglePage('version')"></ion-icon>
             </div>
             <div class="box-sidebar-home-feature" style="display: none;">
              <ion-icon name="time" class="" onclick="checkLoginTime()"></ion-icon>
@@ -967,279 +980,280 @@
      </div>
       <div class="header_title_content">
        <h1 class="title-header-home">about the development</h1>
-       <p class="article-text">dolor ullamco do sint est anim ut ullamco duis consectetur ut voluptate occaecat laboris occaecat reprehenderit.</p>
+       <p class="article-text">hint-hint di bawah berisi informasi tentang pengembangan dan tujuan website ini dibuat.</p>
       </div>
-     <div class="container-box-hints" id="hints">
-      <div id="particles-js"></div>
-      <div class="wrapper-box-hints">
-       <div class="box-hints">
-        <div class="item-hints" id="particles-view">
-         <div class="hint" data-position="4">
-          <span class="hint-dot" id="show-elem">Created</span>
-          <div class="hint-content hint-right">
-           <div class="overflow-padding">
-            <p id="txt-hint" class="hint-text">This website was first developed and created on June 1, 2023. FYI this it was ? months ago.<br><br>Developer : Farid Fathoni N</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div>
-       <div class="box-hints">
-        <div class="item-hints">
-         <div class="hint" data-position="4">
-         <span class="hint-dot" id="show-elem">Description</span>
-          <div class="hint-content">
-           <div class="overflow-padding">
-            <p class="hint-text">This website is a simple chatbot website that is used only to learn to understand the basic JavaScript programming language.</p>
-           </div>
-          </div>
-         </div>
-        </div>
-       </div>
-       <div class="box-hints">
-        <div class="item-hints">
-         <div class="hint" data-position="4">
-          <span class="hint-dot" id="show-elem">About me</span>
+      <div class="container-box-hints" id="hints">
+       <div id="particles-js"></div>
+       <div class="wrapper-box-hints">
+        <div class="box-hints">
+         <div class="item-hints" id="particles-view">
+          <div class="hint" data-position="4">
+           <span class="hint-dot" id="show-elem">Created</span>
            <div class="hint-content hint-right">
             <div class="overflow-padding">
-             <p class="hint-text">A b o u t&nbsp;&nbsp;D e v e l o p e r -><br><br>Name : Farid Fathoni N<br>Status : vocational high school<br>Favorite : code/ typing/ reading/ Music</p>
+             <p id="txt-hint" class="hint-text">This website was first developed and created on June 1, 2023. FYI this it was ? months ago.<br><br>Developer : Farid Fathoni N</p>
             </div>
            </div>
           </div>
          </div>
-       </div>
-       <div class="box-hints">
-        <div class="item-hints">
-         <div class="hint" data-position="4">
-         <span class="hint-dot" id="show-elem">.......</span>
-          <div class="hint-content">
-           <div class="overflow-padding">
-            <p class="hint-text">This website was created because it was inspired by someone.</p>
+        </div>
+        <div class="box-hints">
+         <div class="item-hints">
+          <div class="hint" data-position="4">
+          <span class="hint-dot" id="show-elem">Description</span>
+           <div class="hint-content">
+            <div class="overflow-padding">
+             <p class="hint-text">This website is a simple chatbot website that is used only to learn to understand the basic JavaScript programming language.</p>
+            </div>
            </div>
           </div>
          </div>
         </div>
-       </div>
-       <div class="box-hints">
-        <div class="item-hints">
-         <div class="hint" data-position="4">
-         <span class="hint-dot" id="show-elem">conclusion</span>
-          <div class="hint-content hint-right">
-           <div class="overflow-padding">
-            <p class="hint-text">The conclusion is that this website was created only as a place for developers to learn about developing a website.</p>
+        <div class="box-hints">
+         <div class="item-hints">
+          <div class="hint" data-position="4">
+           <span class="hint-dot" id="show-elem">About me</span>
+            <div class="hint-content hint-right">
+             <div class="overflow-padding">
+              <p class="hint-text">A b o u t&nbsp;&nbsp;D e v e l o p e r -><br><br>Name : Farid Fathoni N<br>Status : vocational high school<br>Favorite : code/ typing/ reading/ Music</p>
+             </div>
+            </div>
+           </div>
+          </div>
+        </div>
+        <div class="box-hints">
+         <div class="item-hints">
+          <div class="hint" data-position="4">
+          <span class="hint-dot" id="show-elem">.......</span>
+           <div class="hint-content">
+            <div class="overflow-padding">
+             <p class="hint-text">This website was created because it was inspired by someone.</p>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+        <div class="box-hints">
+         <div class="item-hints">
+          <div class="hint" data-position="4">
+          <span class="hint-dot" id="show-elem">conclusion</span>
+           <div class="hint-content hint-right">
+            <div class="overflow-padding">
+             <p class="hint-text">The conclusion is that this website was created only as a place for developers to learn about developing a website.</p>
+            </div>
            </div>
           </div>
          </div>
         </div>
        </div>
       </div>
-     </div>
-     <div class="container-cards-skils">
-      <div class="wrapper-card-box-skils">
-       <div class="header_title_content">
-        <h1 class="title-header-home">why should choose me?</h1>
-        <p class="article-text">dolor ullamco do sint est anim ut ullamco duis consectetur ut voluptate occaecat laboris occaecat reprehenderit.</p>
-       </div>
-       <div class="wrapper-cards-header" id="cards-excess">
-        <div class="items-cards-skils">
-         <div class="cards-skils">
-          <p class="header-text-cards"></p>
-          <ion-icon name="bulb" class="cards-icon"></ion-icon>
-          <div class="cta-cards-skils">
-           <div class="content-cards-skils">
-            <p class="body-cards-skils"></p>
-           </div>
-           <div class="box-cta-cards-skils">
-            <ion-icon name="caret-forward-outline"></ion-icon>
-            <p>MORE</p>
+      <div class="container-cards-skils">
+       <div class="wrapper-card-box-skils">
+        <div class="header_title_content">
+         <h1 class="title-header-home">why should choose me?</h1>
+         <p class="article-text">cards-cards di bawah adalah beberapa kelebihan saya dalam mempelajari bahasa pemrograman.</p>
+        </div>
+        <div class="wrapper-cards-header" id="cards-excess">
+         <div class="items-cards-skils">
+          <div class="cards-skils">
+           <p class="header-text-cards"></p>
+           <ion-icon name="bulb" class="cards-icon"></ion-icon>
+           <div class="cta-cards-skils">
+            <div class="content-cards-skils">
+             <p class="body-cards-skils"></p>
+            </div>
+            <div class="box-cta-cards-skils">
+             <ion-icon name="caret-forward-outline"></ion-icon>
+             <p>MORE</p>
+            </div>
            </div>
           </div>
          </div>
         </div>
        </div>
-      </div>
-      <div class="wrapper-card-box-skils">
-       <div class="header_title_content">
-        <h1 class="title-header-home">what are my shortcomings?</h1>
-        <p class="article-text">dolor ullamco do sint est anim ut ullamco duis consectetur ut voluptate occaecat laboris occaecat reprehenderit.</p>
+       <div class="wrapper-card-box-skils">
+        <div class="header_title_content">
+         <h1 class="title-header-home">what are my shortcomings?</h1>
+         <p class="article-text">cards-cards di bawah adalah kekurangan kekurangan yang ada dalam diri saya saat belajar bahasa pemrograman.</p>
+        </div>
+        <div class="wrapper-cards-header" id="cards-lack"></div>
        </div>
-       <div class="wrapper-cards-header" id="cards-lack"></div>
-      </div>
-      <div class="wrapper-card-box-skils" id="skils">
-       <div class="header_title_content">
-        <h1 class="title-header-home">programming languages.</h1>
-        <p class="article-text">dolor ullamco do sint est anim ut ullamco duis consectetur ut voluptate occaecat laboris occaecat reprehenderit.</p>
-       </div>
-       <div class="container-skill">
-        <div class="skill-box">
-         <span class="span-title-skill">
-          <ion-icon name="logo-html5" class="main-icon" style="--clr: #e66200;"></ion-icon>
-          <span class="title">HTML</span>
-         </span>
-         <div class="skill-bar">
-          <span class="skill-per html" id="show-elem">
-           <span class="tooltip hint-text">70%</span>
+       <div class="wrapper-card-box-skils" id="skils">
+        <div class="header_title_content">
+         <h1 class="title-header-home">programming languages?</h1>
+         <p class="article-text">progress bar di bawah adalah sejauh mana pemahaman saya dalam belajar tentang bahasa pemrograman.</p>
+        </div>
+        <div class="container-skill">
+         <div class="skill-box">
+          <span class="span-title-skill">
+           <ion-icon name="logo-html5" class="main-icon" style="--clr: #e66200;"></ion-icon>
+           <span class="title">HTML</span>
           </span>
+          <div class="skill-bar">
+           <span class="skill-per html" id="show-elem">
+            <span class="tooltip hint-text">70%</span>
+           </span>
+          </div>
+         </div>
+         <div class="skill-box">
+          <span class="span-title-skill">
+           <ion-icon name="logo-css3" class="main-icon" style="--clr: #005ee6; "></ion-icon>
+           <span class="title">CSS</span>
+          </span>
+           <div class="skill-bar">
+             <span class="skill-per css" id="show-elem">
+               <span class="tooltip hint-text">55%</span>
+             </span>
+           </div>
+         </div>
+         <div class="skill-box">
+          <span class="span-title-skill">
+           <ion-icon name="logo-javascript" class="main-icon" style="--clr: #ecd700;"></ion-icon>
+            <span class="title">JavaScript</span>
+           </span>
+           <div class="skill-bar">
+             <span class="skill-per javascript" id="show-elem">
+               <span class="tooltip hint-text">45%</span>
+             </span>
+           </div>
          </div>
         </div>
-        <div class="skill-box">
-         <span class="span-title-skill">
-          <ion-icon name="logo-css3" class="main-icon" style="--clr: #005ee6; "></ion-icon>
-          <span class="title">CSS</span>
-         </span>
-          <div class="skill-bar">
-            <span class="skill-per css" id="show-elem">
-              <span class="tooltip hint-text">55%</span>
-            </span>
-          </div>
-        </div>
-        <div class="skill-box">
-         <span class="span-title-skill">
-          <ion-icon name="logo-javascript" class="main-icon" style="--clr: #ecd700;"></ion-icon>
-           <span class="title">JavaScript</span>
-          </span>
-          <div class="skill-bar">
-            <span class="skill-per javascript" id="show-elem">
-              <span class="tooltip hint-text">45%</span>
-            </span>
-          </div>
-        </div>
        </div>
-      </div>
-      <div class="wrapper-card-box-skils" id="skils">
-       <div class="header_title_content"  id="set-particles">
-        <h1 class="title-header-home">programming languages.</h1>
-        <p class="article-text">dolor ullamco do sint est anim ut ullamco duis consectetur ut voluptate occaecat laboris occaecat reprehenderit.</p>
-       </div>
-       <div class="container-box-theme">
-        <div class="wrapper-box-theme">
-         <div class="box-theme">
-          <div class="box-type-theme">
-           <p class="secondary-text" id="title-theme" style="letter-spacing: 2px;">Dark</p>
-           <ion-icon name="moon" class="mini-icons"></ion-icon>
+       <div class="wrapper-card-box-skils" id="skils">
+        <div class="header_title_content"  id="set-particles">
+         <h1 class="title-header-home">theme & particle settings</h1>
+         <p class="article-text">dibawah ini adalah tema dan partikel yang bisa kamu pilih sesuai dengan mood dan kesukaan kamu.</p>
+        </div>
+        <div class="container-box-theme">
+         <div class="box-change-particle">
+          <div class="box-cta-particle">
+           <p class="title-header-home" style="font-size: 11px;">Particles</p>
+           <div class="wrapper-change-particle">
+            <div class="box-sidebar-home-feature" onclick="modeParticle('line')">
+             <p class="particle-items">1</pclass>
+            </div>
+            <div class="box-sidebar-home-feature" onclick="modeParticle('snow')">
+             <p class="particle-items">2</pclass>
+            </div>
+            <div class="box-sidebar-home-feature" onclick="modeParticle('shape')">
+             <p class="particle-items">3</pclass>
+            </div>
+            <div class="box-sidebar-home-feature" onclick="modeParticle('image')">
+             <p class="particle-items">4</pclass>
+            </div>
+           </div>
           </div>
-          <div class="info-type-theme">
-           <p class="secondary-text">Select Theme</p>
-           <div class="box-wrapper-item">
-            <div class="box-item-theme">
-             <p id="template-name" style="font-size: 10px; font-weight: 500; text-transform: capitalize;">&nbsp;</p>
-             <label class="container-label">
-              <input type="checkbox" class="love-checkbox" onclick="lovingTheme()">
-              <div class="checkmark">
-                <svg viewBox="0 0 256 256">
-                <rect fill="none" height="256" width="256"></rect>
-                <path d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z" stroke-width="20px" stroke="none" fill="none"></path></svg>
+           <div class="btn-down-particle" onclick="goDownParticle()">
+            <div>
+             <ion-icon name="chevron-down" class="main-icon"></ion-icon>
+            </div>
+           </div>
+          </div>
+         <div class="wrapper-theme">
+          <div class="wrapper-box-theme">
+           <div class="box-theme">
+            <div class="info-type-theme">
+             <span class="secondary-text">
+              <p>Select Type Theme&nbsp;&nbsp;&#10132;</p>
+              <p id="title-theme" style="margin-top: 2px;">Type dark</p>
+             </span>
+             <div class="box-wrapper-item">
+              <div class="box-item-theme">
+               <p id="template-name" style="font-size: 10px; font-weight: 500; text-transform: capitalize;">&nbsp;</p>
+               <label class="container-label">
+                <input type="checkbox" class="love-checkbox" onclick="lovingTheme()">
+                <div class="checkmark">
+                  <svg viewBox="0 0 256 256">
+                  <rect fill="none" height="256" width="256"></rect>
+                  <path d="M224.6,51.9a59.5,59.5,0,0,0-43-19.9,60.5,60.5,0,0,0-44,17.6L128,59.1l-7.5-7.4C97.2,28.3,59.2,26.3,35.9,47.4a59.9,59.9,0,0,0-2.3,87l83.1,83.1a15.9,15.9,0,0,0,22.6,0l81-81C243.7,113.2,245.6,75.2,224.6,51.9Z" stroke-width="20px" stroke="none" fill="none"></path></svg>
+                </div>
+               </label>
               </div>
-             </label>
+             </div>
             </div>
+           </div>
+           <div class="wrapper-checkbox-theme">
+            <input type="radio" id="radio-theme1" onclick="uncheckRadio('radio-theme1')" name="radioGroup">
+            <label data-text="DARK" for="radio-theme1"></label>
+            
+            <input type="radio" id="radio-theme2" onclick="uncheckRadio('radio-theme2')" name="radioGroup">
+            <label data-text="LIGHT" for="radio-theme2"></label>
+            
+            <input type="radio" id="radio-theme3" onclick="uncheckRadio('radio-theme3')" name="radioGroup">
+            <label data-text="CUSTOM" for="radio-theme3"></label>
+            
            </div>
           </div>
          </div>
-         <div class="wrapper-checkbox-theme">
-          <input type="radio" id="radio-theme1" onclick="uncheckRadio('radio-theme1')" name="radioGroup">
-          <label for="radio-theme1"></label>
-          
-          <input type="radio" id="radio-theme2" onclick="uncheckRadio('radio-theme2')" name="radioGroup">
-          <label for="radio-theme2"></label>
-          
-          <input type="radio" id="radio-theme3" onclick="uncheckRadio('radio-theme3')" name="radioGroup">
-          <label for="radio-theme3"></label>
-          
+        </div>
+       </div>
+      </div>
+      <div class="quote-section">
+       <div class="quote-box">
+        <div class="dontQuit-box" data-text="just">
+         <div class="dontquit-wrap">
+          <p class="dontquit-text" style="padding-right: 17%;"><span style="font-weight: 500;">DO</span><span style="animation: dont 8s infinite;">N'T</span></p>
+          <p class="dontquit-text" style=" padding-right: 38%;"><span style="animation: dont 8s infinite;">QU</span><span style="font-weight: 500; ">IT!</span></p>
          </div>
         </div>
+        <p class="article-text" style="border-bottom: 1px solid var(--secondaryBorderColor);">Bejalar coding aja dulu. pusingnya mh belakangan</p>
+        <p class="article-text" style="font-size: 11px; padding: 2px 0 0 0; border-bottom: 1px solid transparent;">Farid Fathoni N</p>
        </div>
-       <div class="box-change-particle">
-        <div class="box-cta-particle">
-         <p class="title-header-home" style="font-size: 11px;">Particles</p>
-         <div class="wrapper-change-particle">
-          <div class="box-sidebar-home-feature" onclick="modeParticle('line')">
-           <p class="particle-items">1</pclass>
-          </div>
-          <div class="box-sidebar-home-feature" onclick="modeParticle('snow')">
-           <p class="particle-items">2</pclass>
-          </div>
-          <div class="box-sidebar-home-feature" onclick="modeParticle('shape')">
-           <p class="particle-items">3</pclass>
-          </div>
-          <div class="box-sidebar-home-feature" onclick="modeParticle('image')">
-           <p class="particle-items">4</pclass>
-          </div>
+       <div class="quote-box">
+        <p class="article-text" id="quote-text">Setiap baris kode adalah kesempatan untuk belajar sesuatu yang baru.</p>
+       </div>
+      </div>
+      <div class="footer-section" id="footer-web">
+       <div class="wrapper-article-footer">
+        <div class="box-article-footer">
+         <p class="title-header-home" style="color: var(--secondaryTextColor);"><ion-icon name="logo-octocat" class="icon-home" id="theme-see"></ion-icon>Fabot Page</p>
+         <p class="article-text">sit dolore officia ea ad aliquip laborumculpa pariatur irure ut sit sit minim ipsum</p>
+         <p class="title-header-home" style="padding: 10px 0 5px 0; font-size: 10px; color: var(--secondaryTextColor);">Follow Us</p>
+         <div class="box-medsos-home">
+          <a class="item-icon-sosmed" href="https://api.whatsapp.com/send?phone=+62 899-5247-491&text=Hi,%20kamu%20developer%20website%20fabot%20?" target="_blank"><i class="fab fa-whatsapp" ></i></a>
+          <a class="item-icon-sosmed" href="https://www.instagram.com/fridfn_" target="_blank"><i class="fab fa-instagram" ></i></a>
+          <a class="item-icon-sosmed" href="https://t.me/ShirakamiFubuki7" target="_blank"><i class="fab fa-telegram" ></i></a>
+          <a class="item-icon-sosmed" href="https://www.linkedin.com/in/farid-fathoni-n-26a48b2b3?trk=contact-info"><i class="fa-brands fa-linkedin" target="_blank"></i></a>
          </div>
         </div>
-         <div class="btn-down-particle" onclick="goDownParticle()">
-          <div>
-           <ion-icon name="chevron-down" class="main-icon"></ion-icon>
-          </div>
-         </div>
-       </div>
-      </div>
-     </div>
-     <div class="quote-section">
-      <div class="quote-box">
-       <div class="dontQuit-box" data-text="just">
-        <div class="dontquit-wrap">
-         <p class="dontquit-text" style="padding-right: 17%;"><span style="font-weight: 500;">DO</span><span style="animation: dont 8s infinite;">N'T</span></p>
-         <p class="dontquit-text" style=" padding-right: 38%;"><span style="animation: dont 8s infinite;">QU</span><span style="font-weight: 500; ">IT!</span></p>
+        <div class="box-footer-link">
+         <p class="title-header-home" style="color: var(--secondaryTextColor);">Explore</p>
+         <ul>
+          <li class="article-text" onclick="handleFooter('help')">Help</li>
+          <li class="article-text" onclick="handleFooter('about')">About</li>
+          <li class="article-text" onclick="handleFooter('service')">Service</li>
+         </ul>
+        </div>
+        <div class="box-footer-link">
+         <p class="title-header-home">&nbsp;</p>
+         <ul>
+          <li class="article-text" onclick="handleFooter('guide')">Guide</li>
+          <li class="article-text"  onclick="handleFooter('description')">Description</li>
+          <li class="article-text"  onclick="handleFooter('policy')">Privacy Policy</li>
+         </ul>
         </div>
        </div>
-       <p class="article-text" style="border-bottom: 1px solid var(--iconColor);">Bejalar coding aja dulu. pusingnya mh belakangan</p>
-       <p class="article-text" style="font-size: 11px; padding: 2px 0 0 0; border-bottom: 1px solid transparent;">Farid Fathoni N</p>
-      </div>
-      <div class="quote-box">
-       <p class="article-text" id="quote-text">Setiap baris kode adalah kesempatan untuk belajar sesuatu yang baru.</p>
-      </div>
-     </div>
-     <div class="footer-section">
-      <div class="wrapper-article-footer">
-       <div class="box-article-footer">
-        <p class="title-header-home"><ion-icon name="logo-octocat" class="icon-home" id="theme-see"></ion-icon>dolor amet</p>
-        <p class="article-text">sit dolore officia ea ad aliquip laborum culpa pariatur irure ut sit sit minim ipsum</p>
-        <p class="title-header-home" style="padding: 10px 0 5px 0; font-size: 10px;">Follow Us</p>
-        <div class="box-medsos-home">
-         <a class="item-icon-sosmed" href="https://api.whatsapp.com/send?phone=+62 899-5247-491&text=Hi,%20kamu%20developer%20website%20fabot%20?" target="_blank"><i class="fab fa-whatsapp" ></i></a>
-         <a class="item-icon-sosmed" href="https://www.instagram.com/fridfn_" target="_blank"><i class="fab fa-instagram" ></i></a>
-         <a class="item-icon-sosmed" href="https://t.me/ShirakamiFubuki7" target="_blank"><i class="fab fa-telegram" ></i></a>
-         <a class="item-icon-sosmed" href="https://www.linkedin.com/in/farid-fathoni-n-26a48b2b3?trk=contact-info"><i class="fa-brands fa-linkedin" target="_blank"></i></a>
+       <div class="box-footer-mail">
+        <div style="display: flex; align-items: center; gap: 8px;">
+         <p class="title-header-home" style="font-size: 8px; font-weight: 700; color: var(--tinyText);">Contact Me&nbsp;&nbsp;&#10148;</p>
+         <p class="article-text" onclick="window.open('https://api.whatsapp.com/send?phone=+62 899-5247-491&text=Hai')"><span style="font-weight: 500;">+62 </span>9952 47 491</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+         <p class="title-header-home" style="font-size: 8px; font-weight: 650; color: var(--tinyText);">Email&nbsp;&nbsp;&#10148;</p>
+         <p class="article-text"><span style="font-weight: 650;"><a onclick="window.open('mailto:faridfathonin@gmail.com')">faridfathonin@gmail.com</a></span></p>
         </div>
        </div>
-       <div class="box-footer-link">
-        <p class="title-header-home">Explore</p>
-        <ul>
-         <li class="article-text" onclick="handleFooter('help')">Help</li>
-         <li class="article-text" onclick="handleFooter('about')">About</li>
-         <li class="article-text" onclick="handleFooter('service')">Service</li>
-        </ul>
-       </div>
-       <div class="box-footer-link">
-        <p class="title-header-home">&nbsp;</p>
-        <ul>
-         <li class="article-text" onclick="handleFooter('guide')">Guide</li>
-         <li class="article-text"  onclick="handleFooter('description')">Description</li>
-         <li class="article-text"  onclick="handleFooter('policy')">Privacy Policy</li>
-        </ul>
-       </div>
+       <footer class="footer">
+        <p class="footer-class">This website is made only for learning in development a website, FaBot-Chat
+         <i>16 October Version.</i>♡</p>
+       </footer>
       </div>
-      <div class="box-footer-mail">
-       <div style="display: flex; align-items: center; gap: 8px;">
-        <p class="title-header-home" style="font-size: 8px; font-weight: 700">Contact Me&nbsp;&nbsp;&#10148;</p>
-        <p class="article-text" onclick="window.open('https://api.whatsapp.com/send?phone=+62 899-5247-491&text=Hai')"><span style="font-weight: 500;">+62 </span>9952 47 491</p>
-       </div>
-       <div style="display: flex; align-items: center; gap: 8px;">
-        <p class="title-header-home" style="font-size: 8px; font-weight: 650">Email&nbsp;&nbsp;&#10148;</p>
-        <p class="article-text"><span style="font-weight: 650;"><a onclick="window.open('mailto:faridfathonin@gmail.com')">faridfathonin@gmail.com</a></span></p>
-       </div>
-      </div>
-      <footer class="footer">
-       <p class="footer-class">This website is made only for learning in development a website, FaBot-Chat
-        <i>16 October Version.</i>♡</p>
-      </footer>
-     </div>
     </div>
    </div>
    <div class="container-bot-ver" id="containerId">
     <header>
      <div class="arrow-button">
-      <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="versionPage()" ></ion-icon>
+      <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="togglePage('version')" ></ion-icon>
      </div>
      <p class="title">About This Website</p>
     </header>
@@ -1328,62 +1342,69 @@
       <div class="header-login">
        <ion-icon name="arrow-back" class="main-icon" onclick="closeLogin()"></ion-icon>
       </div>
-      <div class="login-page">
+      
+     </div>
+     <div class="pembungkus-login-page">
+      
+     </div>
+    </div>
+   </div>
+   <div class="container-login-page">
+    <div class="wrapper-login-page">
+     <div class="login-page">
+      <div class="box-input-logins">
+       <div class="header-login">
+        <ion-icon name="arrow-back" class="main-icon" onclick="toggleLogin('back')"></ion-icon>
+       </div>
+       <div class="box-icon-login-page">
+        <lord-icon src="https://cdn.lordicon.com/bgebyztw.json" trigger="loop" delay="5000" class="current-color">
+        </lord-icon>
+        <p class="title-login-text" >Sign in Up</p>
+       </div>
+       <div class="box-input-login">
+        <ion-icon name="person" class="main-icon"></ion-icon>
+        <input type="text" placeholder="Masukan Nama" class="input-login" autocomplete="off" minlength="4" id="name">
+        <ion-icon name="information" class="main-icon"></ion-icon>
+       </div>
+       <div class="box-input-login">
+        <ion-icon name="mail" class="main-icon"></ion-icon>
+        <input type="email" placeholder="Masukan Email" class="input-login" autocomplete="off" id="email">
+        <ion-icon name="information" class="main-icon"></ion-icon>
+       </div>
+       <div class="box-input-login">
+        <ion-icon name="lock-closed" class="main-icon"></ion-icon>
+        <input placeholder="Masukan Password" class="input-login" autocomplete="off" type="password" id="password_user">
+        <ion-icon name="eye-off-outline" class="main-icon" onclick="togglePassword()" id="show-pass"></ion-icon>
+       </div>
+      </div>
+      <div class="box-input-logins">
+       <div class="header-login">
+        <ion-icon name="arrow-back" class="main-icon" onclick="toggleLogin('undo')"></ion-icon>
+       </div>
+       <div class="login-page">
        <lord-icon src="https://cdn.lordicon.com/vcuhguff.json" trigger="loop" state="hover-wink" delay="7000" class="current-color">
        </lord-icon>
        <p class="title-login-text" >Wellcome To Fabot</p>
-       <div class="box-info-login-text" id="myDescription">
+       <div class="box-info-login-text">
         <p class="info-login-text"><strong>Tujuan website ini di buat adalah sebagai berikut :</strong><br><br>1. tempat
          untuk belajar mengembangkan simulasi chat antara user dan bot menggunakan bahasa pemrograman dasar dari javaScript
          yang saya pahami.<br><br>2. untuk belajar mengembangkan / memahami logika dan algoritma dalam sebuah program yang
          saya buat.<br><br>3. dan untuk belajar membuat fitur fitur umum yang ada dalam sebuah website.<br><br></p>
        </div>
-       <div class="login-box-text" >
-        <p class="login-text" id="myDescription">Next</p>
-       </div>
-       <p class="deskripsi-login-text">kamu harus login terlebih dahulu untuk bisa mencoba chat bot ini</p>
       </div>
-     </div>
-     <div class="pembungkus-login-page">
-      <div class="login-page">
-       <div class="header-login">
-        <ion-icon name="arrow-back" class="main-icon" onclick="loginUndo()"></ion-icon>
-       </div>
-       <lord-icon src="https://cdn.lordicon.com/bgebyztw.json" trigger="loop" delay="10000" class="current-color">
-       </lord-icon>
-       <p class="title-login-text" >Sign in Up</p>
-       <div class="box-input-login" id="jawaban">
-        <ion-icon name="person" class="main-icon"></ion-icon>
-        <input type="text" placeholder="Masukan Nama" class="input-login" autocomplete="off">
-        <ion-icon name="information" class="main-icon"></ion-icon>
-       </div>
-       <div class="box-input-login" id="jawaban">
-        <ion-icon name="mail" class="main-icon"></ion-icon>
-        <input type="text" placeholder="Masukan Email" class="input-login" autocomplete="off">
-        <ion-icon name="information" class="main-icon"></ion-icon>
-       </div>
-       <div class="box-input-login" id="jawaban">
-        <ion-icon name="lock-closed" class="main-icon"></ion-icon>
-        <input placeholder="Masukan Password" class="input-login" autocomplete="off" type="password" id="password_user">
-        <ion-icon name="eye-off-outline" class="main-icon" onclick="togglePassword()" id="show-pass"></ion-icon>
-       </div>
-       <div class="login-box-text" >
-        <p class="login-text" id="myDescription">Login</p>
-       </div>
-       <p class="deskripsi-login-text">Ketikan nama, email dan password untuk profile mu di website ini</p>
       </div>
-     </div>
+      <div class="login-box-text" onclick="toggleLogin('submit')">
+       <p class="login-text" id="myDescription">Submit</p>
+      </div>
+      <p class="deskripsi-login-text">Ketikan nama, email dan password untuk profile mu di website ini</p>
+      </div>
     </div>
    </div>
   <script src="style.js"></script>
-  <script src="variabel.js"></script>
-  <script src="swapBg.js"></script>
-  <script src="swaptheme.js"></script>
-  <script src="coreBot.js"></script>
-  <script src="bubbles.js"></script>
+  <script src="mainbot.js"></script>
   <script src="dataSong.js"></script>
-  <script src="theme.js"></script>
-  <script src="particles.js" id="particle-script"></script>
+  <script src="variabel.js"></script>
+  <script src="particles.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
   </script>
   <script type="module" src="https://cdn.lordicon.com/lordicon-1.1.0.js"></script>
