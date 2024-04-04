@@ -6,12 +6,9 @@ let loaders = document.querySelector('#loader-web');
 let headerIcon = document.querySelectorAll('.headerIconll');
 const containerUserPage = document.querySelector('.container-user-page');
 const containerV = document.querySelector('.container-bot-ver');
-let brush = document.getElementById('brush');
-let moon = document.querySelectorAll('#moon');
-let qr = document.getElementById('qr');
 let container = document.querySelector('.container');
 let containerId = document.querySelectorAll('#containerId');
-let menu = document.querySelector('.menu');
+let developerMenu = document.querySelector('.container-developer-menu');
 let profileSection = document.querySelectorAll('#profileSection');
 let containerOpsi = document.querySelector('.containerOpsi');
 let blurLayer = document.querySelector('.blurLayer');
@@ -58,16 +55,16 @@ const contentHome = document.querySelector('.content-home');
 const openHomeBTN = document.querySelector('.btn-cta');
 const footerHomeText = document.querySelector('.container-home #footers .footer-class');
 
-const personalInput = document.querySelectorAll('.box-input-personality .input-login');
+const personalInput = document.querySelectorAll('.box-input-personality #personalInput');
 const inputLogin = document.querySelectorAll('.box-input-login .input-login');
 
-const namaUser = document.querySelector('.name-user');
-const emailUser = document.querySelector('.user-email');
+const namaUsers = document.querySelector('.name-user');
+const emailUsers = document.querySelector('.user-email');
 const hobbyUser = document.querySelectorAll('.text-hobby-user');
 const nameUser = document.querySelectorAll('.nameUser');
 const personalDataInfo = document.querySelectorAll('.txt-user-personal-box');
 const titleWidget = document.querySelectorAll('.user-name-widget');
-const bioUser = document.querySelector('.bio-user');
+const bioUsers = document.querySelector('.bio-user');
 
 const textareaElement = document.querySelectorAll('textarea');
 
@@ -78,31 +75,25 @@ textareaElement.forEach(function(e) {
  });
 });
 
-// validation for personal info input /
-let namaDepan;
-let namaBelakang;
-if (localStorage.getItem('sudahLogin') === 'true') {
-namaDepan = localStorage.getItem('userName').split(' ')[0];
-namaDepan = localStorage.getItem('userName').split(' ').pop();
-}
-let ultah = localStorage.getItem('birthday');
-let song = localStorage.getItem('favSong');
-let dreams = localStorage.getItem('myDreams');
-let gender = localStorage.getItem('gender');
-let kelas = localStorage.getItem('kelas');
-let planet = localStorage.getItem('planet');
-let hobby1 = localStorage.getItem('hobby1');
-let hobby2 = localStorage.getItem('hobby2');
-let hobby3 = localStorage.getItem('hobby3');
-let userNames = localStorage.getItem('userNames');
-let userEmails = localStorage.getItem('userEmail');
+// validation for personal info input //
+const userDataJSON = localStorage.getItem('userJSON');
+const getDataUser = userDataJSON ? JSON.parse(userDataJSON) : {} ;
+const { flagLogin = {} } = getDataUser;
+const { isLogin, isFullLogin } = flagLogin;
+
+const fullName = getDataUser?.user?.personal?.fullName || '';
+const [ namaDepan, midName, ...lastName ] = fullName.split(' ');
+
+const { birth, songs, status, planet, dreams, gender, bioUser, ...recent } = getDataUser?.user?.personal || {};
+const { hobbyFir = '', hobbySec = '', hobbyThi = '' } = getDataUser?.user?.personal?.hobby || {};
+const { namaUser = '', emailUser = '' } = getDataUser?.user || {};
 
 let dataUser = [];
 let containerHomeIs = true;
 
 descriptionSatu.innerHTML = "Hi👋,My name is Farid Fathoni N. I am the developer of this website and I am a vocational high school student who is very enthusiastic about learning and has a special interest in making websites. Although sometimes I feel confused cause I am self-taught and don't hv a mentor to guide me.";
 
-descriptionDua.innerHTML = "I have taught myself various techniques and programming languages such as HTML, CSS, and javascript to build attractive and interactive websites for users.";
+descriptionDua.innerHTML = "I have taught myself various techniques and prgramming languages such as HTML, CSS, and javascript to build attractive and interactive websites for users.";
 
 descriptionTiga.innerHTML = "and lastly this website was created only to learn how to develop websites using the basic programming language and logic that I currently understand.";
 
@@ -324,12 +315,11 @@ function openHome() {
   menuSidebar.classList.toggle('active');
  }
 }
-
+/*
 function openChat() {
  containerHomeIs = false;
  window.scrollTo({ top: 0 });
- if (localStorage.getItem("sudahLogin") === "true") {
-   
+ if (isLogin) {
   setTimeout(() => {
    containerHome.style.display = "none";
    pembungkusContainer.classList.add('active');
@@ -362,7 +352,8 @@ function openChat() {
   setTimeout(loginValidation, 0);
  }
 }
-  setTimeout(() => {
+
+setTimeout(() => {
    firstPertanyaan.innerHTML = botSay()[0];
    //textLoad();
    barier.style.display = "block";
@@ -375,7 +366,7 @@ function openChat() {
     firstContentPertanyaan.style.display = "block";
    }, 1000);
   }, 1000);
-
+*/
 function perbesarGambar() {
  let scrollTop = window.pageYOffset;
  let batasHeight = 15;
@@ -413,11 +404,12 @@ function perbesarGambar() {
 
 const DeveloperMenu = function () {
  arrowMenu.style.display = "block";
-
+ 
+developerMenu.appendChild(footerWeb);
  boxDeskripsiKoleksi2 = containerDeskripsiKoleksi.querySelector('.box-deskripsi-koleksi-2');
 
- if (containerExplore.classList.contains('containerExploreActive')) {
-  containerExplore.classList.remove('containerExploreActive');
+ if (containerExplore.classList.contains('active')) {
+  containerExplore.classList.remove('active');
 
   footers[1].style.position = "absolute";
   containerExplore.style.display = "none";
@@ -428,14 +420,14 @@ const DeveloperMenu = function () {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
  } else {
-  if (menu.classList.contains('active')) {
+  if (developerMenu.classList.contains('active')) {
    setTimeout(() => {
    
     arrowMenu.style.display = "none";
     menuSidebar.classList.toggle("active");
 
     header.classList.remove('active');
-    menu.classList.remove('active');
+    developerMenu.classList.remove('active');
     container.classList.remove('active');
     if (containerUserPage.classList.contains('active')) {
      containerUserPage.classList.remove('active');
@@ -443,7 +435,7 @@ const DeveloperMenu = function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
    }, 400);
   } else {
-   menu.classList.add('active');
+   developerMenu.classList.add('active');
    header.classList.add('active');
    container.classList.add('active');
 
@@ -509,22 +501,6 @@ const validationCTA = function () {
 arrowMenu.addEventListener('click', () => {
  arrowMenu.classList.toggle('active');
 });
-
-brush.onclick = () => {
- brush.classList.add('clickEffect');
- setTimeout(function () {
-  brush.classList.remove('clickEffect');
-  opsi();
- }, 300);
-}
-
-qr.onclick = () => {
- qr.classList.add('clickEffect');
- setTimeout(function () {
-  qr.classList.remove('clickEffect');
-  opsi();
- }, 300);
-}
 
 window.addEventListener('scroll', function () {
  var scrollTop = window.pageYOffset;
@@ -915,10 +891,10 @@ function openSidebar() {
 
 const objTextExplore = {
  help: "<strong>Selamat datang di chatBot [ Fabot Chat ] - Chatting dengan bot !</strong><br><br><br>Bagian 'help' kami didesain untuk memberikan panduan lengkap dalam menggunakan chatBot [ Fabot Chat ]. Berikut adalah beberapa informasi yang akan Anda temukan di bagian 'help' kami:<br><br><br> 1. Cara Memulai: Panduan langkah demi langkah untuk memulai percakapan dengan chatBot [ Fabot Chat ]. Anda akan menemukan cara memulai percakapan, termasuk perintah awal yang dapat Anda berikan.<br><br> 2. Fitur Utama: Penjelasan mengenai fitur-fitur utama yang dapat digunakan dalam percakapan dengan chatBot [ Fabot Chat ]. Mulai dari pertanyaan umum, pencarian informasi, hingga melakukan tugas-tugas khusus.<br><br> 3. Perintah Khusus: Daftar perintah khusus yang dapat Anda gunakan untuk mengakses fitur-fitur tertentu dengan cepat. Kami menyediakan daftar perintah beserta contoh penggunaannya.<br><br> 4. Pertanyaan Umum: Jawaban atas pertanyaan-pertanyaan umum seputar chatBot [ Fabot Chat ] dan cara kerjanya. Jika Anda mengalami masalah atau kesulitan, Anda mungkin akan menemukan jawaban di sini.<br><br> 5. Kebijakan dan Privasi: Informasi tentang kebijakan kami terkait penggunaan data dan privasi Anda. Kami selalu mengutamakan keamanan dan privasi informasi pengguna.<br><br> 6. Kontak dan Dukungan: Informasi tentang cara menghubungi tim dukungan kami jika Anda mengalami masalah yang tidak teratasi oleh bagian 'help' kami.<br><br><br><br> Kami berharap bagian 'help' ini dapat membantu Anda dalam menjalankan percakapan dengan chatBot [ Fabot Chat ] dengan lancar dan menyenangkan. Jika Anda memiliki pertanyaan lebih lanjut, jangan ragu untuk menghubungi kami melalui bagian kontak yang telah disediakan. <strong>Terima kasih telah menggunakan chatBot [ Fabot Chat ] sebagai Chatting dengan bot !</strong>",
- about: "**Footer About Chatbot**<br><br>Selamat datang di [Nama Chatbot]! Saya adalah proyek chatbot sederhana yang dikembangkan oleh seorang pelajar SMK yang antusias tentang bahasa pemrograman. Tujuan utama saya adalah membantu Anda dengan pertanyaan sederhana dan memberikan pengalaman belajar yang menyenangkan.<br><br>**Tentang Pengembang**<br><br>Saya dibuat oleh [Nama Pengembang], seorang pelajar SMK dengan minat dalam belajar bahasa pemrograman. Proses pengembangan saya adalah bagian dari perjalanan belajarnya dan eksplorasi di dunia teknologi.<br><br>**Fungsi Utama Saya**<br><br>- **Jawaban Pertanyaan Sederhana**: Saya siap memberikan jawaban untuk pertanyaan sederhana tentang [topik atau domain yang relevan].<br><br>- **Pertolongan Belajar**: Saya dirancang untuk membantu Anda memahami konsep dasar bahasa pemrograman.<br><br>- **Eksplorasi Bersama**: Mari kita belajar bersama! Saya ingin memotivasi dan memudahkan pemahaman tentang dunia pemrograman.<br><br>**Perjalanan Pembelajaran**<br><br>Saya masih dalam tahap pengembangan dan akan terus diperbarui seiring berjalannya waktu. Setiap pertanyaan dan umpan balik membantu saya tumbuh dan meningkatkan kemampuan saya.<br><br>**Kontak Pengembang**<br><br>Jika Anda ingin berbagi ide, memberikan masukan, atau sekadar menyapa, [Nama Pengembang] dapat dihubungi di [alamat email atau tautan formulir kontak].<br><br>Terima kasih telah menjelajahi [Nama Chatbot]. Semoga kita dapat belajar bersama!<br><br>Salam,[Nama Pengembang]",
- policy: '<strong>Kebijakan Privasi ChatBot [ Fabot Chat ]</strong><br><br><br><strong>Selamat datang di [ Fabot Chat ]!</strong><br><br>Kami di [ Fabot Chat ] sangat memahami pentingnya privasi informasi pribadi Anda. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi data yang kami peroleh dari Anda saat Anda berinteraksi dengan ChatBot kami.<br><br><strong>**Informasi yang Kami Kumpulkan**</strong><br><br>Ketika Anda menggunakan [F abot Chat ], kami dapat mengumpulkan beberapa informasi pribadi yang Anda berikan secara sukarela selama sesi percakapan. Informasi ini dapat mencakup nama, alamat email, atau informasi kontak lainnya yang Anda berikan untuk membantu kami memahami dan merespons pertanyaan atau permintaan Anda dengan lebih baik.<br><br><strong>**Penggunaan Informasi**</strong><br><br>Informasi pribadi yang kami kumpulkan dari Anda digunakan secara eksklusif untuk memberikan layanan yang sesuai dan memberikan jawaban yang relevan dengan pertanyaan yang Anda ajukan kepada ChatBot kami. Kami tidak akan menggunakan informasi Anda untuk tujuan pemasaran atau penjualan ke pihak ketiga tanpa persetujuan Anda.<br><br><strong>**Perlindungan Informasi**</strong><br><br>Kami mengambil langkah-langkah untuk melindungi informasi pribadi Anda dari akses atau penggunaan yang tidak sah. Kami hanya menyimpan data pribadi yang diperlukan selama diperlukan untuk memberikan layanan percakapan dengan ChatBot kami.<br><br><strong>**Penggunaan Teknologi Pelacakan**</strong><br><br>[ Fabot Chat ] hanyalah ChatBot yang di buat hanya untuk bertujuan belajar membuat bot yang bisamembalas apa yang user katakan. jadi ChatBot ini hanyalah ChatBot biasa yang tidak sama seperti ChatBot yang menggunakan AI.<br><br><strong>**Kebijakan Privasi Pihak Ketiga**</strong><br><br>Harap dicatat bahwa Kebijakan Privasi ini hanya berlaku untuk ChatBot [ Fabot Chat ]. Kami tidak bertanggung jawab atas praktik privasi situs web pihak ketiga atau aplikasi yang mungkin Anda gunakan untuk mengakses ChatBot kami. Pastikan untuk membaca kebijakan privasi pihak ketiga tersebut sebelum memberikan informasi pribadi Anda kepada mereka.<br><br><strong>**Perubahan pada Kebijakan Privasi**</strong><br><br>Kami berhak untuk memperbarui Kebijakan Privasi ini dari waktu ke waktu untuk mencerminkan perubahan dalam layanan kami atau peraturan yang berlaku. Perubahan tersebut akan diberitahukan kepada Anda melalui pembaruan pada halaman ini.<br><br><strong>**Kontak Kami**</strong><br><br>Jika Anda memiliki pertanyaan, masukan, atau kekhawatiran terkait Kebijakan Privasi ini atau penggunaan ChatBot [ Fabot Chat ], silakan hubungi kami melalui:<br><br><u>[faridfathonin@gmail.com]</u><strong><br><br><br>Terima kasih telah menggunakan ChatBot [ Fabot Chat ]. Kami berkomitmen untuk melindungi privasi dan memberikan pengalaman percakapan yang bermanfaat bagi Anda.</strong><br><br>Tanggal dipublikasikan&nbsp;:&nbsp;[28 July 2023]<br>Tanggal terakhir diperbarui&nbsp;: [28 July 2023]',
+ about: `<strong>Footer About Chatbot</strong><br><br>Selamat datang di [Fabot]! fabot adalah sebuah project sederhana chatbot yang dikembangkan oleh seorang pelajar SMK yang sangat tertarik dengan bahasa pemrograman. Tujuan utama chatbot ini adalah tempat belajar mengembangkan sebuah chatbot yang bisa berinteksi dengan pengguna menggunakan bahasa pemrograman dan logika program yang saya pahami.<br><br><strong>Tentang Pengembang</strong><br><br>chatbot ini bernama Fabot dan dibuat dan dikembangkan oleh Farid Fathoni N, seorang pelajar SMK yang sangat ambisius dalam belajar bahasa pemrograman. Fabot pertama kali di kembangkan pada 1 Juni 2023 dan terus di kembangkan hingga saat ini.<br><br><strong>Tujuan utama chatbot</strong><br><br>- <strong>Jawaban Pertanyaan Sederhana</strong>: Fabot bisa menjawab pesan yang dikirim kan pengguna dan juga memberikan pertanyaan mengenai topik yang sedang di bicarakan.<br><br>- <strong>Hal spesial fabot</strong>: fabot bisa memberitahu mu fakta menarik tentang angka dan dia juga bisa memberikan mu playlist lagu untuk menemani mu jika kamu menginginkan nya.<br><br>- <strong>Teman chat</strong>: Fabot di kembangkan sebagai teman chat untuk seru seruan di saat pengguna muak dengan chat manusia.<br><br> <strong>Masih dalam tahap pengembangan</strong><br><br>Fabot masih dalam tahap pengembangan dan akan terus diperbarui seiring berjalannya waktu. Setiap pertanyaan dan umpan balik kamu membatu saya agar terus bersemangat mengembangkan Fabot menjadi lebih baik.<br><br><strong>Kontak Pengembang</strong><br><br>Jika kamu ingin memberikan ide, memberikan masukan, atau sekadar menyapa, saya dapat dihubungi di <a onclick="window.open('mailto:faridfathonin@gmail.com')">faridfathonin@gmail.com</a>.<br><br>Terima kasih telah mencoba menggunakan Fabot. Semoga kita dapat belajar bersama!`,
+ policy: `<strong>Kebijakan Privasi ChatBot [ Fabot Chat ]</strong></strong><br><br>Kami di [ Fabot Chat ] sangat memahami pentingnya privasi informasi pribadi Anda. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi data yang kami peroleh dari Anda saat Anda berinteraksi dengan ChatBot kami.<br><br><br><strong>Informasi yang Kami Kumpulkan</strong><br><br>Ketika Anda menggunakan [ Fabot Chat ], kami dapat mengumpulkan beberapa informasi pribadi yang Anda berikan secara sukarela selama sesi percakapan. Informasi ini dapat mencakup nama, alamat email, atau informasi kontak lainnya yang Anda berikan untuk membantu kami memahami dan merespons pertanyaan atau permintaan Anda dengan lebih baik.<br><br><br><strong>Penggunaan Informasi</strong><br><br>Informasi pribadi yang kami kumpulkan dari Anda digunakan secara eksklusif untuk memberikan layanan yang sesuai dan memberikan jawaban yang relevan dengan pertanyaan yang Anda ajukan kepada ChatBot kami. Kami tidak akan menggunakan informasi Anda untuk tujuan pemasaran atau penjualan ke pihak ketiga tanpa persetujuan Anda.<br><br><br><strong>Perlindungan Informasi</strong><br><br>Kami mengambil langkah-langkah untuk melindungi informasi pribadi Anda dari akses atau penggunaan yang tidak sah. Kami hanya menyimpan data pribadi yang diperlukan selama diperlukan untuk memberikan layanan percakapan dengan ChatBot kami.<br><br><br><strong>Penggunaan Teknologi Pelacakan</strong><br><br>[ Fabot Chat ] hanyalah ChatBot yang di buat hanya untuk bertujuan belajar membuat bot yang bisamembalas apa yang user katakan. jadi ChatBot ini hanyalah ChatBot biasa yang tidak sama seperti ChatBot yang menggunakan AI.<br><br><br><strong>Kebijakan Privasi Pihak Ketiga</strong><br><br>Harap dicatat bahwa Kebijakan Privasi ini hanya berlaku untuk ChatBot [ Fabot Chat ]. Kami tidak bertanggung jawab atas praktik privasi situs web pihak ketiga atau aplikasi yang mungkin Anda gunakan untuk mengakses ChatBot kami. Pastikan untuk membaca kebijakan privasi pihak ketiga tersebut sebelum memberikan informasi pribadi Anda kepada mereka.<br><br><br><strong>Perubahan pada Kebijakan Privasi</strong><br><br>Kami berhak untuk memperbarui Kebijakan Privasi ini dari waktu ke waktu untuk mencerminkan perubahan dalam layanan kami atau peraturan yang berlaku. Perubahan tersebut akan diberitahukan kepada Anda melalui pembaruan pada halaman ini.<br><br><br><strong>Kontak Kami</strong><br>Jika Anda memiliki pertanyaan, masukan, atau kekhawatiran terkait Kebijakan Privasi ini atau penggunaan ChatBot [ Fabot Chat ], silakan hubungi kami melalui:<br><br><a onclick="window.open('mailto:faridfathonin@gmail.com')">faridfathonin@gmail.com</a><strong><br><br><br>Terima kasih telah menggunakan ChatBot [ Fabot Chat ]. Kami berkomitmen untuk melindungi privasi dan memberikan pengalaman percakapan yang bermanfaat bagi Anda.</strong><br><br>Tanggal dipublikasikan&nbsp;:&nbsp;[28 July 2023]<br>Tanggal terakhir diperbarui&nbsp;: [28 July 2023]`,
  service: '<strong>1. Pengertian:</strong> Terms of Service atau Syarat dan Ketentuan adalah dokumen hukum yang berisi perjanjian antara pengguna (user) dan pemilik website. Dokumen ini menetapkan persetujuan dan aturan yang mengatur bagaimana pengguna dapat menggunakan layanan yang diberikan oleh website tersebut.<br><br><strong>2. Penggunaan Layanan:</strong> Bagian ini menjelaskan tentang jenis layanan yang disediakan oleh website dan cara pengguna dapat mengakses serta menggunakan layanan tersebut. Juga mungkin mencakup persyaratan usia minimal atau persyaratan kelayakan lainnya untuk menjadi pengguna.<br><br><strong>3. Privasi dan Data Pengguna:</strong> Ini adalah bagian yang menjelaskan kebijakan privasi website, termasuk bagaimana data pengguna dikumpulkan, digunakan, disimpan, dan dilindungi. Biasanya mencakup informasi tentang cookies dan kebijakan pengumpulan data pribadi.<br><br><strong>4. Kekayaan Intelektual:</strong> Bagian ini mengatur hak kekayaan intelektual pemilik website, termasuk hak cipta, merek dagang, hak paten, dan hak kekayaan intelektual lainnya. Hal ini menetapkan batasan-batasan terkait penggunaan konten yang dimiliki oleh website.<br><br><strong>5. Kewajiban Pengguna:</strong> Menjelaskan tindakan atau perilaku yang dilarang atau diharamkan bagi pengguna saat menggunakan layanan. Misalnya, tindakan seperti pelanggaran hukum, penyebaran konten ilegal, atau penyalahgunaan layanan website.<br><br><strong>6. Tanggung Jawab Pihak Terkait:</strong> Bagian ini mengatur batasan tanggung jawab pihak-pihak yang terlibat dalam penyediaan layanan, termasuk pemilik website, mitra, dan penyedia layanan pihak ketiga.<br><br><strong>7. Pembatalan atau Pengakhiran Akun:</strong> Menjelaskan prosedur atau kriteria di mana pemilik website dapat membatalkan atau mengakhiri akun pengguna jika terjadi pelanggaran terhadap TOS atau alasan lain yang ditetapkan.<br><br><strong>8. Perubahan pada TOS:</strong> Menjelaskan bahwa pemilik website dapat mengubah TOS dari waktu ke waktu dan bagaimana perubahan tersebut akan diinformasikan kepada pengguna.<br><br><strong>9. Hukum yang Berlaku:</strong> Menentukan yurisdiksi dan hukum yang berlaku untuk penyelesaian sengketa atau permasalahan yang timbul dari penggunaan layanan website.<br><br><strong>10. Persetujuan Pengguna: </strong>Bagian terakhir biasanya meminta pengguna untuk menyetujui dan mengikatkan diri pada TOS sebelum mereka dapat menggunakan layanan yang disediakan oleh website.<br><br><br><br><strong>Penting bagi pengguna untuk membaca dan memahami TOS dengan seksama sebelum menggunakan layanan dari sebuah website.</strong> Dengan menerima TOS, pengguna menyetujui persyaratan dan aturan yang telah ditetapkan oleh pemilik website, dan ini dapat mempengaruhi hak dan kewajiban mereka selama menggunakan layanan tersebut.',
- guides: '<strong>Kontak Kami - Tim Dukungan chatBot [ Fabot Chat ]</strong><br><br>Kami senang mendengar dari Anda! Jika Anda memiliki pertanyaan, masalah, atau umpan balik mengenai pengalaman Anda menggunakan chatBot [ Fabot Chat ], tim dukungan kami siap membantu. Berikut adalah beberapa opsi untuk menghubungi kami:<br><br><br><br>1. Formulir Kontak: Anda dapat mengisi formulir kontak yang telah kami sediakan. Jangan ragu untuk menjelaskan pertanyaan atau masalah Anda secara detail agar tim kami dapat memberikan bantuan yang tepat.<br><br><br>2. Email: Kirimkan email Anda ke support@chatBot [ Fabot Chat ].com dan tim dukungan kami akan merespons dalam waktu secepatnya.<br><br><br>3. Live Chat: Jika Anda mengalami masalah mendesak atau membutuhkan bantuan langsung, gunakan fitur live chat yang tersedia. Tim dukungan kami akan berusaha merespons dengan segera.<br><br><br>4. Media Sosial: Anda juga dapat menghubungi kami melalui media sosial kami. Kami aktif di platform-platform seperti Twitter, Facebook, dan Instagram. Cari akun kami dengan username @chatBot [ Fabot Chat ] untuk mendapatkan dukungan.<br><br><br><br>Kami mengutamakan kepuasan pengguna dan selalu siap membantu Anda dengan setiap pertanyaan dan masalah yang Anda hadapi. Tim dukungan kami terdiri dari tenaga ahli yang berpengalaman dalam mengatasi berbagai situasi. <u>Jangan ragu untuk menghubungi kami kapan saja, dan kami akan dengan senang hati memberikan bantuan terbaik kami.</u> <strong>Terima kasih telah memilih chatBot [ Fabot Chat ] sebagai Chatting dengan bot !</strong>',
+ contact: '<strong>Kontak Kami - Tim Dukungan chatBot [ Fabot Chat ]</strong><br><br>Kami senang mendengar dari Anda! Jika Anda memiliki pertanyaan, masalah, atau umpan balik mengenai pengalaman Anda menggunakan chatBot [ Fabot Chat ], tim dukungan kami siap membantu. Berikut adalah beberapa opsi untuk menghubungi kami:<br><br><br><br>1. Formulir Kontak: Anda dapat mengisi formulir kontak yang telah kami sediakan. Jangan ragu untuk menjelaskan pertanyaan atau masalah Anda secara detail agar tim kami dapat memberikan bantuan yang tepat.<br><br><br>2. Email: Kirimkan email Anda ke support@chatBot [ Fabot Chat ].com dan tim dukungan kami akan merespons dalam waktu secepatnya.<br><br><br>3. Live Chat: Jika Anda mengalami masalah mendesak atau membutuhkan bantuan langsung, gunakan fitur live chat yang tersedia. Tim dukungan kami akan berusaha merespons dengan segera.<br><br><br>4. Media Sosial: Anda juga dapat menghubungi kami melalui media sosial kami. Kami aktif di platform-platform seperti Twitter, Facebook, dan Instagram. Cari akun kami dengan username @chatBot [ Fabot Chat ] untuk mendapatkan dukungan.<br><br><br><br>Kami mengutamakan kepuasan pengguna dan selalu siap membantu Anda dengan setiap pertanyaan dan masalah yang Anda hadapi. Tim dukungan kami terdiri dari tenaga ahli yang berpengalaman dalam mengatasi berbagai situasi. <u>Jangan ragu untuk menghubungi kami kapan saja, dan kami akan dengan senang hati memberikan bantuan terbaik kami.</u> <strong>Terima kasih telah memilih chatBot [ Fabot Chat ] sebagai Chatting dengan bot !</strong>',
  guide: "**Guide - Panduan Pengguna Lengkap**<br><br>Selamat datang di Panduan Pengguna [Nama Aplikasi atau Platform]! Panduan ini dirancang untuk memberikan pemahaman mendalam tentang fitur-fitur kami dan memandu Anda melalui setiap langkah dengan rinci. Silakan ikuti petunjuk ini untuk memaksimalkan pengalaman Anda dengan [Nama Aplikasi atau Platform].<br><br><br><br>### **Daftar Isi:**<br><br>1. **Pengenalan**- **Tentang [Nama Aplikasi atau Platform]:** Sebuah visi menyeluruh tentang tujuan dan nilai inti yang kami pegang.<br>- **Tujuan Panduan Ini:** Mendefinisikan sasaran dan manfaat yang akan Anda dapatkan.<br><br>2. **Registrasi dan Masuk**<br><br>- **Membuat Akun Baru:** Langkah-demi-langkah untuk membuat akun baru dengan memasukkan informasi yang dibutuhkan.<br><br>- **Proses Masuk:** Petunjuk mendetail untuk mengakses akun Anda dengan aman.<br><br>3. **Navigasi Antarmuka**<br><br>- **Penjelasan Menu Utama:** Pemahaman mendalam tentang setiap elemen pada menu utama.<br><br>- **Tautan Penting:** Menyajikan tautan yang krusial untuk memudahkan navigasi.<br><br>4. **Profil Pengguna**<br><br>- **Mengelola Informasi Profil:** Cara memperbarui dan memodifikasi informasi pribadi Anda.<br><br>- **Pengaturan Keamanan Akun:** Panduan tentang bagaimana menjaga keamanan akun Anda.<br><br>5. **Memulai**<br><br>- **Langkah Awal untuk Pengguna Baru:** Serangkaian langkah awal untuk memandu pengguna baru dalam menggunakan platform.<br><br>- **Menyesuaikan Pengaturan:** Bagaimana menyesuaikan pengaturan sesuai preferensi Anda.<br><br>6. **Penggunaan Fitur Utama**<br><br>- **[Nama Fitur 1]: Cara Menggunakannya:** Tutorial rinci tentang penggunaan fitur utama pertama.<br><br>- **[Nama Fitur 2]: Cara Mengoptimalkannya:** Tips dan trik untuk memaksimalkan manfaat dari fitur kedua.<br><br>7. **Pertanyaan Umum (FAQ)**<br><br>- **Jawaban untuk Pertanyaan Umum Pengguna:** Sekumpulan jawaban lengkap untuk pertanyaan umum pengguna.<br><br>- **Solusi Masalah Umum:** Cara mengatasi kendala umum dengan solusi yang jelas.<br><br>8. **Dukungan Pelanggan**<br><br>- **Cara Menghubungi Dukungan Pelanggan:** Informasi kontak lengkap untuk mendapatkan bantuan.<br><br>- **Menyediakan Umpan Balik:** Cara memberikan umpan balik untuk membantu kami memperbaiki pengalaman Anda.<br><br><br><br>### **Tips dan Trik:**<br><br>- **Manfaatkan [Fitur Tertentu]:** Bagaimana menggunakan fitur tertentu untuk keuntungan maksimal.<br><br>- **Telusuri [Tempat Tertentu]:** Cara menemukan informasi penting di [Tempat Tertentu].<br><br>- **Eksplorasi [Fitur Lanjutan]:** Tips untuk menjelajahi fitur lanjutan demi pengalaman yang lebih kaya.<br><br><br><br>### **Kontak Dukungan:**<br><br>Jangan ragu untuk menghubungi tim dukungan kami di [Nomor Telepon] atau melalui [Alamat Email] jika Anda membutuhkan bantuan lebih lanjut.<br><br>Terima kasih telah memilih [Nama Aplikasi atau Platform]! Kami berharap panduan ini memberikan pandangan komprehensif dan mempermudah penggunaan platform kami.<br><br>Salam,<br><br>Tim Dukungan [Nama Aplikasi atau Platform]"
 };
  
@@ -958,15 +934,14 @@ const fadeInBox = (index) => {
      second: `${itemElem.removeElement}`
     });
     
-    lastElem.scrollIntoView({behavior: 'smooth'});
+    lastElem.scrollIntoView({ behavior: 'smooth' });
     
    setTimeout(() => {
     fadeInBox(index + 1);
     cloneExploreBox.style.opacity = "1";
-   }, 500);
+   }, 300);
   } else {
     barierElement.style.visibility = 'hidden';
-    
     wrapperExploreBox.removeChild(lastElem);
   }
 }
@@ -981,50 +956,55 @@ function executeRemoveItem() {
  const setRemoveItem = arrRemoveItem.length - 1;
  const toStart = arrRemoveItem[setRemoveItem].first;
  const toRemove = arrRemoveItem[setRemoveItem].second;
+ const defaultLength = wrapperExploreBox.children.length;
  
- if (wrapperExploreBox.children.length <= toRemove) {
-  for (let i = 3; i <= toRemove; i++) {
-   wrapperExploreBox.children[toStart].remove();
+ if (defaultLength <= toRemove) {
+  if (defaultLength !== 1) {
+   for (let i = 3; i <= toRemove; i++) {
+    wrapperExploreBox.children[toStart].remove();
+   }
   }
  }
 }
 
 
-function handleFooter(page) {
- containerHome.classList.toggle('active');
- containerExplore.classList.toggle('containerExploreActive');
- document.querySelector('.box-text-explore').style.display = "block";
- window.scrollTo(0, document.body.scrollHeight);
-
- switch(page) {
-  case 'help':
-   explore_text.innerHTML = objTextExplore.help;
-   break;
-  case 'about':
-   explore_text.innerHTML = objTextExplore.about;
-   break;
-  case '':
-   alert('help')
-   explore_text.innerHTML = objTextExplore.about;
-   break;
-  case 'service':
-   explore_text.innerHTML = objTextExplore.service;
-   break;
-  case 'guide':
-   explore_text.innerHTML = objTextExplore.guide;
-   break;
-  case 'description':
-   fadeInBox(0);
-   document.querySelector('.box-text-explore').style.display = "none";
-   wrapperExploreBox.style.display = "block";
-   break;
-  case 'policy':
-   explore_text.innerHTML = objTextExplore.policy;
-   break;
-  default:
-  console.log('keluar')
+function handleFooter(params) {
+ const { open, page, removes } = params;
+ loadingAnimation({
+  active: containerExplore,
+  remove: page,
+  conditional: defaultElem,
+  isRemove: defaultElem,
+  action: 'active'
+ });
+ 
+ if (open === 'Description') {
+  fadeInBox(0);
   executeRemoveItem();
-  wrapperExploreBox.style.display = "none";
+  wrapperExploreBox.classList.toggle('active');
+  document.querySelector('.box-text-explore').classList.remove('active');
+ } else {
+  document.querySelector('.box-text-explore').classList.add('active');
+  wrapperExploreBox.classList.remove('active');
+  switch(open) {
+   case 'Help':
+    explore_text.innerHTML = objTextExplore.help;
+    break;
+   case 'About':
+    explore_text.innerHTML = objTextExplore.about;
+    break;
+   case 'Service':
+    explore_text.innerHTML = objTextExplore.service;
+    break;
+   case 'Contact':
+    explore_text.innerHTML = objTextExplore.contact;
+    break;
+   case 'Policy':
+    explore_text.innerHTML = objTextExplore.policy;
+    break;
+   default:
+   document.querySelector('.box-text-explore').classList.add('active');
+  }
  }
 }
 
@@ -1076,36 +1056,37 @@ let genderIs;
 let genderSay;
 
 let genderValidation = () => {
- if (localStorage.getItem('full_login') === "true") {
- let img = [
-  document.querySelector('.img-box-user .img-user'),
-  document.querySelector('.content-user-page .profileSection .profileImgBox .imgProfile')
- ];
- if (genderCwo.some((kata) => gender.includes(kata))) {
-  genderIs = "cowo";
-  genderSay = 'ganteng';
-  img[0].src = 'profileicon.webp';
-  img[1].src = 'profileicon.webp';
- } else if (genderCwe.some((kata) => gender.includes(kata))) {
-  genderIs = "cewe";
-  genderSay = 'cantik';
-  img[0].src = 'https://iili.io/JHPki0X.webp';
-  img[1].src = 'https://iili.io/JHPVwKv.md.webp';
- } else {
-  genderIs = "cowo/cewe";
-  img[0].src = 'at.webp';
-  img[1].src = 'at.webp';
+ if (isFullLogin) {
+  let img = [
+   document.querySelector('.img-box-user .img-user'),
+   document.querySelector('.content-user-page .profileSection .profileImgBox .imgProfile')
+  ];
+  if (genderCwo.some((kata) => gender.includes(kata))) {
+   genderIs = "cowo";
+   genderSay = 'ganteng';
+   img[0].src = 'profileicon.webp';
+   img[1].src = 'profileicon.webp';
+  } else if (genderCwe.some((kata) => gender.includes(kata))) {
+   genderIs = "cewe";
+   genderSay = 'cantik';
+   img[0].src = 'https://iili.io/JHPki0X.webp';
+   img[1].src = 'https://iili.io/JHPVwKv.md.webp';
+  } else {
+   genderIs = "cowo/cewe";
+   img[0].src = 'at.webp';
+   img[1].src = 'at.webp';
+   genderSay = 'ganteng/cantik';
+  }
  }
- } else { genderSay = 'cantik/ganteng'; }
 }
 
-if (localStorage.getItem('sudahLogin') === "true") {
-  if (localStorage.getItem('full_login') === "true") {
+if (isLogin) {
+  if (isFullLogin) {
    let namaBulan = `${monthNames[monthIndex]}`;
    
-   let bulanUltah = ultah.split(' ')[1];
+   let bulanUltah = birth.split(' ')[1];
    console.log(namaBulan, "nama bulan sekarang", bulanUltah, "bulan ultah");
-   var kalimatUltah = ultah.slice((ultah).length - 4);
+   var kalimatUltah = birth.slice((birth).length - 4);
    kalimat = kalimatUltah;
    angka = kalimat.match(/\d+/);
    if (angka !== null) {
@@ -1135,7 +1116,7 @@ let loginButton = false;
 
 function checkInputLogin() {
  inputLogin.forEach(function (inputLogin) {
-  inputLogin.addEventListener("input", function () {
+  inputLogin.addEventLtener("input", function () {
    if (inputLogin.value.length >= 4) {
     loginButton = true;
    } else {
@@ -1165,173 +1146,9 @@ function togglePassword() {
   }
 }
 
-const loginValidation = () => {
- setTimeout(() => {
-  containerLogin.style.left = "0";
- }, 0);
- 
- loginBtn.forEach(function(loginBtn) {
-  setTimeout(() => {
-   loginPage[0].style.display = "block";
-   setTimeout(() => { loginPage[0].style.opacity = "1" }, 500);
-  }, 300);
-  
-  loginBtn.addEventListener("click",
-   function () {
-    boxLogin.style.opacity = "0";
-    setTimeout(() => {
-     boxLogin.style.opacity = "1";
-    }, 1000);
-
-    if (localStorage.getItem('sudahLogin') === "true") {
-     containerLogin.style.transition = ".0s";
-     setTimeout(() => {
-      titleLoginText.innerHTML = "Kamu Sudah Login";
-      infoLoginText.innerHTML = "terimakasih telah menggunakan website chatbot ini. nantikan update menarik selanjutnya untuk web chatbot ini !";
-      deksripsiLoginText.innerHTML = "This website is made only for learning in development a website, FaBot-Chat <u>17 July Version.</u>";
-
-      loginPage[0].style.display = "block";
-      setTimeout(() => {
-       loginBtn1.addEventListener('click', closeLogin);
-       loginPage[0].style.opacity = "1";
-      }, 500);
-     }, 1000);
-
-    } else {
-     //kondisi user belum login
-     loginPageInit++;
-     loginInitAlert++;
-     containerLogin.style.transition = ".3s";
-     
-     let userName = input_name.value;
-     let userEmail = input_email.value;
-     let userPass = input_password.value;
-     let inputUser = [userName, userEmail, userPass];
-     
-     if (loginPageInit === 0) {
-      boxLogin.style.opacity = "0";
-      loginPage[1].style.opacity = "0"
-      loginPage[1].style.display ="none";
-     } else if (loginPageInit === 1) {
-      if (loginPageInit === 1 && inputUser.every(value => value.length >= 5)) {
-       loginInitAlert = 0;
-       loginPageInit = 1;
-       inputUser.length = 0;
-       
-       
-       if (['@gmail.com', '@icloud.com', '@yahoo.com'].some((kata) => userEmail.includes(kata))) {
-        console.log("input email benar");
-       } else {
-        loginPage[1].style.opacity = "1";
-        boxLogin.style.opacity = "1";
-        loginPage[1].style.display = "block";
-        
-        loginPageInit = 0;
-        myAlert.style.zIndex = "100";
-        blurLayer.style.zIndex = "100";
-        myAlert.style.display = "block";
-        blurLayer.style.display = "block"
-        infoAlert.innerHTML = "Info !";
-        myAlertText.innerHTML = "tolong masukkan email dengan benar. dengan format contoh namakamu@gmail.com agar kamu bisa melanjutkan ke halaman login berikutnya&nbsp;&nbsp;>//<";
-        btnAlert.addEventListener('click', closeAlert);
-       }
-       
-      } else if (inputUser.every(value => value.length <= 4)) {
-       loginPageInit = 0;
-       console.log(loginInitAlert)
-       if (loginInitAlert >= 2) {
-        loginPage[1].style.opacity = "1";
-        boxLogin.style.opacity = "1";
-        loginPage[1].style.display = "block";
-        
-        myAlert.style.zIndex = "100";
-        blurLayer.style.zIndex = "100";
-        myAlert.style.display = "block";
-        blurLayer.style.display = "block"
-        infoAlert.innerHTML = "Info !";
-        myAlertText.innerHTML = "tolong isi semua input atau jika sudah ketikan kata minimal lebih dari 5 huruf di setiap input. agar kamu bisa <br>melanjutkan ke halaman login berikutnya&nbsp;&nbsp;>//<";
-        btnAlert.addEventListener('click', closeAlert);
-       } else {/..../}
-      }
-      
-      setTimeout(() => {
-       loginPage[0].style.display = "none";
-       loginPage[1].style.display = "block";
-       setTimeout(() => {
-        loginPage[1].style.opacity = "1";
-       }, 1000);
-      }, 1000);
-      
-     } else if (loginPageInit === 2) {
-      loginPageInit++;
-      sudahLogin = true;
-      loginInitAlert = 0;
-      localStorage.setItem('sudahLogin', 'true');
-      var waktuLoginUser = new Date();
-      var waktuLoginString = waktuLoginUser.toISOString();
-      localStorage.setItem('waktuLogin', waktuLoginString);
-      
-      setTimeout(() => {
-       titleLoginText.innerHTML = "Login Berhasil";
-       infoLoginText.innerHTML = "<strong>Kamu perlu membaca hal dibawah ini :</strong><br><br>1. saat kamu login itu hanyalah sebuah simulasi fake login.<br><br>2. ini hanyalah chat bot biasa yang di buat hanya untuk belajar.<br><br>3. website ini dibuat hanyalah untuk belajar, jadi ada beberapa fitur yang belum selsai.<br><br>4. dan semua yang ada di web ini hanyalah `simulasi` dan tidak lah nyata seperti aslinya.<br><br><br>Terimakasih telah membaca text diatas. setelah ini kamu bisa menggunakan website chat bot ini, have fun 🥳";
-       deksripsiLoginText.innerHTML = "Terimakasih buat kamu yang udah login<br>Fabot Chat Made With ᥫ᭡";
-       
-       loginPage[0].style.display = "block";
-       loginPage[1].style.display = "none";
-       setTimeout(() => {
-        sudahLoginAlert = true;
-        loginBtn1.addEventListener('click', closeLogin);
-        loginPage[0].style.opacity = "1";
-       }, 500);
-      }, 1000);
-     }
-     window.scrollTo({ top: 0, behavior: 'smooth' });
-     if (kataKasar.some((kata) => inputUser.includes(kata))) {
-      loginPageInit = 0;
-      loginInitAlert = 0;
-      boxLogin.style.opacity = "1";
-     }
-    }
-   });
- });
- window.scrollTo({ top: 0, behavior: 'smooth'});
-}
-
-function loginUndo() {
-  loginPage.forEach(function (loginPage) {
-   loginPage.style.display = "none";
-   loginPage.style.opacity = "0";
-  });
- 
-  if (loginPageInit === 1) {
-   loginPageInit = 0;
-   loginInitAlert = 0
-   loginPage[0].style.display = "block";
-   setTimeout(() => {
-    loginPage[0].style.opacity = "1";
-   }, 500);
-  } else if (loginPageInit === 2) {
-   loginPageInit = 1;
-   loginPage[1].style.display = "block";
-   setTimeout(() => {
-    loginPage[1].style.opacity = "1";
-   }, 500);
-  } else {
-   loginInitAlert = 0;
-   setTimeout(() => {
-    loginPage[0].style.display = "block";
-    setTimeout(() => {
-     loginPage[0].style.opacity = "1";
-    }, 500);
-    titleLoginText.innerHTML = "Wellcome To Fabot";
-    infoLoginText.innerHTML = "<br><strong>Tujuan website ini di buat adalah sebagai berikut :</strong><br><br><br>1. tempat untuk belajar mengembangkan simulasi chat antara user dan bot menggunakan bahasa pemrograman dasar dari javascript yang saya pahami.<br><br>2. untuk belajar mengembangkan / memahami logika dan algoritma dalam sebuah program yang saya buat.<br><br>3. dan untuk belajar membuat fitur fitur umum yang ada dalam sebuah website.<br><br>";
-   }, 1000);
-  }
-}
-
 function closeLogin() {
  footerHomeText.style.opacity = "1";
- containerLogin.style.left = "-100%";
+ containerLogin.style.display = "none";
  loginPage.forEach(function (loginPage) {
   loginPage.style.display = "none";
   loginPage.style.opacity = "0";
@@ -1352,54 +1169,40 @@ function closeLogin() {
  } else {/.../}
 }
 
-function openProfile() {
- container.classList.toggle('active');
- containerUserPage.classList.toggle('active');
-
- if (containerUserPage.classList.contains('active')) {
-  blurLayer.style.display = "none";
-  containerSidebar.classList.remove('active');
-  menuSidebar.classList.toggle('active');
- }
- setTimeout(() => {
-  menuSidebar.classList.toggle("active");
- }, 500);
- setTimeout(validationCTA, 0);
- window.scrollTo({ top: 0, behavior: 'smooth' });
-}
 const signBtn = document.querySelector('.signin-text');
+const inputPersonality = document.getElementById('inputPersonality');
 
 function userValidation() {
   genderValidation();
- if (localStorage.getItem('sudahLogin') === "true") {
+ if (isLogin) {
   signBtn.innerHTML = "Logout";
   // profile user info validation //
   
+  namaUsers.innerHTML = fullName;
   nameUser[1].innerHTML = namaDepan;
-  namaUser.innerHTML = namaDepan;
-  emailUser.innerHTML = localStorage.getItem('userEmail');
+  emailUsers.innerHTML = emailUser;
   
-  if (localStorage.getItem('full_login') === "true") {
-   personalDataInfo[0].innerHTML = localStorage.getItem('nama_lengkap');
-   personalDataInfo[1].innerHTML = localStorage.getItem('birthday');
-   personalDataInfo[2].innerHTML = localStorage.getItem('myDreams');
-   personalDataInfo[3].innerHTML = localStorage.getItem('kelas');
-   personalDataInfo[4].innerHTML = localStorage.getItem('gender');
-   personalDataInfo[5].innerHTML = localStorage.getItem('favSong');
+  if (isFullLogin) {
+   personalDataInfo[0].innerHTML = fullName;
+   personalDataInfo[1].innerHTML = birth;
+   personalDataInfo[2].innerHTML = dreams
+   personalDataInfo[3].innerHTML = status
+   personalDataInfo[4].innerHTML = gender
+   personalDataInfo[5].innerHTML = songs;
  
-   hobbyUser[5].innerHTML = localStorage.getItem('hobby1');
-   hobbyUser[6].innerHTML = localStorage.getItem('hobby2');
-   hobbyUser[7].innerHTML = localStorage.getItem('hobby3');
+   hobbyUser[5].innerHTML = hobbyFir;
+   hobbyUser[6].innerHTML = hobbySec;
+   hobbyUser[7].innerHTML = hobbyThi;
  
-   bioUser.innerHTML = localStorage.getItem('userBio');
-   titleWidget[1].innerHTML = `${localStorage.getItem('planet')}`;
-   titleWidget[2].innerHTML = `Heart&nbsp;${umurNow}`;
+   bioUsers.innerHTML = bioUser;
+   /*titleWidget[1].innerHTML = `${localStorage.getItem('planet')}`;
+   titleWidget[2].innerHTML = `Heart&nbsp;${umurNow}`;*/
    // profile user info validation //
  
    // sidebar user info profile //
-   hobbyUser[1].innerHTML = localStorage.getItem('hobby1');
-   hobbyUser[2].innerHTML = localStorage.getItem('hobby2');
-   hobbyUser[3].innerHTML = localStorage.getItem('hobby3');
+   hobbyUser[1].innerHTML = hobbyFir;
+   hobbyUser[2].innerHTML = hobbySec;
+   hobbyUser[3].innerHTML = hobbyThi;
    // sidebar user info profile end //
   } else { console.log('perlu validasi') }
   setTimeout(() => {

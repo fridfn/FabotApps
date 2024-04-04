@@ -1,3 +1,4 @@
+const see = console.log.bind(console);
 let jawaban = document.querySelector('.input-jawaban');
 const sendBtn = document.querySelector('.btn-bot');
 const notif = document.getElementById('audio-player');
@@ -40,8 +41,8 @@ const clonedTimeAsk = clonedElementJawaban.querySelector('#timeAsk');
 const barier = document.querySelector('.barier');
 const textMengetik = document.querySelector('.botStatus');
 
-const containerLinear = document.querySelector('.container-linear');
-const containerLove = document.querySelector('.container-love');
+const containerLinear = document.querySelectorAll('.container-linear');
+const containerLove = document.querySelectorAll('.container-love');
 
 const clonedTextJawaban = clonedElementJawaban.querySelector('#textJawaban');
 const clonedTextPertanyaan = clonedElementPertanyaan.querySelector('#textPertanyaan');
@@ -72,36 +73,14 @@ function checkInput() {
  let jawaban = document.querySelector('.input-jawaban');
  let sendBtn = document.querySelector('.btn-bot');
 
- if (jawaban.value.length >= 2) {
-  sendBtn.disabled = false;
- } else {
-  sendBtn.disabled = true;
- }
+ (jawaban.value.length >= 1) ? sendBtn.disabled = false : sendBtn.disabled = true;
 }
 
-let img = document.createElement('img');
-img.src = 'boticon.webp';
-document.getElementById('imgBox').appendChild(img);
+let img = document.querySelector('.ico-bot');
 
 function reactBot() {
- if (localStorage.getItem("theme") === "basic") {
-  let img = document.createElement('img');
   img.src = 'xd.webp';
-  document.getElementById('imgBox').appendChild(img);
-  setTimeout(() => {
-   let img = document.createElement('img');
-   img.src = 'boticon.webp';
-   document.getElementById('imgBox').appendChild(img);
-  }, 1200);
- } else {
-  img.src = 'xdBlue.webp';
-  document.getElementById('imgBox').appendChild(img);
-  setTimeout(() => {
-   let img = document.createElement('img');
-   img.src = 'fablue.webp';
-   document.getElementById('imgBox').appendChild(img);
-  }, 1200);
- }
+  setTimeout(() => img.src = 'boticon.webp', 1200);
 }
 
 let targetElement;
@@ -109,12 +88,11 @@ const mediaQuery = window.matchMedia('(max-width: 768px)');
 
 const handleMediaChange = (mediaQuery) => {
  if (mediaQuery.matches) {
-  console.log('lebar layar <= 768px');
   document.addEventListener('contextmenu', function(e) {
    targetElement = e.target;
    if (targetElement.classList.contains('jawaban')) {
    } else {
-    //e.preventDefault();
+    e.preventDefault();
    }
   });
  } else {
@@ -144,8 +122,8 @@ const botSay = (data) => {
  return [
   `Hi. namaku adalah Fabot, nama kamu ${fullName} ya?`, /*0*/
   `halo ${namaDepan} aku adalah chat bot sederhana yang dibuat dengan bahasa pemrograman JavaScript dasar`, /*1*/
-  `kamu kan lahirnya tanggal ${ultah}, berarti umur kamu sekarang brp?`,/*2*/
-  `owh sekarang umur kamu udh ${umurNow} tahun, berarti kamu udh kelas ${kelas} ya`, /*3*/
+  `kamu kan lahirnya tanggal ${birth}, berarti umur kamu sekarang brp?`,/*2*/
+  `owh sekarang umur kamu udh ${umurNow} tahun, berarti kamu udh kelas ${status} ya`, /*3*/
   `btw kamu`, /*4*/
   `hmm apa yaa, bingung mau ngomong apa lagi sama kamu`, /*5*/
   `dari pada bingung, gimana klo kita main game aja?`, /*6*/
@@ -192,8 +170,7 @@ const kataGame = ['hadiah', 'dapet', 'makasih', 'tebak', 'abis', 'mau', 'tantang
 const kataPertanyaan = [
  `kasih tau`,`ngasih tau`,`dapet apa`,`buat apa`,`diapain`,`guna`,`jawab`,`gatau`, 'gimana'];
 
-containerLove.style.opacity = "0";
-containerLove.style.display = "none";
+ containerLove.forEach(e => e.style.opacity = "0");
 contentPertanyaan.style.display = "none";
 contentJawaban.style.display = "none";
 firstContentPertanyaan.style.display = "none";
@@ -249,7 +226,6 @@ function botStart(data) {
  textLoad();
  sendBtn.disabled = true;
  jawaban.style.height = '38px';
- const fullLogin = localStorage.getItem('full_login');
  cekKata = jawaban.value.toLowerCase();
  jawabanValue = jawaban.value.toLowerCase();
  kalimat = jawabanValue;
@@ -372,7 +348,7 @@ function botStart(data) {
    barier.style.display = "none";
    textMengetik.innerHTML = "Online";
    
-   if ([`${namaDepan}`, `${namaBelakang}`].some((kata) => jawabanValue.includes(kata))) {
+   if ([`${namaDepan}`, `${midName}`].some((kata) => jawabanValue.includes(kata))) {
     mainChat = 0;
     contentPertanyaan.style.display = "block";
     
@@ -443,7 +419,7 @@ function botStart(data) {
    textMengetik.innerHTML = "Online";
    originalTimeQuestion.innerHTML = timeQuestion.innerHTML;
    
-   if (fullLogin === 'true') {
+   if (isFullLogin) {
     init = 1;
     if (!chatValidation) {
      if (mainChat === 1) {
@@ -539,21 +515,21 @@ function botStart(data) {
    } else {
     init = 1;
     if (!chatRepeated) {
-     textPopup.textContent = 'kamu harus mengisi form terlebih dahulu.';
      
      chatRepeated = true;
      clonedTextPertanyaan.innerHTML = 'Ups! sebelum kita lanjut chatnya kamu harus memperkenalkan diri terlebih dahulu';
      
      setTimeout(() => {
-      handlePopup();
-      clonedTextPertanyaan.innerHTML = 'tolong isi input yang aku berikan ya!';
+      notification({ icon: 'alert', text: 'KAMU HARUS MENGISI FORM TERLEBIH DAHULU ✓' });
+      clonedTextPertanyaan.innerHTML = 'tolong isi input yang aku berikan ya !';
       
       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
      }, 1000);
     } else {
      mainChat = 0;
      chatRepeated = false;
-     setTimeout(() => togglePersonality(), 500);
+     loadingAnimation({ active: 
+     personality_page, remove: pembungkusContainer, conditional: defaultElem, isRemove: defaultElem, action: 'active' });
     }
    }
    (isCloneChat) ? document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true)) : alert("tidak is cloneChat || Bot Diam");
@@ -597,7 +573,7 @@ function botStart(data) {
        clonedTextPertanyaan.innerHTML = `owh gitu ya. umur kamu skrng ${umurNow} 😒`;
       }
      } else if (jawabanValue.includes(`${umurTrue}`) && nilaiAngka.length === 2) {
-      let bulanUltah = ultah.split(' ')[1]
+      let bulanUltah = birth.split(' ')[1];
       if (!mainChatIs) {
        clonedTextPertanyaan.innerHTML = `owh skrng masi ${nilaiAngka} tahun ya, karna skrng blom bulan ${bulanUltah} jadi umur kamu blom ${umurNow} tahun`;
       } else {
@@ -2736,11 +2712,11 @@ function botStart(data) {
  }
  
  if (isRainLinear) {
-  containerLinear.style.opacity = "1";
+  containerLinear.forEach(e => e.style.opacity = "1");
   containerLove.style.opacity = "0";
  } else {
-  containerLinear.style.opacity = "0";
   containerLove.style.opacity = "1";
+  containerLinear.forEach(e => e.style.opacity = "0");
  }
 }/*kurawa end botStart*/
 
@@ -2831,6 +2807,23 @@ function startTimeHome() {
  let time = setTimeout(startTimeHome, 1000);
 }
 
+function sayTime(login) {
+ let timeNow = new Date().getHours();
+  if (login === true) {
+   if (timeNow >= 1 && timeNow < 8) {
+    return `Selamat pagi ${namaDepan} !`;
+   } else if (timeNow >= 8 && timeNow < 16) {
+    return `Selamat siang ! ${namaDepan}`;
+   } else if (timeNow >= 16 && timeNow < 18) {
+    return `Selamat sore ${namaDepan} !`;
+   } else {
+    return `Selamat malam ${namaDepan} !`;
+   }
+  } else {
+   return `Selamat datang di fabot !`;
+  }
+}
+
 function checkTime(i) {
  if (i < 10) {
   i = "0" + i;
@@ -2848,13 +2841,18 @@ window.onload = function() {
 
 /*JAVASCRIPT CODE BACKGROUND ANIMATION*/
 
-function hujanLinear() {
+function hujanLinear(index) {
  let amount = 10;
- let containerLinear = document.querySelector('.container-linear');
  let i = 0;
+ 
+ let containers = {
+  0: document.getElementById('linear0'),
+  1: document.getElementById('linear1')
+ }
+ console.log(containers[0], containers[1])
  while (i < amount) {
   let drop = document.createElement('i');
-
+  
   let size = Math.random() * 4;
   let posX = Math.floor(Math.random() * window.innerWidth);
   let delay = Math.random() * -150;
@@ -2864,7 +2862,9 @@ function hujanLinear() {
   drop.style.left = posX + 'px';
   drop.style.animationDelay = delay+'s';
   drop.style.animationDuration = 25 + duration + 's';
-  containerLinear.appendChild(drop);
+  
+  containers[0].appendChild(drop.cloneNode(true));
+  containers[1].appendChild(drop.cloneNode(true));
   i ++;
  }
 }
@@ -2873,8 +2873,11 @@ hujanLinear();
 
 function rainLove() {
  let amount = 15;
- let containerLove = document.querySelector('.container-love');
  let i = 0;
+ let containers = {
+  0: document.getElementById('lovee0'),
+  1: document.getElementById('lovee1')
+ }
  while (i < amount) {
   let dropLove = document.createElement('i');
   dropLove.classList.add('fas');
@@ -2888,17 +2891,14 @@ function rainLove() {
   dropLove.style.fontSize = 13 + sizeLove + 'px';
   dropLove.style.left = posXLove + '%';
   dropLove.style.animationDelay = delayLove + 's';
-  dropLove.style.animationDuration = 25 + durationLove + 's';
-  containerLove.appendChild(dropLove);
+  dropLove.style.animationDuration = 30 + durationLove + 's';
+  containers[0].appendChild(dropLove.cloneNode(true));
+  containers[1].appendChild(dropLove.cloneNode(true));
   i ++;
  }
 }
 
 rainLove();
-
-let linearClr1 = getComputedStyle(document.querySelector('.container-linear i:nth-child(2n+1)')).getPropertyValue('background');
-
-let linearClr2 = getComputedStyle(document.querySelector('.container-linear i:nth-child(2n+2)')).getPropertyValue('background');
 
 // putih oren oren, putih ijo biru, putih biru ijo, putih coklat coklat
 

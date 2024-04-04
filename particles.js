@@ -1537,12 +1537,11 @@ window.particlesJS.load = function(tag_id, path_config_json, callback){
     }
   };
   xhr.send();
-
 };
 function setupParticle(color) {
- handleSwitchTheme.setupExecuted = false;
  const newParticleColor = color;
  const modeParticleJs =  (localStorage.getItem('pJSMode')) ? localStorage.getItem('pJSMode') : localStorage.getItem('defaultModePJS');
+ 
  handleParticle(modeParticleJs, newParticleColor);
 }
 
@@ -1553,12 +1552,15 @@ function modeParticle(mode) {
  localStorage.setItem('pJSMode', mode);
  const color = colorParticle.primaryIconColor;
  handleParticle(mode, color);
- toSeeParticle('particles');
+ toSeeParticle({ event: 'particles', name: mode });
 }
 
 const btnDown = document.querySelector('.btn-down-particle');
 
-function toSeeParticle(event) {
+function toSeeParticle(params) {
+  let { event, name } = params;
+  notification({ icon: 'info', text: `berhasil mengubah ${event} website menjadi ${name} !` });
+  
   switch(event) {
    case 'theme':
     setTimeout(() => {
@@ -1569,29 +1571,31 @@ function toSeeParticle(event) {
     document.getElementById('particles-view').scrollIntoView({ behavior: 'smooth'});
     break;
     default:
-     console.log('default');
+     console.log('defaults');
   }
   
-  btnDown.style.display = "block";
  setTimeout(() => {
   btnDown.classList.add('block');
   // menghilangkan button down
   setTimeout(() => {
    btnDown.classList.remove('block');
   }, 7000);
- }, 1500);
+ }, 2000);
 }
 
 function goDownParticle() {
- btnDown.style.display = "none";
+ btnDown.classList.remove('block');
  document.getElementById('set-particles').scrollIntoView({ behavior: 'smooth'});
 }
 
 
 function handleParticle(mode, newParticleColor) {
- flagParticle = false;
  localStorage.setItem('pJSMode', mode);
- const pushModeParticle = localStorage.getItem('pJSMode', mode);
+ const isLinearMode = ['linear', 'love'].includes(mode);
+ pjs.style.opacity = isLinearMode ? "0" : "1"; 
+ containerLinear.forEach(e => e.style.opacity = isLinearMode ? "1" : "0");
+ containerLove.forEach(e => e.style.opacity = isLinearMode ? "1" : "0");
+ 
  switch(mode) {
   case 'line':
     particlesJS("particles-js", {
@@ -1680,7 +1684,7 @@ function handleParticle(mode, newParticleColor) {
          }
        },
        "opacity": {
-         "value": 0.5,
+         "value": 0.7,
          "random": true,
          "anim": {
            "enable": true,
@@ -1740,7 +1744,7 @@ function handleParticle(mode, newParticleColor) {
      }
     });
    break;
-  case 'shape':
+  case 'stars':
     particlesJS('particles-js', {
      "particles": {
        "number": {
@@ -1779,12 +1783,12 @@ function handleParticle(mode, newParticleColor) {
          }
        },
        "size": {
-         "value": 5,
+         "value": 6,
          "random": true,
          "anim": {
            "enable": true,
            "speed": 6,
-           "size_min": 0.1,
+           "size_min": 0.6,
            "sync": false
          }
        },
@@ -1831,7 +1835,7 @@ function handleParticle(mode, newParticleColor) {
          },
          "bubble": {
            "distance": 100,
-           "size": 6,
+           "size": 7,
            "duration": 1,
            "opacity": 8,
            "speed": 3
@@ -1958,15 +1962,16 @@ function handleParticle(mode, newParticleColor) {
      },
     });
    break;
+  case 'linear':
+    containerLinear.forEach(e => e.style.opacity = '1');
+    containerLove.forEach(e => e.style.opacity = '0');
+   break;
+  case 'love':
+    containerLove.forEach(e => e.style.opacity = '1');
+    containerLinear.forEach(e => e.style.opacity = '0');
+   break;
   default:
   console.log('default is none');
  }
 }
 
-
-document.addEventListener('DOMContentLoaded', function() {
- const savedTheme = JSON.parse(localStorage.getItem('setTHEME'));
- 
- const setTheme = (savedTheme) ? JSON.parse(localStorage.getItem('setTHEME')) : JSON.parse(localStorage.getItem('defaultTheme'));
- setupParticle(setTheme.primaryIconColor);
-});

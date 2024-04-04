@@ -14,6 +14,7 @@
  <body id="body" class="body">
   <h2 class="err">MAAF WEBSITE INI TIDAK TERSEDIA UNTUK VERSI DESKTOP</h2>
   <div class="blurLayer" id="layer"></div>
+  <div id="defaultElement"></div>
    <div class="containerAlert">
     <div class="myAlert" id="jawaban">
      <p class="infoAlert" id="myDescription">INFO !</p>
@@ -64,9 +65,9 @@
      <div class="arrow-button">
       <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="togglePage('guide')" ></ion-icon>
      </div>
-     <ion-icon name="moon" class="main-icon" id="moon" onclick="switchTheme()"></ion-icon>
-     <ion-icon name="mail-sharp" class="main-icon" onclick="togglePage('emails')"></ion-icon>
-     <ion-icon name="qr-code" class="main-icon" id="brush" onclick="handlePopup()"></ion-icon>
+     <ion-icon name="moon" class="main-icon" id="main-icon" onclick="switchTheme()"></ion-icon>
+     <ion-icon name="mail-sharp" class="main-icon"  class="main-icon" id="main-icon" onclick="togglePage('emails')"></ion-icon>
+     <ion-icon name="qr-code" class="main-icon" class="main-icon" id="main-icon" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
     </div>
     <div class="profileSection" id="profileSection">
      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -108,7 +109,7 @@
        </div>
       </div>
       <div class="box-note-guide">
-       <div class="header_title_content"  id="set-particles">
+       <div class="header_title_content">
         <h1 class="title-header-home">panduan informasi</h1>
         <p class="article-text">dibawah inu adalah pembahasan dan solusi saat sedang melakukan chat dengan bot.</p>
        </div>
@@ -123,7 +124,7 @@
           <p class="description_text" id="description_guide">Deskripsi 2</p>
          </div>
         </div>
-        <div class="header_title_content"  id="set-particles">
+        <div class="header_title_content">
          <h1 class="title-header-home">notebook guide</h1>
          <p class="article-text">tolong perlu di perhatikan poin poin di bawah ini saat melakukan chat.</p>
         </div>
@@ -207,14 +208,14 @@
       <p class="description_text">This website is made only for learning in development a website, FaBot-Chat 16 October Version.</p>
      </div>
     </div>
-   <div class="menu">
+   <div class="container-developer-menu">
     <div class="headerMenu">
      <div class="arrow-button">
-      <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="DeveloperMenu()" ></ion-icon>
+      <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="togglePage('developer')" ></ion-icon>
      </div>
-     <ion-icon name="moon" class="main-icon" id="moon" onclick="switchTheme()"></ion-icon>
-     <ion-icon name="share-social" class="main-icon" id="qr" onclick="handlePopup()"></ion-icon>
-     <ion-icon name="qr-code" class="main-icon" id="brush" onclick="handlePopup()"></ion-icon>
+     <ion-icon name="moon" class="main-icon" class="main-icon" id="main-icon"></ion-icon>
+     <ion-icon name="share-social" class="main-icon" class="main-icon" id="main-icon" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
+     <ion-icon name="qr-code" class="main-icon" class="main-icon" id="main-icon" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
     </div>
     <div class="profileSection" id="profileSection">
      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -232,7 +233,7 @@
     </div>
     <div class="contentMenu">
      <div class="cards">
-      <p id="bio" class="infoTxt"><ion-icon name="person"></ion-icon>&nbsp;About Me</p>
+      <p id="bio" class="infoTxt"><ion-icon class="icon" name="person"></ion-icon>&nbsp;About Me</p>
       <div class="description">
        <div class="wrapper-text">
         <p class="descriptionText" id="descriptionSatu" onclick="descriptionClick()">DESKRIPSI 1</p>
@@ -252,7 +253,7 @@
       </div>
      </div>
      <div class="underline"></div>
-     <p id="bio" class="infoTxt"><ion-icon name="sparkles"></ion-icon>&nbsp;Favorite Thing</p>
+     <p id="bio" class="infoTxt"><ion-icon class="icon" name="sparkles"></ion-icon>&nbsp;Favorite Thing</p>
      <div class="container-favorite">
       <div class="cards-favorite">
        <div class="favorite-items">
@@ -303,7 +304,7 @@
      </div>
      <!--containerFavorite end-->
      <div class="underline"></div>
-     <p id="bio" class="infoTxt"><ion-icon name="folder"></ion-icon>&nbsp;My Collection Website</p>
+     <p id="bio" class="infoTxt"><ion-icon class="icon" name="folder"></ion-icon>&nbsp;My Collection Website</p>
      <div class="my-koleksi">
       <div class="koleksi-box">
        <div class="content-koleksi koleksi1">
@@ -331,58 +332,13 @@
        <ion-icon name="chevron-forward" class="ico-next" id="jawaban" onclick="nextKoleksi()"></ion-icon>
       </div>
      </div>
-     <div class="underline"></div>
-     <div class="footer-container">
-      <p id="bio" class="infoTxt"><ion-icon name="book"></ion-icon>&nbsp;Explore Propertiess</p>
-      <div class="footer-box">
-       <div class="wrapper-box-footer">
-        <div class="wrapper-footer">
-         <div class="footer-box-text" id="myDescription" onclick="footerBoxOne()">
-          <li class="footer-li">
-           <a class="footer-text" >About Me</a>
-          </li>
-         </div>
-         <div class="footer-box-text" id="myDescription" onclick="footerBoxSecond()">
-          <li class="footer-li">
-           <a class="footer-text" >Privacy Policy</a>
-          </li>
-         </div>
-         <div class="footer-box-text" id="myDescription" onclick="footerBoxThird()">
-          <li class="footer-li">
-           <a class="footer-text" >Description</a>
-          </li>
-         </div>
-        </div>
-        <div class="wrapper-footer-2">
-         <div class="footer-box-text" id="myDescription" onclick="footerBoxFour()">
-          <li class="footer-li">
-           <a class="footer-text" >Terms Of Service</a>
-          </li>
-         </div>
-         <div class="footer-box-text" id="myDescription" onclick="footerBoxFive()">
-          <li class="footer-li">
-           <a class="footer-text" >Contact Us</a>
-          </li>
-         </div>
-         <div class="footer-box-text" id="myDescription" onclick="footerBoxSix()">
-          <li class="footer-li">
-           <a class="footer-text" >Help</a>
-          </li>
-         </div>
-        </div>
-        <footer id="footers">
-         <p class="footer-class" >&copy;Copyrights 2023 All Rights Reserved.</p>
-        </footer>
-       </div>
-      </div>
-     </div>
     </div>
    </div>
-   <div class="pembungkus-container">
+   <div class="pembungkus-container" id="container-chat">
     <header>
      <div class="headerBot">
       <div class="imgboxs" id="imgBox" onclick="reactBot()">
-       <img src="boticon.webp" alt="FaBOT-icon" id="img"/>
+       <img src="boticon.webp" alt="FaBOT-icon" class="ico-bot" id="img"/>
       </div>
       <div class="botInfo">
         <p class="nameBot">Fabot Chat</p>
@@ -393,8 +349,8 @@
      </div>
     </header>
     <div class="container" id="containerId">
-      <div class="container-linear"></div>
-      <div class="container-love"></div>
+      <div class="container-linear" id="linear1"></div>
+      <div class="container-love" id="lovee1"></div>
      <div class="wrapper" id="container_input">
       <div class="containerInput">
         <textarea class="input-jawaban" id="jawaban" placeholder="Ketikan Pesan" onkeyup="checkInput()" autocomplete="off"></textarea>
@@ -423,7 +379,7 @@
         <div class="box-info-user">
          <div class="info-user">
           <span class="text-usr say-user" >hallo,</span>
-          <span class="text-usr name-user" >unknown user</span>
+          <span class="text-usr name-user">unknown user</span>
           <p class="user-email">unknown@gmail.com</p>
          </div>
         </div>
@@ -445,21 +401,21 @@
       </div>
       <div class="content-sidebar" id="myKoleksi">
        <div class="wrapper-box-sidebar">
-        <div class="box-sidebar-items" onclick="openHome()">
+        <div class="box-sidebar-items" onclick="togglePage('home')">
          <button class="btn-cta" disabled>
          <ion-icon name="home" class="sidebar-icon" ></ion-icon>
          <p class="text-sidebar" >Home</p>
          </button>
         </div>
-        <div class="box-sidebar-items" onclick="openProfile()">
+        <div class="box-sidebar-items" onclick="togglePage('profile')">
          <ion-icon name="person" class="sidebar-icon" ></ion-icon>
          <p class="text-sidebar" >My Profile</p>
         </div>
-        <div class="box-sidebar-items" onclick="togglePage('guide')">
+        <div class="box-sidebar-items" onclick="togglePage('sidebarGuide')">
          <ion-icon name="book" class="sidebar-icon" ></ion-icon>
          <p class="text-sidebar" >ChatBot Guide</p>
         </div> 
-        <div class="box-sidebar-items" onclick="DeveloperMenu()">
+        <div class="box-sidebar-items" onclick="togglePage('developer')">
          <ion-icon name="id-card" class="sidebar-icon" ></ion-icon>
          <p class="text-sidebar" >About Developer</p>
         </div>
@@ -467,8 +423,8 @@
        <div class="box-social-media">
         <p class="text-usr" >Social Media</p>
         <div class="box-item-sosmed">
-         <a class="item-icon-sosmed" href="https://www.facebook.com/bayuan.754"><i class="fab fa-facebook" ></i></a>
-         <a class="item-icon-sosmed" href="https://www.instagram.com/fridfn_"><i class="fab fa-instagram" ></i></a>
+         <a class="item-icon-sosmed" href="https://www.facebook.com/fridfn_"><i class="fab fa-facebook" ></i></i>
+         <a class="item-icon-sosmed" href="https://www.instagram.com/fridfn"><i class="fab fa-instagram" ></i></a>
          <a class="item-icon-sosmed" href="https://t.me/ShirakamiFubuki7"><i class="fab fa-telegram" ></i></a>
          <a class="item-icon-sosmed" href="https://tiktok.com/@frdfnz"><i class="fab fa-tiktok"></i></a>
         </div>
@@ -485,13 +441,13 @@
          <p class="txtOpsi" onclick="fullScreen()"><lord-icon src="https://cdn.lordicon.com/ktpvefbv.json" trigger="loop" delay="3000" stroke="bold" class="current-color"></lord-icon>&nbsp;Full Screen</p>
         </div>
         <div class="boxOpsi">
-        <p class="txtOpsi" onclick="handlePopup()"><ion-icon name="settings-sharp" id="ico"></ion-icon>&nbsp;Pengaturan</p>
+        <p class="txtOpsi" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"><ion-icon name="settings-sharp" id="ico"></ion-icon>&nbsp;Pengaturan</p>
         </div>
         <div class="boxOpsi">
-         <p class="txtOpsi" onclick="handlePopup()"><ion-icon name="share-social" id="ico"></ion-icon>&nbsp;Bagikan</p>
+         <p class="txtOpsi" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"><ion-icon name="share-social" id="ico"></ion-icon>&nbsp;Bagikan</p>
         </div>
         <div class="boxOpsi">
-         <p class="txtOpsi" onclick="handlePopup()"><ion-icon name="trash" id="ico"></ion-icon>&nbsp;Bersihkan chat</p>
+         <p class="txtOpsi" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"><ion-icon name="trash" id="ico"></ion-icon>&nbsp;Bersihkan chat</p>
         </div>
        </div>
       </div>
@@ -544,8 +500,8 @@
      </div>
      <p class="title-explore" >Personal Settings</p>
      <div class="wrapper-header-icon">
-      <ion-icon name="moon" class="main-icon" id="moon" onclick="switchTheme()"></ion-icon>
-      <ion-icon name="save" class="main-icon" id="brush" onclick="savePersonality()"></ion-icon>
+      <ion-icon name="moon" class="main-icon" class="main-icon" id="main-icon"></ion-icon>
+      <ion-icon name="save" class="main-icon" class="main-icon" id="main-icon"onclick="savePersonality()"></ion-icon>
      </div>
     </div>
    </div>
@@ -558,7 +514,7 @@
         <div class="wrapper-icon-avatar">
          <ion-icon name="heart" class="main-icon"></ion-icon>
          <ion-icon name="heart" class="main-icon"></ion-icon>
-         <ion-icon name="heart" class="main-icon" onclick="handlePopup()"></ion-icon>
+         <ion-icon name="heart" class="main-icon" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
         </div>
        </div>
        <div class="wrapper-input-personality">
@@ -566,14 +522,14 @@
          <p class="title-personality-input">Nama Panggilan</p>
          <div class="box-input-personality">
           <ion-icon name="person" class="main-icon"></ion-icon>
-          <input type="text" placeholder="Kamu mau di panggil apa" class="input-login" autocomplete="off" name='Nama panggilan'>
+          <input type="text" placeholder="Kamu mau di panggil apa" class="input-login" autocomplete="off" name='Nama panggilan' id="personalInput">
          </div>
         </div>
         <div class="wrapper-box-personality">
          <p class="title-personality-input">Nama Lengkap / Nama Panjang</p>
          <div class="box-input-personality">
           <ion-icon name="person" class="main-icon"></ion-icon>
-          <input type="text" placeholder="Ketikan nama kamu" class="input-login" autocomplete="off" name='Nama lengkap'>
+          <input type="text" placeholder="Ketikan nama kamu" class="input-login" autocomplete="off" name='Nama lengkap' id="personalInput">
          </div>
         </div>
        </div>
@@ -583,42 +539,42 @@
         <p class="title-personality-input">Tanggal Lahir</p>
         <div class="box-input-personality">
          <ion-icon name="calendar" class="main-icon"></ion-icon>
-         <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" name='Tanggal Lahir'>
+         <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" name='Tanggal Lahir' id="personalInput">
         </div>
        </div>
        <div class="wrapper-box-personality">
         <p class="title-personality-input">Kelas</p>
         <div class="box-input-personality">
          <ion-icon name="school" class="main-icon"></ion-icon>
-         <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" name='Kelas'>
-        </div>
-       </div>
-       <div class="wrapper-box-personality">
-        <p class="title-personality-input">Favorite Song's</p>
-        <div class="box-input-personality">
-         <ion-icon name="musical-notes" class="main-icon"></ion-icon>
-         <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" name='Favorite lagu'>
+         <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" name='Kelas' id="personalInput">
         </div>
        </div>
        <div class="wrapper-box-personality">
         <p class="title-personality-input">Gender</p>
         <div class="box-input-personality">
          <ion-icon name="male-female" class="main-icon"></ion-icon>
-         <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" name='Gender'>
-        </div>
-       </div>
-       <div class="wrapper-box-personality">
-        <p class="title-personality-input">My Dream's</p>
-        <div class="box-input-personality">
-         <ion-icon name="star" class="main-icon"></ion-icon>
-         <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" name='My Dreams'>
+         <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" name='gender' id="personalInput">
         </div>
        </div>
        <div class="wrapper-box-personality">
         <p class="title-personality-input">Planet</p>
         <div class="box-input-personality">
          <ion-icon name="planet" class="main-icon"></ion-icon>
-         <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" name='Planet'>
+         <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" name='planet' id="personalInput">
+        </div>
+       </div>
+       <div class="wrapper-box-personality">
+        <p class="title-personality-input">My Dream's</p>
+        <div class="box-input-personality">
+         <ion-icon name="star" class="main-icon"></ion-icon>
+         <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" name='My Dreams' id="personalInput">
+        </div>
+       </div>
+       <div class="wrapper-box-personality">
+        <p class="title-personality-input">Favorite Song</p>
+        <div class="box-input-personality">
+         <ion-icon name="musical-notes" class="main-icon"></ion-icon>
+         <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" name='songs' id="personalInput">
         </div>
        </div>
       </div>
@@ -628,21 +584,21 @@
           <p class="title-personality-input">Hobby</p>
           <div class="box-input-personality">
            <ion-icon name="sparkles" class="main-icon"></ion-icon>
-           <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" maxlength="8" name='hobby 1'>
+           <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" maxlength="8" name='hobby 1' id="personalInput">
           </div>
          </div>
          <div class="wrapper-box-personality">
           <p class="title-personality-input">Hobby</p>
           <div class="box-input-personality">
            <ion-icon name="sparkles" class="main-icon"></ion-icon>
-           <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" maxlength="8" name='hobby 1'>
+           <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" maxlength="8" name='hobby 2' id="personalInput">
           </div>
          </div>
          <div class="wrapper-box-personality">
           <p class="title-personality-input">Hobby</p>
           <div class="box-input-personality">
            <ion-icon name="sparkles" class="main-icon"></ion-icon>
-           <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" maxlength="8" name='hobby 1'>
+           <input type="text" placeholder="Ketikan sesuatu" class="input-login" autocomplete="off" maxlength="8" name='hobby 3' id="personalInput">
           </div>
          </div>
         </div>
@@ -658,7 +614,7 @@
         </div>
         <div class="box-note-personality">
          <p class="description_text txt--lg"><strong>CATATAN</strong></p>
-         <p class="description_text">1. Informasi yang kamu ketikan diatas digunakan untuk bot mengenali tentang diri kamu.<br><br>2. Isilah input sesuai dengan judul input nya, agar ketika kamu chatting dengan bot topik / konteks yang di bicarakan nanti menjadi jelas.<br><br>3. Berikan kata kata yang sopan dan baik saat mengisikan input diatas, karna developer sangat melarang keras kata kata kasar saat mengisi input / membalas pesan dari bot nanti.<br><br>4. Setelah semua input diisi kamu bisa menyimpan nya dengan mengklik tombol save di kanan diatas, pastikan bahwa semua input diisi dengan benar.<br><br><br>Tolong di ingat bahwa apa yang kamu ketikan diatas hanyalah simulasi untuk developer belajar mengelola data dari apa yang user ketikan dalam input diatas dan informasi diatas digunakan hanya untuk bot mengenali pengguna nya.<br><br><br>Terimaksih atas perhatian nya | Developer.</p>
+         <p class="description_text">1. Informasi yang kamu ketikan diatas digunakan untuk bot mengenali tentang diri kamu.<br><br>2. Isilah input sesuai dengan judul input nya, agar ketika kamu chat dengan bot topik / konteks yang di bicarakan nanti menjadi jelas.<br><br>3. Berikan kata kata yang sopan dan baik saat mengisikan input diatas, karna developer sangat melarang keras kata kata kasar saat mengisi input / membalas pesan dari bot nanti.<br><br>4. Setelah semua input diisi kamu bisa menyimpan nya dengan mengklik tombol save di kanan diatas, pastikan bahwa semua input diisi dengan benar.<br><br><br>Tolong di ingat bahwa apa yang kamu ketikan diatas hanyalah simulasi untuk developer belajar mengelola data dari apa yang user ketikan dalam input diatas dan informasi diatas digunakan hanya untuk bot mengenali pengguna nya.<br><br><br>Terimaksih atas perhatian nya | Developer.</p>
        </div>
       </div>
      </div>
@@ -671,11 +627,11 @@
    <div class="content-user-page">
     <div class="headerMenu">
      <div class="arrow-button">
-      <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="openProfile()" ></ion-icon>
+      <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="togglePage('profile')" ></ion-icon>
      </div>
-     <ion-icon name="moon" class="main-icon" id="moon" onclick="switchTheme()"></ion-icon>
-     <ion-icon name="newspaper" class="main-icon" id="qr" onclick="togglePersonality()"></ion-icon>
-     <ion-icon name="qr-code" class="main-icon" id="brush" onclick="handlePopup()"></ion-icon>
+     <ion-icon name="moon" class="main-icon" class="main-icon" id="main-icon" onclick="switchTheme()"></ion-icon>
+     <ion-icon name="newspaper" class="main-icon" class="main-icon" id="main-icon" onclick="togglePersonality()"></ion-icon>
+     <ion-icon name="qr-code" class="main-icon" class="main-icon" id="main-icon" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
     </div>
     <div class="profileSection" id="profileSection">
      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -772,51 +728,6 @@
         <p class="bio-user">contoh deskripsi untuk bio pengguna website ini. ini hanyalah sempel contoh text nya</p>
        </div>
       </div>
-      <div class="underline"></div>
-      <div class="footer-container">
-       <p id="bio" class="infoTxt"><ion-icon name="book"></ion-icon>&nbsp;Explore Propertiess</p>
-       <div class="footer-box">
-        <div class="wrapper-box-footer">
-         <div class="wrapper-footer">
-          <div class="footer-box-text" id="myDescription" onclick="footerBoxOne()">
-           <li class="footer-li">
-            <a class="footer-text" >About Me</a>
-           </li>
-          </div>
-          <div class="footer-box-text" id="myDescription" onclick="footerBoxSecond()">
-           <li class="footer-li">
-            <a class="footer-text" >Privacy Policy</a>
-           </li>
-          </div>
-          <div class="footer-box-text" id="myDescription" onclick="footerBoxThird()">
-           <li class="footer-li">
-            <a class="footer-text" >Description</a>
-           </li>
-          </div>
-         </div>
-         <div class="wrapper-footer-2">
-          <div class="footer-box-text" id="myDescription" onclick="footerBoxFour()">
-           <li class="footer-li">
-            <a class="footer-text" >Terms Of Service</a>
-           </li>
-          </div>
-          <div class="footer-box-text" id="myDescription" onclick="footerBoxFive()">
-           <li class="footer-li">
-            <a class="footer-text" >Contact Us</a>
-           </li>
-          </div>
-          <div class="footer-box-text" id="myDescription" onclick="footerBoxSix()">
-           <li class="footer-li">
-            <a class="footer-text" >Help</a>
-           </li>
-          </div>
-         </div>
-         <footer id="footers">
-          <p class="footer-class" >&copy;Copyrights 2023 All Rights Reserved.</p>
-         </footer>
-        </div>
-       </div>
-      </div>
      </div>
     </div>
    </div>
@@ -826,13 +737,13 @@
      <div class="header-explore-wrapper">
       <div class="headerMenu">
        <div class="arrow-button">
-        <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="handleFooter()"></ion-icon>
+        <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="handleFooter({ open: undefined, page: containerHome })" id="button-back-explore"></ion-icon>
         <span id="barier-element"></span>
        </div>
        <p class="title-explore" >Explore Properties</p>
-       <ion-icon name="moon" class="main-icon" id="moon" onclick="switchTheme()"></ion-icon>
-       <ion-icon name="person-add" class="main-icon" id="qr" onclick="handlePopup()"></ion-icon>
-       <ion-icon name="heart" class="main-icon" id="brush" onclick="handlePopup()"></ion-icon>
+       <ion-icon name="moon" class="main-icon" class="main-icon" id="main-icon"></ion-icon>
+       <ion-icon name="person-add" class="main-icon" class="main-icon" id="main-icon"></ion-icon> 
+       <ion-icon name="heart" class="main-icon" class="main-icon" id="main-icon"></ion-icon>
       </div>
      </div>
     </div>
@@ -856,31 +767,6 @@
      <div id="background-home">
       <video class="animate-background" autoplay loop muted>
       </video>
-      <div class="content-box-home" style="display: none;">
-       <div class="home-date-info" >
-        <div class="text-box-day">
-         
-        </div>
-        <div class="box-info-widget">
-         <div class="box-text-widget">
-          <ion-icon name="person-sharp"></ion-icon>&nbsp;
-          <p class="user-name-widget" ></p>
-         </div>
-         <div class="box-text-widget">
-          <ion-icon name="location"></ion-icon>&nbsp;
-          <p class="user-name-widget" ></p>
-         </div>
-         <div class="box-text-widget">
-          <ion-icon name="heart">&nbsp;</ion-icon>&nbsp;
-          <p class="user-name-widget" ></p>
-         </div>
-        </div>
-       </div>
-       <div class="title-text-home">
-        <p class="text-icon-day" >Welcome</p>
-        <p class="text-icon-day" >farid</p>
-       </div>
-      </div>
       <div class="container-popup" style="display: none;">
        <div class="box-img-popup">
         <div class="profileImgBox">
@@ -915,7 +801,7 @@
              <li onclick="switchTheme(themeYellow)"><a href="#">Yellow</a></li>
             </ul>
            </li>
-           <li><button class="btn-login"><span><ion-icon name="person"></ion-icon>Signup</span></button></li>
+           <li onclick="toggleLogin('loging')"><button class="btn-login"><span><ion-icon name="person"></ion-icon>Signup</span></button></button>
           </ul>
          </nav>
         </div>
@@ -932,10 +818,10 @@
            <div id="hide-article" style="display: flex; flex-direction: column; gap: 15px; width: 75%;">
             <div class="box-header-article">
              <h1 class="title-header-home" style="font-size: 15px;">welcome to my <span style="color: var(--secondaryTextColor);">chatbot </span>web <span style="color: var(--secondaryTextColor);">development</span> journey!</h1>
-             <p class="article-text">website ini adalah website chat bot sederhana yang menggunakan bahasa pemrograman javascript, </p>
+             <p class="article-text">website ini adalah sebuah web berbasis aplikasi chatbot, jadi website ini saya kembangkan untuk tujuan belajar membangun sebuah web yang memiliki banyak fitur dan interaksi pada bot sederhana yang saya kembangkan.</p>
             </div>
             <div class="box-btn-article">
-             <button class="cta-article" onclick="toggleLogin('start')"><p>START CHAT</p><ion-icon name="arrow-forward"></ion-icon></button>
+             <button class="cta-article" onclick="toggleStart('start')"><p>START CHAT</p><ion-icon name="arrow-forward"></ion-icon></button>
              <button class="cta-article" onclick="togglePage('guideHome')"><p>GUIDE</p><ion-icon name="bulb"></ion-icon></p>
             </div>
            </div>
@@ -966,24 +852,26 @@
       <div class="box-website-review">
        <div class="item-box-review">
         <p class="title-txt-review">170+</p>
-        <p class="article-text">This is a simple chatbot </p>
+        <p class="article-text">This is a simple chatbot</p>
+       </div>
+       <div class="item-box-review">
+        <p class="title-txt-review">3 API</p>
+        <p class="article-text">menggunakan 3 macam API unik dan menarik</p>
        </div>
        <div class="item-box-review">
         <p class="title-txt-review">170+</p>
-        <p class="article-text">This is a simple chatbot </p>
-       </div>
-       <div class="item-box-review">
-        <p class="title-txt-review">170+</p>
-        <p class="article-text">This is a simple chatbot </p>
+        <p class="article-text">This is a simple chatbot</p>
        </div>
       </div>
      </div>
-      <div class="header_title_content">
+      <div class="header_title_content" id="hints">
        <h1 class="title-header-home">about the development</h1>
-       <p class="article-text">hint-hint di bawah berisi informasi tentang pengembangan dan tujuan website ini dibuat.</p>
+       <p class="article-text">hint-hint di bawah adalah informasi tentang pengembangan dan tujuan website ini dibuat.</p>
       </div>
-      <div class="container-box-hints" id="hints">
+      <div class="container-box-hints">
        <div id="particles-js"></div>
+       <div class="container-linear" id="linear0"></div>
+      <div class="container-love" id="lovee0"></div>
        <div class="wrapper-box-hints">
         <div class="box-hints">
          <div class="item-hints" id="particles-view">
@@ -991,7 +879,7 @@
            <span class="hint-dot" id="show-elem">Created</span>
            <div class="hint-content hint-right">
             <div class="overflow-padding">
-             <p id="txt-hint" class="hint-text">This website was first developed and created on June 1, 2023. FYI this it was ? months ago.<br><br>Developer : Farid Fathoni N</p>
+             <p id="txt-hint" class="hint-text">This website was first developed and created on June 1, 2023. FYI this it was ? months ago !<br><br>Developer : Farid Fathoni N</p>
             </div>
            </div>
           </div>
@@ -1015,7 +903,7 @@
            <span class="hint-dot" id="show-elem">About me</span>
             <div class="hint-content hint-right">
              <div class="overflow-padding">
-              <p class="hint-text">A b o u t&nbsp;&nbsp;D e v e l o p e r -><br><br>Name : Farid Fathoni N<br>Status : vocational high school<br>Favorite : code/ typing/ reading/ Music</p>
+              <p class="hint-text">A b o u t&nbsp;&nbsp;D e v e l o p e r -><br><br>Name : Farid Fathoni N<br>Status : vocational high school<br>Favorite : code/ Game/ typing/ Music</p>
              </div>
             </div>
            </div>
@@ -1081,12 +969,12 @@
        <div class="wrapper-card-box-skils" id="skils">
         <div class="header_title_content">
          <h1 class="title-header-home">programming languages?</h1>
-         <p class="article-text">progress bar di bawah adalah sejauh mana pemahaman saya dalam belajar tentang bahasa pemrograman.</p>
+         <p class="article-text">progress bar di bawah adalah sejauh mana pemahaman saya dalam belajar mengenai bahasa pemrograman.</p>
         </div>
         <div class="container-skill">
          <div class="skill-box">
           <span class="span-title-skill">
-           <ion-icon name="logo-html5" class="main-icon" style="--clr: #e66200;"></ion-icon>
+           <ion-icon name="logo-html5" class="main-icon" style="--clr: #ef6600;"></ion-icon>
            <span class="title">HTML</span>
           </span>
           <div class="skill-bar">
@@ -1119,27 +1007,35 @@
          </div>
         </div>
        </div>
-       <div class="wrapper-card-box-skils" id="skils">
-        <div class="header_title_content"  id="set-particles">
+       <div class="wrapper-card-box-skils" id="tema-settings">
+        <div class="header_title_content" id="set-particles">
          <h1 class="title-header-home">theme & particle settings</h1>
-         <p class="article-text">dibawah ini adalah tema dan partikel yang bisa kamu pilih sesuai dengan mood dan kesukaan kamu.</p>
+         <p class="article-text">dibawah ini adalah tema dan partikel yang bisa kamu pilih sesuai dengan mood dan keinginan kamu.</p>
         </div>
         <div class="container-box-theme">
          <div class="box-change-particle">
           <div class="box-cta-particle">
            <p class="title-header-home" style="font-size: 11px;">Particles</p>
            <div class="wrapper-change-particle">
-            <div class="box-sidebar-home-feature" onclick="modeParticle('line')">
-             <p class="particle-items">1</pclass>
-            </div>
-            <div class="box-sidebar-home-feature" onclick="modeParticle('snow')">
-             <p class="particle-items">2</pclass>
-            </div>
-            <div class="box-sidebar-home-feature" onclick="modeParticle('shape')">
-             <p class="particle-items">3</pclass>
-            </div>
-            <div class="box-sidebar-home-feature" onclick="modeParticle('image')">
-             <p class="particle-items">4</pclass>
+            <div class="wrapper-change-particle-box">
+             <div class="box-sidebar-home-feature" onclick="modeParticle('line')">
+              <p class="particle-items">1</pclass>
+             </div>
+             <div class="box-sidebar-home-feature" onclick="modeParticle('snow')">
+              <p class="particle-items">2</pclass>
+             </div>
+             <div class="box-sidebar-home-feature" onclick="modeParticle('stars')">
+              <p class="particle-items">3</pclass>
+             </div>
+             <div class="box-sidebar-home-feature" onclick="modeParticle('image')">
+              <p class="particle-items">4</pclass>
+             </div>
+             <div class="box-sidebar-home-feature" onclick="modeParticle('linear')">
+              <p class="particle-items">5</pclass>
+             </div>
+             <div class="box-sidebar-home-feature" onclick="modeParticle('love')">
+              <p class="particle-items">6</pclass>
+             </div>
             </div>
            </div>
           </div>
@@ -1180,12 +1076,13 @@
             <label data-text="LIGHT" for="radio-theme2"></label>
             
             <input type="radio" id="radio-theme3" onclick="uncheckRadio('radio-theme3')" name="radioGroup">
-            <label data-text="CUSTOM" for="radio-theme3"></label>
+            <label data-text="MONO" for="radio-theme3"></label>
             
            </div>
           </div>
          </div>
         </div>
+         <p class="article-text" id="hint-tema">NOTE&nbsp;&nbsp;&#10149;&nbsp;&nbsp;klik 2x pada setiap tema-tema yang ingin kamu gunakan</p>
        </div>
       </div>
       <div class="quote-section">
@@ -1219,17 +1116,17 @@
         <div class="box-footer-link">
          <p class="title-header-home" style="color: var(--secondaryTextColor);">Explore</p>
          <ul>
-          <li class="article-text" onclick="handleFooter('help')">Help</li>
-          <li class="article-text" onclick="handleFooter('about')">About</li>
-          <li class="article-text" onclick="handleFooter('service')">Service</li>
+          <li class="article-text" onclick="handleFooter({ open: 'Help', page: containerHome })" name="Help">Help</li>
+          <li class="article-text" onclick="handleFooter({ open: 'About', page: containerHome })" name="About">About</li>
+          <li class="article-text" onclick="handleFooter({ open: 'Service', page: containerHome })" name="Service">Service</li>
          </ul>
         </div>
         <div class="box-footer-link">
          <p class="title-header-home">&nbsp;</p>
          <ul>
-          <li class="article-text" onclick="handleFooter('guide')">Guide</li>
-          <li class="article-text"  onclick="handleFooter('description')">Description</li>
-          <li class="article-text"  onclick="handleFooter('policy')">Privacy Policy</li>
+          <li class="article-text" onclick="handleFooter({ open: 'Contact', page: containerHome })" name="Contact">Contact</li>
+          <li class="article-text"  onclick="handleFooter({ open: 'Policy', page: containerHome })" name="Policy">Policy</li>
+          <li class="article-text"  onclick="handleFooter({ open: 'Description', page: containerHome })" name="Description">Description</li>
          </ul>
         </div>
        </div>
@@ -1342,11 +1239,10 @@
       <div class="header-login">
        <ion-icon name="arrow-back" class="main-icon" onclick="closeLogin()"></ion-icon>
       </div>
-      
      </div>
-     <div class="pembungkus-login-page">
+     <!-- <div class="pembungkus-login-page">
       
-     </div>
+     </div> -->
     </div>
    </div>
    <div class="container-login-page">
@@ -1382,11 +1278,13 @@
         <ion-icon name="arrow-back" class="main-icon" onclick="toggleLogin('undo')"></ion-icon>
        </div>
        <div class="login-page">
-       <lord-icon src="https://cdn.lordicon.com/vcuhguff.json" trigger="loop" state="hover-wink" delay="7000" class="current-color">
-       </lord-icon>
-       <p class="title-login-text" >Wellcome To Fabot</p>
+        <div class="box-icon-login-page" id="icon-info-login">
+         <lord-icon src="https://cdn.lordicon.com/vcuhguff.json" trigger="loop" state="hover-wink" delay="7000" class="current-color">
+         </lord-icon>
+         <p class="title-login-text" >Wellcome To Fabot</p>
+        </div>
        <div class="box-info-login-text">
-        <p class="info-login-text"><strong>Tujuan website ini di buat adalah sebagai berikut :</strong><br><br>1. tempat
+        <p class="info-login-text" id="info-login-text"><strong>Tujuan website ini di buat adalah sebagai berikut :</strong><br><br>1. tempat
          untuk belajar mengembangkan simulasi chat antara user dan bot menggunakan bahasa pemrograman dasar dari javaScript
          yang saya pahami.<br><br>2. untuk belajar mengembangkan / memahami logika dan algoritma dalam sebuah program yang
          saya buat.<br><br>3. dan untuk belajar membuat fitur fitur umum yang ada dalam sebuah website.<br><br></p>
@@ -1403,7 +1301,7 @@
   <script src="style.js"></script>
   <script src="mainbot.js"></script>
   <script src="dataSong.js"></script>
-  <script src="variabel.js"></script>
+  <script src="feature.js"></script>
   <script src="particles.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
   </script>
