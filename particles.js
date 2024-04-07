@@ -6,7 +6,6 @@
 /* How to use? : Check the GitHub README
 /* v2.0.0
 /* ----------------------------------------------- */
-let particleJs = document.getElementById('particles-js');
 
 var pJS = function(tag_id, params){
   var canvas_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el');
@@ -495,8 +494,8 @@ var pJS = function(tag_id, params){
     pJS.canvas.ctx.fill();
     
   };
-
-
+  
+  
   pJS.fn.particlesCreate = function(){
     for(var i = 0; i < pJS.particles.number.value; i++) {
       pJS.particles.array.push(new pJS.fn.particle(pJS.particles.color, pJS.particles.opacity.value));
@@ -506,7 +505,7 @@ var pJS = function(tag_id, params){
   pJS.fn.particlesUpdate = function(){
 
     for(var i = 0; i < pJS.particles.array.length; i++){
-
+     
       /* the particle */
       var p = pJS.particles.array[i];
 
@@ -1493,7 +1492,7 @@ window.particlesJS = function(tag_id, params){
   var pJS_tag = document.getElementById(tag_id),
       pJS_canvas_class = 'particles-js-canvas-el',
       exist_canvas = pJS_tag.getElementsByClassName(pJS_canvas_class);
-
+      
   /* remove canvas if exists into the pJS target tag */
   if(exist_canvas.length){
     while(exist_canvas.length > 0){
@@ -1520,7 +1519,6 @@ window.particlesJS = function(tag_id, params){
 };
 
 window.particlesJS.load = function(tag_id, path_config_json, callback){
-
   /* load json config */
   var xhr = new XMLHttpRequest();
   xhr.open('GET', path_config_json);
@@ -1598,7 +1596,7 @@ function handleParticle(mode, newParticleColor) {
  
  switch(mode) {
   case 'line':
-    particlesJS("particles-js", {
+    particlesJS('particles-js', {
       particles: {
         number: {
           value: 100,
@@ -1974,4 +1972,3 @@ function handleParticle(mode, newParticleColor) {
   console.log('default is none');
  }
 }
-

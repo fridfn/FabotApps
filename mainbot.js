@@ -970,7 +970,7 @@ function botStart(data) {
      
      document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
      
-    } else {// !chatValidation
+    } else { // !chatValidation
      init = 5;
      if (noRepeatChat) {
       if (kataGame.some((kata) => jawabanValue.includes(kata)) && isGameWin) {
@@ -1090,7 +1090,7 @@ function botStart(data) {
       }
      }
     }
-   } else {//!mainChatIs || main lg
+   } else { //!mainChatIs || main lg
     init = 5;
     mainChat++;
     if (guessGame) {
@@ -1336,7 +1336,7 @@ function botStart(data) {
       }
      }
     } else {
-     alert("wahhh lu ngecit ya? sampe bisa ga milih opsi😠😠")
+     alert("wahhh lu ngecit ya? sampe bisa ga milih opsi😠😠");
     }
    }
   }, 1000);
@@ -2849,7 +2849,6 @@ function hujanLinear(index) {
   0: document.getElementById('linear0'),
   1: document.getElementById('linear1')
  }
- console.log(containers[0], containers[1])
  while (i < amount) {
   let drop = document.createElement('i');
   
@@ -2860,7 +2859,7 @@ function hujanLinear(index) {
 
   drop.style.width = 2 + size +'px';
   drop.style.left = posX + 'px';
-  drop.style.animationDelay = delay+'s';
+  drop.style.animationDelay = delay+ 's';
   drop.style.animationDuration = 25 + duration + 's';
   
   containers[0].appendChild(drop.cloneNode(true));

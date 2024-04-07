@@ -30,6 +30,58 @@
      <p class="description_text" id="text-popup">Maaf fitur ini belum tersedia !!</p>
     </div>
    </div>
+   <div class="container-cards">
+    <div class="container-cards-user">
+     <span>
+      <div class="img-cards-user">
+       <img src="developericon.webp" class="img-user" alt="icon"/>
+      </div>
+     </span>
+     <span>
+      <div class="wrapper-content-user">
+       <div class="items-info-user">
+        <p class="title-header-home">Nama :</p>
+        <p class="article-text" style="text-transform: capitalize;">Farid Fathoni N</p>
+       </div>
+       <div class="items-info-user">
+        <p class="title-header-home">Login :</p>
+        <p class="article-text">29 Oktober 2024</p>
+       </div>
+       <div class="items-info-user">
+        <p class="title-header-home">Email :</p>
+        <p class="article-text">faridfathonin@gmail.com</p>
+       </div>
+      </div>
+      <div class="box-social-media">
+        <div class="box-item-sosmed">
+         <a class="item-icon-sosmed" href="https://www.facebook.com/fridfn_"><i class="fab fa-facebook" ></i></img>
+         <a class="item-icon-sosmed" href="https://www.instagram.com/fridfn"><i class="fab fa-instagram" ></i></a>
+         <a class="item-icon-sosmed" href="https://t.me/ShirakamiFubuki7"><i class="fab fa-telegram" ></i></a>
+         <a class="item-icon-sosmed" href="https://tiktok.com/@frdfnz"><i class="fab fa-tiktok"></i></a>
+        </div>
+       </div>
+     </span>
+     <div class="box-opsi" onclick="toggleLogin('signout')" id="signout-btn">
+      <ion-icon class="log-out" name="log-out"></ion-icon>
+      <p class="title-header-home">SIGN OUT</p>
+     </div>
+     <div class="box-opsi" onclick="toggleLogin('closeCards_chat')" id="signout-btn" style="position: absolute; top: 20px; left: 20px;">
+      <ion-icon class="log-out" name="close" style="font-size: 25px;"></ion-icon>
+     </div>
+     <p class ="article-text">do labore quis ipsum ea consequat excepteur pariatur ex ad labore mollit culpa aute esse laborum ullamco Lorem tempor aliquip ullamco Lorem reprehenderit pariatur ullamco</p>
+    </div>
+   </div>
+   <div class="container-cards-notif">
+    <div class="notificationCard">
+     <p class="title-header-home">Pemberitahuan</p>
+     <lord-icon src="https://cdn.lordicon.com/krenhavm.json" trigger="in" delay="500" stroke="bold" state="in-reveal" class="current-color" id="ico-koleksi"></lord-icon>
+     <p class="notificationPara">Allow push notifications so you will get latest updates</p>
+     <div class="buttonContainer">
+       <button class="AllowBtn" onclick="handleAction('sure')">Saya Yakin!</button>
+       <button class="NotnowBtn" onclick="handleAction({ action: 'default', event: 'default' })">Tidak</button>
+     </div>
+    </div>
+   </div>
    <div class="container-loader" id="loader-page">
     <div class="spinner-container">
      <div class="spinner">
@@ -429,9 +481,9 @@
          <a class="item-icon-sosmed" href="https://tiktok.com/@frdfnz"><i class="fab fa-tiktok"></i></a>
         </div>
        </div>
-       <div class="signin-box" id="blueHeaderUser" onclick="loginValidation()">
+       <div class="signin-box" id="blueHeaderUser" onclick="toggleLogin('signup')">
         <ion-icon name="log-in" class="sidebar-icon" ></ion-icon>
-        <p class="signin-text" >Login</p>
+        <p class="signin-text">Full Login</p>
        </div>
       </div>
      </div>

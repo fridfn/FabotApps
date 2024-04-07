@@ -79,14 +79,15 @@ textareaElement.forEach(function(e) {
 const userDataJSON = localStorage.getItem('userJSON');
 const getDataUser = userDataJSON ? JSON.parse(userDataJSON) : {} ;
 const { flagLogin = {} } = getDataUser;
-const { isLogin, isFullLogin } = flagLogin;
+let { isLogin, isFullLogin } = flagLogin;
 
-const fullName = getDataUser?.user?.personal?.fullName || '';
-const [ namaDepan, midName, ...lastName ] = fullName.split(' ');
+let fullName = getDataUser?.user?.personal?.fullName || '';
+let [ namaDepan, midName, ...lastName ] = fullName.split(' ');
+let user = getDataUser?.user?.namaUser || '';
 
-const { birth, songs, status, planet, dreams, gender, bioUser, ...recent } = getDataUser?.user?.personal || {};
-const { hobbyFir = '', hobbySec = '', hobbyThi = '' } = getDataUser?.user?.personal?.hobby || {};
-const { namaUser = '', emailUser = '' } = getDataUser?.user || {};
+let { birth, songs, status, planet, dreams, gender, bioUser, ...recent } = getDataUser?.user?.personal || {};
+let { hobbyFir = '', hobbySec = '', hobbyThi = '' } = getDataUser?.user?.personal?.hobby || {};
+let { namaUser = '', emailUser = '' } = getDataUser?.user || {};
 
 let dataUser = [];
 let containerHomeIs = true;
@@ -315,58 +316,8 @@ function openHome() {
   menuSidebar.classList.toggle('active');
  }
 }
-/*
-function openChat() {
- containerHomeIs = false;
- window.scrollTo({ top: 0 });
- if (isLogin) {
-  setTimeout(() => {
-   containerHome.style.display = "none";
-   pembungkusContainer.classList.add('active');
-   pembungkusContainer.style.opacity = "0";
-   setTimeout(() => {
-    typedTextElement[1].innerHTML = text[0];
-    typedTextElement[2].innerHTML = text[0];
-    titleWidget[0].innerHTML = text[0];
-    pembungkusContainer.style.opacity = "1";
-   }, 200);
-  }, 800);
-  
-  
-  if (isRainLinear) {
-   containerLinear.style.opacity = "1";
-  } else {
-   containerLinear.style.opacity = "0";
-  }
-
- } else {
-  myAlert.style.zIndex = "100";
-  blurLayer.style.zIndex = "100";
-  myAlert.style.display = "block";
-  blurLayer.style.display = "block";
-  footerHomeText.style.opacity = "0";
-  infoAlert.innerHTML = "PEMBERITAHUAN !";
-  myAlertText.innerHTML = "kamu harus melakukan login terlebih dahulu agar bisa membuka halaman selanjut nya.";
-  setTimeout(() => { loginPage[0].style.opacity = "1" }, 500);
-  btnAlert.addEventListener('click', closeAlert);
-  setTimeout(loginValidation, 0);
- }
-}
-
-setTimeout(() => {
-   firstPertanyaan.innerHTML = botSay()[0];
-   //textLoad();
-   barier.style.display = "block";
-   
-   setTimeout(() => {
-    barier.style.display = "none";
-    textMengetik.innerHTML = "Online";
-    
-    containerLove.style.display = "block";
-    firstContentPertanyaan.style.display = "block";
-   }, 1000);
-  }, 1000);
-*/
+ 
+ 
 function perbesarGambar() {
  let scrollTop = window.pageYOffset;
  let batasHeight = 15;
@@ -898,8 +849,8 @@ const objTextExplore = {
  guide: "**Guide - Panduan Pengguna Lengkap**<br><br>Selamat datang di Panduan Pengguna [Nama Aplikasi atau Platform]! Panduan ini dirancang untuk memberikan pemahaman mendalam tentang fitur-fitur kami dan memandu Anda melalui setiap langkah dengan rinci. Silakan ikuti petunjuk ini untuk memaksimalkan pengalaman Anda dengan [Nama Aplikasi atau Platform].<br><br><br><br>### **Daftar Isi:**<br><br>1. **Pengenalan**- **Tentang [Nama Aplikasi atau Platform]:** Sebuah visi menyeluruh tentang tujuan dan nilai inti yang kami pegang.<br>- **Tujuan Panduan Ini:** Mendefinisikan sasaran dan manfaat yang akan Anda dapatkan.<br><br>2. **Registrasi dan Masuk**<br><br>- **Membuat Akun Baru:** Langkah-demi-langkah untuk membuat akun baru dengan memasukkan informasi yang dibutuhkan.<br><br>- **Proses Masuk:** Petunjuk mendetail untuk mengakses akun Anda dengan aman.<br><br>3. **Navigasi Antarmuka**<br><br>- **Penjelasan Menu Utama:** Pemahaman mendalam tentang setiap elemen pada menu utama.<br><br>- **Tautan Penting:** Menyajikan tautan yang krusial untuk memudahkan navigasi.<br><br>4. **Profil Pengguna**<br><br>- **Mengelola Informasi Profil:** Cara memperbarui dan memodifikasi informasi pribadi Anda.<br><br>- **Pengaturan Keamanan Akun:** Panduan tentang bagaimana menjaga keamanan akun Anda.<br><br>5. **Memulai**<br><br>- **Langkah Awal untuk Pengguna Baru:** Serangkaian langkah awal untuk memandu pengguna baru dalam menggunakan platform.<br><br>- **Menyesuaikan Pengaturan:** Bagaimana menyesuaikan pengaturan sesuai preferensi Anda.<br><br>6. **Penggunaan Fitur Utama**<br><br>- **[Nama Fitur 1]: Cara Menggunakannya:** Tutorial rinci tentang penggunaan fitur utama pertama.<br><br>- **[Nama Fitur 2]: Cara Mengoptimalkannya:** Tips dan trik untuk memaksimalkan manfaat dari fitur kedua.<br><br>7. **Pertanyaan Umum (FAQ)**<br><br>- **Jawaban untuk Pertanyaan Umum Pengguna:** Sekumpulan jawaban lengkap untuk pertanyaan umum pengguna.<br><br>- **Solusi Masalah Umum:** Cara mengatasi kendala umum dengan solusi yang jelas.<br><br>8. **Dukungan Pelanggan**<br><br>- **Cara Menghubungi Dukungan Pelanggan:** Informasi kontak lengkap untuk mendapatkan bantuan.<br><br>- **Menyediakan Umpan Balik:** Cara memberikan umpan balik untuk membantu kami memperbaiki pengalaman Anda.<br><br><br><br>### **Tips dan Trik:**<br><br>- **Manfaatkan [Fitur Tertentu]:** Bagaimana menggunakan fitur tertentu untuk keuntungan maksimal.<br><br>- **Telusuri [Tempat Tertentu]:** Cara menemukan informasi penting di [Tempat Tertentu].<br><br>- **Eksplorasi [Fitur Lanjutan]:** Tips untuk menjelajahi fitur lanjutan demi pengalaman yang lebih kaya.<br><br><br><br>### **Kontak Dukungan:**<br><br>Jangan ragu untuk menghubungi tim dukungan kami di [Nomor Telepon] atau melalui [Alamat Email] jika Anda membutuhkan bantuan lebih lanjut.<br><br>Terima kasih telah memilih [Nama Aplikasi atau Platform]! Kami berharap panduan ini memberikan pandangan komprehensif dan mempermudah penggunaan platform kami.<br><br>Salam,<br><br>Tim Dukungan [Nama Aplikasi atau Platform]"
 };
  
- 
- 
+
+
 const devWords = ["sebagai seorang pelajar sekolah yang baru memasuki dunia pengembangan website, saya sedang menggali ilmu dan mempelajari dasar-dasar HTML, CSS, dan javascript untuk membuat website sederhana namun menarik. <br><br> Saat ini, saya tengah menjalani perjalanan menarik dalam belajar pengembangan website, di mana saya mengenal konsep dasar tentang bagaimana menggabungkan elemen-elemen visual dan fungsionalitas untuk membuat sebuah halaman web yang sederhana.", "Dengan semangat belajar yang tinggi, saya berusaha memahami struktur dasar sebuah website, seperti header, konten, dan footer, serta berlatih membuat tata letak yang responsif untuk meningkatkan kemampuan pengembangan saya. <br><br> Terkadang tantangan muncul, tetapi sebagai seorang pelajar yang berdedikasi, saya selalu mencari sumber daya tambahan dan mencari sumber belajar secara online untuk mengatasi rintangan dalam mengembangkan sebuah website yang saya buat.", "Dalam perjalanan belajar saya, saya sedang berlatih membuat website sederhana dengan desain yang menarik, menggabungkan warna dan tipografi secara tepat untuk menciptakan tampilan visual yang estetis. <br><br> Saya sangat antusias untuk mempelajari konsep-konsep baru dalam web development, seperti animasi CSS dan javascript, yang akan menambahkan sentuhan dinamis pada project website saya saat ini.", "Saya percaya bahwa belajar pengembangan website adalah investasi berharga bagi masa depan, karena website menjadi sarana penting dalam dunia digital untuk menyampaikan informasi dan berinteraksi dengan audiens. <br><br> Meskipun masih baru dalam dunia pengembangan website, saya terus mengasah keterampilan dengan project-project kecil dan berusaha mencari tantangan baru untuk menguji kemampuan saya.", "Saya yakin, dengan kerja keras dan dedikasi, perjalanan belajar saya dalam pengembangan website akan membuka peluang yang menarik dan menginspirasi saya untuk terus berkembang di bidang ini."];
 
 
@@ -1099,7 +1050,7 @@ if (isLogin) {
     console.log("Tidak ada angka dalam string ini.");
    }
   } else {
-   console.log("user belum melakukan login")
+   console.log("user belum melakukan login");
   }
 }
 let umurNow = parseInt(tahunNow - tahunLahir);
@@ -1115,9 +1066,9 @@ let sudahLogin = false;
 let loginButton = false;
 
 function checkInputLogin() {
- inputLogin.forEach(function (inputLogin) {
-  inputLogin.addEventLtener("input", function () {
-   if (inputLogin.value.length >= 4) {
+ inputLogin.forEach(function (input) {
+  input.addEventListener("input", function () {
+   if (input.value.length >= 4) {
     loginButton = true;
    } else {
     loginButton = false;
@@ -1126,14 +1077,14 @@ function checkInputLogin() {
  })
 }
 
-inputLogin.forEach(function (inputLogin) {
- inputLogin.addEventListener("input",
+inputLogin.forEach(function (login) {
+ login.addEventListener("input",
   checkInputLogin);
 });
 
 let sudahLoginAlert = false;
 
-let password_user = document.getElementById('password_user');
+let passworduser = document.getElementById('password_user');
 const showIconPass = document.getElementById('show-pass');
 
 function togglePassword() {
@@ -1173,16 +1124,22 @@ const signBtn = document.querySelector('.signin-text');
 const inputPersonality = document.getElementById('inputPersonality');
 
 function userValidation() {
-  genderValidation();
+  const frInitialize = JSON.parse(localStorage.getItem('userJSON'));
+  isLogin = frInitialize.flagLogin.isLogin;
+  emailUser = frInitialize.user.emailUser
+  user = frInitialize.user.namaUser;
+  let dateLogin = frInitialize.user.dateLogin;
+  
  if (isLogin) {
-  signBtn.innerHTML = "Logout";
   // profile user info validation //
   
-  namaUsers.innerHTML = fullName;
-  nameUser[1].innerHTML = namaDepan;
+  nameUser[1].innerHTML = user;
   emailUsers.innerHTML = emailUser;
+  namaUsers.innerHTML = fullName || user;
   
   if (isFullLogin) {
+   genderValidation();
+   signBtn.innerHTML = "Logout";
    personalDataInfo[0].innerHTML = fullName;
    personalDataInfo[1].innerHTML = birth;
    personalDataInfo[2].innerHTML = dreams
@@ -1200,6 +1157,11 @@ function userValidation() {
    // profile user info validation //
  
    // sidebar user info profile //
+   
+   identityUser[0].textContent = fullName
+   identityUser[1].textContent = dateLogin;
+   identityUser[2].textContent = emailUser
+   
    hobbyUser[1].innerHTML = hobbyFir;
    hobbyUser[2].innerHTML = hobbySec;
    hobbyUser[3].innerHTML = hobbyThi;
@@ -1217,8 +1179,6 @@ function userValidation() {
     loginPage[0].style.opacity = "1";
    }, 500);
   }, 1000);
- } else {
-  //localStorage.clear();
  }
  //setTimeout(() => { typeText(0) }, 2000);
 }
@@ -1253,4 +1213,3 @@ function fullScreen() {
 }
 
 
-userValidation();

@@ -2,9 +2,15 @@ const cl = console.log.bind(console);
 let userStatus = document.querySelectorAll('.statusUser');
 let statusUsers = userStatus[1];
 let statusDeveloper = userStatus[0];
+const signinBTN = document.querySelector('.signin-box');
+const sureBtn = document.querySelector('.AllowBtn');
+const signoutBTN = document.querySelector('#signout-btn');
+const notSureBtn = document.querySelector('.NotnowBtn');
 let containerHome = document.querySelector('.container-home');
 let backgroundHome = document.querySelector('#background-home');
 let forwardIcon = document.querySelector('.forward-box ion-icon');
+let identityUser = document.querySelectorAll('.items-info-user .article-text');
+let btnBackPersonlity = document.querySelector('.container-personality-box .wrapper-header-menu .headerMenu .arrow-button .arrow-menu')
 let nemBots = document.querySelector('.nameBot');
 let botStat = document.querySelector('.botStatus');
 let firstDescTxt = document.querySelector('.descriptionText:first-child');
@@ -14,6 +20,9 @@ let input = document.querySelectorAll('#jawaban');
 let bgColor = document.querySelectorAll('#bgColor');
 let myButton = document.querySelectorAll('#myButton');
 let bio = document.querySelectorAll('.infoTxt');
+let containerAction = document.querySelector('.container-cards');
+let cardsUser = document.querySelector('.container-cards-user');
+let cardsAction = document.querySelector('.container-cards-notif');
 let containerInput = document.getElementById('container_input')
 let about = document.querySelector('.about');
 let favItem = document.querySelectorAll('.favorite-items');
@@ -261,6 +270,53 @@ function notification(params) {
  containerPopup.appendChild(clonedMyPopup.cloneNode(true));
 }
 
+const notificationParam = document.querySelector('.notificationPara');
+const notificationIcon = document.querySelector('.notificationCard #ico-koleksi');
+
+function notificationCards(params) {
+ const { text, icon } = params;
+ const attributes = iconAttributes();
+ const getAttributes = attributes[icon];
+ 
+ notificationParam.textContent = text;
+ Object.keys(getAttributes).forEach(key => notificationIcon.setAttribute(key, getAttributes[key]));
+}
+
+function handleAction(params) {
+ const { action, event, removePage } = params;
+  loadingAnimation({ 
+   active: defaultElem,
+   remove: cardsAction,
+   isRemove: defaultElem,
+   conditional: defaultElem,
+   action: 'active'
+  });
+ switch(action) {
+  case 'sure':
+   const actionsMap = {
+    'signout': () => {
+     localStorage.removeItem('userJSON');
+    },
+    'reload': () => {
+     location.reload();
+    },
+    'delete': () => {
+     alert('deleting...');
+    }
+   };
+   
+   let result = actionsMap[event] || "maaf gagal melakukan tindakan!";
+   if (typeof result === 'function') {
+    result();
+   } else {
+    alert(result);
+   }
+  break;
+  default:
+  console.log('default');
+ }
+}
+
 let targetPopup = document.querySelector('.container-my-popup');
 
 const observe = new MutationObserver((mutationsList, observe) => {
@@ -332,6 +388,7 @@ const userJSON = () => {
    namaUser: null,
    emailUser: null,
    passwordUser: null,
+   dateLogin: null,
    personal: {
     panggilan: null,
     fullName: null,
@@ -366,6 +423,7 @@ const handlePersonality = (params) => {
    
    Object.assign(personal, userData);
    Object.assign(hobby, { hobbyFir, hobbySec, hobbyThi });
+   newUserJSON.flagLogin.isFullLogin = true;
    
    localStorage.setItem('userJSON', JSON.stringify(newUserJSON));
   }
@@ -378,7 +436,6 @@ function savePersonality() {
   const lowerMonth = monthNames.map((month) => month.toLowerCase());
   
   if (inputPersonal.every((input) => input.value.length >= 4)) {
-   
    const birthdayDate = birthday.split(' ');
    const moon = birthdayDate[1];
    const date = parseInt(birthdayDate[0]);
@@ -403,20 +460,31 @@ function savePersonality() {
     let getHobby2 = input_hobby2.value;
     let getHobby3 = input_hobby3.value;
     
+    loadingAnimation({ 
+     active: cardsAction,
+     remove: defaultElem,
+     conditional: defaultElem,
+     isRemove: defaultElem,
+     action: 'active'
+    });
     handlePersonality({
-    panggilan: getPanggilan,
-    fullName: getFullName,
-    birth: getBirthday,
-    status: getClass,
-    gender: getGender,
-    planet: getPlanet,
-    dreams: getDreams,
-    bioUser: getBioUser,
-    songs: getFavsong,
-    hobbyFir: getHobby1,
-    hobbySec: getHobby2
-    , hobbyThi: getHobby3 });
+     panggilan: getPanggilan,
+     fullName: getFullName,
+     birth: getBirthday,
+     status: getClass,
+     gender: getGender,
+     planet: getPlanet,
+     dreams: getDreams,
+     bioUser: getBioUser,
+     songs: getFavsong,
+     hobbyFir: getHobby1,
+     hobbySec: getHobby2,
+     hobbyThi: getHobby3
+    });
     
+    sureBtn.onclick = () => {handleAction({ action: 'sure', event: 'reload', removePage: cardsAction }) }
+    notSureBtn.onclick = () => { handleAction({ action: 'null', event: 'reload', removePage: cardsAction }) };
+    notificationCards({ text: "apakah kamu yakin ingin menyimpan perubahan? tindakan ini akan mereload browser.", icon: "alert" });
     notification({ icon: 'info', text: 'PERUBAHAN TELAH DI SIMPAN ✓' });
    } else {
     setTimeout(() => notification({ icon: 'alert', text: 'tolong isi tanggal lahir dengan benar. dengan format seperti ini 29 Oktober 2006'}), 300);
@@ -487,14 +555,14 @@ window.addEventListener('load', () => {
   const loaderTime = (getUser && isLogin) ? 50 : 100 ;
  
  setTimeout(() => {
-  loadingAnimation({ 
-   active: containerHome,
+ loadingAnimation({ 
+   active: pembungkusContainer,
    remove: defaultElem,
    conditional: defaultElem,
    isRemove: defaultElem,
    action: 'active'
   });
-  developerMenu.appendChild(footerWeb);
+  
   loaders.style.display = "none";
   //notification({ icon: 'love', text: `${sayTime(isLogin)}` });
  }, loaderTime);
@@ -913,7 +981,9 @@ const themeJSON = () => {
        primaryColor: '#052659',
        primaryCards: '#0e1527',
        primaryBackground: '#000000',
+       primaryButtonColor: '#a883ff',
        
+       secondaryButtonColor: '#a883ff',
        secondaryIconColor: '#3f6bff',
        secondaryTextColor: '#2563ff',
        secondaryBorderColor: '#436bff',
@@ -940,7 +1010,9 @@ const themeJSON = () => {
        primaryCards: '#1d0e27',
        primaryBorderColor: '#9b1eff',
        primaryBackground: '#000000',
+       primaryButtonColor: '#a883ff',
        
+       secondaryButtonColor: '#a883ff',
        secondaryIconColor: '#daa1fb',
        secondaryTextColor: '#b10aff',
        secondaryBorderColor: '#c255ff',
@@ -968,7 +1040,9 @@ const themeJSON = () => {
        primaryCards: '#0c0c0c',
        primaryBorderColor: '#efbfaa',
        primaryBackground: '#000000',
+       primaryButtonColor: '#a883ff',
        
+       secondaryButtonColor: '#a883ff',
        secondaryIconColor: '#ff4e3f',
        secondaryTextColor: '#d42417',
        secondaryBorderColor: '#ff7243',
@@ -997,7 +1071,9 @@ const themeJSON = () => {
        primaryCards: '#082028',
        primaryBorderColor: '#00b087',
        primaryBackground: '#000000',
+       primaryButtonColor: '#a883ff',
        
+       secondaryButtonColor: '#a883ff',
        secondaryIconColor: '#0091c0',
        secondaryTextColor: '#25a4ff',
        secondaryBorderColor: '#00a1a7',
@@ -1024,7 +1100,9 @@ const themeJSON = () => {
        primaryCards: '#1a0d08',
        primaryBorderColor: '#991d09',
        primaryBackground: '#000000',
+       primaryButtonColor: '#a883ff',
        
+       secondaryButtonColor: '#a883ff',
        secondaryIconColor: '#6ec046',
        secondaryTextColor: '#991d09',
        secondaryBorderColor: '#b46d1c',
@@ -1410,7 +1488,15 @@ function toggleLogin(event) {
  switch(event) {
   case 'loging':
    if (isStarting) {
-    notification({ icon: 'info', text: 'kamu sudah login, apakah ingin logout?!' })
+    loadingAnimation({
+     active: containerAction,
+     remove: defaultElem,
+     conditional: defaultElem,
+     isRemove: defaultElem,
+     action: 'active'
+    });
+    signoutBTN.setAttribute('onclick', "toggleLogin('loging')");
+    notification({ icon: 'info', text: 'kamu sudah login, apakah ingin logout?!' });
    } else {
     btnLogin.classList.toggle('effect');
     loadingAnimation({
@@ -1420,7 +1506,39 @@ function toggleLogin(event) {
      isRemove: defaultElem,
      action: 'active'
     });
+    localStorage.setItem('userJSON', JSON.stringify(userJSON()));
     loginPages[0].classList.toggle('active');
+   }
+  break;
+  case 'signout':
+   loadingAnimation({ 
+    active: cardsAction,
+    remove: defaultElem,
+    conditional: defaultElem,
+    isRemove: defaultElem,
+    action: 'active'
+   });
+  break;
+  case 'signup':
+   if (!isFullLogin) {
+    loadingAnimation({
+     active: personality_page,
+     remove: pembungkusContainer,
+     conditional: defaultElem,
+     isRemove: defaultElem,
+     action: 'active'
+    });
+    btnBackPersonlity.onclick = () => { toggleLogin('signup') };
+   } else {
+    loadingAnimation({
+     active: defaultElem,
+     remove: pembungkusContainer,
+     conditional: [containerAction, cardsUser],
+     isRemove: defaultElem,
+     action: 'active'
+    });
+    sureBtn.onclick = () => { handleAction({ action: 'sure', event: 'signout', removePage: containerAction }) };
+    notificationCards({ text: "apakah kamu yakin ingin sign out? tindakan ini akan menghapus akun kamu", icon: "alert" });
    }
   break;
   case 'undo':
@@ -1434,6 +1552,24 @@ function toggleLogin(event) {
    loginPages[0].classList.toggle('active');
    loginPages[1].classList.remove('active');
   break;
+  case 'closeCards_chat':
+   loadingAnimation({
+     active: pembungkusContainer,
+     remove: cardsUser,
+     conditional: [containerAction],
+     isRemove: defaultElem,
+     action: 'active'
+    });
+  break;
+  case 'closeCards_home':
+   loadingAnimation({
+     active: containerHome,
+     remove: containerAction,
+     conditional: defaultElem,
+     isRemove: defaultElem,
+     action: 'active'
+    });
+  break;
   case 'submit':
    if (alreadyLogin) {
     notification({ icon: 'info', text: 'kamu sudah login' })
@@ -1443,6 +1579,8 @@ function toggleLogin(event) {
     let userName = input_name.value;
     let userPass = input_password.value;
     let userEmail = input_email.value.trim();
+    let dateLogin = `${d} ${monthNames[monthIndex]} ${y}`;
+    
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
     if (emailPattern.test(userEmail) && userName.length >= 4) {
@@ -1450,6 +1588,7 @@ function toggleLogin(event) {
      login.user.namaUser = userName;
      login.user.emailUser = userEmail;
      login.user.passwordUser = userPass;
+     login.user.dateLogin = dateLogin;
      
      loadingAnimation({ 
       active: loginPages[1],
@@ -1459,7 +1598,7 @@ function toggleLogin(event) {
       action: 'active'
      });
     } else {
-     notification({ icon: 'alert', text: 'TOLONG MASUKAN INPUT EMAIL DAN NAMA DENGAN BENAR!' })
+     notification({ icon: 'alert', text: 'TOLONG MASUKAN INPUT EMAIL DAN NAMA DENGAN BENAR!' });
     }
    }
    localStorage.setItem('userJSON', JSON.stringify(login));
@@ -1474,11 +1613,11 @@ function toggleLogin(event) {
 function toggleStart(event) {
   let login = JSON.parse(localStorage.getItem('userJSON'));
   let isStarting = (!login) ? false : login.flagLogin.isLogin ;
-  
  switch(event) {
   case 'start':
    if (isStarting) {
     fullScreen();
+    userValidation();
     loadingAnimation({
      active: pageChat,
      remove: containerHome,
@@ -1486,6 +1625,18 @@ function toggleStart(event) {
      isRemove: defaultElem,
      action: 'active'
     });
+    container.appendChild(pjs);
+    setTimeout(() => {
+     firstPertanyaan.innerHTML = botSay()[0];
+     barier.style.display = "block";
+     
+     textLoad();
+     setTimeout(() => {
+      barier.style.display = "none";
+      textMengetik.innerHTML = "Online";
+      firstContentPertanyaan.style.display = "block";
+     }, 1000);
+    }, 1000);
    } else {
     btnLogin.classList.add('effect');
     notification({ icon: 'alert', text: 'maaf sebelum bisa memulai, kamu harus signup terlebih dahulu !' });
@@ -1513,34 +1664,43 @@ function togglePage(page) {
     isRemove: defaultElem,
     action: 'active'
    });
+   containerBoxHints.appendChild(pjs);
   break;
   case 'profile':
-   linkedFooter({ 
-    parents: 'containerUserPage',
-    remove: containerUserPage
-   });
-   loadingAnimation({
-    active: containerUserPage,
-    remove: pembungkusContainer,
-    conditional: defaultElem,
-    isRemove: defaultElem,
-    action: 'active'
-   });
-   containerUserPage.appendChild(footerWeb);
+   if (isFullLogin) {
+    linkedFooter({ 
+     parents: 'containerUserPage',
+     remove: containerUserPage
+    });
+    loadingAnimation({
+     active: containerUserPage,
+     remove: pembungkusContainer,
+     conditional: defaultElem,
+     isRemove: defaultElem,
+     action: 'active'
+    });
+    containerUserPage.appendChild(footerWeb);
+   } else {
+    notification({ icon: 'alert', text: 'maaf kamu harus melakukan full login terlebih dahulu !' });
+   }
   break;
   case 'developer':
-   linkedFooter({ 
-    parents: 'developerMenu',
-    remove: developerMenu
-   });
-   loadingAnimation({
-    active: developerMenu,
-    remove: pembungkusContainer,
-    conditional: defaultElem,
-    isRemove: defaultElem,
-    action: 'active'
-   });
-   developerMenu.appendChild(footerWeb);
+   if (isFullLogin) {
+    linkedFooter({ 
+     parents: 'developerMenu',
+     remove: developerMenu
+    });
+    loadingAnimation({
+     active: developerMenu,
+     remove: pembungkusContainer,
+     conditional: defaultElem,
+     isRemove: defaultElem,
+     action: 'active'
+    });
+    developerMenu.appendChild(footerWeb);
+   } else {
+    notification({ icon: 'alert', text: 'maaf kamu harus melakukan full login terlebih dahulu !' });
+   }
   break;
   case 'guideHome':
    linkedFooter({ 
@@ -1611,6 +1771,17 @@ function togglePage(page) {
     });
     backEmail.onclick = () => { togglePage('emails') };
    break;
+   case 'emailBot':
+    showingEmail();
+    loadingAnimation({
+     active: pageEmail,
+     remove: pembungkusContainer,
+     conditional: defaultElem,
+     isRemove: defaultElem,
+     action: 'active'
+    });
+    backEmail.onclick = () => { togglePage('emailBot') };
+   break;
    case 'version':
     loadingAnimation({ 
      active: containerV,
@@ -1643,10 +1814,10 @@ function setRemoveFooter(parents) {
   }
  }
  
- let footerRemoveParents;
+let footerRemoveParents;
 
 function linkedFooter(params) {
- const { parents, remove } = params;
+  const { parents, remove } = params;
   const exploreLink = footerWeb.querySelectorAll('.wrapper-article-footer .box-footer-link ul li');
   const getNameLink = footerWeb.querySelectorAll('.wrapper-article-footer .box-footer-link ul li');
   footerRemoveParents = setRemoveFooter(parents);
@@ -1694,7 +1865,7 @@ function loadingAnimation(pages) {
    if (Array.isArray(conditional)) {
     conditional.forEach(element => {
      if ((typeof element) === 'object') {
-      element.classList.toggle('active');
+      element.classList.toggle(action);
      }
     });
    }
@@ -1704,4 +1875,9 @@ function loadingAnimation(pages) {
 function generateRandomSong(songs) {
  const getRandom = Math.floor(Math.random() * songs.length);
  cl(songs[getRandom]);
+}
+
+function getRamdomTimer() {
+ const time = Math.floor(Math.random() * (2000 - 1000 + 1) + 1000)
+ cl(time)
 }
