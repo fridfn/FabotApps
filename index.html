@@ -34,7 +34,7 @@
     <div class="container-cards-user">
      <span>
       <div class="img-cards-user">
-       <img src="developericon.webp" class="img-user" alt="icon"/>
+       <img src="profileicon.webp" class="img-user" alt="icon"/>
       </div>
      </span>
      <span>
@@ -65,7 +65,7 @@
       <ion-icon class="log-out" name="log-out"></ion-icon>
       <p class="title-header-home">SIGN OUT</p>
      </div>
-     <div class="box-opsi" onclick="toggleLogin('closeCards_chat')" id="signout-btn" style="position: absolute; top: 20px; left: 20px;">
+     <div class="box-opsi" onclick="toggleLogin('closeCards_chat')" id="close-cards" style="position: absolute; top: 20px; left: 20px;">
       <ion-icon class="log-out" name="close" style="font-size: 25px;"></ion-icon>
      </div>
      <p class ="article-text">do labore quis ipsum ea consequat excepteur pariatur ex ad labore mollit culpa aute esse laborum ullamco Lorem tempor aliquip ullamco Lorem reprehenderit pariatur ullamco</p>
@@ -188,7 +188,7 @@
      </div>
     </div>
    </div>
-   <div class="containerMail" id="containerId">
+   <div class="containerMail">
     <div class="header-email" id="profileSection">
      <div class="box-header-email">
       <div class="bx-btn-exit" onclick="togglePage('email')">
@@ -440,13 +440,13 @@
         <p class="text-hobby-user" >&nbsp;Favorite&nbsp;&nbsp;:</p>
         <div class="wrapper-hobby-user">
          <div class="box-hobby-user" id="box-hobby-clr">
-          <p class="text-hobby-user" >coding</p>
+          <p class="text-hobby-user" >...</p>
          </div>
          <div class="box-hobby-user" id="box-hobby-clr">
-          <p class="text-hobby-user" >game</p>
+          <p class="text-hobby-user" >...</p>
          </div>
          <div class="box-hobby-user" id="box-hobby-clr">
-          <p class="text-hobby-user" >Sleep</p>
+          <p class="text-hobby-user" >...</p>
          </div>
         </div>
        </div>
@@ -548,7 +548,7 @@
    <div class="wrapper-header-menu">
     <div class="headerMenu">
      <div class="arrow-button">
-      <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="togglePersonality()" ></ion-icon>
+      <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="togglePage('personal')" ></ion-icon>
      </div>
      <p class="title-explore" >Personal Settings</p>
      <div class="wrapper-header-icon">
@@ -682,7 +682,7 @@
       <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="togglePage('profile')" ></ion-icon>
      </div>
      <ion-icon name="moon" class="main-icon" class="main-icon" id="main-icon" onclick="switchTheme()"></ion-icon>
-     <ion-icon name="newspaper" class="main-icon" class="main-icon" id="main-icon" onclick="togglePersonality()"></ion-icon>
+     <ion-icon name="newspaper" class="main-icon" class="main-icon" id="main-icon" onclick="togglePage('personal')"></ion-icon>
      <ion-icon name="qr-code" class="main-icon" class="main-icon" id="main-icon" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
     </div>
     <div class="profileSection" id="profileSection">
@@ -853,7 +853,7 @@
              <li onclick="switchTheme(themeYellow)"><a href="#">Yellow</a></li>
             </ul>
            </li>
-           <li onclick="toggleLogin('loging')"><button class="btn-login"><span><ion-icon name="person"></ion-icon>Signup</span></button></button>
+           <li onclick="toggleLogin('loging')" id="signup-text"><button class="btn-login"><span><ion-icon name="person"></ion-icon>Signup</span></button></li>
           </ul>
          </nav>
         </div>

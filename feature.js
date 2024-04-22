@@ -5,6 +5,7 @@ let statusDeveloper = userStatus[0];
 const signinBTN = document.querySelector('.signin-box');
 const sureBtn = document.querySelector('.AllowBtn');
 const signoutBTN = document.querySelector('#signout-btn');
+const closeCards = document.querySelector('#close-cards');
 const notSureBtn = document.querySelector('.NotnowBtn');
 let containerHome = document.querySelector('.container-home');
 let backgroundHome = document.querySelector('#background-home');
@@ -258,7 +259,7 @@ const iconAttributes = () => {
 }
 
 
-function notification(params) {
+function notificationPopup(params) {
  const { text, icon } = params;
  const attributes = iconAttributes();
  const getAttributes = attributes[icon];
@@ -295,6 +296,7 @@ function handleAction(params) {
   case 'sure':
    const actionsMap = {
     'signout': () => {
+     notificationPopup({ icon: 'alert', text: 'Selamat sign out telah berhasil!' });
      localStorage.removeItem('userJSON');
     },
     'reload': () => {
@@ -483,14 +485,14 @@ function savePersonality() {
     });
     
     sureBtn.onclick = () => {handleAction({ action: 'sure', event: 'reload', removePage: cardsAction }) }
-    notSureBtn.onclick = () => { handleAction({ action: 'null', event: 'reload', removePage: cardsAction }) };
+    notSureBtn.onclick = () => { handleAction({ action: 'null', event: null, removePage: cardsAction }) };
     notificationCards({ text: "apakah kamu yakin ingin menyimpan perubahan? tindakan ini akan mereload browser.", icon: "alert" });
-    notification({ icon: 'info', text: 'PERUBAHAN TELAH DI SIMPAN ✓' });
+    notificationPopup({ icon: 'info', text: 'PERUBAHAN TELAH DI SIMPAN ✓' });
    } else {
-    setTimeout(() => notification({ icon: 'alert', text: 'tolong isi tanggal lahir dengan benar. dengan format seperti ini 29 Oktober 2006'}), 300);
+    setTimeout(() => notificationPopup({ icon: 'alert', text: 'tolong isi tanggal lahir dengan benar. dengan format seperti ini 29 Oktober 2006'}), 300);
    }
   } else {
-   setTimeout(() => notification({ icon: 'alert', text: 'Kamu harus mengisi setiap input agar bisa menyimpan perubahan.'}), 300);
+   setTimeout(() => notificationPopup({ icon: 'alert', text: 'Kamu harus mengisi setiap input agar bisa menyimpan perubahan.'}), 300);
   }
   if (localStorage.getItem('full_login') === 'true') {
    setTimeout(() => {
@@ -556,7 +558,7 @@ window.addEventListener('load', () => {
  
  setTimeout(() => {
  loadingAnimation({ 
-   active: pembungkusContainer,
+   active: containerHome,
    remove: defaultElem,
    conditional: defaultElem,
    isRemove: defaultElem,
@@ -564,7 +566,7 @@ window.addEventListener('load', () => {
   });
   
   loaders.style.display = "none";
-  //notification({ icon: 'love', text: `${sayTime(isLogin)}` });
+  //notificationPopup({ icon: 'love', text: `${sayTime(isLogin)}` });
  }, loaderTime);
 });
 
@@ -835,7 +837,6 @@ formEmail.addEventListener('submit', function(e) {
   footerEmail.innerHTML = "Tolong berikan kata kata yang sopan";
  } else { // validasi tidak berkata kasar
  if (value_email.value.length >= 10 && title_email.value.length >= 5) {
-    
     storedEmailDate.push(`${d} ${monthNames[monthIndex]} ${y}`);
     localStorage.setItem('emailDate', JSON.stringify(storedEmailDate));
     
@@ -845,40 +846,53 @@ formEmail.addEventListener('submit', function(e) {
     storedEmailTime.push(`${hourEmail}:${minuteEmail}`);
     localStorage.setItem('emailTime', JSON.stringify(storedEmailTime));
     
-    let from = `${localStorage.getItem('userEmail')}`;
+    let from = user || fullName;
     let serviceID = `service_uuzer5a`;
     let email = 'faridfathonin@gmail.com';
-    let subject = `${title_email.value}`;
-    let body = `${value_email.value}`;
+    let subject = title_email.value;
+    let valueEmail = value_email.value;
     let chatValue = fullType;
+    let lastNames = fullName.split(' ').length<= 2 ? namaDepan : lastName;
+    let personalitys = `
+    Nama Depan: ${namaDepan}\n` +
+    `Nama Belakang: ${lastNames}\n` +
+    `Nama Pengguna: ${user}\n` +
+    `Email Pengguna: ${emailUser}\n` +
+    `Tanggal Login: ${dateLogin}\n` +
+    `Tanggal Lahir: ${birth}\n\n` +
+    `Lagu Favorit: ${songs}\n` +
+    `Status: ${status}\n` +
+    `Planet: ${planet}\n` +
+    `Mimpi: ${dreams}\n` +
+    `Gender: ${gender}\n\n\n` +
+    `Bio Pengguna: ${bioUser}\n\n\n` +
+    `Hobi Pertama: ${hobbyFir}\n` +
+    `Hobi Kedua: ${hobbySec}\n` +
+    `Hobi Ketiga: ${hobbyThi}\n`;
     
     let templateParams = {
      nama: from,
      to_email: email,
+     pesanEmail: valueEmail,
      subjects: subject,
-     message: body,
-     userInput: chatValue
+     fromEmail: emailUser,
+     personality: personalitys,
+     date: `${dateLogin} / ${hourEmail}:${minuteEmail}`,
+     chatValues: chatValue
     };
+    
     //emailjs.send("service_uuzer5a", "template_wb424q8", templateParams);
     
     setTimeout(() => {
-     infoAlert.style.color = "white";
-     myAlert.style.display = "block";
-     blurLayer.style.display = "block";
-     infoAlert.innerHTML = "Info !";
-     myAlertText.innerHTML = textAlert[0];
+     addNewEmail();
      footerEmail.innerHTML = `Terimakasih sudah mengirimkan email.`;
-     btnAlert.addEventListener('click', closeAlert);
+     notificationPopup({ icon: 'love', text: `Terimakasih ${namaDepan} sudah mengirimkan email kepada developer🥳🎉`});
      
      value_email.value = "";
      title_email.value = "";
     }, 700);
   } else {
-   myAlert.style.display = "block";
-   blurLayer.style.display = "block";
-   infoAlert.innerHTML = "Info !";
-   myAlertText.innerHTML = textAlert[1];
-   btnAlert.addEventListener('click', closeAlert);
+   notificationPopup({ icon: 'alert', text: `ketikan judul email 5 huruf atau jika sudah ketikan isi email 15 huruf`});
   }
  }
 });
@@ -893,21 +907,23 @@ function objectEmail(value, title, time, date) {
   };
 }
 
-const valueObjEmail = new objectEmail(localStorage.getItem('emailValue'), 'judul email', localStorage.getItem('emailTime'), localStorage.getItem('emailDate'));
-
-localStorage.setItem('objMail', JSON.stringify(valueObjEmail));
-const infoEmail = JSON.parse(localStorage.getItem('objMail'));
+const emailItem = [];
 
 let storedEmailValue = JSON.parse(localStorage.getItem('emailValue')) || [];
 let storedEmailTime = JSON.parse(localStorage.getItem('emailTime')) || [];
 let storedEmailDate = JSON.parse(localStorage.getItem('emailDate')) || [];
-const mailText = JSON.parse(infoEmail.valueEmail);
-const mailTime = JSON.parse(infoEmail.timeEmail);
-const mailDate = JSON.parse(infoEmail.dateEmail);
 
-const emailItem = [];
-if (mailText !== null) {
-  mailText.forEach(function(email, index) {
+ let valueObjEmail = new objectEmail(localStorage.getItem('emailValue'), 'judul email', localStorage.getItem('emailTime'), localStorage.getItem('emailDate'));
+ 
+ localStorage.setItem('objMail', JSON.stringify(valueObjEmail));
+ let infoEmail = JSON.parse(localStorage.getItem('objMail'));
+ 
+ let mailText = JSON.parse(infoEmail.valueEmail);
+ let mailTime = JSON.parse(infoEmail.timeEmail);
+ let mailDate = JSON.parse(infoEmail.dateEmail);
+ 
+ if (mailText !== null) {
+  mailText.forEach(function(email,index){
    footerEmail.innerHTML = `Kirimkan email kepada developer.`;
    const cloneEmailBox = emailBox.cloneNode(true);
    const email_sending = document.querySelector('#email_sending');
@@ -920,23 +936,61 @@ if (mailText !== null) {
    email_time.innerHTML = mailTime[index];
    email_date.innerHTML = mailDate[index];
    
+   infoMsg.style.display = "none";
+   cloneEmailBox.style.display = "flex";
+   container_email.appendChild(cloneEmailBox);
+   emailItem.push(cloneEmailBox);
+   
    if (email_text.textContent.length > 100) {
     email_text.style.animation = 'marquee 10s linear infinite';
     email_text.style.transform = 'translateY(100%)';
    } else { console.log('false') }
-   
-   emailItem.push(cloneEmailBox);
-   infoMsg.style.display = "none";
-   cloneEmailBox.style.display = "flex";
-   container_email.appendChild(cloneEmailBox);
   });
+ }
+
+function addNewEmail() {
+ const cloneEmailBox = emailBox.cloneNode(true);
+ infoMsg.style.display = "none";
+ cloneEmailBox.style.display = "flex";
+ 
+ valueObjEmail = new objectEmail(localStorage.getItem('emailValue'), 'judul email', localStorage.getItem('emailTime'), localStorage.getItem('emailDate'));
+ 
+ localStorage.setItem('objMail', JSON.stringify(valueObjEmail));
+ infoEmail = JSON.parse(localStorage.getItem('objMail'));
+ 
+ mailText = JSON.parse(infoEmail.valueEmail);
+ mailTime = JSON.parse(infoEmail.timeEmail);
+ mailDate = JSON.parse(infoEmail.dateEmail);
+ 
+ const email_sending = document.querySelector('#email_sending');
+ const email_text = cloneEmailBox.querySelector('.wrap-email-txt .description_text');
+ const email_date = cloneEmailBox.querySelector('#date_email');
+ const email_time = cloneEmailBox.querySelector('#time_email');
+ 
+ email_text.innerHTML = mailText.pop();
+ email_time.innerHTML = mailTime.pop();
+ email_date.innerHTML = mailDate.pop();
+  
+ container_email.appendChild(cloneEmailBox);
+ email_sending.style.opacity = '0';
+ const lastEmail = container_email.lastElementChild;
+ 
+ setTimeout(() => {
+  lastEmail.style.opacity = '1';
+  email_sending.style.opacity = '1';
+  email_sending.innerHTML = mailText.length + 1;
+  lastEmail.scrollIntoView({ behavior: 'smooth', block: 'end' });
+ }, 750);
 }
+
+
 const mailEff = (index) => {
  if (index < emailItem.length) {
   if (emailItem.length >= 3) {
    const containerEmailItem = document.querySelector('.container-history-email .padding-overflow');
    containerEmailItem.style.height = '67vh';
   }
+  
   emailItem[index].scrollIntoView({ behavior: 'smooth', block: 'end' });
   
   setTimeout(() => {
@@ -1037,10 +1091,10 @@ const themeJSON = () => {
        primaryIconColor: '#ff5728',
        primaryTextColor: '#efbfaa',
        primaryColor: '#592605',
-       primaryCards: '#0c0c0c',
+       primaryCards: '#2c1515',
        primaryBorderColor: '#efbfaa',
        primaryBackground: '#000000',
-       primaryButtonColor: '#a883ff',
+       primaryButtonColor: '#ff6245',
        
        secondaryButtonColor: '#a883ff',
        secondaryIconColor: '#ff4e3f',
@@ -1051,13 +1105,12 @@ const themeJSON = () => {
        secondaryBackground: '#000000',
        
        bubbleUser: '#c73c00',
-       bubbleBot: '#8d3c31',
+       bubbleBot: '#501e17',
        shadowUser: '#551a00',
        shadowBot: '#32130f',
        tinyText: '#efbfaa',
-       primaryCards: '#592705',
        backgroundColor: '#000000',
-       backgroundPY: '50%',
+       backgroundPY: 'calc(150%)',
        backgroundImage: 'url("dark_3.jpg")'
       }
      },
@@ -1194,7 +1247,7 @@ const themeJSON = () => {
  }
  
 
-const defaultTheme = themeJSON().type.themeDark[1].keyColor;
+const defaultTheme = themeJSON().type.themeDark[2].keyColor;
 
  const outerLocalTheme = {
   theme: '',
@@ -1358,9 +1411,9 @@ function lovingTheme() {
          if (!this.executedLoving) {
           this.executedLoving = true;
           if (checkbox.checked === false) {
-           notification({ icon: 'unlove', text: `berhasil unlove tema&nbsp;<p style='opacity: .8;'>${getName}&nbsp;!</p>` });
+           notificationPopup({ icon: 'unlove', text: `berhasil unlove tema&nbsp;<p style='opacity: .8;'>${getName}&nbsp;!</p>` });
           } else {
-           notification({ icon: 'love', text: `berhasil menyukai tema&nbsp;<p style='opacity: .8;'>${getName}&nbsp;!</p>` });
+           notificationPopup({ icon: 'love', text: `berhasil menyukai tema&nbsp;<p style='opacity: .8;'>${getName}&nbsp;!</p>` });
           }
          }
         }).call(this);
@@ -1487,16 +1540,29 @@ function toggleLogin(event) {
   
  switch(event) {
   case 'loging':
-   if (isStarting) {
+   if (alreadyLogin) {
+    if (isFullLogin) {
     loadingAnimation({
-     active: containerAction,
-     remove: defaultElem,
-     conditional: defaultElem,
+     active: cardsUser,
+     remove: containerHome,
+     conditional: [containerAction],
      isRemove: defaultElem,
      action: 'active'
     });
-    signoutBTN.setAttribute('onclick', "toggleLogin('loging')");
-    notification({ icon: 'info', text: 'kamu sudah login, apakah ingin logout?!' });
+    sureBtn.onclick = () => { handleAction({ action: 'sure', event: 'signout', removePage: containerAction }) };
+    closeCards.onclick = () => { toggleLogin('closeCards_home') };
+    notificationCards({ text: "apakah kamu yakin ingin sign out? tindakan ini akan menghapus akun kamu", icon: "alert" });
+    notificationPopup({ icon: 'info', text: 'kamu sudah login, apakah ingin logout?!' });
+    } else {
+     loadingAnimation({
+      active: personality_page,
+      remove: containerHome,
+      conditional: defaultElem,
+      isRemove: defaultElem,
+      action: 'active'
+     });
+     btnBackPersonlity.onclick = () => { toggleLogin('loging') };
+    }
    } else {
     btnLogin.classList.toggle('effect');
     loadingAnimation({
@@ -1529,6 +1595,9 @@ function toggleLogin(event) {
      action: 'active'
     });
     btnBackPersonlity.onclick = () => { toggleLogin('signup') };
+    sureBtn.onclick = () => {handleAction({ action: 'sure', event: 'reload', removePage: cardsAction }) }
+    notSureBtn.onclick = () => { handleAction({ action: 'null', event: null, removePage: cardsAction }) };
+    notificationCards({ text: "apakah kamu yakin ingin menyimpan perubahan? tindakan ini akan mereload browser.", icon: "alert" });
    } else {
     loadingAnimation({
      active: defaultElem,
@@ -1564,41 +1633,46 @@ function toggleLogin(event) {
   case 'closeCards_home':
    loadingAnimation({
      active: containerHome,
-     remove: containerAction,
+     remove: cardsUser,
      conditional: defaultElem,
-     isRemove: defaultElem,
+     isRemove: containerAction,
      action: 'active'
     });
   break;
   case 'submit':
    if (alreadyLogin) {
-    notification({ icon: 'info', text: 'kamu sudah login' })
+    notificationPopup({ icon: 'info', text: 'kamu sudah login' })
     login.flagLogin.isStart = true;
+    document.querySelector('#signup-text').innerHTML = `<button class="btn-login"><span><ion-icon name="person"></ion-icon>Full Login</span></button>`;;
     signUpPage.classList.remove('active');
    } else {
     let userName = input_name.value;
     let userPass = input_password.value;
     let userEmail = input_email.value.trim();
-    let dateLogin = `${d} ${monthNames[monthIndex]} ${y}`;
+    let dateLogin = `${dayNames[dayIndex]}, ${d} ${monthNames[monthIndex]} ${y}`;
     
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
     if (emailPattern.test(userEmail) && userName.length >= 4) {
+     if (userPass.length >= 5) {
      login.flagLogin.isLogin = true;
      login.user.namaUser = userName;
      login.user.emailUser = userEmail;
      login.user.passwordUser = userPass;
      login.user.dateLogin = dateLogin;
      
-     loadingAnimation({ 
+     loadingAnimation({
       active: loginPages[1],
       remove: loginPages[0],
       conditional: defaultElem,
       isRemove: defaultElem,
       action: 'active'
      });
+     } else {
+      notificationPopup({ icon: 'alert', text: 'MAAF TOLONG MASUKKAN PASSWORD TERLEBIH DAHULU!' });
+     }
     } else {
-     notification({ icon: 'alert', text: 'TOLONG MASUKAN INPUT EMAIL DAN NAMA DENGAN BENAR!' });
+     notificationPopup({ icon: 'alert', text: 'TOLONG MASUKAN INPUT EMAIL DAN NAMA DENGAN BENAR!' });
     }
    }
    localStorage.setItem('userJSON', JSON.stringify(login));
@@ -1626,6 +1700,8 @@ function toggleStart(event) {
      action: 'active'
     });
     container.appendChild(pjs);
+    //pjs.style.visibility = 'visible';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     setTimeout(() => {
      firstPertanyaan.innerHTML = botSay()[0];
      barier.style.display = "block";
@@ -1639,7 +1715,7 @@ function toggleStart(event) {
     }, 1000);
    } else {
     btnLogin.classList.add('effect');
-    notification({ icon: 'alert', text: 'maaf sebelum bisa memulai, kamu harus signup terlebih dahulu !' });
+    notificationPopup({ icon: 'alert', text: 'maaf sebelum bisa memulai, kamu harus signup terlebih dahulu !' });
     localStorage.setItem('userJSON', JSON.stringify(userJSON()));
    }
   break;
@@ -1681,7 +1757,7 @@ function togglePage(page) {
     });
     containerUserPage.appendChild(footerWeb);
    } else {
-    notification({ icon: 'alert', text: 'maaf kamu harus melakukan full login terlebih dahulu !' });
+    notificationPopup({ icon: 'alert', text: 'maaf kamu harus melakukan full login terlebih dahulu !' });
    }
   break;
   case 'developer':
@@ -1699,7 +1775,7 @@ function togglePage(page) {
     });
     developerMenu.appendChild(footerWeb);
    } else {
-    notification({ icon: 'alert', text: 'maaf kamu harus melakukan full login terlebih dahulu !' });
+    notificationPopup({ icon: 'alert', text: 'maaf kamu harus melakukan full login terlebih dahulu !' });
    }
   break;
   case 'guideHome':
@@ -1748,6 +1824,16 @@ function togglePage(page) {
    backFooter.setAttribute('onclick', `handleFooter({ open: undefined, page: containerHome })`);
    containerGuide.appendChild(footerWeb);
    backGuide.onclick = () => { togglePage('guide') };
+  break;
+  case 'personal':
+   
+   loadingAnimation({ 
+    active: personality_page,
+    remove: containerUserPage,
+    conditional: defaultElem,
+    isRemove: defaultElem,
+    action: 'active'
+   });
   break;
   case 'email':
    showingEmail();

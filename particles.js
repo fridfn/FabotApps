@@ -1557,7 +1557,7 @@ const btnDown = document.querySelector('.btn-down-particle');
 
 function toSeeParticle(params) {
   let { event, name } = params;
-  notification({ icon: 'info', text: `berhasil mengubah ${event} website menjadi ${name} !` });
+  notificationPopup({ icon: 'info', text: `berhasil mengubah ${event} website menjadi ${name} !` });
   
   switch(event) {
    case 'theme':
@@ -1590,9 +1590,10 @@ function goDownParticle() {
 function handleParticle(mode, newParticleColor) {
  localStorage.setItem('pJSMode', mode);
  const isLinearMode = ['linear', 'love'].includes(mode);
- pjs.style.opacity = isLinearMode ? "0" : "1"; 
- containerLinear.forEach(e => e.style.opacity = isLinearMode ? "1" : "0");
- containerLove.forEach(e => e.style.opacity = isLinearMode ? "1" : "0");
+ pjs.style.visibility = isLinearMode ? "hidden" : "visible"; 
+ containerLinear.forEach(e => e.style.visibility = isLinearMode ? "visible" : "hidden");
+ containerLove.forEach(e => e.style.visibility = isLinearMode ? "visible" : "hidden");
+ 
  
  switch(mode) {
   case 'line':

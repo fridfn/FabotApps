@@ -117,11 +117,12 @@ document.querySelector(".input-jawaban").addEventListener("paste", function(e) {
 let userSays = [];
 let fullType = [];
 let lengthFullType;
+let sayName = fullName || user;
 
 const botSay = (data) => {
  return [
-  `Hi. namaku adalah Fabot, nama kamu ${fullName} ya?`, /*0*/
-  `halo ${namaDepan} aku adalah chat bot sederhana yang dibuat dengan bahasa pemrograman JavaScript dasar`, /*1*/
+  `Hi. selamat ${sayTime(isLogin)} aku adalah Fabot, nama kamu ${sayName} ya?`, /*0*/
+  `halo ${sayName} aku adalah chat bot sederhana yang dibuat dengan bahasa pemrograman JavaScript dasar`, /*1*/
   `kamu kan lahirnya tanggal ${birth}, berarti umur kamu sekarang brp?`,/*2*/
   `owh sekarang umur kamu udh ${umurNow} tahun, berarti kamu udh kelas ${status} ya`, /*3*/
   `btw kamu`, /*4*/
@@ -208,7 +209,6 @@ let botAnswerExecuted = false;
 //flag untuk animasi background
 
 let isRainLove = false;
-let isRainLinear = true;
 
 //variabel untuk validasi angka
 
@@ -347,7 +347,6 @@ function botStart(data) {
   setTimeout(() => {
    barier.style.display = "none";
    textMengetik.innerHTML = "Online";
-   
    if ([`${namaDepan}`, `${midName}`].some((kata) => jawabanValue.includes(kata))) {
     mainChat = 0;
     contentPertanyaan.style.display = "block";
@@ -520,7 +519,7 @@ function botStart(data) {
      clonedTextPertanyaan.innerHTML = 'Ups! sebelum kita lanjut chatnya kamu harus memperkenalkan diri terlebih dahulu';
      
      setTimeout(() => {
-      notification({ icon: 'alert', text: 'KAMU HARUS MENGISI FORM TERLEBIH DAHULU ✓' });
+      notificationPopup({ icon: 'alert', text: 'KAMU HARUS MENGISI FORM TERLEBIH DAHULU ✓' });
       clonedTextPertanyaan.innerHTML = 'tolong isi input yang aku berikan ya !';
       
       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
@@ -976,7 +975,6 @@ function botStart(data) {
       if (kataGame.some((kata) => jawabanValue.includes(kata)) && isGameWin) {
       
        isRainLove = true;
-       isRainLinear = false;
        clonedTextPertanyaan.innerHTML = `owh iya karna kamu udh bisa jawab semua ini hadiah buat kamu ❤️😁`;
        
        document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
@@ -2332,7 +2330,7 @@ function botStart(data) {
 				      
 				     setTimeout(() => {
 				      isRainLove = true;
-				      isRainLinear = false;
+				      
           botAnswerExecuted = false;
 				      JawabanValue = jawaban.value;
 				      barier.style.display = "none";
@@ -2574,7 +2572,6 @@ function botStart(data) {
         if (['ilangin', 'yaudah'].some((kata) => jawabanValue.includes(kata))) {
          mainChat = 3;
          isRainLove = false;
-         isRainLinear = true;
          clonedTextPertanyaan.innerHTML = 'oke aku hilangin ya love nya';
         } else {
          mainChat = 3;
@@ -2603,7 +2600,6 @@ function botStart(data) {
          if (['mau', 'yaudah', `iya`].some((kata) => jawabanValue.includes(kata))) {
           mainChat = 3;
           isRainLove = false;
-          isRainLinear = true;
           botAnswerExecuted = true;
           clonedTextPertanyaan.innerHTML = `okeh klo kamu mau ganti😅`;
          } else if (['gak', 'engga'].some((kata) => jawabanValue.includes(kata))) {
@@ -2623,7 +2619,6 @@ function botStart(data) {
         } else {
         if (!botAnswerExecuted) {
          isRainLove = false;
-         isRainLinear = true;
          botAnswerExecuted = true;
          clonedTextPertanyaan.innerHTML = `yaudahh ya ${namaDepan} aku ilangin love nya😅`;
         } else {
@@ -2709,14 +2704,6 @@ function botStart(data) {
  }
  if (initSticker >= 1 || initGuess >= 1){
   console.log("sticker bertambah :", initSticker, "dan tebak gambar :", initGuess);
- }
- 
- if (isRainLinear) {
-  containerLinear.forEach(e => e.style.opacity = "1");
-  containerLove.style.opacity = "0";
- } else {
-  containerLove.style.opacity = "1";
-  containerLinear.forEach(e => e.style.opacity = "0");
  }
 }/*kurawa end botStart*/
 
@@ -2811,16 +2798,16 @@ function sayTime(login) {
  let timeNow = new Date().getHours();
   if (login === true) {
    if (timeNow >= 1 && timeNow < 8) {
-    return `Selamat pagi ${namaDepan} !`;
+    return `pagi`;
    } else if (timeNow >= 8 && timeNow < 16) {
-    return `Selamat siang ! ${namaDepan}`;
+    return `siang`;
    } else if (timeNow >= 16 && timeNow < 18) {
-    return `Selamat sore ${namaDepan} !`;
+    return `sore`;
    } else {
-    return `Selamat malam ${namaDepan} !`;
+    return `malam`;
    }
   } else {
-   return `Selamat datang di fabot !`;
+   return `selamat datang di fabot !`;
   }
 }
 

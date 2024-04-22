@@ -1,5 +1,5 @@
 
- const cz = console.log.bind(console);
+const csl = console.log.bind(console);
 
 let blurProfile = document.querySelectorAll('.blur-profile');
 let loaders = document.querySelector('#loader-web');
@@ -84,6 +84,7 @@ let { isLogin, isFullLogin } = flagLogin;
 let fullName = getDataUser?.user?.personal?.fullName || '';
 let [ namaDepan, midName, ...lastName ] = fullName.split(' ');
 let user = getDataUser?.user?.namaUser || '';
+let dateLogin = getDataUser?.user?.dateLogin || '';
 
 let { birth, songs, status, planet, dreams, gender, bioUser, ...recent } = getDataUser?.user?.personal || {};
 let { hobbyFir = '', hobbySec = '', hobbyThi = '' } = getDataUser?.user?.personal?.hobby || {};
@@ -94,7 +95,7 @@ let containerHomeIs = true;
 
 descriptionSatu.innerHTML = "Hi👋,My name is Farid Fathoni N. I am the developer of this website and I am a vocational high school student who is very enthusiastic about learning and has a special interest in making websites. Although sometimes I feel confused cause I am self-taught and don't hv a mentor to guide me.";
 
-descriptionDua.innerHTML = "I have taught myself various techniques and prgramming languages such as HTML, CSS, and javascript to build attractive and interactive websites for users.";
+descriptionDua.innerHTML = "I have taught myself various techniques and programming languages such as HTML, CSS, and javascript to build attractive and interactive websites for users.";
 
 descriptionTiga.innerHTML = "and lastly this website was created only to learn how to develop websites using the basic programming language and logic that I currently understand.";
 
@@ -542,8 +543,6 @@ favoriteIcons.forEach((favoriteIcon) => {
   }
  });
 });
-
-const textAlert = [`Terimakasih ${namaDepan} sudah mengirimkan email kepada developer🥳🎉<br><br>Email kamu sangat berguna untuk developer agar terus bersemangat mengembangkan web chat bot ini`, 'ketikan judul email minimal lebih dari 5 huruf atau jika sudah ketikan isi email minimal lebih dari 15 huruf', ''];
 
 const pageEmail = document.querySelector('.containerMail');
 const container_email = document.querySelector('.wrap-bx-hs');
@@ -1128,7 +1127,7 @@ function userValidation() {
   isLogin = frInitialize.flagLogin.isLogin;
   emailUser = frInitialize.user.emailUser
   user = frInitialize.user.namaUser;
-  let dateLogin = frInitialize.user.dateLogin;
+  dateLogin = frInitialize.user.dateLogin;
   
  if (isLogin) {
   // profile user info validation //
@@ -1181,6 +1180,7 @@ function userValidation() {
   }, 1000);
  }
  //setTimeout(() => { typeText(0) }, 2000);
+ document.querySelector('#signup-text').innerHTML = isLogin ? `<button class="btn-login"><span><ion-icon name="person"></ion-icon>${namaDepan}</span></button>` : `<button class="btn-login"><span><ion-icon name="person"></ion-icon>SIGN UP</span></button>`;
 }
 
 document.addEventListener("visibilitychange", function() {
