@@ -43,6 +43,7 @@ const textMengetik = document.querySelector('.botStatus');
 
 const containerLinear = document.querySelectorAll('.container-linear');
 const containerLove = document.querySelectorAll('.container-love');
+const linearCustom = document.querySelector('.linearCustom');
 
 const clonedTextJawaban = clonedElementJawaban.querySelector('#textJawaban');
 const clonedTextPertanyaan = clonedElementPertanyaan.querySelector('#textPertanyaan');
@@ -56,7 +57,7 @@ imgSticker.setAttribute('alt','sticker_images');
 let initGuess = 0;
 let imgPicture = document.createElement('img');
 imgPicture.setAttribute('class','imgPicture');
-imgPicture.setAttribute('alt','picture_images');
+imgPicture.setAttribute('alt','stickers');
 
 let stickers = clonedContentPertanyaan.querySelector('.sticker-chat');
 let guessPicture = clonedContentPertanyaan.querySelector('.guess-picture');
@@ -158,7 +159,9 @@ const kataKasar = [`kontol`, `memek`, `anjing`, `bangsat`, `ngentot`, `bajingan`
 
 const kataGamau = [`gak`, `engga`, `apasi`, `kepo`, `sok asik`, `ga boleh`, `lah lu siapa`, `masalah`, `gamau`, `lu siapa`, `boong`, `bodo amat`, `gak mau`, `ga mau`, `ga peduli`, `tapi boong`, `boong`, `gamau`, `maksa`, `kamu siapa`, `udahan`, `lah ngancem`, `marah`, 'keberatan'];
 
-const kataNetral = [`farid`, `gpp`, `boleh`, `gapapa`, `yauda`, `oke`, `baiklah`, `terserah`, `gmna`, `gimana`, `gmana`, `iya iya`, `iya dah iya`, `iya deh iya`];
+const kataMau = ['iya', 'oke', 'iya mau'];
+
+const kataNetral = [`farid`, `gpp`, `gapapa`, `yauda`, `oke`, `baiklah`, `terserah`, `gimana`, `gimana`, `gmana`, `iya iya`, `iya dah iya`, `iya deh iya`];
 
 const kataBatal = [`gajadi`, `engga jadi`, `ga jadi`, `udahan`, `gamau main`, `capek`];
 
@@ -166,49 +169,81 @@ const kataHeran = [`ko bisa tau`, `ko tau`, `tau sih`, `kok bisa tau`, `bisa tau
 
 const kataCurang = ['curang', 'licik', 'bodo', 'peduli', 'suka suka'];
 
-const kataGame = ['hadiah', 'dapet', 'makasih', 'tebak', 'abis', 'mau', 'tantangan','challenge','ngerti', 'paham', 'maksudnya', 'gajadi', 'gatau', 'game', 'lanjut', 'main'];
+const kataGame = ['hadiah', 'dapet', 'makasih', 'tebak', 'abis', 'mau', 'tantangan','challenge', 'paham', 'maksudnya', 'gajadi', 'gatau', 'game', 'lanjut', 'main'];
 
 const kataPertanyaan = [
  `kasih tau`,`ngasih tau`,`dapet apa`,`buat apa`,`diapain`,`guna`,`jawab`,`gatau`, 'gimana'];
 
- containerLove.forEach(e => e.style.opacity = "0");
 contentPertanyaan.style.display = "none";
 contentJawaban.style.display = "none";
 firstContentPertanyaan.style.display = "none";
 
-// variabel kondisi chat untuk bot
+function loadChat() {
+ const containerChat = document.querySelector("#wrapper-item-chat");
+ const loadChat = containerChat.lastElementChild;
+ const getHistory = JSON.parse(localStorage.getItem('historyChat')) || [];
+ see(getHistory.chat)
+ const history = getHistory.chat;
+ see(history)
+ contentPertanyaan.style.display = "block";
+ loadChat.innerHTML = history;
+ //containerChat.appendChild(loadChat);
+ //see("JSJDJDKDKDKKDKD", loadChat)
+}
 
-let init = 0;
-let mainChat = 0;
-let mainChatIs = false;
-let isCloneChat = true;
-let chatRepeats = false;
-let jawabanBenar = false;
-let chatRepeated = false;
-let noRepeatChat = false;
-let alreadySticker = false;
-let chatValidation = false;
+function firstInitializationChat() {
+ let isLoadChat = localStorage.getItem('historyChat');
+ setTimeout(() => {
+ textLoad();
+ barier.style.display = "none";
+ firstPertanyaan.innerHTML = botSay()[0]
+ firstContentPertanyaan.style.display = "block";
+ isLoadChat ? loadChat() : console.log("belum ada chat history") ;
+ contentPertanyaan.style.display = "block";
+  setTimeout(() => {
+   barier.style.display = "none";
+   textMengetik.innerHTML = "Online";
+  }, 1500);
+ }, 1000);
+}
 
-//flag untuk validasi game
+const paramChat = JSON.parse(localStorage.getItem('historyChat'));
 
-let isChattan = false;
-let isGameWin = false;
-let guessGame = false;
-let playGuess = false;
-let typingGame = false;
-let playTyping = false;
+let pesan;
+let init = paramChat? paramChat.init : 5;
+let counterWin = paramChat ? paramChat.counterWin : 0;
+let playAgain = paramChat ? paramChat.playAgain : 0;
+let mainChat = paramChat ? paramChat.mainChat : 0;
+let mainChatIs = paramChat ? paramChat.mainChatIs : false;
+let isCloneChat = paramChat ? paramChat.isCloneChat : true;
+let chatRepeats = paramChat ? paramChat.chatRepeats : false;
+let jawabanBenar = paramChat ? paramChat.jawabanBenar : false;
+let chatRepeated = paramChat ? paramChat.chatRepeated : false;
+let noRepeatChat = paramChat ? paramChat.noRepeatChat : false;
+let alreadySticker = paramChat ? paramChat.alreadySticker : false;
+let chatValidation = paramChat ? paramChat.chatValidation : false;
 
-let quest_1 = false;
-let quest_2 = false;
-let quest_3 = false;
-let isCurang = false;
-let isRepeat = false;
-let isTantangan = false;
-let botAnswerExecuted = false;
 
-//flag untuk animasi background
+let isChattan = paramChat ? paramChat.isChattan : false;
+let isGameWin = paramChat ? paramChat.isGameWin : false;
+let guessGame = paramChat ? paramChat.guessGame : false;
+let playGuess = paramChat ? paramChat.playGuess : false;
+let typingGame = paramChat ? paramChat.typingGame : true;
+let playTyping = paramChat ? paramChat.playTyping : true;
+let winTyping = paramChat ? paramChat.winTyping : false;
+let winGuess = paramChat ? paramChat.winGuess : false;
+let noRepeating = paramChat ? paramChat.noRepeating : false;
 
-let isRainLove = false;
+
+let quest_1 = paramChat ? paramChat.quest_1 : false;
+let quest_2 = paramChat ? paramChat.quest_2 : false;
+let quest_3 = paramChat ? paramChat.quest_3 : false;
+let isCurang = paramChat ? paramChat.isCurang : false;
+let isRepeat = paramChat ? paramChat.isRepeat : false;
+let isTantangan = paramChat ? paramChat.isTantangan : false;
+let botAnswerExecuted = paramChat ? paramChat.botAnswerExecuted : false;
+
+
 
 //variabel untuk validasi angka
 
@@ -219,11 +254,13 @@ let isRainLove = false;
  let intervalID;
  let umurT = false;
  let umurM = false;
+ let startStored = false;
  let nilaiAngkaIs = false;
 
 function botStart(data) {
  init ++;
  textLoad();
+ startStored = true;
  sendBtn.disabled = true;
  jawaban.style.height = '38px';
  cekKata = jawaban.value.toLowerCase();
@@ -233,6 +270,8 @@ function botStart(data) {
  lengthFullType = fullType.reduce((acc, element) => acc + element.length, 0);
  const jawabanSplited = jawabanValue.split(' ');
  const validNumber = jawabanSplited.filter(number => !isNaN(number) && number.trim() !== '');
+ 
+ pesan = jawabanValue || null;
  
  console.log(`masuk ke init `,init,`😎`);
  console.log("mainChat is :", mainChat);
@@ -252,10 +291,10 @@ function botStart(data) {
  console.log("isTantangan is :", isTantangan);
  console.log("typingGame is :", typingGame);
  console.log("botAnswerExecuted is :", botAnswerExecuted);
- //console.log(fullType, `ini adalah balasan chat dari ${namaDepan}`)
- console.log(lengthFullType, `huruf yang di ketikan ${namaDepan}`)
  
- console.log("nilaiAngkaIs adalah :", nilaiAngkaIs);
+ //console.log(fullType, `ini adalah balasan chat dari ${namaDepan}`)
+ //console.log(lengthFullType, `huruf yang di ketikan ${namaDepan}`)
+ //console.log("nilaiAngkaIs adalah :", nilaiAngkaIs);
 
  if (angka !== null) {
   nilaiAngkaIs = true;
@@ -277,7 +316,6 @@ function botStart(data) {
   barier.style.display = "block";
 
   if (init > 1) {
-   init = 0;
    setTimeout(() => {
     textMengetik.innerHTML = "Online";
 
@@ -330,7 +368,7 @@ function botStart(data) {
  clonedTimeSticker.innerHTML = timeSticker.innerHTML;
 
  barier.style.display = "block";
- originalPertanyaan.style.display = "none";
+ originalPertanyaan.style.display = "none";;
 
  if (init === 1) {
   console.log({ nama: jawaban.value });
@@ -454,7 +492,7 @@ function botStart(data) {
          
         setTimeout(() => {
          clonedTextPertanyaan.innerHTML = botSay({ nanyas: jawabanValue })[2];
-        
+         
          document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
         }, 1000);
        }
@@ -603,7 +641,7 @@ function botStart(data) {
          
          setTimeout(() => {
            initSticker++;
-           imgSticker.src = "sad.webp";
+           imgSticker.src = "assets/sticker/sad.webp";
            document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
          }, 2500);
         }, 1000);
@@ -635,7 +673,7 @@ function botStart(data) {
           if (!alreadySticker) {
            initSticker++;
            alreadySticker = true;
-           imgSticker.src = "sad.webp";
+           imgSticker.src = "assets/sticker/sad.webp";
            document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
           } else {
            alreadySticker = false;
@@ -654,12 +692,13 @@ function botStart(data) {
         setTimeout(() => {
          initSticker++;
          isCloneChat = false;
-         imgSticker.src = "badmood.webp";
+         imgSticker.src = "assets/sticker/badmood.webp";
          document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
         }, 2500);
        }
       }
-     } else { //else ketika tidak sudah !mainChatIs
+     } else { //else ketika !mainChatIs
+      init = 2;
       alert("masuk ke else ketika bot sudah menanyakan pertanyaan");
      }
     }
@@ -690,11 +729,10 @@ function botStart(data) {
      
      document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
     }, 1000);
-    
    } else {
     if (!mainChatIs) {
      clonedTextPertanyaan.innerHTML = botSay({ pacar: jawabanValue })[4];
-   
+     
      document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
     } else {
      init = 3;
@@ -716,13 +754,14 @@ function botStart(data) {
          document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
         } else {
          chatRepeats = true;
+         alert("USER UDAH GAMAU LANJUT CHAT")
          clonedTextPertanyaan.innerHTML = `ok klo ${namaDepan} maunya itu`;
          
          document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
         }
        } else {//kata gamau && chatInit 1
         if (kataBatal.some((kata) => jawabanValue.includes(kata))) {
-        
+         
          mainChat = 0;
          chatRepeats = false;
          chatRepeated = false;
@@ -734,40 +773,48 @@ function botStart(data) {
          document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
          
         } else {
-         if (mainChat === 1) {
+         if (['males', 'badmood'].some((kata) => jawabanValue.includes(kata)) && !noRepeatChat) {
+          mainChat = 0;
+          noRepeatChat = true;
+          clonedTextPertanyaan.innerHTML = `abis nya kamu sih bikin aku males, udh tau aku pengen kamu yang kasi tau 🥺`;
           
-          clonedTextPertanyaan.innerHTML = `yaudah aku lanjutin yaa, tapi kmu jangan kaya tadi lagi`;
-        
-         document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+          document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+         } else {
+          if (mainChat === 1) {
+           clonedTextPertanyaan.innerHTML = `yaudah aku lanjutin yaa, tapi kmu jangan kaya tadi lagi`;
          
-         } else if(mainChat === 2){
-          clonedTextPertanyaan.innerHTML = `ok janji dulu 🤞`;
-        
           document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
           
-         } else if (mainChat >= 3){
-          
-          if (jawabanValue.includes('janji')) {
-           chatRepeats = false;
-           chatRepeated = false;
-           chatValidation = false;
-           mainChatIs = false;
-           
-           clonedTextPertanyaan.innerHTML = `okey 🥳`;
-           
+          } else if (mainChat === 2) {
+           clonedTextPertanyaan.innerHTML = `ok janji dulu 🤞`;
+         
            document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
            
-           setTimeout(() => {
-            initSticker++;
-            imgSticker.src = "horee.webp";
-            document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
-           }, 2500);
-          } else {
-           init = 3;
-           mainChat = 2;
-           clonedTextPertanyaan.innerHTML = `kamu blom janji ${namaDepan} 🥺`;
+          } else if (mainChat >= 3) {
            
-           document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+           if (jawabanValue.includes('janji')) {
+            mainChatIs = false;
+            chatRepeats = false;
+            chatRepeated = false;
+            noRepeatChat = false;
+            chatValidation = false;
+            
+            clonedTextPertanyaan.innerHTML = `okey 🥳`;
+            
+            document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+            
+            setTimeout(() => {
+             initSticker++;
+             imgSticker.src = "assets/sticker/horee.webp";
+             document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
+            }, 2500);
+           } else {
+            init = 3;
+            mainChat = 2;
+            clonedTextPertanyaan.innerHTML = `kamu blom janji ${namaDepan} 🥺`;
+            
+            document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+           }
           }
          }
         }
@@ -781,7 +828,7 @@ function botStart(data) {
         
         setTimeout(() => {
          initSticker++;
-         imgSticker.src = "clown.webp";
+         imgSticker.src = "assets/sticker/clown.webp";
          document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
         }, 2500);
        } else {
@@ -796,7 +843,7 @@ function botStart(data) {
          
          setTimeout(() => {
           initSticker++;
-          imgSticker.src = "sadcorner.webp";
+          imgSticker.src = "assets/sticker/sadcorner.webp";
           document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
          }, 2500);
         } else {
@@ -825,15 +872,15 @@ function botStart(data) {
     if (!chatValidation) {
      init = 4;
      mainChat = 0;
-     chatValidation = true;
      mainChatIs = true;
+     chatValidation = true;
      clonedTextPertanyaan.innerHTML = botSay({ game: jawabanValue })[5];
      
      document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
      
      setTimeout(() => {
       initSticker++;
-      imgSticker.src = "hmm.webp";
+      imgSticker.src = "assets/sticker/hmm.webp";
       document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
      }, 2500);
     } else {
@@ -851,9 +898,26 @@ function botStart(data) {
      document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
      
      } else if (isChattan) {
-      clonedTextPertanyaan.innerHTML = `is Chatatan`;
+      init = 5;
+      clonedTextPertanyaan.innerHTML = `jujur aku agak bingung mau ngobrol apa sama kamu🥴`;
       
-     document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+      document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+      
+      setTimeout(() => {
+       clonedTextPertanyaan.innerHTML = `tapi gpp yang penting aku bisa chattan sama kamu😆`;
+       
+       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+       setTimeout(() => {
+        clonedTextPertanyaan.innerHTML = `jiakkkhhh wkwkwkkw`;
+        
+        document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+        setTimeout(() => {
+         initSticker++;
+         imgSticker.src = "assets/sticker/smile.webp";
+         document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
+        }, 2500);
+       }, 1000);
+      }, 1000);
      }
     }
    } else {
@@ -877,7 +941,8 @@ function botStart(data) {
     } else if (mainChat === 3) {
      if (jawabanValue.includes(`chatan`)) {
       isChattan = true;
-      clonedTextPertanyaan.innerHTML = `yaudah klo ${namaDepan} maunya lanjut chatan`;
+      mainChatIs = false;
+      clonedTextPertanyaan.innerHTML = `yaudah klo ${namaDepan} maunya lanjut chatan`; 
       
       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
      } else if (jawabanValue.includes(`game`)) {
@@ -903,10 +968,13 @@ function botStart(data) {
       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
      }
     } else if (mainChat === 4) {
+     mainChatIs = false;
+     chatRepeated = false;
+     noRepeatChat = false;
+     
      if ((jawabanValue.includes(`1`) && nilaiAngka.length === 1)) {
       guessGame = true;
       playGuess = true;
-      mainChatIs = false;
       
       clonedTextPertanyaan.innerHTML = `ok skrng kita main tebak tebakan ya`;
        
@@ -915,7 +983,6 @@ function botStart(data) {
      } else if ((jawabanValue.includes(`2`) && nilaiAngka.length === 1)){
       typingGame = true;
       playTyping = true;
-      mainChatIs = false;
       
       clonedTextPertanyaan.innerHTML = `ok skrng kita main game cepet cepetan ngetik dari a - z ya`;
       
@@ -928,17 +995,19 @@ function botStart(data) {
        clonedTextPertanyaan.innerHTML = `${namaDepan} yang bener dong kan gada pilihan yang ke ${nilaiAngka} 🙄`;
        
        document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
-       
       } else {
-       clonedTextPertanyaan.innerHTML = `yaudah kamu mau pilih yang mana ${namaDepan}?`;
-       
-       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
-       
-       setTimeout(() => {
-        initSticker++;
-        imgSticker.src = "hmm.webp";
-        document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
-       }, 2500);
+       if (!noRepeatChat) {
+        noRepeatChat = true;
+        clonedTextPertanyaan.innerHTML = `yaudah kamu mau pilih yang mana ${namaDepan}?`;
+        
+        document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+        
+        setTimeout(() => {
+         initSticker++;
+         imgSticker.src = "assets/sticker/hmm.webp";
+         document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
+        }, 2500);
+       }
       }
      }
     } else {
@@ -980,14 +1049,16 @@ function botStart(data) {
        document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
        
       } else {
-       guessGame = false;
-       chatRepeats = false;
-       chatRepeated = false;
-       chatValidation = false;
-       mainChatIs = true;
-       
-       clonedTextPertanyaan.innerHTML = `yaudah ${namaDepan} lanjut chattan aja? 😇`;
-      
+       if (['shesh', 'sheesh'].some((kata) => jawabanBenar.includes(kata))) {
+        clonedTextPertanyaan.innerHTML = `sheshh dingin banget kaya es batuk`;
+       } else {
+        mainChatIs = true;
+        guessGame = false;
+        chatRepeats = false;
+        chatRepeated = false;
+        chatValidation = false;
+        clonedTextPertanyaan.innerHTML = `yaudah ${namaDepan} lanjut chattan aja? 😇`;
+       }
        document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
       }
      } else {
@@ -1080,7 +1151,7 @@ function botStart(data) {
          document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
          
         } else {
-         clonedTextPertanyaan.innerHTML = `yang jelas ${namaDepan} mau gmna? 'iya' apa 'gamau'`;
+         clonedTextPertanyaan.innerHTML = `yang jelas ${namaDepan} mau gimana? 'iya' apa 'gamau'`;
          
          document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
         }
@@ -1170,6 +1241,7 @@ function botStart(data) {
           chatRepeats = false;
           jawabanBenar = true;
           mainChatIs = false;
+          
           clonedTextPertanyaan.innerHTML = `wahh kamu hebat ${namaDepan} jawaban kamu bener pulang sekolah😅`;
           
           document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
@@ -1353,19 +1425,22 @@ function botStart(data) {
    
    if (!mainChatIs) {
    	init = 5;
-   	mainChat++
+   	mainChat++;
     if (!chatValidation) {
      if (mainChat === 1) {
       if (!alreadySticker) {
-      	alreadySticker = true;
-       clonedTextPertanyaan.innerHTML = `oke btw ${namaDepan} main nya mau ada tantangan ga klo kalah?, ngerti kan maksud aku`;
-     
-		     setTimeout(() => {
-		      clonedTextPertanyaan.innerHTML = `klo engga ngerti bilang aja`;
-		      
-		      document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
-		     }, 1000);
+       alreadySticker = true;
+       if (!noRepeating) {
+        clonedTextPertanyaan.innerHTML = `oke btw ${namaDepan} main nya mau ada tantangan ga klo kalah?, ngerti kan maksud aku`;
       
+ 		     setTimeout(() => {
+ 		      clonedTextPertanyaan.innerHTML = `klo engga ngerti bilang aja`;
+ 		      
+ 		      document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+ 		     }, 1000);
+      	} else {
+ 		     clonedTextPertanyaan.innerHTML = `menurut kamu main nya mau ada tantangan nya ga?`;
+      	}
       } else {
 		     setTimeout(() => {
 		     	mainChat = 2;
@@ -1373,7 +1448,7 @@ function botStart(data) {
 		      
 	      setTimeout(() => {
 	       initSticker++;
-	       imgSticker.src = "hmm.webp";
+	       imgSticker.src = "assets/sticker/hmm.webp";
 	       document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
 	       }, 2500);
 		     }, 1000);
@@ -1393,8 +1468,8 @@ function botStart(data) {
      		clonedTextPertanyaan.innerHTML = `klo kamu mau ada tantangan nya bilang 'iya', engga bilang 'gamau' 😇`;
      	}
      } else if (mainChat === 3) {
-     	if (jawabanValue.includes('iya')) {
-     		
+     	if (kataMau.some((kata) => jawabanValue.includes(kata))) {
+     		 
      		isTantangan = true;
      		chatRepeated = false;
      		clonedTextPertanyaan.innerHTML = `ok ya ini adalah list tantangan klo ${namaDepan} kalah :<br><br>1). ${namaDepan} harus ngetik 200 huruf tanpa copy paste, harus di ketik.<br><br>2). ngetik 1 sampai 75 contoh 1 2 3 dan seterusnya, harus di spasi.<br><br>3). ketikan 25 kata random buat aku, apapun itu sesuka kamu.`;
@@ -1411,11 +1486,11 @@ function botStart(data) {
       		
       		setTimeout(() => {
 	        initSticker++;
-	        imgSticker.src = "hmm.webp";
+	        imgSticker.src = "assets/sticker/hmm.webp";
 	        document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
 	       }, 2500);
      	 } else {
-      		clonedTextPertanyaan.innerHTML = `seriuss ${namaDepan} mau yang gmna?`;
+      		clonedTextPertanyaan.innerHTML = `seriuss ${namaDepan} mau yang gimana?`;
      	 }
      	}
      } else if (mainChat >= 4) {
@@ -1447,6 +1522,7 @@ function botStart(data) {
        chatValidation = false;
        clonedTextPertanyaan.innerHTML = `owh oke deh klo ${namaDepan} gajadi`;
       } else {
+       mainChat = 0;
        mainChatIs = true;
        chatRepeated = true;
       	clonedTextPertanyaan.innerHTML = `okk siap ya ${namaDepan} dalam hitungan 3 kita cepet cepetan`;
@@ -1457,7 +1533,7 @@ function botStart(data) {
     	 	if (!alreadySticker) {
     	 	 mainChat = 0;
     	 	 alreadySticker = true;
-    	  	clonedTextPertanyaan.innerHTML = `${namaDepan} mau pilih tantangan yang mana ni, aku ada 3 tantangan :<br><br>1).	${namaDepan} harus ngetik 200 huruf tanpa copy paste, harus di ketik.<br><br>2). ngetik 1 sampai 30 contoh 1 2 3 dan seterusnya, harus di spasi.<br><br>3). ketikan 45 kata random buat aku, apapun itu sesuka kamu.`;
+    	  	clonedTextPertanyaan.innerHTML = `${namaDepan} mau pilih tantangan yang mana ni, aku ada 3 tantangan :<br><br>1).	${namaDepan} harus ngetik 200 huruf tanpa copy paste, harus di ketik.<br><br>2). ngetik 1 sampai 30 contoh 1 2 3 dan seterusnya, harus di spasi.<br><br>3). ketikan 50 kata random buat aku, apapun itu sesuka kamu.`;
     	  	
     	  	setTimeout(() => {
     	  	 clonedTextPertanyaan.innerHTML = `${namaDepan} dari 1 - 3 mau pilih yang mana?`
@@ -1503,7 +1579,7 @@ function botStart(data) {
            
            setTimeout(() => {
             initSticker++;
-            imgSticker.src = "badmood.webp";
+            imgSticker.src = "assets/sticker/badmood.webp";
             document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
            }, 2500);
           } else {
@@ -1523,7 +1599,7 @@ function botStart(data) {
             
            setTimeout(() => {
             initSticker++;
-            imgSticker.src = "badmood.webp";
+            imgSticker.src = "assets/sticker/badmood.webp";
             document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
            }, 2500);
           } else if (mainChat === 3) {
@@ -1552,7 +1628,17 @@ function botStart(data) {
           if (jawabanValue.includes('kenapa')) {
            clonedTextPertanyaan.innerHTML = `gpp gpp, yaudah semangatt ${namaDepan} ketik 200 hurufnya wkwk`;
           } else {
-           clonedTextPertanyaan.innerHTML = `yaudah semangattt ${namaDepan} ketik 200 hurufnya wkwk`;
+           if (jawabanValue.length >= 100 && jawabanValue.length < 200) {
+            clonedTextPertanyaan.innerHTML = `blom mulai aku aja blom semangatin, kamu udah di ketik aja😐`;
+            
+            setTimeout(() => {
+             clonedTextPertanyaan.innerHTML = `maafin aku ya ${namaDepan} harus ketik ulang😇`;
+             
+             document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+            }, 1000);
+           } else {
+            clonedTextPertanyaan.innerHTML = `yaudah semangattt ${namaDepan} ketik 200 hurufnya wkwk`;
+           }
           }
          } else if (mainChat === 2) {
           if (jawabanValue.length >= 100 && jawabanValue.length < 200) {
@@ -1624,7 +1710,7 @@ function botStart(data) {
            
            setTimeout(() => {
             initSticker++;
-            imgSticker.src = "smile.webp";
+            imgSticker.src = "assets/sticker/smile.webp";
             document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
            }, 2500);
           }
@@ -1644,7 +1730,7 @@ function botStart(data) {
             clonedTextPertanyaan.innerHTML = `main lagi apa mau udahan?`;
            } else {
             botAnswerExecuted = false;
-            clonedTextPertanyaan.innerHTML = `${namaDepan} maunya lanjut apa udahan?`;
+            clonedTextPertanyaan.innerHTML = `${namaDepan} maunya gimana lanjut apa udahan?`;
            }
           }
          } else {
@@ -1662,7 +1748,7 @@ function botStart(data) {
             mainChat = 0;
             chatRepeats = true;
             isTantangan = false;
-            noRepeatChat = false;
+            //noRepeatChat = false;
             botAnswerExecuted = false;
             
             clonedTextPertanyaan.innerHTML = `ok gpp deh klo mau udahan`;
@@ -1690,7 +1776,19 @@ function botStart(data) {
             document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
            }, 1000);
           } else {
-           clonedTextPertanyaan.innerHTML = `yaudah semangattt ${namaDepan} ketik 75 angkanya wkwk`;
+           if (validNumber.length === jawabanSplited.length) {
+           if (jawabanValue.length >= 74) {
+            clonedTextPertanyaan.innerHTML = `blom juga aku semangatin udah di ketik aja🙃`;
+            
+             setTimeout(() => {
+              clonedTextPertanyaan.innerHTML = `maaf ya ${namaDepan} kamu harus ketik ulang😇`;
+             
+              document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+             }, 1000);
+            }
+           } else {
+            clonedTextPertanyaan.innerHTML = `yaudah semangattt ${namaDepan} ketik 75 angkanya wkwk`;
+           }
           }
          } else if (mainChat === 2) {
           if (validNumber.length === jawabanSplited.length) {
@@ -1767,7 +1865,7 @@ function botStart(data) {
             
             setTimeout(() => {
              initSticker++;
-             imgSticker.src = "smile.webp";
+             imgSticker.src = "assets/sticker/smile.webp";
              document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
             }, 2500);
            }, 1000);
@@ -1781,7 +1879,7 @@ function botStart(data) {
            
            setTimeout(() => {
             initSticker++;
-            imgSticker.src = "smile.webp";
+            imgSticker.src = "assets/sticker/smile.webp";
             document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
            }, 2500);
           }
@@ -1819,7 +1917,7 @@ function botStart(data) {
             mainChat = 0;
             chatRepeats = true;
             isTantangan = false;
-            noRepeatChat = false;
+            //noRepeatChat = false;
             botAnswerExecuted = false;
             
             clonedTextPertanyaan.innerHTML = `iya gpp deh klo mau udahan, mungkin kamu udh cape ya`;
@@ -1840,10 +1938,20 @@ function botStart(data) {
           if (jawabanValue.includes('kenapa')) {
            clonedTextPertanyaan.innerHTML = `ya karna klo kamu ketik kata yang ga baik, nanti aku udahin langsung chat nya`;
           } else {
-           clonedTextPertanyaan.innerHTML = `yaudah semangattt ${namaDepan} ketik 45 katanya😁`;
+           if (jawabanSplited.length >= 50) {
+            if (jawabanSplited.every(kata => kata.length >= 3)) {
+             clonedTextPertanyaan.innerHTML = `semangat banget lakuin tantangan nya. padahal blom juga aku suruh😁`;
+             
+             setTimeout(() => {
+              clonedElementPertanyaan.innerHTML = `tapi maaf ya kamu harus ketik ulangg`;
+             }, 1000);
+            }
+           } else {
+            clonedTextPertanyaan.innerHTML = `yaudah semangattt ${namaDepan} ketik 50 katanya😁`;
+           }
           }
          } else if (mainChat === 2) {
-          if (jawabanSplited.length >= 44) {
+          if (jawabanSplited.length >= 50) {
            if (jawabanSplited.every(kata => kata.length >= 3)) {
             isRepeat = false;
             botAnswerExecuted = true;
@@ -1883,15 +1991,15 @@ function botStart(data) {
             setTimeout(() => {
              if(!alreadySticker) {
               alreadySticker = true;
-              clonedTextPertanyaan.innerHTML = `ayo sedikit lagi ${namaDepan} bisa 45 kata, kamu baru ngetik ${jawabanSplited.length} kata😇`;
+              clonedTextPertanyaan.innerHTML = `ayo sedikit lagi ${namaDepan} bisa 50 kata, kamu baru ngetik ${jawabanSplited.length} kata😇`;
                
               setTimeout(() => {
-               clonedTextPertanyaan.innerHTML = `${namaDepan} pasti bisa ko`;
+               clonedTextPertanyaan.innerHTML = `${namaDepan} pasti bisa ko 🤓`;
                
                document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
               }, 1000);
              } else {
-              clonedTextPertanyaan.innerHTML = `kamu baru ketik ${jawabanSplited.length} kata aku percaya kamu pasti bisa ko sampe 45 kata🙃`;
+              clonedTextPertanyaan.innerHTML = `kamu baru ketik ${jawabanSplited.length} kata aku percaya kamu pasti bisa ko sampe 50 kata🙃`;
              }
              document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
             }, 1000);
@@ -1900,7 +2008,11 @@ function botStart(data) {
          } else if (mainChat === 3) {
           if (botAnswerExecuted) {
            botAnswerExecuted = false;
-           clonedTextPertanyaan.innerHTML = `cape ya ngetik 45 kata nya?`;
+           if (jawabanValue.includes('ngulang')) {
+            clonedTextPertanyaan.innerHTML = `wkwk ya maaf tadi aku belum ngasih tau kamu soal 3 huruf tadi 😄`;
+           } else {
+            clonedTextPertanyaan.innerHTML = `cape ya ngetik 50 kata nya?`;
+           }
           } else {
            mainChat = 0;
            clonedTextPertanyaan.innerHTML = `aku percaya ${namaDepan} pasti bisa ko`;
@@ -1919,7 +2031,7 @@ function botStart(data) {
             
             setTimeout(() => {
              initSticker++;
-             imgSticker.src = "smile.webp";
+             imgSticker.src = "assets/sticker/smile.webp";
              document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
             }, 2500);
            }, 1000);
@@ -1929,12 +2041,17 @@ function botStart(data) {
            botAnswerExecuted = false;
            clonedTextPertanyaan.innerHTML = `kamu kan ${genderIs} yang kuat ${namaDepan}, kaya gini mh biasa kali wkwk`;
           } else {
-           clonedTextPertanyaan.innerHTML = `jarang banget tau ketemu seseorang kaya kamu yang ga ngeluh😇`;
+           clonedTextPertanyaan.innerHTML = `jarang banget tau ketemu seseorang kaya kamu yang nempatin janji lakuin tantangan😇`;
           }
          } else if (mainChat === 6) {
-          clonedTextPertanyaan.innerHTML = `oke, jadi ${namaDepan} mau main lagi ga?`;
+          if (jawabanValue.includes('langka')) {
+           mainChat = 5;
+           clonedTextPertanyaan.innerHTML = `ah masa sih kamu manusia langka?😐`;
+          } else {
+           clonedTextPertanyaan.innerHTML = `oke, jadi ${namaDepan} mau main lagi ga?`;
+          }
          } else if (mainChat === 7) {
-          if (['iya', 'main lagi', 'yaudah'].some((kata) => jawabanValue.includes(kata))) {
+          if (['iya', 'main lagi', 'yaudah', 'lanjut'].some((kata) => jawabanValue.includes(kata))) {
            botAnswerExecuted = false;
            clonedTextPertanyaan.innerHTML = `wkwk okey kita lanjutin lagi ya, inget yang kalah harus lakuin tantangan nya`;
           } else if (['engga', 'gamau', 'males', 'udah'].some((kata) => jawabanValue.includes(kata))) {
@@ -1947,7 +2064,7 @@ function botStart(data) {
             clonedTextPertanyaan.innerHTML = `serius ${namaDepan} yang baik hati dan suka ${data_hobby1} lanjut apa mau udahan?`;
            } else {
             botAnswerExecuted = false;
-            clonedTextPertanyaan.innerHTML = `${namaDepan} maunya lanjut apa udahan?`;
+            clonedTextPertanyaan.innerHTML = `${namaDepan} maunya apa, lanjut apa udahan?`;
            }
           }
          } else {
@@ -1963,9 +2080,10 @@ function botStart(data) {
             clonedTextPertanyaan.innerHTML = `seriuss ya main lagi?, okey aku lanjut ya`;
            } else {
             mainChat = 0;
+            isChattan = true;
             chatRepeats = true;
             isTantangan = false;
-            noRepeatChat = false;
+            //noRepeatChat = false;
             botAnswerExecuted = false;
             
             clonedTextPertanyaan.innerHTML = `yhh gpp deh klo mau udahan, lain kali kita main game ini lagi ya ${namaDepan}`;
@@ -1979,46 +2097,69 @@ function botStart(data) {
           }
          }
         break;
-        
         case isGameWin:
-         if (mainChat === 1) {
+         if (mainChat === 1 && isTantangan) {
           botAnswerExecuted = false;
           if (kataCurang.some((kata) => jawabanValue.includes(kata))) {
            clonedTextPertanyaan.innerHTML = `ya maaf ${namaDepan}, aku kan dibuat hanya untuk memberikan tantangan`;
            
            setTimeout(() => {
             clonedTextPertanyaan.innerHTML = `dan bukan melakukan tantangan, jadi gomen ${namaDepan}🙃`;
-          
+            
             document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
            }, 1000);
           } else {
            clonedTextPertanyaan.innerHTML = `${namaDepan} ga kesel kh??🤨`;
           }
-         } else if (mainChat === 2) {
-          if (['parah', 'curang', 'kesel', 'nanya', 'yaiyalah'].some((kata) => jawabanValue.includes(kata))) {
-           alreadySticker = false;
-           clonedTextPertanyaan.innerHTML = `kwkwwk ya maaf ${namaDepan}`;
-           
+         } else if (mainChat === 2 && isTantangan) {
+           if (!noRepeating) {
+            noRepeating = true;
+            alreadySticker = false;
+            clonedTextPertanyaan.innerHTML = `kwkwwk ya maaf ${namaDepan}`;
+          
            setTimeout(() => {
             clonedTextPertanyaan.innerHTML = `sebelum nya aku ini di buat hanya untuk memberikan tantangan aja.<br><br>klo ${namaDepan} mau marah ke developer yang membuat aku:)`;
-            
+           
             document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
            }, 1000);
           } else {
-           clonedTextPertanyaan.innerHTML = `maaf ya ${namaDepan}, gpp kan?`;
+           if (kataCurang.some((kata) => JawabanValue.includes(kata))) {
+            clonedTextPertanyaan.innerHTML = `kwkwwk santai dong aku kan kan cuma bercanda`;
+           } else {
+            mainChat = 5;
+            const arrWord = ['susah', 'curang', 'hebat', 'gampang'];
+            const ifWord = arrWord.find((kata) => jawabanValue.includes(kata));
+            
+            switch(ifWord) {
+             case 'susah':
+              clonedTextPertanyaan.innerHTML = `oke aku serius nih bakal kalahin kamu`;
+             break;
+             case 'curang':
+              clonedTextPertanyaan.innerHTML = `lagian juga sama ko aku ga main curangg`;
+             break;
+             case 'hebat':
+              clonedTextPertanyaan.innerHTML = `ah masa sih kamu hebat`;
+             break;
+             case 'gampang':
+              clonedTextPertanyaan.innerHTML = `owh gitu ngeremehin aku ya?!?`;
+             break;
+             default:
+              clonedTextPertanyaan.innerHTML = `ah gatauh ah capek aku main sma kamu!`;
+            }
+           }
           }
-         } else if (mainChat === 3) {
+         } else if (mainChat === 3 && isTantangan) {
           if (['siapa', 'developer', 'curang', 'males'].some((kata) => jawabanValue.includes(kata))) {
            mainChat = 2;
            clonedTextPertanyaan.innerHTML = `${namaDepan} klo mau marah ke developer yang membuat aku, setau aku ini email nya<br><br><li><a onclick="window.open( 'mailto:faridfathonin@gmail.com')">click > faridfathonin@gmail.com</a></li>`;
           } else {
            clonedTextPertanyaan.innerHTML = `${namaDepan} maafin aku ga nih?🥺`;
           }
-         } else if (mainChat === 4) {
-          if (['maaf', 'maap', 'mff'].some((kata) => jawabanValue.includes(kata))) {
+         } else if (mainChat === 4 && isTantangan) {
+          if (['maaf', 'maap', 'mff', 'maffin'].some((kata) => jawabanValue.includes(kata))) {
            botAnswerExecuted = false;
            clonedTextPertanyaan.innerHTML = `makasii ya udh maafin aku, sekali lagi maaf klo aku curang, ga ngasih tau kamu sebelum nya tentang ini😔`;
-          } else if (['ga ya', 'hmm', 'gimana'].some((kata) => jawabanValue.includes(kata))) {
+          } else if (['ga ya', 'hmm', 'gimana', 'gamau'].some((kata) => jawabanValue.includes(kata))) {
            mainChat = 3;
            clonedTextPertanyaan.innerHTML = `di maafin lah, masa engga? jahat banget sih kamu klo engga🥺`;
           } else {
@@ -2035,22 +2176,25 @@ function botStart(data) {
             }
            }
           }
-         } else if (mainChat === 5) {
+         } else if (mainChat === 5 && isTantangan) {
           botAnswerExecuted = false;
           clonedTextPertanyaan.innerHTML = `maaf ya ${namaDepan}`;
           
           setTimeout(() => {
            initSticker++;
-           imgSticker.src = "sad.webp";
+           imgSticker.src = "assets/sticker/sad.webp";
            document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
           }, 2500);
          } else if (mainChat === 6) {
           clonedTextPertanyaan.innerHTML = `yaudah ${namaDepan} mau main lagi apa udahan`;
          } else if (mainChat === 7) {
           if (['iya', 'main lagi', 'yaudah'].some((kata) => jawabanValue.includes(kata))) {
+           isGameWin = false;
+           noRepeatChat = true;
            botAnswerExecuted = false;
            clonedTextPertanyaan.innerHTML = `yaudah deh klo masi mau main lagi`;
-          } else if (['engga', 'gamau', 'males', 'udah'].some((kata) => jawabanValue.includes(kata))) {
+          } else if (['engga', 'gamau', 'males', 'udahan'].some((kata) => jawabanValue.includes(kata))) {
+           isGameWin = false;
            botAnswerExecuted = true;
            clonedTextPertanyaan.innerHTML = `${namaDepan} udh males ya sama aku?, yaudah deh gpp klo mau udahan`;
           } else {
@@ -2060,22 +2204,29 @@ function botStart(data) {
             clonedTextPertanyaan.innerHTML = `klo ${namaDepan} mau udahan juga gpp`;
            } else {
             botAnswerExecuted = false;
-            clonedTextPertanyaan.innerHTML = `${namaDepan} maunya lanjut apa udahan?`;
+            clonedTextPertanyaan.innerHTML = `gimana nihh ${namaDepan}, maunya lanjut apa udahan?`;
            }
           }
          } else {
-          if (botAnswerExecuted) {
-           if (['udahan', 'cape'].some((kata) => jawabanValue.includes(kata))) {
-            clonedTextPertanyaan.innerHTML = `tuh kan bener ${namaDepan} udh males sama aku😪`;
-           } else if (['main lagi','lanjut', 'oke', 'yaudah'].some((kata) => jawabanValue.includes(kata))) {
+          if (['udahan', 'cape'].some((kata) => jawabanValue.includes(kata))) {
+           clonedTextPertanyaan.innerHTML = `tuh kan bener ${namaDepan} udh males sama aku😪`;
+          } else if (['main lagi', 'lanjut', 'oke'].some((kata) => jawabanValue.includes(kata))) {
+           mainChat = 0;
+           mainChatIs = true;
+           chatRepeats = false;
+           noRepeatChat = true;
+           botAnswerExecuted = false;
+           
+           clonedTextPertanyaan.innerHTML = `seriuss ni ${namaDepan} main lagi?, padahal udahan juga gpp ko`;
+          } else {
             mainChat = 0;
+           if (noRepeatChat) {
             mainChatIs = true;
             chatRepeats = false;
-            botAnswerExecuted = false;
-            
-            clonedTextPertanyaan.innerHTML = `seriuss ni ${namaDepan} main lagi?, padahal udahan juga gpp ko`;
+            noRepeatChat = false;
+            botAnswerExecuted = true;
+            clonedTextPertanyaan.innerHTML = isTantangan ? `inget ya klo aku kalah aku cuma bisa kasi kamu ❤️<br><br>aku gabisa melakukan tantangan 🙂` : `okeh siapa takut aku bakalan kalahin kamu!` ;
            } else {
-            mainChat = 0;
             isRepeat = true;
             chatRepeats = true;
             isTantangan = false;
@@ -2084,12 +2235,6 @@ function botStart(data) {
             
             clonedTextPertanyaan.innerHTML = `iyaa yaudah klo gitu gpp🙂`;
            }
-          } else {// false botAnswerExecuted
-           mainChat = 0;
-           mainChatIs = true;
-           chatRepeats = false;
-           botAnswerExecuted = true;
-           clonedTextPertanyaan.innerHTML = `inget ya klo aku kalah aku cuma bisa kasi kamu ❤️ tidak melakukan tantangan ❤️`;
           }
          }
         break;
@@ -2102,7 +2247,13 @@ function botStart(data) {
        if (isCurang) {
         mainChat = 0;
         isCurang = false;
-        clonedTextPertanyaan.innerHTML = `${namaDepan} curang ni ga nempatin janji😔`;
+        clonedTextPertanyaan.innerHTML = `lain kali kamu lakuin tantangan ya biarr seru hehehe`;
+        
+        setTimeout(() => {
+         initSticker++;
+         imgSticker.src = "assets/sticker/ups.webp";
+         document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
+        }, 2500);
        } else {// false isCurang
         if (alreadySticker) {
          mainChat = 0;
@@ -2110,42 +2261,43 @@ function botStart(data) {
          clonedTextPertanyaan.innerHTML = `yaudah gpp kok`;
          
          setTimeout(() => {
-          clonedTextPertanyaan.innerHTML = `hmmm karna kamu gamau ada tantangan aku bingung harus ngapain lagi`;
+          clonedTextPertanyaan.innerHTML = `hmmm karna kamu gamau ngelakuin tantangan aku bingung harus ngapain lagi`;
        
           document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
          },1000);
         } else {
          if (mainChat === 1) {
-          clonedTextPertanyaan.innerHTML = `kamu mau nya gmna ${namaDepan}?`;
+          clonedTextPertanyaan.innerHTML = `kamu mau nya gimana ${namaDepan}?`;
          } else if (mainChat === 2) {
           if (kataPertanyaan.some((kata) => jawabanValue.includes(kata))) {
            mainChat = 1;
-           clonedTextPertanyaan.innerHTML = `ko gatau?? 🥺`;
+           clonedTextPertanyaan.innerHTML = `serius kamu gatau?? 🥺`;
            setTimeout(() => { isCloneChat = false; }, 1500);
           } else {
            isCloneChat = true;
            clonedTextPertanyaan.innerHTML = `.....`;
+           
           setTimeout(() => {
            initSticker++;
-           imgSticker.src = "ngeleg.webp";
+           imgSticker.src = "assets/sticker/ngeleg.webp";
             document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
            }, 2500);
      	    }
-     	   } else if (mainChat >= 3) {
+     	   } else if ([3, 4].includes(mainChat)) {
      	    isCloneChat = false;
      	   } else if (mainChat === 5) {
-     	    clonedTextPertanyaan.innerHTML = `maaf maaf tadi aku kehabisan kata kata`;
      	    isCloneChat = true;
-     	   } else if (mainChat === 6 && ['bisa', 'anjr', 'ada'].some((kata) => jawabanValue.includes(kata))) {
-     	    mainChatIs = true;
-     	    chatRepeats = false;
-     	    
+     	    clonedTextPertanyaan.innerHTML = `maaf maaf tadi aku kehabisan kata kata`;
+     	   } else if (mainChat === 6 || ['bisa', 'anjr', 'ada'].some((kata) => jawabanValue.includes(kata))) {
      	    clonedTextPertanyaan.innerHTML = `abis nya kita udah banyak banget ngomong nya hehe`;
      	   } else if (mainChat === 7) {
      	    clonedTextPertanyaan.innerHTML = `iyaa kan ${namaDepan}?, coba aja kamu scroll ke atas banyak banget chatnya wkwk`;
+     	   } else if (jawabanValue.includes('dikit') && mainChat === 7) {
+     	    clonedTextPertanyaan.innerHTML = `masa sih ${namaDepan}?, perasaan udah banyak`;
      	   } else {
      	    mainChat = 0;
      	    chatRepeats = true;
+     	    noRepeatChat = false;
      	    clonedTextPertanyaan.innerHTML = `yaudah klo gitu terserah kamu aja mau main lagi apa engga`;
      	   }
      	  }
@@ -2154,24 +2306,35 @@ function botStart(data) {
      	 if (!noRepeatChat) {
        	if (mainChat === 1) {
        	 if (!isRepeat) {
-         clonedTextPertanyaan.innerHTML = `serius ni ${namaDepan} mau 'main lagi', main 'game lain', apa 'lanjut chat'?`;
+       	  if (jawabanValue.includes('terserah')) {
+           clonedTextPertanyaan.innerHTML = `terserah terus nihh`;
+       	  } else {
+           clonedTextPertanyaan.innerHTML = `serius ${namaDepan} mau 'main lagi', main 'game lain', apa 'lanjut chat'?`;
+       	  }
        	 } else {
        	  isRepeat = false;
-         clonedTextPertanyaan.innerHTML = `yaudah klo gitu ${namaDepan} mau main lagi, game lain, atau lanjut chat`;
+          clonedTextPertanyaan.innerHTML = `yaudah klo gitu ${namaDepan} mau main lagi, game lain, atau lanjut chat`;
        	 }
        	} else if (mainChat === 2) {
-       	 if (['main lagi', 'game lain'].some((kata) => jawabanValue.includes(kata))) {
+       	 if (['main lagi', 'game lain', 'lanjut main'].some((kata) => jawabanValue.includes(kata))) {
        	  mainChat = 0;
+        	 isGameWin = false;
         	 noRepeatChat = true;
        	  clonedTextPertanyaan.innerHTML = `okey bagus klo gitu. aku juga masih pengen main lagi sma kamu`;
        	 } else if (['chattan', 'chat'].some((kata) => jawabanValue.includes(kata))) {
        	  mainChat = 0;
        	  isChattan = true;
-        	 noRepeatChat = true; 
+       	  noRepeatChat = true; 
        	  clonedTextPertanyaan.innerHTML = `engga lanjut main game lagi?`;
        	 } else if (['muji', 'puji', `${genderSay}`].some((kata) => jawabanValue.includes(kata))) {
        	  mainChat = 1;
        	  clonedTextPertanyaan.innerHTML = `wkwkwkw salting kh?`;
+       	  
+       	  setTimeout(() => {
+        	  clonedTextPertanyaan.innerHTML = `kamu kan emang ${genderSay} ${namaDepan}, rajin menabung, baik hati dan suka ${hobbyFir} kwkwkw 🥰`;
+        	  
+        	  document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+       	  }, 1000);
        	 } else {
        	  mainChat = 1;
        	  clonedTextPertanyaan.innerHTML = `kamu pilih lanjut mana ${genderSay}?`;
@@ -2215,24 +2378,24 @@ function botStart(data) {
   	         document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
        	   }, 1000);
       	   } else {
-      	    if (['1', 'satu'].some((kata) => jawabanValue.includes(kata)) && nilaiAngka.length == 1) {
+      	    if (['1', 'satu'].some((kata) => jawabanValue.includes(kata)) && nilaiAngka.length == 1 || jawabanValue.includes('satu')) {
       	    init = 5;
       	    mainChat = 0;
       	    guessGame = true;
-      	    isCloneChat = true;
       	    playGuess = true;
+      	    isCloneChat = true;
       	    typingGame = false;
       	    mainChatIs = false;
-      	    chatRepeats = false;
       	    playTyping = false;
+      	    chatRepeats = false;
       	    jawabanBenar = false;
       	    chatRepeated = false;
       	    noRepeatChat = false;
       	    chatValidation = false;
       	    botAnswerExecuted = false;
-      	    
+      	     
       	    clonedTextPertanyaan.innerHTML = `ok kita ganti game tebak tebakan ya`;
-      	   } else if (['2', 'dua'].some((kata) => jawabanValue.includes(kata)) && nilaiAngka.length == 1) {
+      	   } else if (['2', 'dua', 'ini'].some((kata) => jawabanValue.includes(kata)) && nilaiAngka.length == 1 || jawabanValue.includes('dua')) {
       	    mainChat = 0;
       	    isChattan = false;
       	    isCloneChat = true;
@@ -2250,7 +2413,7 @@ function botStart(data) {
       	     clonedTextPertanyaan.innerHTML = `abisnya si kamu ga pilih pilih mau no berapa😑`;
       	     isCloneChat = true;
       	    }
-      	   }
+          }
          }
         }
        }
@@ -2271,11 +2434,15 @@ function botStart(data) {
       clonedTextPertanyaan.innerHTML = `sebelum main inget ya ${namaDepan} jangan main copy paste. karna itu curang😇`;
      } else {
       botAnswerExecuted = false;
-      clonedTextPertanyaan.innerHTML = `udah tau kan peraturan nya tadi, jangan copy paste ya😇`;
+      if (jawabanValue.includes('ngerti')) {
+       clonedTextPertanyaan.innerHTML = `makasih ya udah ngertiin aku😸`;
+      } else {
+       clonedTextPertanyaan.innerHTML = `udah tau kan peraturan nya tadi, jangan copy paste ya😇`;
+      }
      }
      
      document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
-    } else { // else true chatRepeats
+    } else { // true chatRepeats
      mainChat++;
      if (mainChat === 1) {
     		clonedTextPertanyaan.innerHTML = `okeh, siappp ya`;
@@ -2321,27 +2488,56 @@ function botStart(data) {
     		if (!botAnswerExecuted && jawabanValue === 'abcdefghijklmnopqrstuvwxyz') {
        botAnswerExecuted = true;
      		function userFirst() {
+     		 counterWin++;
      		 isGameWin = true;
-				    
-				    setTimeout(() => {
-				     clonedTextPertanyaan.innerHTML = `wahh kamu hebat ${namaDepan} bisa ngalahin aku🥳`;
+			     setTimeout(() => {
+         switch (parseInt(counterWin)) {
+          case 1 :
+				       clonedTextPertanyaan.innerHTML = `wahh kamu hebat ${namaDepan} bisa ngalahin aku🥳`;
+          break;
+          case 2 :
+				       clonedTextPertanyaan.innerHTML = `ko bisa sih kamu ngalahin aku yang ke ${counterWin}x?`;
+          break;
+          case 3 :
+				       clonedTextPertanyaan.innerHTML = `hmmm aku mulai curiga 🤨, tapi keren sih`;
+          break;
+          default:
+				       clonedTextPertanyaan.innerHTML = `ampunn ${namaDepan} udah cukup ngalahin aku yang ke ${counterWin}😩`;
+         }
 				     
 				     document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
 				      
 				     setTimeout(() => {
-				      isRainLove = true;
-				      
           botAnswerExecuted = false;
 				      JawabanValue = jawaban.value;
 				      barier.style.display = "none";
 				      textMengetik.innerHTML = "Online";
-				      clonedTextPertanyaan.innerHTML = "karna kamu bisa ngalahin aku, ini buat kamu ❤️";
+				      pjsDefault.style.display = 'none';
+          containerBoxHints.appendChild(pjsGame);
+          
+				      
+				      switch (parseInt(counterWin)) {
+           case 1 :
+            imgSticker.src = "assets/sticker/horee.webp"
+				        clonedTextPertanyaan.innerHTML = "karna kamu bisa ngalahin aku, ini buat kamu ❤️";
+           break;
+           case 2 :
+            imgSticker.src = "assets/sticker/smile.webp"
+				        clonedTextPertanyaan.innerHTML = "buat kamuuu ❤️ ❤️ ❤️";
+           break;
+           case 3 :
+            imgSticker.src = "assets/sticker/smile.webp"
+				        clonedTextPertanyaan.innerHTML = "udah gumoh ya aku kasih ❤️ terus? kwkwk";
+           break;
+           default:
+            imgSticker.src = "assets/sticker/smile.webp"
+				        clonedTextPertanyaan.innerHTML = `I Love you in Every Universe ${namaDepan} ❤️`;
+          }
 				      
 				      document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
 				      
 				      setTimeout(() => {
 	          initSticker++;
-           imgSticker.src = "horee.webp";
            document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
           }, 2500);
 				     }, 4000);
@@ -2355,13 +2551,13 @@ function botStart(data) {
         	} else {
  			      clonedTextPertanyaan.innerHTML = "wleee😝 aku duluan, kamuu kalah yahahaha lucu banget sih";
         	}
-        	
+        	 
  			     document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
  			     
  			    setTimeout(() => {
  			     barier.style.display = "none";
  			     textMengetik.innerHTML = "Online";
- 			     clonedTextPertanyaan.innerHTML = `kalo ${userSays[0]} mau mencoba lagi. ketik 'coba lagi'`;
+ 			     clonedTextPertanyaan.innerHTML = `kalo ${namaDepan} mau mencoba lagi. ketik 'coba lagi'`;
  			     
  			     document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
  			     }, 6000);
@@ -2380,10 +2576,14 @@ function botStart(data) {
      	   if (mainChat == 4) {
           clonedTextPertanyaan.innerHTML = `masa kamu gapercaya si ${namaDepan} ${genderSay}. serius dh aku gamain curang tau`;
      	   } else if (mainChat == 5) {
-          clonedTextPertanyaan.innerHTML = `terserah kamu deh ${namaDepan} mau anggep aku kya gmna, intinya aku engga seperti yang kamu pikirkan😪`;
+          clonedTextPertanyaan.innerHTML = `terserah kamu deh ${namaDepan} mau anggep aku kya gimana, intinya aku engga seperti yang kamu pikirkan😪`;
      	   } else if (mainChat == 6) {
-          clonedTextPertanyaan.innerHTML = `jadi ${namaDepan} mau terima tantangan nya apa engga?<br><br>klo mau bilang 'iya mau' gamau 'engga'`;
+          clonedTextPertanyaan.innerHTML = `mau kamu anggep aku boong atau apalah, intinya aku tadi ga curang.`;
      	   } else if (mainChat == 7) {
+          clonedTextPertanyaan.innerHTML = `klo tadi emang kamu dluan berarti sistem aku bermasalah, maaf ${namaDepan}🙂`;
+     	   } else if (mainChat == 6 && isTantangan) {
+          clonedTextPertanyaan.innerHTML = `jadi ${namaDepan} mau terima tantangan nya apa engga?<br><br>klo mau bilang 'iya mau' gamau 'engga'`;
+     	   } else if (mainChat == 7 && isTantangan) {
      	    if (['iya mau', 'mau', 'iya'].some((kata) => jawabanValue.includes(kata))) {
      	     mainChat = 7;
      	     isCloneChat = true;
@@ -2407,9 +2607,9 @@ function botStart(data) {
      	    chatRepeats = false;
      	    
      	    if (isTantangan) {
-     	    isCurang = false;
-     	    alreadySticker = false;
-     	     clonedTextPertanyaan.innerHTML = `bagus deh klo ${namaDepan} nempatin janji nya`;
+      	    isCurang = false;
+      	    alreadySticker = false;
+      	     clonedTextPertanyaan.innerHTML = `bagus deh klo ${namaDepan} nempatin janji nya`;
      	    } else {
      	     isCurang = true;
      	     mainChatIs = false;
@@ -2419,7 +2619,7 @@ function botStart(data) {
      	     chatValidation = true;
      	     alreadySticker = true;
      	     
-     	     clonedTextPertanyaan.innerHTML = `iya yaudah lah klo gitu ga masalah`;
+     	     clonedTextPertanyaan.innerHTML = `iya yaudah lah klo gitu gausah di bahas lagi`;
      	    }
      	    
      	    setTimeout(() => {
@@ -2434,7 +2634,7 @@ function botStart(data) {
      	      
      	      clonedTextPertanyaan.innerHTML = `ok kita lanjut ya ${namaDepan} 😇`;
      	     } else {
-     	      clonedTextPertanyaan.innerHTML = `yaudah kamu gausah ngelakuin tantangan nya`;
+     	      clonedTextPertanyaan.innerHTML = `yaudah lupain aja hal tadi, mending kita lanjut chat`;
      	     }
      	     document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
      	    }, 1000);
@@ -2451,37 +2651,123 @@ function botStart(data) {
   	       document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
  	       }, 2500);
       	 } else {
-         mainChatIs = false;
-     	   chatRepeats = false;
-      	  chatValidation = true;
-         alreadySticker = false;
-         clonedTextPertanyaan.innerHTML = `ok karna ${namaDepan} kalah berarti kamu harus lakuin 1 opsi tantangan😂`;
+      	  if (isTantangan) {
+          mainChatIs = false;
+          chatRepeats = false;
+          chatValidation = true;
+          alreadySticker = false;
+          clonedTextPertanyaan.innerHTML = `ok karna ${namaDepan} kalah berarti kamu harus lakuin 1 opsi tantangan😂`;
+      	   } else {
+      	    if (!noRepeatChat) {
+      	     noRepeatChat = true;
+            clonedTextPertanyaan.innerHTML = `yhh ga asik ah masa kalah`;
+            
+            setTimeout(() => {
+             initSticker++;
+             imgSticker.src = "assets/sticker/injek.webp";
+             
+             document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
+            }, 2500);
+      	    } else {
+      	     mainChat = 0;
+     	      mainChatIs = false;
+     	      chatRepeats = false;
+     	      botAnswerExecuted = false;
+     	      
+      	     if (kataGame.some((kata) => jawabanValue.includes(kata))) {
+     	       noRepeatChat = false;
+             clonedTextPertanyaan.innerHTML = `<strong>LUCU BANGET</strong> masa kalah sama aku, apalagi lawan developer🙄`;
+     	      } else {
+             clonedTextPertanyaan.innerHTML = `yaudah jadi gimana ni mau lanjut main apa engga?`;
+     	      }
+      	    }
+      	   }
      	   }
      	  }
     	  }
     	 } else { //!botAnswerExecuted
-    	  mainChat = 0;
-     	 isGameWin = true;
      	 mainChatIs = false;
-     	 isTantangan = true;
      	 chatRepeats = true;
      	 chatValidation = true;
-     	 chatValidation = true;
+     	 mainChat = isTantangan ? 1 : 0 ;
      	 
-       clonedTextPertanyaan.innerHTML = `yhh ga seru klo ${namaDepan} menang`;
-      
-      setTimeout(() => {
-       clonedTextPertanyaan.innerHTML = `sebenernya klo aku kalah, yaudah gada opsi tantangan buat aku wkwk`;
-       
-       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
-       
+        switch(parseInt(counterWin)) {
+         case 1:
+          clonedTextPertanyaan.innerHTML = `yhh ga seru klo ${namaDepan} menang`;
+         break;
+         case 2:
+          if (!isTantangan) {
+           clonedTextPertanyaan.innerHTML = `coba dong ${namaDepan} cobain yang pake tantangan`;
+          } else {
+           clonedTextPertanyaan.innerHTML = `ko kaya nya gampang banget sih??!`;
+          }
+         break;
+         case 3:
+          if (jawabanValue.includes('gumoh')) {
+           clonedTextPertanyaan.innerHTML = `siapa tau gitu wkwkwk`;
+          } else {
+           clonedTextPertanyaan.innerHTML = `lain kali aku susahin 😡`;
+          }
+         break;
+        default:
+         clonedTextPertanyaan.innerHTML = `udah ah gatauh kalah mulu aku 😖`;
+        }
+         
        setTimeout(() => {
-	       initSticker++;
-	       imgSticker.src = "sadcorner.webp";
-	       document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
-	       }, 2500);
+        if (!noRepeating) {
+         if (isTantangan) {
+          setTimeout(() => {
+          clonedTextPertanyaan.innerHTML = `sebenernya klo aku kalah, yaudah gada opsi tantangan buat aku wkwk`;
+          
+          document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+           
+           setTimeout(() => {
+            initSticker++;
+            imgSticker.src = "assets/sticker/sadcorner.webp";
+            
+            document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
+           }, 2500);
+          }, 1000);
+         } else {
+          clonedTextPertanyaan.innerHTML = `berhubung aku kalah jadi aku ga ngelakuin tantangan hehe`;
+          
+          setTimeout(() => {
+           clonedTextPertanyaan.innerHTML = `klo kamu mau lebih seru, kamu harus pake tantangan main nya`;
+           
+           document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+          }, 1000);
+         }
+        } else {
+         switch(parseInt(counterWin)) {
+          case 1:
+           if (namaDepan === "farid") {
+            clonedTextPertanyaan.innerHTML = `i love you from ..`;
+           } else {
+            clonedTextPertanyaan.innerHTML = `hebat sih bisa ngalahin aku`;
+           }
+          break;
+          case 2:
+           if (!isTantangan) {
+            clonedTextPertanyaan.innerHTML = `coba pake tantangan pasti seru kwkwk`;
+           } else {
+            clonedTextPertanyaan.innerHTML = `jangan jangan kamu curangg ya?!?`;
+           }
+          break;
+          case 3:
+           clonedTextPertanyaan.innerHTML = `biar kamu susah menang nya.`;
+          break;
+         default:
+          clonedTextPertanyaan.innerHTML = `emang ya kaya nya kamu emang bener bener jago deh🤐`;
+         }
+         
+         setTimeout(() => {
+          initSticker++;
+          imgSticker.src = "assets/sticker/smile.webp";
+          document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
+         }, 2500);
+        }
        }, 1000);
-    	 }
+      }
     ////////Clone Chat Validation//////////
     (isCloneChat) ? document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true)) : alert("tidak is cloneChat || Bot Diam");
    ////////Clone Chat Validation//////////
@@ -2515,7 +2801,7 @@ function botStart(data) {
        
        setTimeout(() => {
         initSticker++;
-        imgSticker.src = 'hmm.webp';
+        imgSticker.src = 'assets/sticker/hmm.webp';
         document.querySelector('#contentPertanyaan').appendChild(stickers.cloneNode(true));
        }, 2500);
        
@@ -2555,13 +2841,13 @@ function botStart(data) {
       } else if (quest_2 && theme === 'blue') {
        if (!isRepeat) {
         if (['emang', 'kenapa'].some((kata) => jawabanValue.includes(kata))) {
-       
+         
          quest_1 = true;
          clonedTextPertanyaan.innerHTML = `ya siapa tau ${namaDepan} risih gitu sama love nya?`;
          
          setTimeout(() => {
           initSticker++;
-          imgSticker.src = 'hmm.webp';
+          imgSticker.src = 'assets/sticker/hmm.webp';
           document.querySelector('#contentPertanyaan').appendChild(stickers.cloneNode(true));
          }, 2500);
         } else {
@@ -2647,7 +2933,7 @@ function botStart(data) {
        
        setTimeout(() => {
         initSticker++;
-        imgSticker.src = 'smile.webp';
+        imgSticker.src = 'assets/sticker/smile.webp';
         document.querySelector('#contentPertanyaan').appendChild(stickers.cloneNode(true));
        }, 2500);
       }
@@ -2659,7 +2945,7 @@ function botStart(data) {
       
       setTimeout(() => {
        initSticker++;
-       imgSticker.src = 'hmm.webp';
+       imgSticker.src = 'assets/sticker/hmm.webp';
        document.getElementById('contentPertanyaan').appendChild(stickers.cloneNode(true));
       }, 1000);
      } else { // true chatValidation
@@ -2716,7 +3002,52 @@ const observer = new MutationObserver((mutationsList, observer) => {
       //notif.play();
       clearInterval(intervalID);
 
+      const storedChat = {};
+      const containerChat = document.querySelector("#wrapper-item-chat");
+      const allChat = containerChat.lastElementChild;
+      
+      const variables = [
+       'init',
+       'pesan',
+       'mainChat',
+       'playAgain',
+       'counterWin',
+       'mainChatIs',
+       'isCloneChat',
+       'chatRepeats',
+       'jawabanBenar',
+       'chatRepeated',
+       'noRepeatChat',
+       'alreadySticker',
+       'chatValidation',
+       'isChattan',
+       'isGameWin',
+       'guessGame',
+       'playGuess',
+       'typingGame',
+       'playTyping',
+       'winTyping',
+       'winGuess',
+       'noRepeating',
+       'quest_1',
+       'quest_2',
+       'quest_3',
+       'isCurang',
+       'isRepeat',
+       'isTantangan',
+       'botAnswerExecuted'
+      ];
+      
       setTimeout(() => {
+       variables.forEach(variable => {
+        storedChat[variable] = eval(variable);
+       });
+       
+       storedChat.chat = allChat.innerHTML;
+       startStored ? localStorage.setItem('historyChat', JSON.stringify(storedChat)) : console.log('initialisasi pertama sebelum memulai storedChat') ;
+       
+       console.table(JSON.parse(localStorage.getItem('historyChat')));
+       
        document.querySelector('.pathchat').scrollIntoView({ behavior: 'smooth', block: 'end' });
       }, 500);
     }
@@ -2829,7 +3160,7 @@ window.onload = function() {
 /*JAVASCRIPT CODE BACKGROUND ANIMATION*/
 
 function hujanLinear(index) {
- let amount = 10;
+ let amount = 15;
  let i = 0;
  
  let containers = {
@@ -2855,10 +3186,38 @@ function hujanLinear(index) {
  }
 }
 
+
+function customRain(index) {
+ let amount = 20;
+ let i = 0;
+ 
+ let containers = document.getElementById('custom0');
+ while (i < amount) {
+  let drop = document.createElement('img');
+  drop.setAttribute('class', 'pjs-image')
+  drop.src = 'money.gif';
+  
+  let size = Math.random() * 40;
+  let posX = Math.floor(Math.random() * window.innerWidth);
+  let delay = Math.random() * -150;
+  let duration = Math.random() * 100;
+
+  drop.style.width = 15 + size + 'px';
+  drop.style.height = 15 + size + 'px';
+  drop.style.left = posX + 'px';
+  drop.style.animationDelay = delay+ 's';
+  drop.style.animation = 'customHujan' + 50 + duration + 's' + 'infinite';
+  
+  containers.appendChild(drop.cloneNode(true));
+  i ++;
+ }
+}
+
 hujanLinear();
+customRain();
 
 function rainLove() {
- let amount = 15;
+ let amount = 16;
  let i = 0;
  let containers = {
   0: document.getElementById('lovee0'),

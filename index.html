@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
    <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@600&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"/>
  </head>
  <body id="body" class="body">
   <h2 class="err">MAAF WEBSITE INI TIDAK TERSEDIA UNTUK VERSI DESKTOP</h2>
@@ -56,8 +57,8 @@
         <div class="box-item-sosmed">
          <a class="item-icon-sosmed" href="https://www.facebook.com/fridfn_"><i class="fab fa-facebook" ></i></img>
          <a class="item-icon-sosmed" href="https://www.instagram.com/fridfn"><i class="fab fa-instagram" ></i></a>
-         <a class="item-icon-sosmed" href="https://t.me/ShirakamiFubuki7"><i class="fab fa-telegram" ></i></a>
-         <a class="item-icon-sosmed" href="https://tiktok.com/@frdfnz"><i class="fab fa-tiktok"></i></a>
+         <a class="item-icon-sosmed" href="https://www.linkedin.com/in/farid-fathoni-n-26a48b2b3?trk=contact-info"><i class="fab fa-linkedin" ></i></a>
+         <a class="item-icon-sosmed" href="https://github.com/fridfn"><i class="fab fa-github"></i></a>
         </div>
        </div>
      </span>
@@ -403,6 +404,7 @@
     <div class="container" id="containerId">
       <div class="container-linear" id="linear1"></div>
       <div class="container-love" id="lovee1"></div>
+      
      <div class="wrapper" id="container_input">
       <div class="containerInput">
         <textarea class="input-jawaban" id="jawaban" placeholder="Ketikan Pesan" onkeyup="checkInput()" autocomplete="off"></textarea>
@@ -475,10 +477,10 @@
        <div class="box-social-media">
         <p class="text-usr" >Social Media</p>
         <div class="box-item-sosmed">
-         <a class="item-icon-sosmed" href="https://www.facebook.com/fridfn_"><i class="fab fa-facebook" ></i></i>
+         <a class="item-icon-sosmed" href="https://www.facebook.com/fridfn_"><i class="fab fa-facebook" ></i></id>
          <a class="item-icon-sosmed" href="https://www.instagram.com/fridfn"><i class="fab fa-instagram" ></i></a>
-         <a class="item-icon-sosmed" href="https://t.me/ShirakamiFubuki7"><i class="fab fa-telegram" ></i></a>
-         <a class="item-icon-sosmed" href="https://tiktok.com/@frdfnz"><i class="fab fa-tiktok"></i></a>
+         <a class="item-icon-sosmed" href="https://www.linkedin.com/in/farid-fathoni-n-26a48b2b3?trk=contact-info"><i class="fab fa-linkedin" ></i></a>
+         <a class="item-icon-sosmed" href="https://github.com/fridfn"><i class="fab fa-github"></i></a>
         </div>
        </div>
        <div class="signin-box" id="blueHeaderUser" onclick="toggleLogin('signup')">
@@ -509,39 +511,41 @@
      <div class="about">
        <p><ion-icon name="lock-closed"></ion-icon> pesan dan riwayat chat terenkripsi secara end-to-end. tidak seorang pun di luar chat ini, termasuk developer yang dapat membaca atau melihatnya.</p>
      </div>
-     <div class="containerChat" id="firstContentPertanyaan">
-      <div class="chatPertanyaans" id="firstChatPertanyaan">
-        <div class="arrowQuest"></div>
-         <p id="firstPertanyaan">pertanyaan</p>
-         <p id="timeQuestion"></p>
-        </div>
-      </div>
-     <div class="containerChat" id="contentJawaban">
-        <div class="chatJawaban styleAsk" id="chatJawaban">
-         <div class="arrowAsk"></div>
-           <p id="textJawaban">Jawaban</p>
-           <span>
-            <p id="timeAsk"></p>
-            <ion-icon name="checkmark-done-sharp" id="check2" class="ceklisDua"></ion-icon>
-           </span>
+     <div id="wrapper-item-chat">
+      <div class="containerChat" id="firstContentPertanyaan">
+       <div class="chatPertanyaans" id="firstChatPertanyaan">
+         <div class="arrowQuest"></div>
+          <p id="firstPertanyaan">pertanyaan</p>
+          <p id="timeQuestion"></p>
          </div>
-      </div>
-     <div class="containerChat" id="contentPertanyaan">
-       <div id="chatPertanyaan" class="chatPertanyaans">
-        <div class="arrowQuest"></div>
-         <p id="textPertanyaan">pertanyaan kedua</p>
-         <p id="timeQuestion"></p>
-        </div>
-        <div class="sticker-chat">
-         <p class="time-sticker">05.06</p>
-        </div>
-        <div class="guess-picture">
-         <div class="forward-box">
-          <ion-icon name="arrow-redo"></ion-icon>
+       </div>
+      <div class="containerChat" id="contentJawaban">
+         <div class="chatJawaban styleAsk" id="chatJawaban">
+          <div class="arrowAsk"></div>
+            <p id="textJawaban">Jawaban</p>
+            <span>
+             <p id="timeAsk"></p>
+             <ion-icon name="checkmark-done-sharp" id="check2" class="ceklisDua"></ion-icon>
+            </span>
+          </div>
+       </div>
+      <div class="containerChat" id="contentPertanyaan">
+        <div id="chatPertanyaan" class="chatPertanyaans">
+         <div class="arrowQuest"></div>
+          <p id="textPertanyaan">pertanyaan kedua</p>
+          <p id="timeQuestion"></p>
          </div>
-        </div>
-      </div>
-     <div class="pathchat"></div>
+         <div class="sticker-chat">
+          <p class="time-sticker">05.06</p>
+         </div>
+         <div class="guess-picture">
+          <div class="forward-box">
+           <ion-icon name="arrow-redo"></ion-icon>
+          </div>
+         </div>
+       </div>
+     </div>
+      <div class="pathchat"></div>
     </div>
    </div>
   <div class="container-personality-box">
@@ -869,7 +873,7 @@
           <div class="wrapper-cta-and-article">
            <div id="hide-article" style="display: flex; flex-direction: column; gap: 15px; width: 75%;">
             <div class="box-header-article">
-             <h1 class="title-header-home" style="font-size: 15px;">welcome to my <span style="color: var(--secondaryTextColor);">chatbot </span>web <span style="color: var(--secondaryTextColor);">development</span> journey!</h1>
+             <h1 class="title-header-home" style="font-size: 15px;" >welcome to my <span style="color: var(--secondaryTextColor);">chatbot </span>web <span style="color: var(--secondaryTextColor);">development</span> journey!</h1>
              <p class="article-text">website ini adalah sebuah web berbasis aplikasi chatbot, jadi website ini saya kembangkan untuk tujuan belajar membangun sebuah web yang memiliki banyak fitur dan interaksi pada bot sederhana yang saya kembangkan.</p>
             </div>
             <div class="box-btn-article">
@@ -903,16 +907,16 @@
       </div>
       <div class="box-website-review">
        <div class="item-box-review">
-        <p class="title-txt-review">170+</p>
-        <p class="article-text">This is a simple chatbot</p>
+        <p class="title-txt-review">Feature</p>
+        <p class="article-text" id="shine-text">This website is equipped with many features</p>
        </div>
        <div class="item-box-review">
         <p class="title-txt-review">3 API</p>
-        <p class="article-text">menggunakan 3 macam API unik dan menarik</p>
+        <p class="article-text" id="shine-text">menggunakan 3 macam API unik dan menarik</p>
        </div>
        <div class="item-box-review">
         <p class="title-txt-review">170+</p>
-        <p class="article-text">This is a simple chatbot</p>
+        <p class="article-text" id="shine-text">This is a simple chatbot</p>
        </div>
       </div>
      </div>
@@ -922,8 +926,10 @@
       </div>
       <div class="container-box-hints">
        <div id="particles-js"></div>
+       <div id="particles-game"></div>
        <div class="container-linear" id="linear0"></div>
-      <div class="container-love" id="lovee0"></div>
+       <div class="container-love" id="lovee0"></div>
+       <div class="linearCustom" id="custom0"></div>
        <div class="wrapper-box-hints">
         <div class="box-hints">
          <div class="item-hints" id="particles-view">
@@ -1161,7 +1167,7 @@
          <div class="box-medsos-home">
           <a class="item-icon-sosmed" href="https://api.whatsapp.com/send?phone=+62 899-5247-491&text=Hi,%20kamu%20developer%20website%20fabot%20?" target="_blank"><i class="fab fa-whatsapp" ></i></a>
           <a class="item-icon-sosmed" href="https://www.instagram.com/fridfn_" target="_blank"><i class="fab fa-instagram" ></i></a>
-          <a class="item-icon-sosmed" href="https://t.me/ShirakamiFubuki7" target="_blank"><i class="fab fa-telegram" ></i></a>
+          <a class="item-icon-sosmed" href="https://www.linkedin.com/in/farid-fathoni-n-26a48b2b3?trk=contact-info" target="_blank"><i class="fab fa-linkedin" ></i></a>
           <a class="item-icon-sosmed" href="https://www.linkedin.com/in/farid-fathoni-n-26a48b2b3?trk=contact-info"><i class="fa-brands fa-linkedin" target="_blank"></i></a>
          </div>
         </div>
@@ -1355,6 +1361,7 @@
   <script src="dataSong.js"></script>
   <script src="feature.js"></script>
   <script src="particles.js"></script>
+  
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
   </script>
   <script type="module" src="https://cdn.lordicon.com/lordicon-1.1.0.js"></script>
@@ -1364,6 +1371,7 @@
       emailjs.init("yZzbJwytB-aSDSuZw");
    })();
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
  </body>

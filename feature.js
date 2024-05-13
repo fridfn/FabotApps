@@ -35,7 +35,8 @@ let fablue = document.querySelector('.nameBot');
 let mail = document.getElementById('mail');
 let footers = document.querySelectorAll('#footers');
 let myKoleksi = document.querySelectorAll('#myKoleksi');
-let pjs = document.querySelector('#particles-js');
+let pjsDefault = document.querySelector('#particles-js');
+let pjsGame = document.querySelector('#particles-game');
 let footerWeb = document.getElementById('footer-web').cloneNode(true);
 
 (function() {
@@ -193,8 +194,6 @@ const bulanNow = `${y}` + '-' + `${monthIndex + 1}` + '-' + `${d}`;
 const MonthAgo = reductionMonth('2023-06-01', `${bulanNow}`);
 const FYIMonth = document.getElementById('txt-hint');
 FYIMonth.innerHTML = `This website was first developed and created on 1 June 2023. FYI this it was ${MonthAgo} months ago !<br><br>Developer : Farid Fathoni N`
-
-
 
 
 
@@ -447,7 +446,7 @@ function savePersonality() {
    const birthdayValidation = [!isNaN(date), lowerMonth.some((month) => moon.includes(month)), !isNaN(year), year < 2013, year > 1995];
    
    if (birthdayValidation.every((items) => items === true)) {
-    
+    tsConfetti(0);
     let getPanggilan = input_namaPanggilan.value.toLowerCase();
     let getFullName = input_namaLengkap.value.toLowerCase();
     let getBirthday = input_birthday.value;
@@ -565,8 +564,12 @@ window.addEventListener('load', () => {
    action: 'active'
   });
   
+  counterWin >= 1 ? pjsDefault.style.display = 'none' : pjsDefault.style.display = 'block';
+  linearCustom.style.display = counterWin >= 1 ? "none" : "none";
+  
+  
   loaders.style.display = "none";
-  //notificationPopup({ icon: 'love', text: `${sayTime(isLogin)}` });
+  //notificationPopup({ icon: 'love', text: `selamat ${sayTime(isLogin)} ${fullName}` });
  }, loaderTime);
 });
 
@@ -1035,7 +1038,7 @@ const themeJSON = () => {
        primaryColor: '#052659',
        primaryCards: '#0e1527',
        primaryBackground: '#000000',
-       primaryButtonColor: '#a883ff',
+       primaryButtonColor: '#838cff',
        
        secondaryButtonColor: '#a883ff',
        secondaryIconColor: '#3f6bff',
@@ -1101,7 +1104,7 @@ const themeJSON = () => {
        secondaryTextColor: '#d42417',
        secondaryBorderColor: '#ff7243',
        secondaryColor: '#ff614a',
-       secondaryCards: '#350d0dd1',
+       secondaryCards: '#350d0d',
        secondaryBackground: '#000000',
        
        bubbleUser: '#c73c00',
@@ -1541,7 +1544,8 @@ function toggleLogin(event) {
  switch(event) {
   case 'loging':
    if (alreadyLogin) {
-    if (isFullLogin) {
+    if (isFullLogin && isLogin) {
+     tsConfetti(3);
     loadingAnimation({
      active: cardsUser,
      remove: containerHome,
@@ -1599,6 +1603,7 @@ function toggleLogin(event) {
     notSureBtn.onclick = () => { handleAction({ action: 'null', event: null, removePage: cardsAction }) };
     notificationCards({ text: "apakah kamu yakin ingin menyimpan perubahan? tindakan ini akan mereload browser.", icon: "alert" });
    } else {
+    tsConfetti(4);
     loadingAnimation({
      active: defaultElem,
      remove: pembungkusContainer,
@@ -1641,6 +1646,7 @@ function toggleLogin(event) {
   break;
   case 'submit':
    if (alreadyLogin) {
+    tsConfetti(0);
     notificationPopup({ icon: 'info', text: 'kamu sudah login' })
     login.flagLogin.isStart = true;
     document.querySelector('#signup-text').innerHTML = `<button class="btn-login"><span><ion-icon name="person"></ion-icon>Full Login</span></button>`;;
@@ -1690,7 +1696,6 @@ function toggleStart(event) {
  switch(event) {
   case 'start':
    if (isStarting) {
-    fullScreen();
     userValidation();
     loadingAnimation({
      active: pageChat,
@@ -1699,20 +1704,14 @@ function toggleStart(event) {
      isRemove: defaultElem,
      action: 'active'
     });
-    container.appendChild(pjs);
-    //pjs.style.visibility = 'visible';
+    const elem = document.documentElement
+    if (!document.fullscreenElement) { if (elem.requestFullscreen) { elem.requestFullscreen() } };
+    firstInitializationChat();
+    container.appendChild(pjsGame);
+    container.appendChild(pjsDefault);
+    container.appendChild(linearCustom);
+    pjsDefault.style.visibility = 'visible';
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    setTimeout(() => {
-     firstPertanyaan.innerHTML = botSay()[0];
-     barier.style.display = "block";
-     
-     textLoad();
-     setTimeout(() => {
-      barier.style.display = "none";
-      textMengetik.innerHTML = "Online";
-      firstContentPertanyaan.style.display = "block";
-     }, 1000);
-    }, 1000);
    } else {
     btnLogin.classList.add('effect');
     notificationPopup({ icon: 'alert', text: 'maaf sebelum bisa memulai, kamu harus signup terlebih dahulu !' });
@@ -1740,10 +1739,12 @@ function togglePage(page) {
     isRemove: defaultElem,
     action: 'active'
    });
-   containerBoxHints.appendChild(pjs);
+   containerBoxHints.appendChild(pjsDefault);
+   containerBoxHints.appendChild(linearCustom);
+   containerBoxHints.appendChild(pjsGame);
   break;
   case 'profile':
-   if (isFullLogin) {
+   if (isFullLogin && isLogin) {
     linkedFooter({ 
      parents: 'containerUserPage',
      remove: containerUserPage
@@ -1761,7 +1762,7 @@ function togglePage(page) {
    }
   break;
   case 'developer':
-   if (isFullLogin) {
+   if (isFullLogin && isLogin) {
     linkedFooter({ 
      parents: 'developerMenu',
      remove: developerMenu
@@ -1965,5 +1966,57 @@ function generateRandomSong(songs) {
 
 function getRamdomTimer() {
  const time = Math.floor(Math.random() * (2000 - 1000 + 1) + 1000)
- cl(time)
+ cl(time);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//HTML CSS JSResult Skip Results Iframe
+//tsParticles library - https://github.com/matteobruni/tsparticles
+
+//tsParticles library - https://github.com/matteobruni/tsparticles
+
+
+function tsConfetti(start) {
+ if (start < 5) {
+  function randomInRange(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+  
+  confetti({
+    angle: randomInRange(55, 125),
+    spread: randomInRange(50, 70),
+    particleCount: randomInRange(50, 100),
+    origin: { y: 0.6 }
+   });
+  setTimeout(() => { tsConfetti(start + 1) }, 1000);
+ }
 }

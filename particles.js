@@ -29,7 +29,7 @@ var pJS = function(tag_id, params){
         value: '#fff'
       },
       shape: {
-        type: 'circle',
+        type: 'lingkaran',
         stroke: {
           width: 0,
           color: '#ff0000'
@@ -423,19 +423,19 @@ var pJS = function(tag_id, params){
 
     switch(p.shape){
 
-      case 'circle':
+      case 'lingkaran':
         pJS.canvas.ctx.arc(p.x, p.y, radius, 0, Math.PI * 2, false);
       break;
 
-      case 'edge':
+      case 'persegi':
         pJS.canvas.ctx.rect(p.x-radius, p.y-radius, radius*2, radius*2);
       break;
 
-      case 'triangle':
+      case 'segitiga':
         pJS.fn.vendors.drawShape(pJS.canvas.ctx, p.x-radius, p.y+radius / 1.66, radius*2, 3, 2);
       break;
 
-      case 'polygon':
+      case 'hexagon':
         pJS.fn.vendors.drawShape(
           pJS.canvas.ctx,
           p.x - radius / (pJS.particles.shape.polygon.nb_sides/3.5), // startX
@@ -446,7 +446,7 @@ var pJS = function(tag_id, params){
         );
       break;
 
-      case 'star':
+      case 'stars':
         pJS.fn.vendors.drawShape(
           pJS.canvas.ctx,
           p.x - radius*2 / (pJS.particles.shape.polygon.nb_sides/4), // startX
@@ -1546,6 +1546,11 @@ function setupParticle(color) {
 function modeParticle(mode) {
  const JSONColor = JSON.parse(localStorage.getItem('setTHEME'));
  const colorParticle = (JSONColor) ? JSONColor : JSON.parse(localStorage.getItem('defaultTheme'));
+ const isLinearMode = ['linear', 'love', 'image'].includes(mode);
+ 
+ pjsDefault.style.display = counterWin >= 1 ? 'block' : 'block';
+ pjsGame.style.display = counterWin >= 1 ? 'none' : 'none';
+ isLinearMode ? counterWin = 0 : counterWin ;
  
  localStorage.setItem('pJSMode', mode);
  const color = colorParticle.primaryIconColor;
@@ -1586,14 +1591,152 @@ function goDownParticle() {
  document.getElementById('set-particles').scrollIntoView({ behavior: 'smooth'});
 }
 
+function particlesGame(params) {
+ const { mode, direction, image, animasi } = params;
+ const storedMode = ['love', 'stars', 'image', 'hexagon', 'segitiga', 'persegi', 'lingkaran'];
+ 
+ const JSONColor = JSON.parse(localStorage.getItem('setTHEME'));
+ const colorParticle = (JSONColor) ? JSONColor : JSON.parse(localStorage.getItem('defaultTheme'));
+ const color = colorParticle.primaryIconColor;
+ 
+ if (storedMode.includes(mode)) {
+  particlesJS('particles-game', {
+     "particles": {
+       "number": {
+         "value": mode === 'image' ? 50 : 100,
+         "density": {
+           "enable": true,
+           "value_area": 800
+         }
+       },
+       "color": {
+         "value": color
+       },
+       "shape": {
+         "type": mode,
+         "stroke": {
+           "width": 0,
+           "color": "#000000"
+         },
+         "hexagon": {
+           "nb_sides": 6
+         },
+         "segitiga": {
+           "nb_sides": 3
+         },
+         "lingkaran": {
+           "nb_sides": 6
+         },
+         "persegi": {
+           "nb_sides": 4
+         },
+         "image": {
+           "src": image,
+           "width": 500,
+           "height": 500
+         }
+       },
+       "opacity": {
+         "value": 0.5,
+         "random": true,
+         "anim": {
+           "enable": false,
+           "speed": 1,
+           "opacity_min": 0.1,
+           "sync": false
+         }
+       },
+       "size": {
+         "value": mode === 'image' ? 30 : 9,
+         "random": true,
+         "anim": {
+           "enable": animasi,
+           "speed": 6,
+           "size_min": mode === 'image' ? 10 : 19,
+           "sync": false
+         }
+       },
+       "line_linked": {
+         "enable": true,
+         "distance": 150,
+         "color": "#ffffff00",
+         "opacity": 0,
+         "width": 1
+       },
+       "move": {
+         "enable": true,
+         "speed": 1,
+         "direction": direction,
+         "random": false,
+         "straight": false,
+         "out_mode": "out",
+         "attract": {
+           "enable": false,
+           "rotateX": 1000,
+           "rotateY": 800
+         }
+       }
+     },
+     "interactivity": {
+       "detect_on": "canvas",
+       "events": {
+         "onhover": {
+           "enable": true,
+           "mode": "repulse"
+         },
+         "onclick": {
+           "enable": true,
+           "mode": "repulse"
+         },
+         "resize": true
+       },
+       "modes": {
+         "grab": {
+           "distance": 400,
+           "line_linked": {
+             "opacity": 1
+           }
+         },
+         "bubble": {
+           "distance": 100,
+           "size": 7,
+           "duration": 1,
+           "opacity": 8,
+           "speed": 3
+         },
+         "repulse": {
+           "distance": 50
+         },
+         "push": {
+           "particles_nb": 4
+         },
+         "remove": {
+           "particles_nb": 2
+         }
+       }
+     },
+    });
+ }
+}
+
+particlesGame({
+ mode: 'image',
+ direction: 'top-right',
+ image: 'hearts.png',
+ animasi: false
+});
 
 function handleParticle(mode, newParticleColor) {
  localStorage.setItem('pJSMode', mode);
- const isLinearMode = ['linear', 'love'].includes(mode);
- pjs.style.visibility = isLinearMode ? "hidden" : "visible"; 
- containerLinear.forEach(e => e.style.visibility = isLinearMode ? "visible" : "hidden");
- containerLove.forEach(e => e.style.visibility = isLinearMode ? "visible" : "hidden");
+ const isLinearMode = ['linear', 'love', 'image'].includes(mode);
+ pjsDefault.style.visibility = isLinearMode ? "hidden" : "visible";
  
+ [containerLinear, containerLove].forEach((element) => {
+  element.forEach((item) => {
+   item.style.display = 'none';
+   linearCustom.style.display = 'none';
+  });
+});
  
  switch(mode) {
   case 'line':
@@ -1603,39 +1746,39 @@ function handleParticle(mode, newParticleColor) {
           value: 100,
           density: {
             enable: true,
-            value_area: 1000,
+            value_area: 900,
           },
         },
         color: {
           value: `${newParticleColor}`,
         },
         shape: {
-          type: "circle",
+          type: "lingkaran",
           stroke: {
             width: 0,
             color: "#00000",
           },
         },
         opacity: {
-          value: 0.7,
-          random: true,
-          anim: {
-            enable: false,
-          },
-        },
-        size: {
-          value: 3,
+          value: 0.8,
           random: true,
           anim: {
             enable: true,
+          },
+        },
+        size: {
+          value: 4,
+          random: true,
+          anim: {
+            enable: false,
           },
         },
         line_linked: {
           enable: true,
           distance: 130,
           color: `${newParticleColor}`,
-          opacity: 0.6,
-          width: 1,
+          opacity: 0.7,
+          width: 2,
         },
       },
       interactivity: {
@@ -1656,7 +1799,7 @@ function handleParticle(mode, newParticleColor) {
             duration: 0.4,
           },
           push: {
-            particles_nb: 2,
+            particles_nb: 3,
           },
         },
       },
@@ -1676,7 +1819,7 @@ function handleParticle(mode, newParticleColor) {
          "value": `${newParticleColor}`
        },
        "shape": {
-         "type": "circle",
+         "type": "lingkaran",
          "stroke": {
            "width": 0,
            "color": "#000000"
@@ -1757,7 +1900,7 @@ function handleParticle(mode, newParticleColor) {
          "value": `${newParticleColor}`
        },
        "shape": {
-         "type": "star",
+         "type": "stars",
          "stroke": {
            "width": 0,
            "color": "#000000"
@@ -1801,7 +1944,7 @@ function handleParticle(mode, newParticleColor) {
        "move": {
          "enable": true,
          "speed": 1,
-         "direction": "none",
+         "direction": "top-right",
          "random": false,
          "straight": false,
          "out_mode": "out",
@@ -1853,121 +1996,16 @@ function handleParticle(mode, newParticleColor) {
     });
    break;
   case 'image':
-    particlesJS('particles-js', {
-     "particles": {
-       "number": {
-         "value": 80,
-         "density": {
-           "enable": true,
-           "value_area": 800
-         }
-       },
-       "color": {
-         "value": `${newParticleColor}`
-       },
-       "shape": {
-         "type": "image",
-         "stroke": {
-           "width": 0,
-           "color": "#000000"
-         },
-         "polygon": {
-           "nb_sides": 5
-         },
-         "image": {
-           "src": "heart.webp",
-           "width": 100,
-           "height": 100
-         }
-       },
-       "opacity": {
-         "value": 0.3,
-         "random": true,
-         "anim": {
-           "enable": true,
-           "speed": 1,
-           "opacity_min": 0.05,
-           "sync": true
-         }
-       },
-       "size": {
-         "value": 10,
-         "random": true,
-         "anim": {
-           "enable": false,
-           "speed": 40,
-           "size_min": 7,
-           "sync": false
-         }
-       },
-       "line_linked": {
-         "enable": true,
-         "distance": 150,
-         "color": "#ffffff00",
-         "opacity": 0,
-         "width": 1
-       },
-       "move": {
-         "enable": true,
-         "speed": 1,
-         "direction": "none",
-         "random": false,
-         "straight": false,
-         "out_mode": "bounce",
-         "attract": {
-           "enable": true,
-           "rotateX": 1000,
-           "rotateY": 800
-         }
-       }
-     },
-     "interactivity": {
-       "detect_on": "canvas",
-       "events": {
-         "onhover": {
-           "enable": true,
-           "mode": "repulse"
-         },
-         "onclick": {
-           "enable": true,
-           "mode": "repulse"
-         },
-         "resize": true
-       },
-       "modes": {
-         "grab": {
-           "distance": 400,
-           "line_linked": {
-             "opacity": 1
-           }
-         },
-         "bubble": {
-           "distance": 400,
-           "size": 40,
-           "duration": 2,
-           "opacity": 8,
-           "speed": 3
-         },
-         "repulse": {
-           "distance": 150
-         },
-         "push": {
-           "particles_nb": 4
-         },
-         "remove": {
-           "particles_nb": 2
-         }
-       }
-     },
-    });
+   linearCustom.style.display =  "block";
+   linearCustom.style.visibility = counterWin ? 'hidden' : 'visible';
    break;
   case 'linear':
-    containerLinear.forEach(e => e.style.opacity = '1');
-    containerLove.forEach(e => e.style.opacity = '0');
+   containerLinear.forEach(e => e.style.display = 'block');
+   containerLinear.forEach(e => e.style.visibility = counterWin ? 'hidden' : 'visible');
    break;
   case 'love':
-    containerLove.forEach(e => e.style.opacity = '1');
-    containerLinear.forEach(e => e.style.opacity = '0');
+   containerLove.forEach(e => e.style.display = 'block');
+   containerLove.forEach(e => e.style.visibility = counterWin ? 'hidden' : 'visible');
    break;
   default:
   console.log('default is none');

@@ -45,20 +45,19 @@ li a {
  color: var(--default-text);
 }
 
-#particles-js {
+#particles-js, #particles-game {
  position: absolute;
  top: 0;
  opacity: 1;
- z-index: 10;
+ z-index: 2;
  width: 100%;
- height: 100%;
+ height: 140vh;
  display: block;
  transition: opacity 2.5s ease-in-out;
 }
 
-.container #particles-js {
+.container #particles-js, #particles-game {
  z-index: 5;
- height: 126vh;
 }
 :root {
  --default-text: #fff;
@@ -1369,9 +1368,9 @@ header .imgboxs img {
  position: fixed;
  align-self: center;
  border-radius: 20px;
+ box-shadow: 5px 5px 10px var(--shadowUser);
  background: var(--primaryBackground);
  border: 2px solid var(--primaryTextColor);
- box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.123);
 }
 
 .notificationCard .current-color {
@@ -1578,7 +1577,6 @@ header .imgboxs img {
  background-image: repeating-linear-gradient(220deg, var(--primaryBackground) 0px, var(--primaryBackground) 19px,transparent 19px, transparent 22px),repeating-linear-gradient(189deg, var(--primaryBackground) 0px, var(--primaryBackground) 19px,transparent 19px, transparent 22px),repeating-linear-gradient(148deg, var(--primaryBackground) 0px, var(--primaryCards) 19px,transparent 19px, transparent 22px),linear-gradient(90deg, var(--primaryIconColor),var(--secondaryColor));
  border-bottom: 2px solid var(--primaryBorderColor);
 }
-
 .box-header-email {
  gap: 20px;
  width: 100%;
@@ -1783,7 +1781,7 @@ header .imgboxs img {
 .submitEmail:focus {
  opacity: .7;
  transition: .1s ease-in-out;
- outline: 1px solid var(--secondaryColor);
+ ouline: 1px solid var(--secondaryColor);
 }/* 
 
 textarea::placeholder {
@@ -2078,11 +2076,13 @@ textarea:focus {
 .sticker-chat {
  display: none;
  width: 130px;
- height: 130px;
+ height: 120px;
  margin-top: 10px;
  margin-left: 20px;
  border-radius: 10px;
  backdrop-filter: blur(1px);
+ border: 2px solid var(--bubbleBot);
+ box-shadow: 5px -5px 4px var(--shadowBot);
 }
 
 .time-sticker {
@@ -2756,7 +2756,6 @@ textarea:focus {
  justify-content: center;
  margin: 27px 0px 0px 0px;
  border: 1.5px solid var(--primaryBorderColor);
-  box-shadow: -4px -4px 3px var(--shadowUser);
 }
 
 .cards-deskripsi-2 {
@@ -3501,6 +3500,12 @@ textarea:focus {
  justify-content: center;
  border-bottom: 1px solid var(--primaryIconColor);
  border-top: 1px solid var(--primaryIconColor);
+ background: linear-gradient(to right, var(--primaryTextColor) 0, #ffffff 10%, var(--primaryTextColor) 30%);
+ background-position: 0;
+ -webkit-background-clip: text;
+ -webkit-text-fill-color: transparent;
+ animation: shine 7s infinite linear;
+ animation-fill-mode: forwards;
 }
 
 #quote-text:before {
@@ -4158,6 +4163,27 @@ textarea:focus {
  border-bottom: 2px solid var(--secondaryBorderColor);
 }
 
+#shine-text {
+ background: linear-gradient(to right, var(--primaryTextColor) 0, #fff 10%, var(--primaryTextColor) 30%);
+ background-position: 0;
+ -webkit-background-clip: text;
+ -webkit-text-fill-color: transparent;
+ animation: shine 7s infinite linear;
+ animation-fill-mode: forwards;
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 180px;
+  }
+  100% {
+    background-position: 250px;
+  }
+}
+
 .title-header-home {
  font-size: 12px;
  font-weight: 600;
@@ -4337,10 +4363,39 @@ textarea:focus {
  position: absolute;
  animation: hujanLinearHome 60s infinite;
 }
+.container-box-hints .linearCustom .pjs-image {
+ top: 0;
+ z-index: -1;
+ position: absolute;
+ animation: customHujan 80s infinite;
+}
+.linearCustom {
+ display: none;
+}
 .container-box-hints .container-love i {
  animation: hujanLoveHome 60s infinite;
 }
 
+.container .linearCustom {
+ top: 0;
+ z-index: 9;
+ position: absolute;
+ /*animation: customHujan 80s infinite;*/
+}
+
+@keyframes customHujan {
+ 0% {
+  opacity: 1;
+  transform: translateY(-200px);
+ } 
+ 70% {
+  opacity: 1;
+ }
+ 100% {
+  opacity: 0;
+  transform: translateY(calc(180vh + -70px));
+ }
+}
 @keyframes hujanLinearHome {
  0% {
   opacity: 1;
@@ -5410,7 +5465,6 @@ textarea:focus {
 
 .container-linear i {
  top: 0;
- opacity: 0;
  height: 200px;
  position: absolute;
  border-bottom-left-radius: 5px;
@@ -5450,12 +5504,10 @@ textarea:focus {
 }
 
 .container-love i:nth-child(2n+1) {
- color: #CE2400;
- text-shadow: 0 0 5px #CE2400, 0 0 13px #CE2400;
+ color: var(--primaryTextColor);
 }
 .container-love i:nth-child(2n+2) {
- color: #f301e3;
- text-shadow: 0 0 5px #f301e3, 0 0 7px #f301e3;
+ color: var(--primaryIconColor);
 }
 
 @keyframes hujanLove {
@@ -5468,7 +5520,7 @@ textarea:focus {
  }
  100% {
   opacity: 0;
-  transform: translateY(calc(100vh + 125px));
+  transform: translateY(calc(130vh + 125px));
  }
 }
 
