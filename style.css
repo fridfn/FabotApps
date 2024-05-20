@@ -51,7 +51,11 @@ li a {
  opacity: 1;
  z-index: 2;
  width: 100%;
+<<<<<<< HEAD
  height: 140vh;
+=======
+ height: 155vh;
+>>>>>>> master
  display: block;
  transition: opacity 2.5s ease-in-out;
 }
@@ -4378,11 +4382,20 @@ textarea:focus {
 
 .container .linearCustom {
  top: 0;
+<<<<<<< HEAD
  z-index: 9;
  position: absolute;
  /*animation: customHujan 80s infinite;*/
 }
 
+=======
+ position: absolute;
+}
+.container .linearCustom .pjs-image {
+ z-index: 9;
+ animation: hujanCustomChat 80s infinite;
+}
+>>>>>>> master
 @keyframes customHujan {
  0% {
   opacity: 1;
@@ -5523,6 +5536,22 @@ textarea:focus {
   transform: translateY(calc(130vh + 125px));
  }
 }
+<<<<<<< HEAD
+=======
+@keyframes hujanCustomChat {
+ 0% {
+  opacity: 1;
+  transform: translateY(-100px);
+ } 
+ 70% {
+  opacity: 1;
+ }
+ 100% {
+  opacity: 0;
+  transform: translateY(calc(130vh + 125px));
+ }
+}
+>>>>>>> master
 
 .fav1 {
  opacity: 0;

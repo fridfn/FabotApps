@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 const csl = console.log.bind(console);
 
 let blurProfile = document.querySelectorAll('.blur-profile');
@@ -1081,13 +1084,20 @@ inputLogin.forEach(function (login) {
   checkInputLogin);
 });
 
+<<<<<<< HEAD
 let sudahLoginAlert = false;
 
+=======
+>>>>>>> master
 let passworduser = document.getElementById('password_user');
 const showIconPass = document.getElementById('show-pass');
 
 function togglePassword() {
+<<<<<<< HEAD
   if (password_user.type === 'password') {
+=======
+  if(password_user.type === 'password') {
+>>>>>>> master
    password_user.type = 'text';
    showIconPass.name = `eye-outline`;
   } else {
@@ -1103,6 +1113,7 @@ function closeLogin() {
   loginPage.style.display = "none";
   loginPage.style.opacity = "0";
  });
+<<<<<<< HEAD
  
  if (sudahLoginAlert) {
   myAlert.style.opacity = "0";
@@ -1117,6 +1128,8 @@ function closeLogin() {
    myAlert.style.opacity = "1"
   }, 300);
  } else {/.../}
+=======
+>>>>>>> master
 }
 
 const signBtn = document.querySelector('.signin-text');
@@ -1165,7 +1178,11 @@ function userValidation() {
    hobbyUser[2].innerHTML = hobbySec;
    hobbyUser[3].innerHTML = hobbyThi;
    // sidebar user info profile end //
+<<<<<<< HEAD
   } else { console.log('perlu validasi') }
+=======
+  } else {console.log('perlu validasi')}
+>>>>>>> master
   setTimeout(() => {
    titleLoginText.innerHTML = "Kamu Sudah Login";
    infoLoginText.innerHTML = "terimakasih telah menggunakan website chatbot ini. nantikan update menarik selanjutnya dari chatbot ini !";
@@ -1179,7 +1196,10 @@ function userValidation() {
    }, 500);
   }, 1000);
  }
+<<<<<<< HEAD
  //setTimeout(() => { typeText(0) }, 2000);
+=======
+>>>>>>> master
  document.querySelector('#signup-text').innerHTML = isLogin ? `<button class="btn-login"><span><ion-icon name="person"></ion-icon>${namaDepan}</span></button>` : `<button class="btn-login"><span><ion-icon name="person"></ion-icon>SIGN UP</span></button>`;
 }
 
@@ -1210,6 +1230,10 @@ function fullScreen() {
       document.exitFullscreen();
     }
   }
+<<<<<<< HEAD
 }
 
 
+=======
+}
+>>>>>>> master
