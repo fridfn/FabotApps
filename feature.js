@@ -527,27 +527,27 @@ function rotateWords() {
     hiddenLoader = true;
     words[0].style.transform = `translateY(40px)`;
     setTimeout(() => {
-      words.forEach(e => e.style.opacity = '1');
+     words.forEach(e => e.style.opacity = '1');
     }, 300);
    }
     words.forEach(word => {
-      const height = word.clientHeight;
-      word.style.transform = `translateY(-${height * counter}px)`;
+     const height = word.clientHeight;
+     word.style.transform = `translateY(-${height * counter}px)`;
     });
     counter++;
     if (counter === words.length) {
-      counter = 0;
-      setTimeout(() => {
-       words.forEach(e => e.style.opacity = '0');
-      }, 600);
-      hiddenLoader = false;
+     counter = 0;
+     setTimeout(() => {
+      words.forEach(e => e.style.opacity = '0');
+     }, 600);
+     hiddenLoader = false;
     }
   }, 1000);
   // clearInterval(interval);
 }
 
-document.addEventListener('DOMContentLoaded', rotateWords);
 
+document.addEventListener('DOMContentLoaded', rotateWords);
 
 
 window.addEventListener('load', () => {
@@ -564,8 +564,9 @@ window.addEventListener('load', () => {
    action: 'active'
   });
   
-  counterWin >= 1 ? pjsDefault.style.display = 'none' : pjsDefault.style.display = 'block';
-  linearCustom.style.display = counterWin >= 1 ? "none" : "none";
+  counterWin ? pjsDefault.style.display = 'none' : pjsDefault.style.display = 'block';
+  linearCustom.style.display = counterWin ? "none" : "none";
+  counterWin ? particlesGame({ mode: null, direction: null, image: null, speed: null, key: false }) : console.log('user belum memenangkan game apapun');
   
   
   loaders.style.display = "none";
@@ -947,7 +948,7 @@ let storedEmailDate = JSON.parse(localStorage.getItem('emailDate')) || [];
    if (email_text.textContent.length > 100) {
     email_text.style.animation = 'marquee 10s linear infinite';
     email_text.style.transform = 'translateY(100%)';
-   } else { console.log('false') }
+   }
   });
  }
 
@@ -1463,9 +1464,12 @@ function handleSwitchTheme(typeTheme) {
         this.executedLoving = true;
         Object.entries(typeTheme[id].keyColor).forEach(([pseudo, color]) => {
          const setTHEME = localStorage.setItem('setTHEME', JSON.stringify(typeTheme[id].keyColor));
+         
          document.documentElement.style.setProperty(`--${pseudo}`, color);
+         
+         counterWin ? particlesGame({ mode: null, direction: null, image: null, speed: null, key: false }) : console.log('no particle custom');
         });
-        
+         
         const colorParticle = JSON.parse(localStorage.getItem('setTHEME')) || JSON.parse(localStorage.getItem('defaultTheme'));
         
         setupParticle(colorParticle.primaryIconColor);

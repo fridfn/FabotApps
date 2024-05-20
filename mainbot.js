@@ -159,7 +159,7 @@ const kataKasar = [`kontol`, `memek`, `anjing`, `bangsat`, `ngentot`, `bajingan`
 
 const kataGamau = [`gak`, `engga`, `apasi`, `kepo`, `sok asik`, `ga boleh`, `lah lu siapa`, `masalah`, `gamau`, `lu siapa`, `boong`, `bodo amat`, `gak mau`, `ga mau`, `ga peduli`, `tapi boong`, `boong`, `gamau`, `maksa`, `kamu siapa`, `udahan`, `lah ngancem`, `marah`, 'keberatan'];
 
-const kataMau = ['iya', 'oke', 'iya mau'];
+const kataMau = ['iya', 'oke', 'iya mau', 'yaudah'];
 
 const kataNetral = [`farid`, `gpp`, `gapapa`, `yauda`, `oke`, `baiklah`, `terserah`, `gimana`, `gimana`, `gmana`, `iya iya`, `iya dah iya`, `iya deh iya`];
 
@@ -209,12 +209,11 @@ function firstInitializationChat() {
 
 const paramChat = JSON.parse(localStorage.getItem('historyChat'));
 
-let pesan;
 let init = paramChat? paramChat.init : 5;
-let counterWin = paramChat ? paramChat.counterWin : 0;
+let counterWin = paramChat ? paramChat.counterWin : 1;
 let playAgain = paramChat ? paramChat.playAgain : 0;
 let mainChat = paramChat ? paramChat.mainChat : 0;
-let mainChatIs = paramChat ? paramChat.mainChatIs : false;
+let mainChatIs = paramChat ? paramChat.mainChatIs : true;
 let isCloneChat = paramChat ? paramChat.isCloneChat : true;
 let chatRepeats = paramChat ? paramChat.chatRepeats : false;
 let jawabanBenar = paramChat ? paramChat.jawabanBenar : false;
@@ -224,12 +223,12 @@ let alreadySticker = paramChat ? paramChat.alreadySticker : false;
 let chatValidation = paramChat ? paramChat.chatValidation : false;
 
 
-let isChattan = paramChat ? paramChat.isChattan : false;
-let isGameWin = paramChat ? paramChat.isGameWin : false;
+let isChattan = paramChat ? paramChat.isChattan : true;
+let isGameWin = paramChat ? paramChat.isGameWin : true;
 let guessGame = paramChat ? paramChat.guessGame : false;
 let playGuess = paramChat ? paramChat.playGuess : false;
-let typingGame = paramChat ? paramChat.typingGame : true;
-let playTyping = paramChat ? paramChat.playTyping : true;
+let typingGame = paramChat ? paramChat.typingGame : false;
+let playTyping = paramChat ? paramChat.playTyping : false;
 let winTyping = paramChat ? paramChat.winTyping : false;
 let winGuess = paramChat ? paramChat.winGuess : false;
 let noRepeating = paramChat ? paramChat.noRepeating : false;
@@ -247,6 +246,7 @@ let botAnswerExecuted = paramChat ? paramChat.botAnswerExecuted : false;
 
 //variabel untuk validasi angka
 
+ let pesan;
  let angka;
  let kalimat;
  let umurTrue;
@@ -256,6 +256,7 @@ let botAnswerExecuted = paramChat ? paramChat.botAnswerExecuted : false;
  let umurM = false;
  let startStored = false;
  let nilaiAngkaIs = false;
+ let isCustomParticle = false;
 
 function botStart(data) {
  init ++;
@@ -270,9 +271,27 @@ function botStart(data) {
  lengthFullType = fullType.reduce((acc, element) => acc + element.length, 0);
  const jawabanSplited = jawabanValue.split(' ');
  const validNumber = jawabanSplited.filter(number => !isNaN(number) && number.trim() !== '');
- 
  pesan = jawabanValue || null;
  
+ const wordTrim = jawabanValue.replace(/\s+/g, '');
+ const params = wordTrim.split(',');
+ const command = params.length;
+ const [mode, direction, speed] = params;
+ see(mode, direction, speed)
+ 
+ 
+ const speedValue = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+ const customMode = ['stars', 'love', 'hexagon', 'segitiga', 'persegi', 'lingkaran'];
+ const customDirection = ['top', 'right', 'left', 'bottom', 'top-right', 'top-left', 'bottom-right', 'bottom-left'];
+ 
+ const checkCustomMode = customMode.some((kata) => jawabanValue.includes(kata));
+ const checkSpeedValue = speedValue.some((kata) => jawabanValue.includes(kata));
+ const checkDirectionMode = customDirection.some((kata) => jawabanValue.includes(kata));
+ const setExecutedCustom = [command === 3, checkCustomMode, checkDirectionMode, checkSpeedValue].every((value) => value === true);
+ 
+ //if (isCustomParticle && setExecutedCustom) { handleCustomParticle({  }) };
+ 
+ // variabel penampung nilai custom partikel //
  console.log(`masuk ke init `,init,`😎`);
  console.log("mainChat is :", mainChat);
  console.log("jawabanBenar is :", jawabanBenar);
@@ -911,6 +930,7 @@ function botStart(data) {
         clonedTextPertanyaan.innerHTML = `jiakkkhhh wkwkwkkw`;
         
         document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+        
         setTimeout(() => {
          initSticker++;
          imgSticker.src = "assets/sticker/smile.webp";
@@ -1606,6 +1626,12 @@ function botStart(data) {
            clonedTextPertanyaan.innerHTML = `mending kamu ngomong sama tembok aja sana`;
           } else if (mainChat === 4) {
            clonedTextPertanyaan.innerHTML = `gatau ah gelap ${namaDepan}`;
+           
+           setTimeout(() => {
+            initSticker++;
+            imgSticker.src = "assets/sticker/smile.webp";
+            document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
+           }, 2500);
           } else if (mainChat === 5) {
            isCloneChat = false;
           } else if (mainChat === 6) {
@@ -2412,7 +2438,7 @@ function botStart(data) {
       	    } else if (mainChat >= 7) {
       	     clonedTextPertanyaan.innerHTML = `abisnya si kamu ga pilih pilih mau no berapa😑`;
       	     isCloneChat = true;
-      	    }
+           }
           }
          }
         }
@@ -2647,7 +2673,7 @@ function botStart(data) {
          
          setTimeout(() => {
   	       initSticker++;
-  	       imgSticker.src = "pukulin.webp";
+  	       imgSticker.src = "assets/sticker/pukulin.webp";
   	       document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
  	       }, 2500);
       	 } else {
@@ -2790,155 +2816,89 @@ function botStart(data) {
   setTimeout(() => {
    barier.style.display = 'none';
    if (!mainChatIs) {
-    if (isGameWin) {
+    if (counterWin) {
      if (mainChat === 1) {
-      clonedTextPertanyaan.innerHTML = `owh ya btw ${namaDepan} mau hilangin love nya ga?`;
+      if (['kenapa', 'ilangin', 'knp'].some((kata) => jawabanValue.includes(kata))) {
+       clonedTextPertanyaan.innerHTML = `siapa tau kamu risih gitu sama love nya? karna alay🙃`;
+      } else {
+       clonedTextPertanyaan.innerHTML = `${namaDepan} berarti ga risih?`;
+      }
      } else if (mainChat === 2) {
-      if (['emang', 'kenapa', 'knp', 'emng'].some((kata) => jawabanValue.includes(kata))) {
-       
-       quest_1 = true;
-       clonedTextPertanyaan.innerHTML = `ya siapa tau ${namaDepan} risih gitu sama love nya?`;
+      if (jawabanValue.includes('alay') && !noRepeatChat) {
+       mainChat = 1;
+       noRepeatChat = true;
+       clonedTextPertanyaan.innerHTML = `ya kan ${namaDepan} alay bangett?🙃`;
+      } else {
+       noRepeatChat = false;
+       clonedTextPertanyaan.innerHTML = `jadi gimana ni kamu mau ilangin love nya apa gimana??`;
        
        setTimeout(() => {
         initSticker++;
         imgSticker.src = 'assets/sticker/hmm.webp';
-        document.querySelector('#contentPertanyaan').appendChild(stickers.cloneNode(true));
-       }, 2500);
-       
-      } else if (['gamau', 'engga', 'biarin', 'gausah'].some((kata) => jawabanValue.includes(kata))) {
-       
-       quest_2 = true;
-       if (theme === 'basic') {
-        clonedTextPertanyaan.innerHTML = `${namaDepan} ga risih kh?, menurut aku sih mending ganti linear aja labih bagus ga sih?`;
-       } else {
-        clonedTextPertanyaan.innerHTML = 'menurut aku udah cukup ga sih efek rain love nya?';
-       }
-       
-      } else if (['hilangin', 'ilangin', 'yaudah'].some((kata) => jawabanValue.includes(kata))) {
-       
-       quest_3 = true;
-       clonedTextPertanyaan.innerHTML = `gangu ya love nya atau kamu risih liat love nya?`;
-       
-      } else {
-       mainChat = 1;
-       clonedTextPertanyaan.innerHTML = `gimana ni mau kamu ${namaDepan}, aku mh ikutin kamu aja😇`;
+        document.getElementById('contentPertanyaan').appendChild(stickers.cloneNode(true));
+       }, 1000);
       }
      } else if (mainChat === 3) {
-      mainChat = 2;
-      if (quest_1) {
-       if (!isRepeat) {
-        if (['ilangin', 'yaudah'].some((kata) => jawabanValue.includes(kata))) {
-         mainChat = 3;
-         clonedTextPertanyaan.innerHTML = `okk aku hilangin yaa ${namaDepan}`;
-        } else {
-         isRepeat = true;
-         clonedTextPertanyaan.innerHTML = `serius ga risih?, padahal aku mikir nya kamu risih tau.`;
-        }
-       } else {
-        mainChat = 3;
-        clonedTextPertanyaan.innerHTML = `okeh deh, klo misal ${namaDepan} mau hilangin ketik kode [ UNL0V3 ] ini ya`;
-       }
-      } else if (quest_2 && theme === 'blue') {
-       if (!isRepeat) {
-        if (['emang', 'kenapa'].some((kata) => jawabanValue.includes(kata))) {
-         
-         quest_1 = true;
-         clonedTextPertanyaan.innerHTML = `ya siapa tau ${namaDepan} risih gitu sama love nya?`;
-         
-         setTimeout(() => {
-          initSticker++;
-          imgSticker.src = 'assets/sticker/hmm.webp';
-          document.querySelector('#contentPertanyaan').appendChild(stickers.cloneNode(true));
-         }, 2500);
-        } else {
-         isRepeat = true;
-         clonedTextPertanyaan.innerHTML = `mending di hilangin aja ga sih ${namaDepan} biar lebih bagus, biar lebih nyaman juga chattan nya`;
-        }
-       } else { // true isRepeat
-        if (['ilangin', 'yaudah'].some((kata) => jawabanValue.includes(kata))) {
-         mainChat = 3;
-         isRainLove = false;
-         clonedTextPertanyaan.innerHTML = 'oke aku hilangin ya love nya';
-        } else {
-         mainChat = 3;
-         clonedTextPertanyaan.innerHTML = 'yaudah deh terserah kamu aja, klo kamu mau ilangin ketik kode [ UNL0V3 ] ini ya';
-        }
-       }
-      } else if (quest_2 && theme === 'basic') {
-       if (!isRepeat) {
-        isRepeat = true;
-        clonedTextPertanyaan.innerHTML = `itu kamu tau kan yang garis garis turun kebawah itu?`;
-       } else {
-        if (!botAnswerExecuted) {
-         if (!chatRepeated) {
-          if (['mana', 'gimana', 'gatau', 'engga'].some((kata) => jawabanValue.includes(kata))) {
-           chatRepeated = true;
-           clonedTextPertanyaan.innerHTML = `ishhh itu loh ${namaDepan} yang garis garis kaya hujan gitu, tau kan`;
-          } else {
-           botAnswerExecuted = true;
-           clonedTextPertanyaan.innerHTML = `iyaa jadi kamu mau di ganti ga sama yang itu?`;
-          }
-         } else { // true chatRepeated
-          botAnswerExecuted = true;
-          clonedTextPertanyaan.innerHTML = `nhh yang kaya gitu, ${namaDepan} mau ga di ganti yang itu?`;
-         }
-        } else {
-         if (['mau', 'yaudah', `iya`].some((kata) => jawabanValue.includes(kata))) {
-          mainChat = 3;
-          isRainLove = false;
-          botAnswerExecuted = true;
-          clonedTextPertanyaan.innerHTML = `okeh klo kamu mau ganti😅`;
-         } else if (['gak', 'engga'].some((kata) => jawabanValue.includes(kata))) {
-          mainChat = 3;
-          clonedTextPertanyaan.innerHTML = `hmm ok deh klo ${namaDepan} gamau, btw klo mau ganti ketik kode [ UNL0V3 ] ini ya`;
-         } else {
-          clonedTextPertanyaan.innerHTML = `${namaDepan} bilang aja engga atau iya?`;
-         }
-        }
-       }
-      } else if (quest_3) {
-       if (['gak', 'ngga'].some((kata) => jawabanValue.includes(kata))) {
-        mainChat = 3;
-        clonedTextPertanyaan.innerHTML = `owh yaudah deh klo gitu`;
-       } else if (['risih', 'ganggu'].some((kata) => jawabanValue.includes(kata))) {
-        clonedTextPertanyaan.innerHTML = `owhh gitu ya maaf ya udh bikin kamu risih/nge ganggu`;
-        } else {
-        if (!botAnswerExecuted) {
-         isRainLove = false;
-         botAnswerExecuted = true;
-         clonedTextPertanyaan.innerHTML = `yaudahh ya ${namaDepan} aku ilangin love nya😅`;
-        } else {
-         mainChat = 3;
-         clonedTextPertanyaan.innerHTML = `maaf ya ${namaDepan} karna udah buat kamu ga nyaman karna love nya`;
-        }
-       }
-      } else { alert('user ini curang') }
-     } else { // else mainChat
-      quest_1 = false;
-      quest_2 = false;
-      quest_3 = false;
-      isGameWin = false;
-      
-      if (botAnswerExecuted) {
-       botAnswerExecuted = false;
-       clonedTextPertanyaan.innerHTML = `udah hilang kan sekarang love nya??`;
+      if (['yaudah', 'ilangin', 'iya', 'terserah', 'terah'].some((kata) => jawabanValue.includes(kata))) {
+       noRepeatChat = true;
+       clonedTextPertanyaan.innerHTML = `oke ${namaDepan} aku ilangin yaa buat kamu`;
        
        setTimeout(() => {
-        clonedTextPertanyaan.innerHTML = `jadi lebih bagus gini ya kan?`;
+        clonedTextPertanyaan.innerHTML = `padahal aku lebih suka ada love love nya wkwk`;
         
-        document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
-       }, 1000);
-      } else { // false botAnswerExecuted
-       clonedTextPertanyaan.innerHTML = `yaudah klo gitu terserah kamu aja deh, aku mh ngikutin kamu aja wkwk`;
+        document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true))
+        }, 1000);
+      } else {
+       clonedTextPertanyaan.innerHTML = `seriusan nih kamu gamau ilangin?`;
+      }
+     } else if (mainChat === 4) {
+      if (noRepeatChat) {
+       clonedTextPertanyaan.innerHTML = `yaudah lah gpp ${namaDepan}`;
        
        setTimeout(() => {
         initSticker++;
-        imgSticker.src = 'assets/sticker/smile.webp';
-        document.querySelector('#contentPertanyaan').appendChild(stickers.cloneNode(true));
-       }, 2500);
+        imgSticker.src = 'assets/sticker/okey.webp';
+        document.getElementById('contentPertanyaan').appendChild(stickers.cloneNode(true));
+       }, 1000);
+      } else {
+       if (['gausah', 'serius', 'gamau', 'gak'].some((kata) => jawabanValue.includes(kata))) {
+        clonedTextPertanyaan.innerHTML = `ok klo kamu seriuss`;
+       } else if (['yaudah', 'ilangin', 'iya', 'terserah', 'terah'].some((kata) => jawabanValue.includes(kata))) {
+        noRepeatChat = true;
+        clonedTextPertanyaan.innerHTML = `nhh gini dong kan jelas, yaudah aku ilangin yaa`;
+       } else {
+        mainChat = 3;
+        clonedTextPertanyaan.innerHTML = `tunggu dlu kamu mau nya gimana, serius ga nih gamau di ilangin?`;
+        
+        setTimeout(() => {
+         clonedTextPertanyaan.innerHTML = `mau di ilangin apa engga?`;
+         
+         document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+        }, 1000);
+       }
+      }
+     } else {
+      mainChat = 0;
+      mainChatIs = true;
+      if (noRepeatChat) {
+       clonedTextPertanyaan.innerHTML = `yhh jadi polos doang background chat nya`;
+       
+       setTimeout(() => {
+        clonedTextPertanyaan.innerHTML = `btw kamu mau ganti background partikelnya ga?`;
+        
+        document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+       },1000);
+      } else {
+       clonedTextPertanyaan.innerHTML = `berhubung kamu tadi udah menangin game dan kalahin aku`;
+       
+       setTimeout(() => {
+        clonedTextPertanyaan.innerHTML = `aku bisa ngelakuin sesuatu buat kamu`;
+        
+        document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+       }, 1000);
       }
      }
-    } else { // false isGameWin
+    } else { // kondisi untuk user tidak memenangkan game sama sekali
      if (!chatValidation) {
       chatValidation = true;
       clonedTextPertanyaan.innerHTML = `Mmmmmm`;
@@ -2951,15 +2911,79 @@ function botStart(data) {
      } else { // true chatValidation
       clonedTextPertanyaan.innerHTML = `anuu`;
      }
-    }
+    } //needd validation
    } else { // trus mainChatIs
-    
+    if (counterWin) { //validasi untuk user bisa mengubah partikel
+     if (mainChat === 1) {
+      clonedTextPertanyaan.innerHTML = `jadi aku bisa ngubah background partikel menjadi beberapa mode, yanh bisa kamu pilih sesuka kamu`;
+      particlesGame({ mode: 'persegi', direction: 'bottom-left', image: 'asyla.webp', speed: true, key: true, });
+
+      setTimeout(() => {
+       clonedTextPertanyaan.innerHTML = `di bawah ini adalah nilai yang bisa kamu gunakan untuk mengatur partikelnya.<br><br>di bawah ini adalah mode :<br><br>1. Love<br>2. stars<br>3. image <br>4.  hexagon<br>5. segitiga<br>6 .persegi<br>7. lingkaran<br><br>di bawah ini adalah direction / arah :<br><br>1. top<br>2. top-right<br>3. top-left<br>4. right<br>5. left<br>7. bottom<br>6. bottom-right<br>8. bottom-left<br><br>kamu bisa mengatur kecepatan animasi dari 1 - 5.`;
+       
+       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true))
+      }, 1000);
+     } else if (mainChat === 2) {
+      clonedTextPertanyaan.innerHTML = `pasti kamu bertanya gimana cara ngubah nya ya kan?`;
+      
+      setTimeout(() => {
+       clonedTextPertanyaan.innerHTML = `caranya kamu harus mengetikan 3 nilai, yaitu mode, arah, kecepatan`;
+       
+       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true))
+      }, 1000);
+     } else if (mainChat === 3) {
+      clonedTextPertanyaan.innerHTML = `jadii kamu bisa memberikan nilai yang kamu pilih sesuai pesan chat diatas`;
+      
+      setTimeout(() => {
+       clonedTextPertanyaan.innerHTML = `perlu kamu ingat. kamu harus mengetikan nilai nya harus sama seperti pesan chat diatas, agar valid`;
+       
+       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true))
+      }, 1000);
+     } else if (mainChat === 4) {
+       clonedTextPertanyaan.innerHTML = `stars, top-right, 3`;
+       
+      setTimeout(() => {
+       clonedTextPertanyaan.innerHTML = `maksud contoh diatas stars itu adalah mode, top-right adalah arah gerakan dan kecepatan animasinya inget ya pake koma`;
+       
+       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+        
+       setTimeout(() => {
+        clonedTextPertanyaan.innerHTML = `udah gitu doang, nanti aku ganti background nya sesuai yang kamu mau ${namaDepan}😄`;
+        
+        document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+       }, 1000);
+      }, 1000);
+     } else if (mainChat === 5) {
+      clonedTextPertanyaan.innerHTML = `okey sekarang kamu coba seperti yang aku kasi tau tadi ${namaDepan}`;
+      
+      setTimeout(() => {
+       initSticker++;
+       imgSticker.src = "assets/sticker/smile.webp";
+       document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
+      }, 2500);
+     } else {
+      // mengirim nilai jawaban user untuk meng custom partikel
+      if (isCustomParticle) {
+       clonedTextPertanyaan.innerHTML = `mulai sekarang kamu bisa mengubah partikelnya kapan pun`;
+        
+        setTimeout(() => {
+         clonedTextPertanyaan.innerHTML = `kamu tinggal mengetikan seperti sebelum nya ya ${namaDepan}`;
+         
+         document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+       }, 1000);
+      } else {
+       isCustomParticle = true;
+       handleCustomParticle({ key: setExecutedCustom, thisMode: mode, thisDirection: direction, thisSpeed: speed });
+      }
+     }
+    } else { // validasi untuk user yang tidak bisa mengubah partikel
+     
+    }
    }
    //////////Clone Chat Validation//////////
    (isCloneChat) ? document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true)) : alert("tidak is cloneChat || Bot Diam");
    //////////Clone Chat Validation//////////
   }, 1000);
-  
  } else if (init === 7) {
   console.log({ ok: jawabanValue });
   chatValue = userSay({ ok: jawabanValue })[6];
@@ -2993,64 +3017,93 @@ function botStart(data) {
  }
 }/*kurawa end botStart*/
 
+function handleCustomParticle(nilai) {
+ let { key, thisMode, thisDirection, thisSpeed } = nilai;
+ 
+ if (key) {
+  clonedTextPertanyaan.innerHTML = `okey sebentar ya ${namaDepan}`;
+ 
+  setTimeout(() => {
+   particlesGame({ mode: thisMode, direction: thisDirection, image: 'asyla.webp', speed: thisSpeed, key: true, });
+   
+   isCustomParticle = true;
+   clonedTextPertanyaan.innerHTML = `keren kan bisa aku ubah background partikelnya? kwkw`;
+   
+   document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+  }, 1000);
+ } else {
+  if (command <= 2) {
+   clonedTextPertanyaan.innerHTML = `maaf kayanya ada sesuatu yang kurang deh mengetikan nilai nya, tolong kasi tau aku nilai nya dengan benar`;
+  } else {
+   clonedTextPertanyaan.innerHTML = `maaf kayanya kamu kelebihan deh mengetikan nilai nya, coba ketik ulang lagii`;
+   
+   setTimeout(() => {
+    clonedTextPertanyaan.innerHTML = `tolong ketikan seperti apa yang sudah diberitahu tadi ya.`;
+    
+    document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+   }, 1000);
+  }
+ }
+}
+
 // Membuat instance dari MutationObserver dengan sebuah callback function
 const observer = new MutationObserver((mutationsList, observer) => {
   // Iterasi melalui setiap mutasi
   for (let mutation of mutationsList) {
-    if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-      textMengetik.innerHTML = 'Online';
-      //notif.play();
-      clearInterval(intervalID);
+   if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+    textMengetik.innerHTML = 'Online';
+    //notif.play();
+    clearInterval(intervalID);
 
-      const storedChat = {};
-      const containerChat = document.querySelector("#wrapper-item-chat");
-      const allChat = containerChat.lastElementChild;
-      
-      const variables = [
-       'init',
-       'pesan',
-       'mainChat',
-       'playAgain',
-       'counterWin',
-       'mainChatIs',
-       'isCloneChat',
-       'chatRepeats',
-       'jawabanBenar',
-       'chatRepeated',
-       'noRepeatChat',
-       'alreadySticker',
-       'chatValidation',
-       'isChattan',
-       'isGameWin',
-       'guessGame',
-       'playGuess',
-       'typingGame',
-       'playTyping',
-       'winTyping',
-       'winGuess',
-       'noRepeating',
-       'quest_1',
-       'quest_2',
-       'quest_3',
-       'isCurang',
-       'isRepeat',
-       'isTantangan',
-       'botAnswerExecuted'
-      ];
-      
-      setTimeout(() => {
-       variables.forEach(variable => {
-        storedChat[variable] = eval(variable);
-       });
-       
-       storedChat.chat = allChat.innerHTML;
-       startStored ? localStorage.setItem('historyChat', JSON.stringify(storedChat)) : console.log('initialisasi pertama sebelum memulai storedChat') ;
-       
-       console.table(JSON.parse(localStorage.getItem('historyChat')));
-       
-       document.querySelector('.pathchat').scrollIntoView({ behavior: 'smooth', block: 'end' });
-      }, 500);
-    }
+    const storedChat = {};
+    const containerChat = document.querySelector("#wrapper-item-chat");
+    const allChat = containerChat.lastElementChild;
+    
+    const variables = [
+     'init',
+     'pesan',
+     'mainChat',
+     'playAgain',
+     'counterWin',
+     'mainChatIs',
+     'isCloneChat',
+     'chatRepeats',
+     'jawabanBenar',
+     'chatRepeated',
+     'noRepeatChat',
+     'alreadySticker',
+     'chatValidation',
+     'isChattan',
+     'isGameWin',
+     'guessGame',
+     'playGuess',
+     'typingGame',
+     'playTyping',
+     'winTyping',
+     'winGuess',
+     'noRepeating',
+     'quest_1',
+     'quest_2',
+     'quest_3',
+     'isCurang',
+     'isRepeat',
+     'isTantangan',
+     'botAnswerExecuted'
+    ];
+    
+    setTimeout(() => {
+     variables.forEach(variable => {
+      storedChat[variable] = eval(variable);
+     });
+     
+     storedChat.chat= allChat.innerHTML;
+     startStored ? localStorage.setItem('historyChat', JSON.stringify(storedChat)) : console.log('initialisasi pertama sebelum memulai storedChat') ;
+     
+     console.table(JSON.parse(localStorage.getItem('historyChat')));
+     
+     document.querySelector('.pathchat').scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }, 500);
+   }
   }
 });
 // Tentukan elemen target yang akan diamati

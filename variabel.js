@@ -774,8 +774,7 @@ if (mailText !== null) {
    if (email_text.textContent.length > 100) {
     email_text.style.animation = 'marquee 10s linear infinite';
     email_text.style.transform = 'translateY(100%)';
-   } else { console.log('false') }
-   
+   }
    emailItem.push(cloneEmailBox);
    infoMsg.style.display = "none";
    cloneEmailBox.style.display = "flex";
@@ -1416,7 +1415,7 @@ function loadingAnimation(pages) {
     } else { 
      throw new Eror (remove, 'bukan object') 
     }
-   } catch (err) { cl("eror logic")}
+   } catch (err) { cl("eror logic", err)}
    
    if (Array.isArray(conditional)) {
     conditional.forEach(element => {

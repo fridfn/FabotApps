@@ -1,4 +1,3 @@
-
 const csl = console.log.bind(console);
 
 let blurProfile = document.querySelectorAll('.blur-profile');
@@ -1081,13 +1080,11 @@ inputLogin.forEach(function (login) {
   checkInputLogin);
 });
 
-let sudahLoginAlert = false;
-
 let passworduser = document.getElementById('password_user');
 const showIconPass = document.getElementById('show-pass');
 
 function togglePassword() {
-  if (password_user.type === 'password') {
+  if(password_user.type === 'password') {
    password_user.type = 'text';
    showIconPass.name = `eye-outline`;
   } else {
@@ -1103,20 +1100,6 @@ function closeLogin() {
   loginPage.style.display = "none";
   loginPage.style.opacity = "0";
  });
- 
- if (sudahLoginAlert) {
-  myAlert.style.opacity = "0";
-  myAlert.style.zIndex = "100";
-  blurLayer.style.zIndex = "100";
-  myAlert.style.display = "block";
-  blurLayer.style.display = "block";
-  infoAlert.innerHTML = "PEMBERITAHUAN !";
-  myAlertText.innerHTML = "login telah berhasil. silahkan klik tombol ok untuk<br>merefresh website ini.";
-  btnAlert.addEventListener('click', toxicAlert);
-  setTimeout(() => {
-   myAlert.style.opacity = "1"
-  }, 300);
- } else {/.../}
 }
 
 const signBtn = document.querySelector('.signin-text');
@@ -1165,7 +1148,7 @@ function userValidation() {
    hobbyUser[2].innerHTML = hobbySec;
    hobbyUser[3].innerHTML = hobbyThi;
    // sidebar user info profile end //
-  } else { console.log('perlu validasi') }
+  } else {console.log('perlu validasi')}
   setTimeout(() => {
    titleLoginText.innerHTML = "Kamu Sudah Login";
    infoLoginText.innerHTML = "terimakasih telah menggunakan website chatbot ini. nantikan update menarik selanjutnya dari chatbot ini !";
@@ -1179,7 +1162,6 @@ function userValidation() {
    }, 500);
   }, 1000);
  }
- //setTimeout(() => { typeText(0) }, 2000);
  document.querySelector('#signup-text').innerHTML = isLogin ? `<button class="btn-login"><span><ion-icon name="person"></ion-icon>${namaDepan}</span></button>` : `<button class="btn-login"><span><ion-icon name="person"></ion-icon>SIGN UP</span></button>`;
 }
 
@@ -1211,5 +1193,3 @@ function fullScreen() {
     }
   }
 }
-
-
