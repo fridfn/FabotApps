@@ -774,12 +774,7 @@ if (mailText !== null) {
    if (email_text.textContent.length > 100) {
     email_text.style.animation = 'marquee 10s linear infinite';
     email_text.style.transform = 'translateY(100%)';
-<<<<<<< HEAD
-   } else { console.log('false') }
-   
-=======
    }
->>>>>>> master
    emailItem.push(cloneEmailBox);
    infoMsg.style.display = "none";
    cloneEmailBox.style.display = "flex";
@@ -849,7 +844,7 @@ const themeJSON = () => {
        shadowBot: 'rgba(86,136,255,0.861)',
        tinyText: '#b4ccff',
        backgroundPY: 'calc(100% + 80%)',
-       backgroundImage: 'url("/assets/image/dark_1.jpg")'
+       backgroundImage: 'url("assets/background/dark_1.jpg")'
       }
      },
      {
@@ -877,7 +872,7 @@ const themeJSON = () => {
        tinyText: '#c89cf7',
        backgroundColor: '#000000',
        backgroundPY: '70%',
-       backgroundImage: 'url("/assets/image/dark_2.jpg")'
+       backgroundImage: 'url("assets/background/dark_2.jpg")'
       }
      },
      {
@@ -906,7 +901,7 @@ const themeJSON = () => {
        primaryCards: '#592705',
        backgroundColor: '#000000',
        backgroundPY: '50%',
-       backgroundImage: 'url("/assets/image/dark_3.jpg")'
+       backgroundImage: 'url("assets/background/dark_3.jpg")'
       }
      },
      {
@@ -933,7 +928,7 @@ const themeJSON = () => {
        shadowBot: '',
        tinyText: '#77f6ff',
        backgroundPY: '25%',
-       backgroundImage: 'url("/assets/image/dark_4.jpg")'
+       backgroundImage: 'url("assets/background/dark_4.jpg")'
       }
      },
      {
@@ -961,7 +956,7 @@ const themeJSON = () => {
        tinyText: '#aeaeae',
        backgroundColor: '#000000',
        backgroundPY: '50%',
-       backgroundImage: 'url("/assets/image/dark_5.jpg")'
+       backgroundImage: 'url("assets/background/dark_5.jpg")'
       }
      }
     ],
@@ -975,7 +970,7 @@ const themeJSON = () => {
        backgroundPY: '80%',
        primaryBorderColor: 'light ocean',
        backgroundColor: '#ff1b1b',
-       backgroundImage: 'url("/assets/image/light_1.jpg")'
+       backgroundImage: 'url("assets/background/light_1.jpg")'
       }
      },
      {
@@ -986,7 +981,7 @@ const themeJSON = () => {
        primaryIconColor: '#ff1bee',
        primaryBorderColor: 'light clouds',
        backgroundColor: '#ff1b1b',
-       backgroundImage: 'url("/assets/image/light_2.jpg")'
+       backgroundImage: 'url("assets/background/light_2.jpg")'
       }
      },
      {
@@ -997,7 +992,7 @@ const themeJSON = () => {
        primaryIconColor: '#1b47ff',
        primaryBorderColor: 'light beach',
        backgroundColor: '#ff1b1b',
-       backgroundImage: 'url("/assets/image/light_3.jpg")'
+       backgroundImage: 'url("assets/background/light_3.jpg")'
       }
      }
     ],
@@ -1009,7 +1004,7 @@ const themeJSON = () => {
        primaryTextColor: '#aeaeae',
        primaryBorderColor: 'set theme 1',
        backgroundColor: '#ff1b1b',
-       backgroundImage: 'url("/assets/image/background-image9.jpg")'
+       backgroundImage: 'url("assets/background/background-image9.jpg")'
       }
      },
      {
@@ -1420,11 +1415,7 @@ function loadingAnimation(pages) {
     } else { 
      throw new Eror (remove, 'bukan object') 
     }
-<<<<<<< HEAD
-   } catch (err) { cl("eror logic")}
-=======
    } catch (err) { cl("eror logic", err)}
->>>>>>> master
    
    if (Array.isArray(conditional)) {
     conditional.forEach(element => {

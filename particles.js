@@ -7,11 +7,8 @@
 /* v2.0.0
 /* ----------------------------------------------- */
 
-<<<<<<< HEAD
-var pJS = function(tag_id, params){
-=======
+
 var pJS = function(tag_id, params) {
->>>>>>> master
   var canvas_el = document.querySelector('#'+tag_id+' > .particles-js-canvas-el');
 
   /* particles.js variables with default values */
@@ -1519,10 +1516,6 @@ window.particlesJS = function(tag_id, params){
   if(canvas != null){
     pJSDom.push(new pJS(tag_id, params));
   }
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 };
 
 window.particlesJS.load = function(tag_id, path_config_json, callback){
@@ -1583,16 +1576,6 @@ function toSeeParticle(params) {
     default:
      console.log('defaults');
   }
-  
-<<<<<<< HEAD
- setTimeout(() => {
-  btnDown.classList.add('block');
-  // menghilangkan button down
-  setTimeout(() => {
-   btnDown.classList.remove('block');
-  }, 7000);
- }, 2000);
-=======
   setTimeout(() => {
    btnDown.classList.add('block');
    // menghilangkan button down
@@ -1600,7 +1583,6 @@ function toSeeParticle(params) {
     btnDown.classList.remove('block');
    }, 7000);
   }, 2000);
->>>>>>> master
 }
 
 function goDownParticle() {
@@ -1608,152 +1590,16 @@ function goDownParticle() {
  document.getElementById('set-particles').scrollIntoView({ behavior: 'smooth'});
 }
 
-<<<<<<< HEAD
-function particlesGame(params) {
- const { mode, direction, image, animasi } = params;
- const storedMode = ['love', 'stars', 'image', 'hexagon', 'segitiga', 'persegi', 'lingkaran'];
- 
-=======
-
 function particlesGame(params) {
  const storedMode = ['stars', 'image', 'hexagon', 'segitiga', 'persegi', 'lingkaran'];
  const pjsGameMode = JSON.parse(localStorage.getItem('pjsGame'));
  const { key } = params;
  let { mode, direction, image, speed } = key ? params : pjsGameMode ;
->>>>>>> master
+
  const JSONColor = JSON.parse(localStorage.getItem('setTHEME'));
  const colorParticle = (JSONColor) ? JSONColor : JSON.parse(localStorage.getItem('defaultTheme'));
  const color = colorParticle.primaryIconColor;
  
-<<<<<<< HEAD
- if (storedMode.includes(mode)) {
-  particlesJS('particles-game', {
-     "particles": {
-       "number": {
-         "value": mode === 'image' ? 50 : 100,
-         "density": {
-           "enable": true,
-           "value_area": 800
-         }
-       },
-       "color": {
-         "value": color
-       },
-       "shape": {
-         "type": mode,
-         "stroke": {
-           "width": 0,
-           "color": "#000000"
-         },
-         "hexagon": {
-           "nb_sides": 6
-         },
-         "segitiga": {
-           "nb_sides": 3
-         },
-         "lingkaran": {
-           "nb_sides": 6
-         },
-         "persegi": {
-           "nb_sides": 4
-         },
-         "image": {
-           "src": image,
-           "width": 500,
-           "height": 500
-         }
-       },
-       "opacity": {
-         "value": 0.5,
-         "random": true,
-         "anim": {
-           "enable": false,
-           "speed": 1,
-           "opacity_min": 0.1,
-           "sync": false
-         }
-       },
-       "size": {
-         "value": mode === 'image' ? 30 : 9,
-         "random": true,
-         "anim": {
-           "enable": animasi,
-           "speed": 6,
-           "size_min": mode === 'image' ? 10 : 19,
-           "sync": false
-         }
-       },
-       "line_linked": {
-         "enable": true,
-         "distance": 150,
-         "color": "#ffffff00",
-         "opacity": 0,
-         "width": 1
-       },
-       "move": {
-         "enable": true,
-         "speed": 1,
-         "direction": direction,
-         "random": false,
-         "straight": false,
-         "out_mode": "out",
-         "attract": {
-           "enable": false,
-           "rotateX": 1000,
-           "rotateY": 800
-         }
-       }
-     },
-     "interactivity": {
-       "detect_on": "canvas",
-       "events": {
-         "onhover": {
-           "enable": true,
-           "mode": "repulse"
-         },
-         "onclick": {
-           "enable": true,
-           "mode": "repulse"
-         },
-         "resize": true
-       },
-       "modes": {
-         "grab": {
-           "distance": 400,
-           "line_linked": {
-             "opacity": 1
-           }
-         },
-         "bubble": {
-           "distance": 100,
-           "size": 7,
-           "duration": 1,
-           "opacity": 8,
-           "speed": 3
-         },
-         "repulse": {
-           "distance": 50
-         },
-         "push": {
-           "particles_nb": 4
-         },
-         "remove": {
-           "particles_nb": 2
-         }
-       }
-     },
-    });
- }
-}
-
-particlesGame({
- mode: 'image',
- direction: 'top-right',
- image: 'hearts.png',
- animasi: false
-});
-
-=======
  mode == 'love' ? mode = 'image' : mode ;
  
  if (storedMode.includes(mode)) {
@@ -1883,7 +1729,6 @@ particlesGame({
  }
 }
 
->>>>>>> master
 function handleParticle(mode, newParticleColor) {
  localStorage.setItem('pJSMode', mode);
  const isLinearMode = ['linear', 'love', 'image'].includes(mode);
@@ -2102,11 +1947,7 @@ function handleParticle(mode, newParticleColor) {
        "move": {
          "enable": true,
          "speed": 1,
-<<<<<<< HEAD
-         "direction": "top-right",
-=======
          "direction": direction,
->>>>>>> master
          "random": false,
          "straight": false,
          "out_mode": "out",

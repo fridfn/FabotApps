@@ -159,11 +159,8 @@ const kataKasar = [`kontol`, `memek`, `anjing`, `bangsat`, `ngentot`, `bajingan`
 
 const kataGamau = [`gak`, `engga`, `apasi`, `kepo`, `sok asik`, `ga boleh`, `lah lu siapa`, `masalah`, `gamau`, `lu siapa`, `boong`, `bodo amat`, `gak mau`, `ga mau`, `ga peduli`, `tapi boong`, `boong`, `gamau`, `maksa`, `kamu siapa`, `udahan`, `lah ngancem`, `marah`, 'keberatan'];
 
-<<<<<<< HEAD
-const kataMau = ['iya', 'oke', 'iya mau'];
-=======
 const kataMau = ['iya', 'oke', 'iya mau', 'yaudah'];
->>>>>>> master
+
 
 const kataNetral = [`farid`, `gpp`, `gapapa`, `yauda`, `oke`, `baiklah`, `terserah`, `gimana`, `gimana`, `gmana`, `iya iya`, `iya dah iya`, `iya deh iya`];
 
@@ -213,20 +210,11 @@ function firstInitializationChat() {
 
 const paramChat = JSON.parse(localStorage.getItem('historyChat'));
 
-<<<<<<< HEAD
-let pesan;
-let init = paramChat? paramChat.init : 5;
-let counterWin = paramChat ? paramChat.counterWin : 0;
-let playAgain = paramChat ? paramChat.playAgain : 0;
-let mainChat = paramChat ? paramChat.mainChat : 0;
-let mainChatIs = paramChat ? paramChat.mainChatIs : false;
-=======
 let init = paramChat? paramChat.init : 5;
 let counterWin = paramChat ? paramChat.counterWin : 1;
 let playAgain = paramChat ? paramChat.playAgain : 0;
 let mainChat = paramChat ? paramChat.mainChat : 0;
 let mainChatIs = paramChat ? paramChat.mainChatIs : true;
->>>>>>> master
 let isCloneChat = paramChat ? paramChat.isCloneChat : true;
 let chatRepeats = paramChat ? paramChat.chatRepeats : false;
 let jawabanBenar = paramChat ? paramChat.jawabanBenar : false;
@@ -235,22 +223,12 @@ let noRepeatChat = paramChat ? paramChat.noRepeatChat : false;
 let alreadySticker = paramChat ? paramChat.alreadySticker : false;
 let chatValidation = paramChat ? paramChat.chatValidation : false;
 
-
-<<<<<<< HEAD
-let isChattan = paramChat ? paramChat.isChattan : false;
-let isGameWin = paramChat ? paramChat.isGameWin : false;
-let guessGame = paramChat ? paramChat.guessGame : false;
-let playGuess = paramChat ? paramChat.playGuess : false;
-let typingGame = paramChat ? paramChat.typingGame : true;
-let playTyping = paramChat ? paramChat.playTyping : true;
-=======
 let isChattan = paramChat ? paramChat.isChattan : true;
 let isGameWin = paramChat ? paramChat.isGameWin : true;
 let guessGame = paramChat ? paramChat.guessGame : false;
 let playGuess = paramChat ? paramChat.playGuess : false;
 let typingGame = paramChat ? paramChat.typingGame : false;
 let playTyping = paramChat ? paramChat.playTyping : false;
->>>>>>> master
 let winTyping = paramChat ? paramChat.winTyping : false;
 let winGuess = paramChat ? paramChat.winGuess : false;
 let noRepeating = paramChat ? paramChat.noRepeating : false;
@@ -268,10 +246,7 @@ let botAnswerExecuted = paramChat ? paramChat.botAnswerExecuted : false;
 
 //variabel untuk validasi angka
 
-<<<<<<< HEAD
-=======
  let pesan;
->>>>>>> master
  let angka;
  let kalimat;
  let umurTrue;
@@ -281,10 +256,7 @@ let botAnswerExecuted = paramChat ? paramChat.botAnswerExecuted : false;
  let umurM = false;
  let startStored = false;
  let nilaiAngkaIs = false;
-<<<<<<< HEAD
-=======
  let isCustomParticle = false;
->>>>>>> master
 
 function botStart(data) {
  init ++;
@@ -299,11 +271,7 @@ function botStart(data) {
  lengthFullType = fullType.reduce((acc, element) => acc + element.length, 0);
  const jawabanSplited = jawabanValue.split(' ');
  const validNumber = jawabanSplited.filter(number => !isNaN(number) && number.trim() !== '');
-<<<<<<< HEAD
  
- pesan = jawabanValue || null;
- 
-=======
  pesan = jawabanValue || null;
  
  const wordTrim = jawabanValue.replace(/\s+/g, '');
@@ -325,7 +293,7 @@ function botStart(data) {
  //if (isCustomParticle && setExecutedCustom) { handleCustomParticle({  }) };
  
  // variabel penampung nilai custom partikel //
->>>>>>> master
+ 
  console.log(`masuk ke init `,init,`😎`);
  console.log("mainChat is :", mainChat);
  console.log("jawabanBenar is :", jawabanBenar);
@@ -964,10 +932,7 @@ function botStart(data) {
         clonedTextPertanyaan.innerHTML = `jiakkkhhh wkwkwkkw`;
         
         document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
-<<<<<<< HEAD
-=======
         
->>>>>>> master
         setTimeout(() => {
          initSticker++;
          imgSticker.src = "assets/sticker/smile.webp";
@@ -1663,15 +1628,12 @@ function botStart(data) {
            clonedTextPertanyaan.innerHTML = `mending kamu ngomong sama tembok aja sana`;
           } else if (mainChat === 4) {
            clonedTextPertanyaan.innerHTML = `gatau ah gelap ${namaDepan}`;
-<<<<<<< HEAD
-=======
            
            setTimeout(() => {
             initSticker++;
             imgSticker.src = "assets/sticker/smile.webp";
             document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
            }, 2500);
->>>>>>> master
           } else if (mainChat === 5) {
            isCloneChat = false;
           } else if (mainChat === 6) {
@@ -2478,11 +2440,7 @@ function botStart(data) {
       	    } else if (mainChat >= 7) {
       	     clonedTextPertanyaan.innerHTML = `abisnya si kamu ga pilih pilih mau no berapa😑`;
       	     isCloneChat = true;
-<<<<<<< HEAD
-      	    }
-=======
            }
->>>>>>> master
           }
          }
         }
@@ -2717,11 +2675,7 @@ function botStart(data) {
          
          setTimeout(() => {
   	       initSticker++;
-<<<<<<< HEAD
-  	       imgSticker.src = "pukulin.webp";
-=======
   	       imgSticker.src = "assets/sticker/pukulin.webp";
->>>>>>> master
   	       document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
  	       }, 2500);
       	 } else {
@@ -2864,16 +2818,6 @@ function botStart(data) {
   setTimeout(() => {
    barier.style.display = 'none';
    if (!mainChatIs) {
-<<<<<<< HEAD
-    if (isGameWin) {
-     if (mainChat === 1) {
-      clonedTextPertanyaan.innerHTML = `owh ya btw ${namaDepan} mau hilangin love nya ga?`;
-     } else if (mainChat === 2) {
-      if (['emang', 'kenapa', 'knp', 'emng'].some((kata) => jawabanValue.includes(kata))) {
-       
-       quest_1 = true;
-       clonedTextPertanyaan.innerHTML = `ya siapa tau ${namaDepan} risih gitu sama love nya?`;
-=======
     if (counterWin) {
      if (mainChat === 1) {
       if (['kenapa', 'ilangin', 'knp'].some((kata) => jawabanValue.includes(kata))) {
@@ -2889,150 +2833,10 @@ function botStart(data) {
       } else {
        noRepeatChat = false;
        clonedTextPertanyaan.innerHTML = `jadi gimana ni kamu mau ilangin love nya apa gimana??`;
->>>>>>> master
        
        setTimeout(() => {
         initSticker++;
         imgSticker.src = 'assets/sticker/hmm.webp';
-<<<<<<< HEAD
-        document.querySelector('#contentPertanyaan').appendChild(stickers.cloneNode(true));
-       }, 2500);
-       
-      } else if (['gamau', 'engga', 'biarin', 'gausah'].some((kata) => jawabanValue.includes(kata))) {
-       
-       quest_2 = true;
-       if (theme === 'basic') {
-        clonedTextPertanyaan.innerHTML = `${namaDepan} ga risih kh?, menurut aku sih mending ganti linear aja labih bagus ga sih?`;
-       } else {
-        clonedTextPertanyaan.innerHTML = 'menurut aku udah cukup ga sih efek rain love nya?';
-       }
-       
-      } else if (['hilangin', 'ilangin', 'yaudah'].some((kata) => jawabanValue.includes(kata))) {
-       
-       quest_3 = true;
-       clonedTextPertanyaan.innerHTML = `gangu ya love nya atau kamu risih liat love nya?`;
-       
-      } else {
-       mainChat = 1;
-       clonedTextPertanyaan.innerHTML = `gimana ni mau kamu ${namaDepan}, aku mh ikutin kamu aja😇`;
-      }
-     } else if (mainChat === 3) {
-      mainChat = 2;
-      if (quest_1) {
-       if (!isRepeat) {
-        if (['ilangin', 'yaudah'].some((kata) => jawabanValue.includes(kata))) {
-         mainChat = 3;
-         clonedTextPertanyaan.innerHTML = `okk aku hilangin yaa ${namaDepan}`;
-        } else {
-         isRepeat = true;
-         clonedTextPertanyaan.innerHTML = `serius ga risih?, padahal aku mikir nya kamu risih tau.`;
-        }
-       } else {
-        mainChat = 3;
-        clonedTextPertanyaan.innerHTML = `okeh deh, klo misal ${namaDepan} mau hilangin ketik kode [ UNL0V3 ] ini ya`;
-       }
-      } else if (quest_2 && theme === 'blue') {
-       if (!isRepeat) {
-        if (['emang', 'kenapa'].some((kata) => jawabanValue.includes(kata))) {
-         
-         quest_1 = true;
-         clonedTextPertanyaan.innerHTML = `ya siapa tau ${namaDepan} risih gitu sama love nya?`;
-         
-         setTimeout(() => {
-          initSticker++;
-          imgSticker.src = 'assets/sticker/hmm.webp';
-          document.querySelector('#contentPertanyaan').appendChild(stickers.cloneNode(true));
-         }, 2500);
-        } else {
-         isRepeat = true;
-         clonedTextPertanyaan.innerHTML = `mending di hilangin aja ga sih ${namaDepan} biar lebih bagus, biar lebih nyaman juga chattan nya`;
-        }
-       } else { // true isRepeat
-        if (['ilangin', 'yaudah'].some((kata) => jawabanValue.includes(kata))) {
-         mainChat = 3;
-         isRainLove = false;
-         clonedTextPertanyaan.innerHTML = 'oke aku hilangin ya love nya';
-        } else {
-         mainChat = 3;
-         clonedTextPertanyaan.innerHTML = 'yaudah deh terserah kamu aja, klo kamu mau ilangin ketik kode [ UNL0V3 ] ini ya';
-        }
-       }
-      } else if (quest_2 && theme === 'basic') {
-       if (!isRepeat) {
-        isRepeat = true;
-        clonedTextPertanyaan.innerHTML = `itu kamu tau kan yang garis garis turun kebawah itu?`;
-       } else {
-        if (!botAnswerExecuted) {
-         if (!chatRepeated) {
-          if (['mana', 'gimana', 'gatau', 'engga'].some((kata) => jawabanValue.includes(kata))) {
-           chatRepeated = true;
-           clonedTextPertanyaan.innerHTML = `ishhh itu loh ${namaDepan} yang garis garis kaya hujan gitu, tau kan`;
-          } else {
-           botAnswerExecuted = true;
-           clonedTextPertanyaan.innerHTML = `iyaa jadi kamu mau di ganti ga sama yang itu?`;
-          }
-         } else { // true chatRepeated
-          botAnswerExecuted = true;
-          clonedTextPertanyaan.innerHTML = `nhh yang kaya gitu, ${namaDepan} mau ga di ganti yang itu?`;
-         }
-        } else {
-         if (['mau', 'yaudah', `iya`].some((kata) => jawabanValue.includes(kata))) {
-          mainChat = 3;
-          isRainLove = false;
-          botAnswerExecuted = true;
-          clonedTextPertanyaan.innerHTML = `okeh klo kamu mau ganti😅`;
-         } else if (['gak', 'engga'].some((kata) => jawabanValue.includes(kata))) {
-          mainChat = 3;
-          clonedTextPertanyaan.innerHTML = `hmm ok deh klo ${namaDepan} gamau, btw klo mau ganti ketik kode [ UNL0V3 ] ini ya`;
-         } else {
-          clonedTextPertanyaan.innerHTML = `${namaDepan} bilang aja engga atau iya?`;
-         }
-        }
-       }
-      } else if (quest_3) {
-       if (['gak', 'ngga'].some((kata) => jawabanValue.includes(kata))) {
-        mainChat = 3;
-        clonedTextPertanyaan.innerHTML = `owh yaudah deh klo gitu`;
-       } else if (['risih', 'ganggu'].some((kata) => jawabanValue.includes(kata))) {
-        clonedTextPertanyaan.innerHTML = `owhh gitu ya maaf ya udh bikin kamu risih/nge ganggu`;
-        } else {
-        if (!botAnswerExecuted) {
-         isRainLove = false;
-         botAnswerExecuted = true;
-         clonedTextPertanyaan.innerHTML = `yaudahh ya ${namaDepan} aku ilangin love nya😅`;
-        } else {
-         mainChat = 3;
-         clonedTextPertanyaan.innerHTML = `maaf ya ${namaDepan} karna udah buat kamu ga nyaman karna love nya`;
-        }
-       }
-      } else { alert('user ini curang') }
-     } else { // else mainChat
-      quest_1 = false;
-      quest_2 = false;
-      quest_3 = false;
-      isGameWin = false;
-      
-      if (botAnswerExecuted) {
-       botAnswerExecuted = false;
-       clonedTextPertanyaan.innerHTML = `udah hilang kan sekarang love nya??`;
-       
-       setTimeout(() => {
-        clonedTextPertanyaan.innerHTML = `jadi lebih bagus gini ya kan?`;
-        
-        document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
-       }, 1000);
-      } else { // false botAnswerExecuted
-       clonedTextPertanyaan.innerHTML = `yaudah klo gitu terserah kamu aja deh, aku mh ngikutin kamu aja wkwk`;
-       
-       setTimeout(() => {
-        initSticker++;
-        imgSticker.src = 'assets/sticker/smile.webp';
-        document.querySelector('#contentPertanyaan').appendChild(stickers.cloneNode(true));
-       }, 2500);
-      }
-     }
-    } else { // false isGameWin
-=======
         document.getElementById('contentPertanyaan').appendChild(stickers.cloneNode(true));
        }, 1000);
       }
@@ -3097,7 +2901,6 @@ function botStart(data) {
       }
      }
     } else { // kondisi untuk user tidak memenangkan game sama sekali
->>>>>>> master
      if (!chatValidation) {
       chatValidation = true;
       clonedTextPertanyaan.innerHTML = `Mmmmmm`;
@@ -3110,11 +2913,6 @@ function botStart(data) {
      } else { // true chatValidation
       clonedTextPertanyaan.innerHTML = `anuu`;
      }
-<<<<<<< HEAD
-    }
-   } else { // trus mainChatIs
-    
-=======
     } //needd validation
    } else { // trus mainChatIs
     if (counterWin) { //validasi untuk user bisa mengubah partikel
@@ -3183,16 +2981,11 @@ function botStart(data) {
     } else { // validasi untuk user yang tidak bisa mengubah partikel
      
     }
->>>>>>> master
    }
    //////////Clone Chat Validation//////////
    (isCloneChat) ? document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true)) : alert("tidak is cloneChat || Bot Diam");
    //////////Clone Chat Validation//////////
   }, 1000);
-<<<<<<< HEAD
-  
-=======
->>>>>>> master
  } else if (init === 7) {
   console.log({ ok: jawabanValue });
   chatValue = userSay({ ok: jawabanValue })[6];
@@ -3226,8 +3019,6 @@ function botStart(data) {
  }
 }/*kurawa end botStart*/
 
-<<<<<<< HEAD
-=======
 function handleCustomParticle(nilai) {
  let { key, thisMode, thisDirection, thisSpeed } = nilai;
  
@@ -3257,67 +3048,11 @@ function handleCustomParticle(nilai) {
  }
 }
 
->>>>>>> master
 // Membuat instance dari MutationObserver dengan sebuah callback function
 const observer = new MutationObserver((mutationsList, observer) => {
   // Iterasi melalui setiap mutasi
   for (let mutation of mutationsList) {
-<<<<<<< HEAD
-    if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
-      textMengetik.innerHTML = 'Online';
-      //notif.play();
-      clearInterval(intervalID);
 
-      const storedChat = {};
-      const containerChat = document.querySelector("#wrapper-item-chat");
-      const allChat = containerChat.lastElementChild;
-      
-      const variables = [
-       'init',
-       'pesan',
-       'mainChat',
-       'playAgain',
-       'counterWin',
-       'mainChatIs',
-       'isCloneChat',
-       'chatRepeats',
-       'jawabanBenar',
-       'chatRepeated',
-       'noRepeatChat',
-       'alreadySticker',
-       'chatValidation',
-       'isChattan',
-       'isGameWin',
-       'guessGame',
-       'playGuess',
-       'typingGame',
-       'playTyping',
-       'winTyping',
-       'winGuess',
-       'noRepeating',
-       'quest_1',
-       'quest_2',
-       'quest_3',
-       'isCurang',
-       'isRepeat',
-       'isTantangan',
-       'botAnswerExecuted'
-      ];
-      
-      setTimeout(() => {
-       variables.forEach(variable => {
-        storedChat[variable] = eval(variable);
-       });
-       
-       storedChat.chat = allChat.innerHTML;
-       startStored ? localStorage.setItem('historyChat', JSON.stringify(storedChat)) : console.log('initialisasi pertama sebelum memulai storedChat') ;
-       
-       console.table(JSON.parse(localStorage.getItem('historyChat')));
-       
-       document.querySelector('.pathchat').scrollIntoView({ behavior: 'smooth', block: 'end' });
-      }, 500);
-    }
-=======
    if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
     textMengetik.innerHTML = 'Online';
     //notif.play();
@@ -3372,7 +3107,6 @@ const observer = new MutationObserver((mutationsList, observer) => {
      document.querySelector('.pathchat').scrollIntoView({ behavior: 'smooth', block: 'end' });
     }, 500);
    }
->>>>>>> master
   }
 });
 // Tentukan elemen target yang akan diamati

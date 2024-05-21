@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> master
 const csl = console.log.bind(console);
 
 let blurProfile = document.querySelectorAll('.blur-profile');
@@ -1017,8 +1014,8 @@ let genderValidation = () => {
   if (genderCwo.some((kata) => gender.includes(kata))) {
    genderIs = "cowo";
    genderSay = 'ganteng';
-   img[0].src = 'profileicon.webp';
-   img[1].src = 'profileicon.webp';
+   img[0].src = 'assets/icon/profileicon.webp';
+   img[1].src = 'assets/icon/profileicon.webp';
   } else if (genderCwe.some((kata) => gender.includes(kata))) {
    genderIs = "cewe";
    genderSay = 'cantik';
@@ -1026,8 +1023,8 @@ let genderValidation = () => {
    img[1].src = 'https://iili.io/JHPVwKv.md.webp';
   } else {
    genderIs = "cowo/cewe";
-   img[0].src = 'at.webp';
-   img[1].src = 'at.webp';
+   img[0].src = 'assets/icon/at.webp';
+   img[1].src = 'assets/icon/at.webp';
    genderSay = 'ganteng/cantik';
   }
  }
@@ -1084,20 +1081,11 @@ inputLogin.forEach(function (login) {
   checkInputLogin);
 });
 
-<<<<<<< HEAD
-let sudahLoginAlert = false;
-
-=======
->>>>>>> master
 let passworduser = document.getElementById('password_user');
 const showIconPass = document.getElementById('show-pass');
 
 function togglePassword() {
-<<<<<<< HEAD
-  if (password_user.type === 'password') {
-=======
   if(password_user.type === 'password') {
->>>>>>> master
    password_user.type = 'text';
    showIconPass.name = `eye-outline`;
   } else {
@@ -1113,23 +1101,6 @@ function closeLogin() {
   loginPage.style.display = "none";
   loginPage.style.opacity = "0";
  });
-<<<<<<< HEAD
- 
- if (sudahLoginAlert) {
-  myAlert.style.opacity = "0";
-  myAlert.style.zIndex = "100";
-  blurLayer.style.zIndex = "100";
-  myAlert.style.display = "block";
-  blurLayer.style.display = "block";
-  infoAlert.innerHTML = "PEMBERITAHUAN !";
-  myAlertText.innerHTML = "login telah berhasil. silahkan klik tombol ok untuk<br>merefresh website ini.";
-  btnAlert.addEventListener('click', toxicAlert);
-  setTimeout(() => {
-   myAlert.style.opacity = "1"
-  }, 300);
- } else {/.../}
-=======
->>>>>>> master
 }
 
 const signBtn = document.querySelector('.signin-text');
@@ -1178,11 +1149,7 @@ function userValidation() {
    hobbyUser[2].innerHTML = hobbySec;
    hobbyUser[3].innerHTML = hobbyThi;
    // sidebar user info profile end //
-<<<<<<< HEAD
-  } else { console.log('perlu validasi') }
-=======
   } else {console.log('perlu validasi')}
->>>>>>> master
   setTimeout(() => {
    titleLoginText.innerHTML = "Kamu Sudah Login";
    infoLoginText.innerHTML = "terimakasih telah menggunakan website chatbot ini. nantikan update menarik selanjutnya dari chatbot ini !";
@@ -1196,10 +1163,6 @@ function userValidation() {
    }, 500);
   }, 1000);
  }
-<<<<<<< HEAD
- //setTimeout(() => { typeText(0) }, 2000);
-=======
->>>>>>> master
  document.querySelector('#signup-text').innerHTML = isLogin ? `<button class="btn-login"><span><ion-icon name="person"></ion-icon>${namaDepan}</span></button>` : `<button class="btn-login"><span><ion-icon name="person"></ion-icon>SIGN UP</span></button>`;
 }
 
@@ -1230,10 +1193,4 @@ function fullScreen() {
       document.exitFullscreen();
     }
   }
-<<<<<<< HEAD
 }
-
-
-=======
-}
->>>>>>> master
