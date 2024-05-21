@@ -211,7 +211,7 @@ function firstInitializationChat() {
 const paramChat = JSON.parse(localStorage.getItem('historyChat'));
 
 let init = paramChat? paramChat.init : 5;
-let counterWin = paramChat ? paramChat.counterWin : 1;
+let counterWin = paramChat ? paramChat.counterWin : 0;
 let playAgain = paramChat ? paramChat.playAgain : 0;
 let mainChat = paramChat ? paramChat.mainChat : 0;
 let mainChatIs = paramChat ? paramChat.mainChatIs : true;
@@ -224,7 +224,7 @@ let alreadySticker = paramChat ? paramChat.alreadySticker : false;
 let chatValidation = paramChat ? paramChat.chatValidation : false;
 
 let isChattan = paramChat ? paramChat.isChattan : true;
-let isGameWin = paramChat ? paramChat.isGameWin : true;
+let isGameWin = paramChat ? paramChat.isGameWin : false;
 let guessGame = paramChat ? paramChat.guessGame : false;
 let playGuess = paramChat ? paramChat.playGuess : false;
 let typingGame = paramChat ? paramChat.typingGame : false;

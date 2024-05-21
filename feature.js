@@ -849,7 +849,7 @@ formEmail.addEventListener('submit', function(e) {
     localStorage.setItem('emailTime', JSON.stringify(storedEmailTime));
     
     let from = user || fullName;
-    let serviceID = `service_uuzer5a`;
+    let sericeID = `service_uuzer5a`;
     let email = 'faridfathonin@gmail.com';
     let subject = title_email.value;
     let valueEmail = value_email.value;
@@ -1023,6 +1023,7 @@ const itemsTheme = document.querySelector('.box-item-theme');
 const ctaTheme = document.getElementById('toggleTheme');
 const titleTheme = document.getElementById('title-theme');
 
+
 const themeJSON = () => {
   return {
    type: {
@@ -1037,9 +1038,7 @@ const themeJSON = () => {
        primaryColor: '#052659',
        primaryCards: '#0e1527',
        primaryBackground: '#000000',
-       primaryButtonColor: '#838cff',
        
-       secondaryButtonColor: '#a883ff',
        secondaryIconColor: '#3f6bff',
        secondaryTextColor: '#2563ff',
        secondaryBorderColor: '#436bff',
@@ -1049,16 +1048,16 @@ const themeJSON = () => {
        
        bubbleUser: '#1c4fc7',
        bubbleBot: '#132469',
-       shadowUser: '#002579',
-       shadowBot: '#0a1852',
+       shadowUser: '',
+       shadowBot: 'rgba(86,136,255,0.861)',
        tinyText: '#b4ccff',
        backgroundPY: 'calc(100% + 80%)',
-       backgroundImage: 'url("dark_1.jpg")'
+       backgroundImage: 'url("assets/background/dark_1.jpg")'
       }
      },
      {
       templateName: 'PURPLE NIGHT',
-      themeLoved: false,
+      themeLoved: 'nabilla',
       keyColor: {
        primaryIconColor: '#973cff',
        primaryTextColor: '#d1aff5',
@@ -1066,59 +1065,56 @@ const themeJSON = () => {
        primaryCards: '#1d0e27',
        primaryBorderColor: '#9b1eff',
        primaryBackground: '#000000',
-       primaryButtonColor: '#a883ff',
        
-       secondaryButtonColor: '#a883ff',
        secondaryIconColor: '#daa1fb',
        secondaryTextColor: '#b10aff',
        secondaryBorderColor: '#c255ff',
-       secondaryColor: '#7e54b3',
+       secondaryColor: '#5483B3',
        secondaryCards: '#250c35',
        secondaryBackground: '#000000',
        
        bubbleUser: '#59009c',
        bubbleBot: '#351c49',
-       shadowUser: '#330065',
-       shadowBot: '#1b1421',
+       shadowUser: '',
+       shadowBot: '',
        tinyText: '#c89cf7',
        backgroundColor: '#000000',
        backgroundPY: '70%',
-       backgroundImage: 'url("dark_2.jpg")'
+       backgroundImage: 'url("assets/background/dark_2.jpg")'
       }
      },
      {
       templateName: 'DEEP SUNSET',
-      themeLoved: false,
+      themeLoved: 'pasya',
       keyColor: {
        primaryIconColor: '#ff5728',
        primaryTextColor: '#efbfaa',
        primaryColor: '#592605',
-       primaryCards: '#2c1515',
+       primaryCards: '#0c0c0c',
        primaryBorderColor: '#efbfaa',
        primaryBackground: '#000000',
-       primaryButtonColor: '#ff6245',
        
-       secondaryButtonColor: '#a883ff',
        secondaryIconColor: '#ff4e3f',
        secondaryTextColor: '#d42417',
        secondaryBorderColor: '#ff7243',
        secondaryColor: '#ff614a',
-       secondaryCards: '#350d0d',
+       secondaryCards: '#350d0dd1',
        secondaryBackground: '#000000',
        
        bubbleUser: '#c73c00',
-       bubbleBot: '#501e17',
-       shadowUser: '#551a00',
-       shadowBot: '#32130f',
+       bubbleBot: '#8d3c31',
+       shadowUser: '#ffffff',
+       shadowBot: '#ffffff',
        tinyText: '#efbfaa',
+       primaryCards: '#592705',
        backgroundColor: '#000000',
-       backgroundPY: 'calc(150%)',
-       backgroundImage: 'url("dark_3.jpg")'
+       backgroundPY: '50%',
+       backgroundImage: 'url("assets/background/dark_3.jpg")'
       }
      },
      {
       templateName: 'CYAN FOREST',
-      themeLoved: false,
+      themeLoved: 'pasya',
       keyColor: {
        primaryIconColor: '#18c6ff',
        primaryColor: '#055950',
@@ -1126,9 +1122,7 @@ const themeJSON = () => {
        primaryCards: '#082028',
        primaryBorderColor: '#00b087',
        primaryBackground: '#000000',
-       primaryButtonColor: '#a883ff',
        
-       secondaryButtonColor: '#a883ff',
        secondaryIconColor: '#0091c0',
        secondaryTextColor: '#25a4ff',
        secondaryBorderColor: '#00a1a7',
@@ -1138,16 +1132,16 @@ const themeJSON = () => {
        
        bubbleUser: '#0091c0',
        bubbleBot: '#174f62',
-       shadowUser: '#003747',
-       shadowBot: '#09232c',
+       shadowUser: '',
+       shadowBot: '',
        tinyText: '#77f6ff',
        backgroundPY: '25%',
-       backgroundImage: 'url("dark_4.jpg")'
+       backgroundImage: 'url("assets/background/dark_4.jpg")'
       }
      },
      {
       templateName: 'GREEN TEA',
-      themeLoved: false,
+      themeLoved: 'pasya',
       keyColor: {
        primaryIconColor: '#ba2108',
        primaryTextColor: '#6bba46',
@@ -1155,9 +1149,7 @@ const themeJSON = () => {
        primaryCards: '#1a0d08',
        primaryBorderColor: '#991d09',
        primaryBackground: '#000000',
-       primaryButtonColor: '#a883ff',
        
-       secondaryButtonColor: '#a883ff',
        secondaryIconColor: '#6ec046',
        secondaryTextColor: '#991d09',
        secondaryBorderColor: '#b46d1c',
@@ -1165,14 +1157,14 @@ const themeJSON = () => {
        secondaryCards: '#210909d1',
        secondaryBackground: '#000000',
        
-       bubbleUser: '#811b0a',
-       bubbleBot: '#343434',
-       shadowUser: '#390c05',
-       shadowBot: '#191616',
+       bubbleUser: '',
+       bubbleBot: '',
+       shadowUser: '',
+       shadowBot: '',
        tinyText: '#aeaeae',
        backgroundColor: '#000000',
        backgroundPY: '50%',
-       backgroundImage: 'url("dark_5.jpg")'
+       backgroundImage: 'url("assets/background/dark_5.jpg")'
       }
      }
     ],
@@ -1186,7 +1178,7 @@ const themeJSON = () => {
        backgroundPY: '80%',
        primaryBorderColor: 'light ocean',
        backgroundColor: '#ff1b1b',
-       backgroundImage: 'url("light_1.jpg")'
+       backgroundImage: 'url("assets/background/light_1.jpg")'
       }
      },
      {
@@ -1197,7 +1189,7 @@ const themeJSON = () => {
        primaryIconColor: '#ff1bee',
        primaryBorderColor: 'light clouds',
        backgroundColor: '#ff1b1b',
-       backgroundImage: 'url("light_2.jpg")'
+       backgroundImage: 'url("assets/background/light_2.jpg")'
       }
      },
      {
@@ -1208,7 +1200,7 @@ const themeJSON = () => {
        primaryIconColor: '#1b47ff',
        primaryBorderColor: 'light beach',
        backgroundColor: '#ff1b1b',
-       backgroundImage: 'url("light_3.jpg")'
+       backgroundImage: 'url("assets/background/light_3.jpg")'
       }
      }
     ],
@@ -1220,7 +1212,7 @@ const themeJSON = () => {
        primaryTextColor: '#aeaeae',
        primaryBorderColor: 'set theme 1',
        backgroundColor: '#ff1b1b',
-       backgroundImage: 'url("background-image9.jpg")'
+       backgroundImage: 'url("assets/background/background-image9.jpg")'
       }
      },
      {
@@ -1249,7 +1241,7 @@ const themeJSON = () => {
  }
  
 
-const defaultTheme = themeJSON().type.themeDark[2].keyColor;
+const defaultTheme = themeJSON().type.themeDark[1].keyColor;
 
  const outerLocalTheme = {
   theme: '',
