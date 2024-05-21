@@ -80,8 +80,8 @@ function checkInput() {
 let img = document.querySelector('.ico-bot');
 
 function reactBot() {
-  img.src = 'xd.webp';
-  setTimeout(() => img.src = 'boticon.webp', 1200);
+  img.src = 'assets/icon/xd.webp';
+  setTimeout(() => img.src = 'assets/icon/boticon.webp', 1200);
 }
 
 let targetElement;
@@ -115,9 +115,6 @@ document.querySelector(".input-jawaban").addEventListener("paste", function(e) {
  setTimeout(curang, 500);
 });
 
-let userSays = [];
-let fullType = [];
-let lengthFullType;
 let sayName = fullName || user;
 
 const botSay = (data) => {
@@ -159,7 +156,7 @@ const kataKasar = [`kontol`, `memek`, `anjing`, `bangsat`, `ngentot`, `bajingan`
 
 const kataGamau = [`gak`, `engga`, `apasi`, `kepo`, `sok asik`, `ga boleh`, `lah lu siapa`, `masalah`, `gamau`, `lu siapa`, `boong`, `bodo amat`, `gak mau`, `ga mau`, `ga peduli`, `tapi boong`, `boong`, `gamau`, `maksa`, `kamu siapa`, `udahan`, `lah ngancem`, `marah`, 'keberatan'];
 
-const kataMau = ['iya', 'oke', 'iya mau', 'yaudah'];
+const kataMau = ['iya', 'oke', 'iya mau', 'yaudah deh', 'yaudah iya'];
 
 
 const kataNetral = [`farid`, `gpp`, `gapapa`, `yauda`, `oke`, `baiklah`, `terserah`, `gimana`, `gimana`, `gmana`, `iya iya`, `iya dah iya`, `iya deh iya`];
@@ -184,12 +181,10 @@ function loadChat() {
  const loadChat = containerChat.lastElementChild;
  const getHistory = JSON.parse(localStorage.getItem('historyChat')) || [];
  see(getHistory.chat)
+ 
  const history = getHistory.chat;
- see(history)
- contentPertanyaan.style.display = "block";
  loadChat.innerHTML = history;
- //containerChat.appendChild(loadChat);
- //see("JSJDJDKDKDKKDKD", loadChat)
+ contentPertanyaan.style.display = "block";
 }
 
 function firstInitializationChat() {
@@ -211,6 +206,7 @@ function firstInitializationChat() {
 const paramChat = JSON.parse(localStorage.getItem('historyChat'));
 
 let init = paramChat? paramChat.init : 5;
+let lengthFullType = paramChat ? paramChat.lengthFullType : 0;
 let counterWin = paramChat ? paramChat.counterWin : 0;
 let playAgain = paramChat ? paramChat.playAgain : 0;
 let mainChat = paramChat ? paramChat.mainChat : 0;
@@ -222,6 +218,7 @@ let chatRepeated = paramChat ? paramChat.chatRepeated : false;
 let noRepeatChat = paramChat ? paramChat.noRepeatChat : false;
 let alreadySticker = paramChat ? paramChat.alreadySticker : false;
 let chatValidation = paramChat ? paramChat.chatValidation : false;
+
 
 let isChattan = paramChat ? paramChat.isChattan : true;
 let isGameWin = paramChat ? paramChat.isGameWin : false;
@@ -241,6 +238,8 @@ let isCurang = paramChat ? paramChat.isCurang : false;
 let isRepeat = paramChat ? paramChat.isRepeat : false;
 let isTantangan = paramChat ? paramChat.isTantangan : false;
 let botAnswerExecuted = paramChat ? paramChat.botAnswerExecuted : false;
+ let isCustomParticle = paramChat ? paramChat.isCustomParticle : false;
+let fullType = paramChat ? paramChat.fullType : [] ;
 
 
 
@@ -252,11 +251,11 @@ let botAnswerExecuted = paramChat ? paramChat.botAnswerExecuted : false;
  let umurTrue;
  let nilaiAngka;
  let intervalID;
+ let userSays = [];
  let umurT = false;
  let umurM = false;
  let startStored = false;
  let nilaiAngkaIs = false;
- let isCustomParticle = false;
 
 function botStart(data) {
  init ++;
@@ -277,45 +276,25 @@ function botStart(data) {
  const wordTrim = jawabanValue.replace(/\s+/g, '');
  const params = wordTrim.split(',');
  const command = params.length;
- const [mode, direction, speed] = params;
- see(mode, direction, speed)
- 
+ const [mode, direction, speed, click] = params;
  
  const speedValue = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
  const customMode = ['stars', 'love', 'hexagon', 'segitiga', 'persegi', 'lingkaran'];
  const customDirection = ['top', 'right', 'left', 'bottom', 'top-right', 'top-left', 'bottom-right', 'bottom-left'];
+ const clickMode = ['bubble', 'repulse', 'push', 'remove'];
  
  const checkCustomMode = customMode.some((kata) => jawabanValue.includes(kata));
  const checkSpeedValue = speedValue.some((kata) => jawabanValue.includes(kata));
  const checkDirectionMode = customDirection.some((kata) => jawabanValue.includes(kata));
- const setExecutedCustom = [command === 3, checkCustomMode, checkDirectionMode, checkSpeedValue].every((value) => value === true);
- 
- //if (isCustomParticle && setExecutedCustom) { handleCustomParticle({  }) };
+ const checkClickMode = clickMode.some((kata) => jawabanValue.includes(kata));
+ const setExecutedCustom = [command === 4, checkCustomMode, checkDirectionMode, checkSpeedValue, checkClickMode].every((value) => value === true);
  
  // variabel penampung nilai custom partikel //
+ console.log(fullType, `ini adalah balasan chat dari ${namaDepan}`);
  
- console.log(`masuk ke init `,init,`😎`);
- console.log("mainChat is :", mainChat);
- console.log("jawabanBenar is :", jawabanBenar);
- console.log("chatValidation is :", chatValidation);
- console.log("chatRepeated is :", chatRepeated);
- console.log("chatRepeats is :", chatRepeats);
- console.log("alreadySticker is :", alreadySticker);
- console.log("noRepeatChat is :", noRepeatChat);
- console.log("mainChatIs is :", mainChatIs);
- console.log("alreadySticker is :", alreadySticker);
- console.log("isGameWin is :", isGameWin);
- console.log("isChattan is :", isChattan);
- console.log("guessGame is :", guessGame);
- console.log("isCurang is :", isCurang);
- console.log("isRepeat is :", isRepeat);
- console.log("isTantangan is :", isTantangan);
- console.log("typingGame is :", typingGame);
- console.log("botAnswerExecuted is :", botAnswerExecuted);
- 
- //console.log(fullType, `ini adalah balasan chat dari ${namaDepan}`)
- //console.log(lengthFullType, `huruf yang di ketikan ${namaDepan}`)
- //console.log("nilaiAngkaIs adalah :", nilaiAngkaIs);
+ if (setExecutedCustom && isCustomParticle) {
+  handleCustomParticle({ key: true, thisMode: mode, thisDirection: direction, thisSpeed: speed, thisClick: click });
+ }
 
  if (angka !== null) {
   nilaiAngkaIs = true;
@@ -330,7 +309,7 @@ function botStart(data) {
   nilaiAngkaIs = false;
  }
  umurTrue = umurNow -1;
- console.log("nilai angka adalah :", nilaiAngka)
+ console.log("nilai angka adalah :", nilaiAngka);
 
  if (kataKasar.some((kata) => cekKata.includes(kata))) {
   jawaban.style.color = "red";
@@ -389,7 +368,7 @@ function botStart(data) {
  clonedTimeSticker.innerHTML = timeSticker.innerHTML;
 
  barier.style.display = "block";
- originalPertanyaan.style.display = "none";;
+ originalPertanyaan.style.display = "none";
 
  if (init === 1) {
   console.log({ nama: jawaban.value });
@@ -602,7 +581,7 @@ function botStart(data) {
   document.getElementById('contentPertanyaan').appendChild(clonedElementJawaban.cloneNode(true));
   
   setTimeout(() => {
-   img.src = 'reactIdk.webp';
+   img.src = 'assets/icon/reactIdk.webp';
    barier.style.display = "none";
    textMengetik.innerHTML = "Online";
    
@@ -989,7 +968,7 @@ function botStart(data) {
        
       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
      }
-    } else if (mainChat === 4) {
+    } else {
      mainChatIs = false;
      chatRepeated = false;
      noRepeatChat = false;
@@ -997,6 +976,7 @@ function botStart(data) {
      if ((jawabanValue.includes(`1`) && nilaiAngka.length === 1)) {
       guessGame = true;
       playGuess = true;
+      chatValidation = true;
       
       clonedTextPertanyaan.innerHTML = `ok skrng kita main tebak tebakan ya`;
        
@@ -1005,13 +985,13 @@ function botStart(data) {
      } else if ((jawabanValue.includes(`2`) && nilaiAngka.length === 1)){
       typingGame = true;
       playTyping = true;
+      chatValidation = true;
       
       clonedTextPertanyaan.innerHTML = `ok skrng kita main game cepet cepetan ngetik dari a - z ya`;
       
       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
       
      } else {
-      mainChat = 3;
       if (!chatRepeated || jawabanValue.includes(`${nilaiAngka}`)) {
        chatRepeated = true;
        clonedTextPertanyaan.innerHTML = `${namaDepan} yang bener dong kan gada pilihan yang ke ${nilaiAngka} 🙄`;
@@ -1032,8 +1012,6 @@ function botStart(data) {
        }
       }
      }
-    } else {
-     mainChatIs = false;
     }
    }
   }, 1000);
@@ -1065,7 +1043,6 @@ function botStart(data) {
      if (noRepeatChat) {
       if (kataGame.some((kata) => jawabanValue.includes(kata)) && isGameWin) {
       
-       isRainLove = true;
        clonedTextPertanyaan.innerHTML = `owh iya karna kamu udh bisa jawab semua ini hadiah buat kamu ❤️😁`;
        
        document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
@@ -1192,7 +1169,7 @@ function botStart(data) {
          initGuess++;
          mainChat = 0;
          chatRepeated = true;
-         imgPicture.src = 'tekananbatin.webp';
+         imgPicture.src = 'assets/tebakgambar/tekananbatin.webp';
          
          document.querySelector("#contentPertanyaan").appendChild(guessPicture.cloneNode(true));
          
@@ -1204,7 +1181,7 @@ function botStart(data) {
          initGuess++;
          mainChat = 1;
          chatRepeated = true;
-         imgPicture.src = 'pulangsekolah.webp';
+         imgPicture.src = 'assets/tebakgambar/pulangsekolah.webp';
          
          document.querySelector("#contentPertanyaan").appendChild(guessPicture.cloneNode(true));
          
@@ -1215,7 +1192,7 @@ function botStart(data) {
          initGuess++;
          mainChat = 2;
          chatRepeated = true;
-         imgPicture.src ='lukadalam.webp';
+         imgPicture.src ='assets/tebakgambar/lukadalam.webp';
          
          document.querySelector("#contentPertanyaan").appendChild(guessPicture.cloneNode(true));
          
@@ -2543,44 +2520,47 @@ function botStart(data) {
 				      pjsDefault.style.display = 'none';
           containerBoxHints.appendChild(pjsGame);
           
-				      
-				      switch (parseInt(counterWin)) {
+          
+          switch (parseInt(counterWin)) {
            case 1 :
-            imgSticker.src = "assets/sticker/horee.webp"
-				        clonedTextPertanyaan.innerHTML = "karna kamu bisa ngalahin aku, ini buat kamu ❤️";
+            imgSticker.src = "assets/sticker/horee.webp";
+            clonedTextPertanyaan.innerHTML = "karna kamu bisa ngalahin aku, ini buat kamu ❤️";
            break;
            case 2 :
-            imgSticker.src = "assets/sticker/smile.webp"
-				        clonedTextPertanyaan.innerHTML = "buat kamuuu ❤️ ❤️ ❤️";
+            imgSticker.src = "assets/sticker/smile.webp";
+            clonedTextPertanyaan.innerHTML = "buat kamuuu ❤️ ❤️ ❤️";
            break;
            case 3 :
-            imgSticker.src = "assets/sticker/smile.webp"
-				        clonedTextPertanyaan.innerHTML = "udah gumoh ya aku kasih ❤️ terus? kwkwk";
+            imgSticker.src = "assets/sticker/smile.webp";
+            clonedTextPertanyaan.innerHTML = "udah gumoh ya aku kasih ❤️ terus? kwkwk";
            break;
            default:
-            imgSticker.src = "assets/sticker/smile.webp"
-				        clonedTextPertanyaan.innerHTML = `I Love you in Every Universe ${namaDepan} ❤️`;
+            imgSticker.src = "assets/sticker/smile.webp";
+            clonedTextPertanyaan.innerHTML = `I Love you in Every Universe ${namaDepan} ❤️`;
           }
-				      
-				      document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
-				      
-				      setTimeout(() => {
-	          initSticker++;
+          
+          document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+          linearCustom.style.display = "block";
+          
+          setTimeout(() => {
+           particlesGame({ mode: 'love', direction: 'top-right', image: 'assets/sticker/hearts.png', speed: 2, click: 'push', key: true, });
+           
+           initSticker++;
            document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
           }, 2500);
-				     }, 4000);
-				    }, 8000);
-				   }
- 		    setTimeout(userFirst, 250);
-    		} else {
-    			function botFirst() {
- 			    if (mainChat === 2 && jawabanValue !== "abcdefghijklmnopqrstuvwxyz") {
-          clonedTextPertanyaan.innerHTML = `lucu banget sih kamu ${namaDepan} ngetik huruf aja ga bener🤭`;
-        	} else {
- 			      clonedTextPertanyaan.innerHTML = "wleee😝 aku duluan, kamuu kalah yahahaha lucu banget sih";
-        	}
-        	 
- 			     document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+         }, 4000);
+        }, 8000);
+       }
+      setTimeout(userFirst, 250);
+     } else {
+      function botFirst() {
+       if (mainChat === 2 && jawabanValue !== "abcdefghijklmnopqrstuvwxyz") {
+         clonedTextPertanyaan.innerHTML = `lucu banget sih kamu ${namaDepan} ngetik huruf aja ga bener🤭`;
+       	} else {
+			      clonedTextPertanyaan.innerHTML = "wleee😝 aku duluan, kamuu kalah yahahaha lucu banget sih";
+       	}
+       	 
+			     document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
  			     
  			    setTimeout(() => {
  			     barier.style.display = "none";
@@ -2603,15 +2583,15 @@ function botStart(data) {
      	  if (isCurang) {
      	   if (mainChat == 4) {
           clonedTextPertanyaan.innerHTML = `masa kamu gapercaya si ${namaDepan} ${genderSay}. serius dh aku gamain curang tau`;
-     	   } else if (mainChat == 5) {
+         } else if (mainChat == 5) {
           clonedTextPertanyaan.innerHTML = `terserah kamu deh ${namaDepan} mau anggep aku kya gimana, intinya aku engga seperti yang kamu pikirkan😪`;
-     	   } else if (mainChat == 6) {
+         } else if (mainChat == 6) {
           clonedTextPertanyaan.innerHTML = `mau kamu anggep aku boong atau apalah, intinya aku tadi ga curang.`;
-     	   } else if (mainChat == 7) {
+         } else if (mainChat == 7) {
           clonedTextPertanyaan.innerHTML = `klo tadi emang kamu dluan berarti sistem aku bermasalah, maaf ${namaDepan}🙂`;
-     	   } else if (mainChat == 6 && isTantangan) {
+         } else if (mainChat == 6 && isTantangan) {
           clonedTextPertanyaan.innerHTML = `jadi ${namaDepan} mau terima tantangan nya apa engga?<br><br>klo mau bilang 'iya mau' gamau 'engga'`;
-     	   } else if (mainChat == 7 && isTantangan) {
+        } else if (mainChat == 7 && isTantangan) {
      	    if (['iya mau', 'mau', 'iya'].some((kata) => jawabanValue.includes(kata))) {
      	     mainChat = 7;
      	     isCloneChat = true;
@@ -2901,37 +2881,25 @@ function botStart(data) {
       }
      }
     } else { // kondisi untuk user tidak memenangkan game sama sekali
-     if (!chatValidation) {
-      chatValidation = true;
-      clonedTextPertanyaan.innerHTML = `Mmmmmm`;
-      
-      setTimeout(() => {
-       initSticker++;
-       imgSticker.src = 'assets/sticker/hmm.webp';
-       document.getElementById('contentPertanyaan').appendChild(stickers.cloneNode(true));
-      }, 1000);
-     } else { // true chatValidation
-      clonedTextPertanyaan.innerHTML = `anuu`;
-     }
+    
     } //needd validation
    } else { // trus mainChatIs
     if (counterWin) { //validasi untuk user bisa mengubah partikel
      if (mainChat === 1) {
       clonedTextPertanyaan.innerHTML = `jadi aku bisa ngubah background partikel menjadi beberapa mode, yanh bisa kamu pilih sesuka kamu`;
-      particlesGame({ mode: 'persegi', direction: 'bottom-left', image: 'asyla.webp', speed: true, key: true, });
 
       setTimeout(() => {
-       clonedTextPertanyaan.innerHTML = `di bawah ini adalah nilai yang bisa kamu gunakan untuk mengatur partikelnya.<br><br>di bawah ini adalah mode :<br><br>1. Love<br>2. stars<br>3. image <br>4.  hexagon<br>5. segitiga<br>6 .persegi<br>7. lingkaran<br><br>di bawah ini adalah direction / arah :<br><br>1. top<br>2. top-right<br>3. top-left<br>4. right<br>5. left<br>7. bottom<br>6. bottom-right<br>8. bottom-left<br><br>kamu bisa mengatur kecepatan animasi dari 1 - 5.`;
+       clonedTextPertanyaan.innerHTML = `di bawah ini adalah nilai yang bisa kamu gunakan untuk mengatur partikelnya.<br><br>di bawah ini adalah mode partikel :<br><br>1. Love<br>2. stars<br>3. image <br>4.  hexagon<br>5. segitiga<br>6 .persegi<br>7. lingkaran<br><br>di bawah ini adalah direction / arah :<br><br>1. top<br>2. top-right<br>3. top-left<br>4. right<br>5. left<br>7. bottom<br>6. bottom-right<br>8. bottom-left<br><br>di bawah ini adalah beberapa mode saat kamu meng klik partikel :<br><br>1. bubble<br>2. repulse<br>3. push<br>4. remove<br><br>kamu bisa mengatur kecepatan animasi dari 1 - 5.`;
        
-       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true))
+       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
       }, 1000);
      } else if (mainChat === 2) {
       clonedTextPertanyaan.innerHTML = `pasti kamu bertanya gimana cara ngubah nya ya kan?`;
       
       setTimeout(() => {
-       clonedTextPertanyaan.innerHTML = `caranya kamu harus mengetikan 3 nilai, yaitu mode, arah, kecepatan`;
+       clonedTextPertanyaan.innerHTML = `caranya kamu harus mengetikan 3 nilai. yaitu mode, arah, kecepatan, mode saat di click`;
        
-       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true))
+       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
       }, 1000);
      } else if (mainChat === 3) {
       clonedTextPertanyaan.innerHTML = `jadii kamu bisa memberikan nilai yang kamu pilih sesuai pesan chat diatas`;
@@ -2939,10 +2907,10 @@ function botStart(data) {
       setTimeout(() => {
        clonedTextPertanyaan.innerHTML = `perlu kamu ingat. kamu harus mengetikan nilai nya harus sama seperti pesan chat diatas, agar valid`;
        
-       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true))
+       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
       }, 1000);
      } else if (mainChat === 4) {
-       clonedTextPertanyaan.innerHTML = `stars, top-right, 3`;
+       clonedTextPertanyaan.innerHTML = `stars, top-right, 3, push`;
        
       setTimeout(() => {
        clonedTextPertanyaan.innerHTML = `maksud contoh diatas stars itu adalah mode, top-right adalah arah gerakan dan kecepatan animasinya inget ya pake koma`;
@@ -2975,7 +2943,7 @@ function botStart(data) {
        }, 1000);
       } else {
        isCustomParticle = true;
-       handleCustomParticle({ key: setExecutedCustom, thisMode: mode, thisDirection: direction, thisSpeed: speed });
+       handleCustomParticle({ key: true, thisMode: mode, thisDirection: direction, thisSpeed: speed, thisClick: click });
       }
      }
     } else { // validasi untuk user yang tidak bisa mengubah partikel
@@ -3020,13 +2988,13 @@ function botStart(data) {
 }/*kurawa end botStart*/
 
 function handleCustomParticle(nilai) {
- let { key, thisMode, thisDirection, thisSpeed } = nilai;
+ let { key, thisMode, thisDirection, thisSpeed, thisClick } = nilai;
  
  if (key) {
   clonedTextPertanyaan.innerHTML = `okey sebentar ya ${namaDepan}`;
  
   setTimeout(() => {
-   particlesGame({ mode: thisMode, direction: thisDirection, image: 'asyla.webp', speed: thisSpeed, key: true, });
+   particlesGame({ mode: thisMode, direction: thisDirection, image: 'assets/sticker/hearts.png', speed: thisSpeed, click: thisClick, key: true });
    
    isCustomParticle = true;
    clonedTextPertanyaan.innerHTML = `keren kan bisa aku ubah background partikelnya? kwkw`;
@@ -3065,6 +3033,7 @@ const observer = new MutationObserver((mutationsList, observer) => {
     const variables = [
      'init',
      'pesan',
+     'fullType',
      'mainChat',
      'playAgain',
      'counterWin',
@@ -3074,8 +3043,10 @@ const observer = new MutationObserver((mutationsList, observer) => {
      'jawabanBenar',
      'chatRepeated',
      'noRepeatChat',
+     'lengthFullType',
      'alreadySticker',
      'chatValidation',
+     'isCustomParticle',
      'isChattan',
      'isGameWin',
      'guessGame',
@@ -3099,13 +3070,22 @@ const observer = new MutationObserver((mutationsList, observer) => {
       storedChat[variable] = eval(variable);
      });
      
-     storedChat.chat= allChat.innerHTML;
+     storedChat.chat = allChat.innerHTML;
      startStored ? localStorage.setItem('historyChat', JSON.stringify(storedChat)) : console.log('initialisasi pertama sebelum memulai storedChat') ;
      
-     console.table(JSON.parse(localStorage.getItem('historyChat')));
+     const filteredTable = {};
+     const variableJSON = JSON.parse(localStorage.getItem('historyChat'));
      
-     document.querySelector('.pathchat').scrollIntoView({ behavior: 'smooth', block: 'end' });
+     for (const key in variableJSON) {
+      if (key !== 'fullType') {
+       filteredTable[key] = variableJSON[key];
+      }
+     }
+     
+     console.table(filteredTable)
+     
     }, 500);
+    setTimeout(() => document.querySelector('.pathchat').scrollIntoView({ behavior: 'smooth', block: 'end' }) , 250);
    }
   }
 });

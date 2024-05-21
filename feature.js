@@ -484,7 +484,7 @@ function savePersonality() {
     });
     
     sureBtn.onclick = () => {handleAction({ action: 'sure', event: 'reload', removePage: cardsAction }) }
-    notSureBtn.onclick = () => { handleAction({ action: 'null', event: null, removePage: cardsAction }) };
+    notSureBtn.onclick = () => { handleAction({ action: 'null', event: null, removePage: cardsAction })};
     notificationCards({ text: "apakah kamu yakin ingin menyimpan perubahan? tindakan ini akan mereload browser.", icon: "alert" });
     notificationPopup({ icon: 'info', text: 'PERUBAHAN TELAH DI SIMPAN ✓' });
    } else {
@@ -562,9 +562,10 @@ window.addEventListener('load', () => {
    action: 'active'
   });
   
-  counterWin ? pjsDefault.style.display = 'none' : pjsDefault.style.display = 'block';
-  linearCustom.style.display = counterWin ? "none" : "none";
-  counterWin ? particlesGame({ mode: null, direction: null, image: null, speed: null, key: false }) : console.log('user belum memenangkan game apapun');
+  isCustomParticle ? pjsDefault.style.display = 'none' : pjsDefault.style.display = 'block';
+  linearCustom.style.display = isCustomParticle ? "none" : "none";
+  pjsGame.style.visibility = isCustomParticle ? "visibility" : "hidden";
+  isCustomParticle ? particlesGame({ mode: null, direction: null, image: null, speed: null, key: false }) : console.log('user belum memenangkan game apapun');
   
   
   loaders.style.display = "none";
@@ -621,7 +622,7 @@ const objectGuide = [
   {
    chatUser: 'sok asik lo bngst!!',
    chatBot: 'asik juga ya chatan sama kamu',
-   note: [`saat kamu mengetikan kata kata kasar seperti diatas bot automatis akan menyudahi chat dengan kamu dan dia akan mereload browser secara paksa dan kedepan nya kamu '${sayGuide}' akan di cap sebagai pengguna yang tidak ramah`, 'tolong di ingat ketika kamu mengetikan dan mengirim pesan di wajibkan menggunakan kata kata yang baik dan benar karna attitude diutamakan di website ini.']
+   note: [`saat kamu mengetikan kata kata kasar seperti diatas bot automatis akan menyudahi chat dengan kamu dan dia akan merebrowser secara paksa dan kedepan nya kamu '${sayGuide}' akan di cap sebagai pengguna yang tidak ramah`, 'tolong di ingat ketika kamu mengetikan dan mengirim pesan di wajibkan menggunakan kata kata yang baik dan benar karna attitude diutamakan di website ini.']
   }
 ];
 
@@ -1457,7 +1458,7 @@ function handleSwitchTheme(typeTheme) {
          
          document.documentElement.style.setProperty(`--${pseudo}`, color);
          
-         counterWin ? particlesGame({ mode: null, direction: null, image: null, speed: null, key: false }) : console.log('no particle custom');
+         counterWin ? particlesGame({ mode: null, direction: null, image: null, speed: null, click: null, key: false }) : console.log('no particle custom');
         });
          
         const colorParticle = JSON.parse(localStorage.getItem('setTHEME')) || JSON.parse(localStorage.getItem('defaultTheme'));

@@ -1594,7 +1594,7 @@ function particlesGame(params) {
  const storedMode = ['stars', 'image', 'hexagon', 'segitiga', 'persegi', 'lingkaran'];
  const pjsGameMode = JSON.parse(localStorage.getItem('pjsGame'));
  const { key } = params;
- let { mode, direction, image, speed } = key ? params : pjsGameMode ;
+ let { mode, direction, image, speed, click } = key ? params : pjsGameMode ;
 
  const JSONColor = JSON.parse(localStorage.getItem('setTHEME'));
  const colorParticle = (JSONColor) ? JSONColor : JSON.parse(localStorage.getItem('defaultTheme'));
@@ -1693,7 +1693,7 @@ function particlesGame(params) {
            },
            "onclick": {
              "enable": true,
-             "mode": "push"
+             "mode": click
            },
            "resize": true
          },
@@ -1705,17 +1705,17 @@ function particlesGame(params) {
              }
            },
            "bubble": {
-             "distance": 100,
-             "size": 7,
-             "duration": 1,
-             "opacity": 8,
-             "speed": 3
+             "distance": 200,
+             "size": 15,
+             "duration": 2,
+             "opacity": 1,
+             "speed": 5
            },
            "repulse": {
-             "distance": 50
+             "distance": 65
            },
            "push": {
-             "particles_nb": 4
+             "particles_nb": 2
            },
            "remove": {
              "particles_nb": 2
@@ -2000,15 +2000,15 @@ function handleParticle(mode, newParticleColor) {
    break;
   case 'image':
    linearCustom.style.display =  "block";
-   linearCustom.style.visibility = counterWin ? 'hidden' : 'visible';
+   linearCustom.style.visibility = isCustomParticle ? 'hidden' : 'visible';
    break;
   case 'linear':
    containerLinear.forEach(e => e.style.display = 'block');
-   containerLinear.forEach(e => e.style.visibility = counterWin ? 'hidden' : 'visible');
+   containerLinear.forEach(e => e.style.visibility = isCustomParticle ? 'hidden' : 'visible');
    break;
   case 'love':
    containerLove.forEach(e => e.style.display = 'block');
-   containerLove.forEach(e => e.style.visibility = counterWin ? 'hidden' : 'visible');
+   containerLove.forEach(e => e.style.visibility = isCustomParticle ? 'hidden' : 'visible');
    break;
   default:
   console.log('default is none');

@@ -51,7 +51,7 @@ li a {
  opacity: 1;
  z-index: 2;
  width: 100%;
- height: 155vh;
+ height: 150vh;
  display: block;
  transition: opacity 2.5s ease-in-out;
 }
@@ -4357,6 +4357,10 @@ textarea:focus {
  overflow: hidden;
 }
 
+.container-linear, .container-love {
+ 
+}
+
 .container-box-hints .container-linear i {
  top: 0;
  z-index: -1;
@@ -4407,7 +4411,7 @@ textarea:focus {
  }
  100% {
   opacity: 0;
-  transform: translateY(calc(140vh + -70px));
+  transform: translateY(calc(150vh + -70px));
  }
 }
 @keyframes hujanLoveHome {
@@ -5491,7 +5495,7 @@ textarea:focus {
  }
  100% {
   opacity: 0;
-  transform: translateY(calc(100vh + -50px));
+  transform: translateY(calc(130vh + -50px));
  }
 }
 
@@ -5521,7 +5525,7 @@ textarea:focus {
  }
  100% {
   opacity: 0;
-  transform: translateY(calc(130vh + 125px));
+  transform: translateY(calc(140vh + 125px));
  }
 }
 @keyframes hujanCustomChat {
