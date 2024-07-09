@@ -1536,6 +1536,8 @@ window.particlesJS.load = function(tag_id, path_config_json, callback){
   };
   xhr.send();
 };
+
+
 function setupParticle(color) {
  const newParticleColor = color;
  const modeParticleJs =  (localStorage.getItem('pJSMode')) ? localStorage.getItem('pJSMode') : localStorage.getItem('defaultModePJS');
@@ -1595,7 +1597,9 @@ function particlesGame(params) {
  const pjsGameMode = JSON.parse(localStorage.getItem('pjsGame'));
  const { key } = params;
  let { mode, direction, image, speed, click } = key ? params : pjsGameMode ;
-
+ 
+ console.log({ paramsParticleGame: params })
+ 
  const JSONColor = JSON.parse(localStorage.getItem('setTHEME'));
  const colorParticle = (JSONColor) ? JSONColor : JSON.parse(localStorage.getItem('defaultTheme'));
  const color = colorParticle.primaryIconColor;
@@ -1947,7 +1951,7 @@ function handleParticle(mode, newParticleColor) {
        "move": {
          "enable": true,
          "speed": 1,
-         "direction": direction,
+         "direction": 'bottom',
          "random": false,
          "straight": false,
          "out_mode": "out",

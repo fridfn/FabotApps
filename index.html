@@ -8,7 +8,7 @@
   <meta name="author" content="Farid Fathoni N">
   <link rel="stylesheet" href="style.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-   <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@600&display=swap" rel="stylesheet"/>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css"/>
  </head>
@@ -397,7 +397,7 @@
         <p class="nameBot">Fabot Chat</p>
         <p class="botStatus">Online</p>
       </div>
-       <ion-icon class="headerIcon" id="mail" name="mail-sharp" onclick="openEmail()"></ion-icon>
+       <ion-icon class="headerIcon" id="mail" name="mail-sharp" onclick="togglePage('emailBot')"></ion-icon>
        <ion-icon class="headerIcon" id="ellips" name="ellipsis-vertical-sharp"></ion-icon>
      </div>
     </header>
@@ -501,7 +501,7 @@
          <p class="txtOpsi" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"><ion-icon name="share-social" id="ico"></ion-icon>&nbsp;Bagikan</p>
         </div>
         <div class="boxOpsi">
-         <p class="txtOpsi" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"><ion-icon name="trash" id="ico"></ion-icon>&nbsp;Bersihkan chat</p>
+         <p class="txtOpsi" onclick="handlingAction({ action: null, event: 'clear-message' })"><ion-icon name="trash" id="ico"></ion-icon>&nbsp;Bersihkan chat</ion-icon>
         </div>
        </div>
       </div>
@@ -878,7 +878,7 @@
             </div>
             <div class="box-btn-article">
              <button class="cta-article" onclick="toggleStart('start')"><p>START CHAT</p><ion-icon name="arrow-forward"></ion-icon></button>
-             <button class="cta-article" onclick="togglePage('guideHome')"><p>GUIDE</p><ion-icon name="bulb"></ion-icon></p>
+             <button class="cta-article" onclick="togglePage('guideHome')"><p>GUIDE</p><ion-icon name="bulb"></ion-icon></ion-icon>
             </div>
            </div>
            <div class="container-sidebar-home-feature">
@@ -908,15 +908,15 @@
       <div class="box-website-review">
        <div class="item-box-review">
         <p class="title-txt-review">Feature</p>
-        <p class="article-text" id="shine-text">This website is equipped with many features</p>
+        <p class="article-text" id="shine-text">Dilengkapi dengan berbagai fitur keren</p>
        </div>
        <div class="item-box-review">
-        <p class="title-txt-review">3 API</p>
-        <p class="article-text" id="shine-text">menggunakan 3 macam API unik dan menarik</p>
+        <p class="title-txt-review">5 API</p>
+        <p class="article-text" id="shine-text">Menggunakan 5 macam API unik dan menarik</p>
        </div>
        <div class="item-box-review">
-        <p class="title-txt-review">170+</p>
-        <p class="article-text" id="shine-text">This is a simple chatbot</p>
+        <p class="title-txt-review">Interactive</p>
+        <p class="article-text" id="shine-text">Percakapan interaktif / berbeda di setiap kondisi</p>
        </div>
       </div>
      </div>
@@ -928,8 +928,8 @@
        <div id="particles-js"></div>
        <div id="particles-game"></div>
        <div class="container-linear" id="linear0"></div>
-       <div class="container-love" id="lovee0"></div>
        <div class="linearCustom" id="custom0"></div>
+       <div class="container-love" id="lovee0"></div>
        <div class="wrapper-box-hints">
         <div class="box-hints">
          <div class="item-hints" id="particles-view">
@@ -961,7 +961,7 @@
            <span class="hint-dot" id="show-elem">About me</span>
             <div class="hint-content hint-right">
              <div class="overflow-padding">
-              <p class="hint-text">A b o u t&nbsp;&nbsp;D e v e l o p e r -><br><br>Name : Farid Fathoni N<br>Status : vocational high school<br>Favorite : code/ Game/ typing/ Music</p>
+              <p class="hint-text">A b o u t&nbsp;&nbsp;D e v e l o p e r -><br><br>Name : Farid Fathoni N<br>Status : Student<br>Favorite : code/ Game/ typing/ Music</p>
              </div>
             </div>
            </div>
@@ -1010,7 +1010,7 @@
             </div>
             <div class="box-cta-cards-skils">
              <ion-icon name="caret-forward-outline"></ion-icon>
-             <p>MORE</p>
+             <p>HOLD</p>
             </div>
            </div>
           </div>
@@ -1162,13 +1162,13 @@
        <div class="wrapper-article-footer">
         <div class="box-article-footer">
          <p class="title-header-home" style="color: var(--secondaryTextColor);"><ion-icon name="logo-octocat" class="icon-home" id="theme-see"></ion-icon>Fabot Page</p>
-         <p class="article-text">sit dolore officia ea ad aliquip laborumculpa pariatur irure ut sit sit minim ipsum</p>
+         <p class="article-text">This is just a simple chat bot website as well as a website developed by developers for learning.</p>
          <p class="title-header-home" style="padding: 10px 0 5px 0; font-size: 10px; color: var(--secondaryTextColor);">Follow Us</p>
          <div class="box-medsos-home">
           <a class="item-icon-sosmed" href="https://api.whatsapp.com/send?phone=+62 899-5247-491&text=Hi,%20kamu%20developer%20website%20fabot%20?" target="_blank"><i class="fab fa-whatsapp" ></i></a>
           <a class="item-icon-sosmed" href="https://www.instagram.com/fridfn_" target="_blank"><i class="fab fa-instagram" ></i></a>
           <a class="item-icon-sosmed" href="https://www.linkedin.com/in/farid-fathoni-n-26a48b2b3?trk=contact-info" target="_blank"><i class="fab fa-linkedin" ></i></a>
-          <a class="item-icon-sosmed" href="https://www.linkedin.com/in/farid-fathoni-n-26a48b2b3?trk=contact-info"><i class="fa-brands fa-linkedin" target="_blank"></i></a>
+          <a class="item-icon-sosmed" href="https://github.com/fridfn"><i class="fab fa-github"></i></a>
          </div>
         </div>
         <div class="box-footer-link">
@@ -1364,7 +1364,7 @@
   <script src="https://kit.fontawesome.com/b31741524e.js" crossrorigin="anonymous"></script>
   <script type="text/javascript">
    (function(){
-      emailjs.init("yZzbJwytB-aSDSuZw");
+    emailjs.init("yZzbJwytB-aSDSuZw");
    })();
   </script>
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>

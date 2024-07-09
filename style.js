@@ -88,7 +88,7 @@ let dateLogin = getDataUser?.user?.dateLogin || '';
 
 let { birth, songs, status, planet, dreams, gender, bioUser, ...recent } = getDataUser?.user?.personal || {};
 let { hobbyFir = '', hobbySec = '', hobbyThi = '' } = getDataUser?.user?.personal?.hobby || {};
-let { namaUser = '', emailUser = '' } = getDataUser?.user || {};
+let { namaUser = '', emailUser = '', passwordUser = '' } = getDataUser?.user || {};
 
 let dataUser = [];
 let containerHomeIs = true;
@@ -1163,7 +1163,6 @@ function userValidation() {
    }, 500);
   }, 1000);
  }
- document.querySelector('#signup-text').innerHTML = isLogin ? `<button class="btn-login"><span><ion-icon name="person"></ion-icon>${namaDepan}</span></button>` : `<button class="btn-login"><span><ion-icon name="person"></ion-icon>SIGN UP</span></button>`;
 }
 
 document.addEventListener("visibilitychange", function() {
