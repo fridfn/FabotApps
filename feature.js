@@ -578,6 +578,11 @@ document.addEventListener('DOMContentLoaded', rotateWords);
 window.addEventListener('load', () => {
   const getUser = JSON.parse(localStorage.getItem('userJSON'));
   const isLogin = (getUser && getUser.flagLogin.isLogin === true);
+  
+  setInterval(() => {
+   notificationPopup({ icon: 'alert', text: `under development until 15 august 2024` });
+  }, 11000);
+  
   const loaderTime = (getUser && isLogin) ? 50000000 : 50000000 ;
  
  setTimeout(() => {
@@ -598,7 +603,7 @@ window.addEventListener('load', () => {
   
   
   loaders.style.display = "none";
-  //notificationPopup({ icon: 'love', text: `selamat ${sayTime(isLogin)} ${fullName}` });
+ // notificationPopup({ icon: 'love', text: `selamat ${sayTime(isLogin)} ${fullName}` });
  }, loaderTime);
 });
 
