@@ -1,6 +1,6 @@
 const see = console.log.bind(console);
 const jawaban = document.querySelector('.input-jawaban');
-const sendBtn = document.querySelector('.btn-bot');
+const sendBtn = document.querySelector('#sendChat');
 const notif = document.getElementById('audio-player');
 
 const containerChildren = document.querySelector('#contentPertanyaan');
@@ -70,7 +70,8 @@ guessPicture.style.display = "block";
 
 function checkInput() {
  let jawaban = document.querySelector('.input-jawaban');
- let sendBtn = document.querySelector('.btn-bot');
+ let sendBtn = document.querySelector('#sendChat');
+ let input = document.querySelector('#container_input');
 
  (jawaban.value.length >= 1) ? sendBtn.disabled = false : sendBtn.disabled = true;
 }
@@ -161,14 +162,16 @@ const kataNetral = [`farid`, `gpp`, `gapapa`, `yauda`, `oke`, `baiklah`, `terser
 
 const kataBatal = [`gajadi`, `engga jadi`, `ga jadi`, `udahan`, `gamau main`, `capek`];
 
-const kataHeran = [`ko bisa tau`, `ko tau`, `tau sih`, `kok bisa tau`, `bisa tau`, `sebentar`, 'emang', 'kenapa', 'ko gitu', 'ko begitu', 'begitu', 'tiba', 'gitu'];
+const kataHeran = [`ko bisa tau`, `ko tau`, `tau sih`, `kok bisa tau`, `bisa tau`, `sebentar`, 'emang', 'emng', 'kenapa', 'knapa', 'ko gitu', 'ko begitu', 'begitu', 'tiba', 'gitu'];
 
 const kataCurang = ['curang', 'licik', 'bodo', 'peduli', 'suka suka', 'duluan'];
 
 const kataGame = ['hadiah', 'dapet', 'makasih', 'tebak', 'abis', 'mau', 'tantangan','challenge', 'paham', 'maksudnya', 'gajadi', 'gatau', 'game', 'lanjut', 'main', 'susah'];
 
 const kataPertanyaan = [
- `kasih tau`,`ngasih tau`,`dapet apa`,`buat apa`,`diapain`,`guna`,`jawab`,`gatau`, 'gimana'];
+ `kasih tau`,`ngasih tau`,`dapet apa`,`buat apa`,`diapain`,`guna`,`jawab`,`gatau`, 'gimana', 'mau tau', 'pengen', 'kepo', 'penasaran'];
+
+const heranBertanya = kataPertanyaan.concat(kataHeran);
 
 contentPertanyaan.style.display = "none";
 contentJawaban.style.display = "none";
@@ -184,23 +187,25 @@ function loadChat() {
  contentPertanyaan.style.display = "block";
 }
 
+const paramChat = JSON.parse(localStorage.getItem('historyChat'));
+let isEnding = paramChat ? paramChat.isEnding : false;
+
 function firstInitializationChat() {
  let isLoadChat = localStorage.getItem('historyChat');
+ 
  setTimeout(() => {
- textLoad();
- barier.style.display = "none";
- firstPertanyaan.innerHTML = botSay()[0];
- firstContentPertanyaan.style.display = "block";
- isLoadChat ? loadChat() : console.log("belum ada chat history") ;
- contentPertanyaan.style.display = "block";
+  textLoad();
+  barier.style.display = "none";
+  firstPertanyaan.innerHTML = botSay()[0]
+  firstContentPertanyaan.style.display = isEnding ? "none" : "block";
+  isLoadChat ? loadChat() : console.log("belum ada chat history") ;
+  contentPertanyaan.style.display = "block";
   setTimeout(() => {
    barier.style.display = "none";
    textMengetik.innerHTML = "Online";
   }, 1500);
  }, 1000);
 }
-
-const paramChat = JSON.parse(localStorage.getItem('historyChat'));
 
 let init = paramChat? paramChat.init : 5;
 let lengthFullType = paramChat ? paramChat.lengthFullType : 0;
@@ -233,12 +238,14 @@ let quest_2 = paramChat ? paramChat.quest_2 : false;
 let quest_3 = paramChat ? paramChat.quest_3 : false;
 let isCurang = paramChat ? paramChat.isCurang : false;
 let isRepeat = paramChat ? paramChat.isRepeat : false;
+let newDreams = paramChat ? paramChat.newDreams : dreams;
 let isTantangan = paramChat ? paramChat.isTantangan : false;
 let botAnswerExecuted = paramChat ? paramChat.botAnswerExecuted : false;
 let isCustomParticle = paramChat ? paramChat.isCustomParticle : false;
 let fullType = paramChat ? paramChat.fullType : [] ;
 let initSticker = paramChat ? paramChat.initSticker : 0;
 let initGuess = paramChat ? paramChat.initGuess : 0;
+let inUseAPI = paramChat ? paramChat.inUseAPI : null;
 
 
 //variabel untuk validasi angka
@@ -257,7 +264,7 @@ let initGuess = paramChat ? paramChat.initGuess : 0;
  let nilaiAngkaIs = false;
  let switchParticle = false;
  let doneSwitchParticle = false;
-
+ 
 function botStart(data) {
  textLoad();
  startStored = true;
@@ -810,7 +817,7 @@ if (switchParticle) {
           mainChatIs = false;
           
           clonedTextPertanyaan.innerHTML = `ok kita lanjutin ya chat nya ${namaDepan}.`;
-         
+          
           document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
           
          } else {
@@ -2479,6 +2486,10 @@ if (switchParticle) {
     //////////Clone Chat Validation//////////
     } else { //true mainChatIs
     	init = 5;
+    	quest_1 = false;
+    	quest_2 = false;
+    	quest_3 = false;
+    	
      if (!chatRepeats) {
       mainChat = 0;
       chatRepeats = true;
@@ -2969,9 +2980,10 @@ if (switchParticle) {
         }, 1000);
        } else if (mainChat === 6) {
         if (['ngeremehin', 'kasian'].some((kata) => jawabanValue.includes(kata))) {
-         clonedTextPertanyaan.innerHTML = `yeuhh aku ga bermaksud begitu tau🤬🤬`;
+         mainChat = 5;
+         clonedTextPertanyaan.innerHTML = `yeuhh aku ga bermaksud begitu tau🤬`;
         } else {
-         clonedTextPertanyaan.innerHTML = `yaudah lain kali jangan langsung suren ya😇`;
+         clonedTextPertanyaan.innerHTML = `yaudahh yang penting lain kali jangan langsung suren ya😇`;
          
          setTimeout(() => {
           clonedTextPertanyaan.innerHTML = `maksud aku jangan mudah menyerah`;
@@ -2979,7 +2991,11 @@ if (switchParticle) {
           document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
          }, 1000);
         }
-       } else { }
+       } else {
+        mainChat = 0;
+        mainChatIs = true;
+        clonedTextPertanyaan.innerHTML = `yaudah bagusss klo gitu`;
+       }
       }
      }
     } else { // true mainChatIs
@@ -3050,7 +3066,64 @@ if (switchParticle) {
        }
       }
      } else { // validasi untuk user yang tidak bisa mengubah partikel
-      
+      if (mainChat === 1) {
+       clonedTextPertanyaan.innerHTML = `btw ${namaDepan} cita cita nya apa?`;
+      } else if (mainChat === 2) {
+       if (kataPertanyaan.some((kata) => jawabanValue.includes(kata))) {
+         clonedTextPertanyaan.innerHTML = `ya soalnya aku pengen tau aja gitu hehe`;
+       } else {
+        dreams = dreams.toLowerCase();
+        if (kataGamau.some((kata) => jawabanValue.includes(kata))) {
+          clonedTextPertanyaan.innerHTML = `malesin nihhh`;
+        } else {
+         if (['cita', dreams].every((kata) => jawabanValue.includes(kata))) {
+          clonedTextPertanyaan.innerHTML = `owhh cita cita kamu mau jadi ${dreams}`;
+         } else {
+          const newValueDreams = jawabanValue.split(' ');
+          newDreams = newValueDreams.pop();
+          
+          if (newValueDreams.includes('cita')) {
+           isRepeat = true;
+           clonedTextPertanyaan.innerHTML = `berubah lagi kah cita cita kamu?`;
+          } else {
+           mainChat = 1;
+           clonedTextPertanyaan.innerHTML = noRepeatChat ? `iya sebut cita cita kamu apa?` : `ayo dong kasi tau cita cita kamu aku kan penasaran ${namaDepan}`;
+           noRepeatChat = true;
+          }
+         }
+        }
+       }
+      } else if (mainChat === 3) {
+       clonedTextPertanyaan.innerHTML = isRepeat ? `sebelum nya kan cita cita kamu ${dreams}` : `hebat ya cita cita kamu mau jadi ${dreams}`;
+      } else if (mainChat === 4) {
+       if (heranBertanya.some((kata) => jawabanValue.includes(kata))) {
+        mainChat = 3;
+        clonedTextPertanyaan.innerHTML = 'ya tau dongg makanya aku tanya lagi, cita cita kamu sekarang berubah?';
+       } else {
+        clonedTextPertanyaan.innerHTML = isRepeat ? 'iya deh yang cita cita nya banyak wkwk' : 'keren kerennn';
+       }
+      } else if (mainChat === 5) {
+       clonedTextPertanyaan.innerHTML = isRepeat ? 'semoga cita citanya tercapai ya😇' : `semoga cita cita kamu terwujud ya🥰`;
+       
+       setTimeout(() => {
+        clonedTextPertanyaan.innerHTML = `dan jangan mudah menyerah juga untuk menjadi ${isRepeat ? dreams + 'dan' + newDreams : dreams}`;
+        
+        document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true))
+       }, 1000);
+      } else {
+       if (['makasih', 'amin'].some((kata) => jawabanValue.includes(kata))) {
+        clonedTextPertanyaan.innerHTML = `hehe semangatttt terus ya mengejar cita cita nya`;
+       } else if (['berusaha', 'berjuang', 'menggapai', 'mengapai', 'meraih', 'semangat'].some((kata) => jawabanValue.includes(kata))) {
+        clonedTextPertanyaan.innerHTML = `bagus deh klo gitu aku jadi seneng denger nya`;
+       } else {
+        init = 6;
+        mainChat = 0;
+        isRepeat = false;
+        noRepeatChat = false;
+        
+        clonedTextPertanyaan.innerHTML = `semangatttt terus ya ${namaDepan}`;
+       }
+      }
      }
     }
     //////////Clone Chat Validation//////////
@@ -3096,7 +3169,7 @@ if (switchParticle) {
       if (kataHeran.some((kata) => jawabanValue.includes(kata))) {
        clonedTextPertanyaan.innerHTML = `lain kali kita lanjut lagi ngobrolnya sama kamu, tapi di lain waktu ya😇`;
       } else {
-       clonedTextPertanyaan.innerHTML = `okk makasih ya ${namaDepan} udah nemenin aku ngobrol`;
+       clonedTextPertanyaan.innerHTML = `iyaa makasih ya ${namaDepan} udah nemenin aku ngobrol`;
       }
      } else if (mainChat === 9) {
       clonedTextPertanyaan.innerHTML = `seneng banget aku bisa kenal sama kamu`;
@@ -3113,45 +3186,126 @@ if (switchParticle) {
        document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
       }, 1000);
     } else if (mainChat === 10) {
-      clonedTextPertanyaan.innerHTML = `lain kali kita ngelakuin ${hobbyFir} bareng ya`;
-      
-      setTimeout(() => {
-       clonedTextPertanyaan.innerHTML = `kaya nya itu bakalan seru klo kita berdua ngelakuin bareng wkwk`;
+     if (['belom tau', 'liat', 'tau', 'kenal', 'pernah', genderSay].some((kata) => jawabanValue.includes(kata))) {
+      mainChat = 9;
+      noRepeating = true;
+      clonedTextPertanyaan.innerHTML = `ya kan semua ${gender} itu ${genderSay}`;
+     } else {
+      if (noRepeating) {
+       mainChat = 9;
+       noRepeatChat = true;
+       noRepeating = false;
+       clonedTextPertanyaan.innerHTML = `bener kan? wkwkwk udah ya aku mau pergi nih`;
        
-       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
-      }, 1000);
+       setTimeout(() => {
+        clonedTextPertanyaan.innerHTML = `kamu jangan sedih ya nanti kamu nangid lagi wkwkwk🫠`;
+        
+        document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+       }, 1000);
+      } else {
+       if (noRepeatChat) {
+        if (['sedih', 'nangis', 'nangid', 'pergi'].some((kata) => jawabanValue.includes(kata)) && !isRepeat) {
+         mainChat = 9;
+         isRepeat = true;
+         clonedTextPertanyaan.innerHTML = `seriuss nih kamu ga sedih?? wkwkw`;
+         
+         setTimeout(() => {
+          initSticker++;
+          imgSticker.src = "assets/sticker/ups.webp";
+          document.querySelector("#contentPertanyaan").appendChild(stickers.cloneNode(true));
+         }, 2500);
+        } else {
+         mainChat = 9
+         isRepeat = false;
+         noRepeatChat = false;
+         clonedTextPertanyaan.innerHTML = `yaudah bagus deh klo gitu, ada sesuatu yang mau aku bilang sama kamu`;
+        }
+       } else {
+        clonedTextPertanyaan.innerHTML = `kapan kapan kita ngelakuin ${hobbyFir} bareng ya`;
+        
+        setTimeout(() => {
+         clonedTextPertanyaan.innerHTML = `kaya nya itu bakalan seru klo kita berdua ngelakuin bareng wkwk`;
+         
+         document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+        }, 1000);
+       }
+      }
+     }
     } else if (mainChat === 11) {
-     clonedTextPertanyaan.innerHTML = `truss satu lagi aku mau denger lagu favorite ${songs} bareng kamu😇`;
+     clonedTextPertanyaan.innerHTML = `dan satuu lagi aku mau denger lagu favorite ${songs} bareng kamu😁`;
     } else if (mainChat === 12) {
-     clonedTextPertanyaan.innerHTML = `sebelum itu ada sesuatu yang ingin aku kasi tau ke kamu`;
+     clonedTextPertanyaan.innerHTML = `terakhirr ada sesuatu yang ingin aku kasi tau ke kamu`;
     } else if (mainChat === 13) {
      clonedTextPertanyaan.innerHTML = `kamu masih bisa chat sama aku, tapi ini dalam konteks bertanya sesuatu.`;
      
      setTimeout(() => {
-      clonedTextPertanyaan.innerHTML = `jadi kamu bisa bertanya apa saja mengenai di bawah ini<br><br>1. fakta menarik angka<br>2. random foto kucing<br>3. menentukan gender dari nama<br>4. bisa
-      mengartikan kata ke bahasa jawa dan sunda<br>5. menebak nama asli kamu dari negara mana<br>6. mengetahui informasi negara negara di dunia<br>7. memberikan random playlist lagu sesuai mood
-      kamu<br>8. menampilkan gambar galaksi sesuai tanggal lahir<br><br>semoga bisa menemani kamu tiap hari nya di
-      kala ${namaDepan} bosen😇😸`;
+      clonedTextPertanyaan.innerHTML = `jadi kamu bisa bertanya apa saja mengenai di bawah ini<br><br>1. fakta menarik angka<br>2. random foto kucing<br>3. menentukan gender dari nama<br>4. bisa mengartikan kata ke bahasa jawa dan sunda<br>5. menebak nama asli kamu dari negara mana<br>6. mengetahui informasi negara negara di dunia<br>7. memberikan random playlist lagu sesuai mood kamu<br>8. menampilkan gambar galaksi sesuai tanggal lahir<br><br>semoga bisa menemani kamu tiap hari nya di kala ${namaDepan} bosen😇😸`;
       
       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
      }, 1000);
     } else if (mainChat === 14) {
      clonedTextPertanyaan.innerHTML = `bye ${namaDepan} sampe sini dulu yhh ngobrolnya`;
     } else {
-     alert('PERCAKAPAN END')
+     init = 8;
+     mainChat = 13;
+     isEnding = true;
+     isCloneChat = false;
     }
     //////////Clone Chat Validation//////////
-    (isCloneChat) ? document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true)) : alert("tidak is cloneChat || Bot Diam");
+    (isCloneChat) ? document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true)) : console.log("tidak is cloneChat || Bot Diam");
     //////////Clone Chat Validation//////////
    }, 1000);
   } else {
-   // end of bot
+   init = 999;
+   chatValue = userSay({ api: jawabanValue })[13];
+   userDelay({ api: jawabanValue });
+   //notificationPopup({ icon: 'alert', text: 'chat dengan bot selesai, kamu bisa melihat guide untuk membaca panduan menanyakan sesuatu' });
+   
+   
+   clonedTextJawaban.innerHTML = userSay({ api: jawabanValue })[13];
+   
+   document.getElementById('contentPertanyaan').appendChild(clonedElementJawaban.cloneNode(true));
+   
+   if (storedApi_command.some((kata) => jawabanValue.includes(kata))) {
+    const matchingCommand = Object.keys(commandToParentMap).find(command => jawabanValue.includes(command));
+    const getApi = commandToParentMap[matchingCommand];
+    const resultApi = getApi[0];
+    
+    inUseAPI = resultApi;
+    console.log({getApi: getApi})
+    console.log({matchingCommand: matchingCommand})
+    console.log({commandToParentMap: commandToParentMap})
+   }
+   
+   if (inUseAPI) {
+    const configValue = {
+     'number_api': `${nilaiAngka}`,
+     'cats_api': `${jawabanValue}`,
+     'translate_api': ``,
+     'guess_name_api': ``,
+     'playlist_api': ``,
+     'hadits_api': ``,
+     'apod_api': ``
+    }
+    
+    const value = configValue[inUseAPI];
+    functionApi(inUseAPI, value);
+    
+   } else {
+   
+   setTimeout(() => {
+    barier.style.display = 'none';
+    clonedElementPertanyaan.innerHTML = userSay({ api: jawabanValue })[13];
+    
+    document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+   }, 1000);
+   }
   }
  }
 }/*kurawa end botStart*/
 
 function handleCustomParticle(value) {
- const {key, thisMode, thisDirection, thisSpeed, thisClick } = value;
+ const { key, thisMode, thisDirection, thisSpeed, thisClick } = value;
 
  const speedValue = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
  const customMode = ['stars', 'love', 'hexagon', 'segitiga', 'persegi', 'lingkaran'];
@@ -3165,7 +3319,7 @@ function handleCustomParticle(value) {
  
  const setExecutedCustom = [thisMode, thisDirection, thisSpeed, thisClick].every((value) => value !== undefined);
   
- setTimeout(() => {
+  setTimeout(() => {
    if (key && setExecutedCustom) {
     clonedTextPertanyaan.innerHTML = `okey sebentar ya ${namaDepan}`;
     
@@ -3195,7 +3349,6 @@ function handleCustomParticle(value) {
 const observer = new MutationObserver((mutationsList, observer) => {
   // Iterasi melalui setiap mutasi
   for (let mutation of mutationsList) {
-
    if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
     textMengetik.innerHTML = 'Online';
     //notif.play();
@@ -3236,8 +3389,11 @@ const observer = new MutationObserver((mutationsList, observer) => {
      'quest_1',
      'quest_2',
      'quest_3',
+     'newDreams',
      'isCurang',
      'isRepeat',
+     'isEnding',
+     'inUseAPI',
      'isTantangan',
      'botAnswerExecuted'
     ];
@@ -3460,8 +3616,7 @@ rainLove();
 
 // putih oren oren, putih ijo biru, putih biru ijo, putih coklat coklat
 
-/* const spotifyUri = 'https://spotify.link/4eMIG4pJsDb';
+const spotifyUri = 'https://open.spotify.com/track/2ogKhhoMClkFXek7ZgxAhN?si=DM-cKNjtR1qrBjTNNYTvyA';
  
 //Buka aplikasi Spotify
-window.location.href = spotifyUri;
-*/
+//window.location.href = spotifyUri;

@@ -78,8 +78,8 @@
      <lord-icon src="https://cdn.lordicon.com/krenhavm.json" trigger="in" delay="500" stroke="bold" state="in-reveal" class="current-color" id="ico-koleksi"></lord-icon>
      <p class="notificationPara">Allow push notifications so you will get latest updates</p>
      <div class="buttonContainer">
-       <button class="AllowBtn" onclick="handleAction('sure')">Saya Yakin!</button>
-       <button class="NotnowBtn" onclick="handleAction({ action: 'default', event: 'default' })">Tidak</button>
+      <button class="AllowBtn" onclick="handleAction('sure')">Saya Yakin!</button>
+      <button class="NotnowBtn" onclick="handleAction({ action: 'default', event: 'default' })">Tidak</button>
      </div>
     </div>
    </div>
@@ -109,7 +109,8 @@
        <span class="word">Data</span>
        <span class="word">Chat</span>
        <span class="word">Page</span>
-       <span class="word">Bot</span>
+       <span class="word">FaBot</span>
+       <span class="word">content</span>
      </div>
     </div>
    </div>
@@ -406,15 +407,27 @@
       <div class="container-love" id="lovee1"></div>
       
      <div class="wrapper" id="container_input">
-      <div class="containerInput">
-        <textarea class="input-jawaban" id="jawaban" placeholder="Ketikan Pesan" onkeyup="checkInput()" autocomplete="off"></textarea>
-        <div class="barier"></div>
-        <button class="btn-bot" onclick="botStart()" id="myButton" disabled><ion-icon name="send-sharp"></ion-icon></button>
-      </div>
-       <div class="footer">
-         <p class="description_input">This website is made only for learning in development a website, FaBot-Chat <u>16 October
-         Version.</u></p>
+      <div class="container-list-action">
+       <div class="wrapper-list-action">
+        <div class="items-action" onclick="selectMenu">
+         <span>
+         <ion-icon name="bookmark" class="sidebar-icon"></ion-icon>
+          <p class="description_text"></p>
+         </span>
+         <p class="description_text" id="command">Action</p>
+        </div>
        </div>
+      </div>
+      <div class="containerInput">
+        <button class="btn-bot" onclick="menuChat()" id="btnMenuChat"><ion-icon name="menu" id="menuChat" style="margin: 0;"></ion-icon>Menu</p></button>
+        <textarea class="input-jawaban" id="jawaban" placeholder="Ketikan Pesan" onkeyup="checkInput()" autocomplete="off" wrap="hard"></textarea>
+        <div class="barier"></div>
+        <button class="btn-bot" onclick="botStart()" id="sendChat" disabled><ion-icon name="send-sharp"></ion-icon></button>
+      </div>
+      <div class="footer">
+       <p class="description_input">This website is made only for learning in development a website, FaBot-Chat <u>16 October
+       Version.</u></p>
+      </div>
      </div>
      <div class="container-sidebar" id="myKoleksi">
       <div class="header-sidebar" id="blueHeaderUser">
@@ -495,7 +508,7 @@
          <p class="txtOpsi" onclick="fullScreen()"><lord-icon src="https://cdn.lordicon.com/ktpvefbv.json" trigger="loop" delay="3000" stroke="bold" class="current-color"></lord-icon>&nbsp;Full Screen</p>
         </div>
         <div class="boxOpsi">
-        <p class="txtOpsi" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"><ion-icon name="settings-sharp" id="ico"></ion-icon>&nbsp;Pengaturan</p>
+        <p class="txtOpsi" onclick="handlingAction({ action: null, event: 'options' })"><ion-icon name="settings-sharp" id="ico"></ion-icon>&nbsp;Pengaturan</ion-icon>
         </div>
         <div class="boxOpsi">
          <p class="txtOpsi" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"><ion-icon name="share-social" id="ico"></ion-icon>&nbsp;Bagikan</p>
@@ -552,7 +565,7 @@
    <div class="wrapper-header-menu">
     <div class="headerMenu">
      <div class="arrow-button">
-      <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="togglePage('personal')" ></ion-icon>
+      <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="togglePage('personal')" id="back-personal"></ion-icon>
      </div>
      <p class="title-explore" >Personal Settings</p>
      <div class="wrapper-header-icon">
@@ -686,7 +699,7 @@
       <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="togglePage('profile')" ></ion-icon>
      </div>
      <ion-icon name="moon" class="main-icon" class="main-icon" id="main-icon" onclick="switchTheme()"></ion-icon>
-     <ion-icon name="newspaper" class="main-icon" class="main-icon" id="main-icon" onclick="togglePage('personal')"></ion-icon>
+     <ion-icon name="pencil" class="main-icon" class="main-icon" id="main-icon" onclick="togglePage('personal')"></ion-icon>
      <ion-icon name="qr-code" class="main-icon" class="main-icon" id="main-icon" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
     </div>
     <div class="profileSection" id="profileSection">
@@ -1358,6 +1371,7 @@
   <script src="dataSong.js"></script>
   <script src="feature.js"></script>
   <script src="particles.js"></script>
+  <script src="functionApi.js"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
   </script>
   <script type="module" src="https://cdn.lordicon.com/lordicon-1.1.0.js"></script>

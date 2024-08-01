@@ -230,7 +230,102 @@ const songList = [
   "Troye Sivan - Strawberry And Cigarrates"
 ];
 
+const playlistJSON = () => {
+ return {
+  songs: {
+   slow_vibes: {
+    title: 'slow_vibes',
+    list: [
+    "Alan Walker - Alone",
+    "Alan Walker - Unity",
+    "Alan Walker - On My Way",
+    "Marsmello - Happier",
+    "iLLenium - Take Away",
+    "Cash Cash - Hero" ]
+   },
+   fast_vibes: {
+    title: 'fast_vibes',
+    list: [
+    "One Republic - Conting Stars",
+    "Cash Cash - Take Me Home",
+    "ZAYN - Dusk Till Dawn",
+    "Maroon5 - Memories",
+    "Maroon5 - Girls Like You",
+    "One Direction - Story Of My Live" ]
+   },
+   sad_vibes: {
+    title: 'sad_vibes',
+    list: [
+    "Andra And Backbone - Sempurna",
+    "Daun Jatuh - Resah Jadi Luka",
+    "Miselia - Akhir Tak bahagia",
+    "HONNE - Location Unknown",
+    "Clean Bandit,Demi Lovato - Solo",
+    "Runtuh - Feby Putri ft.Fiersa" ]
+   },
+   happy_vibes: {
+    title: 'happy_vibes',
+    list: [
+    "Billie Elish Feat Khalid - Lovely",
+    "Nidji - Laskar Pelangi [Rawi Beat]",
+    "Chainsmokers - All We Know",
+    "Abdurrahman M - Al Ankabut",
+    "Alan Walker - End Of Time",
+    "Katy Perry - Unconditional"]
+   },
+   chill_vibes: {
+    title: 'chill_vibes',
+    list: [
+    "Billie Elish Feat Khalid - Lovely",
+    "Nidji - Laskar Pelangi [Rawi Beat]",
+    "Chainsmokers - All We Know",
+    "Abdurrahman M - Al Ankabut",
+    "Alan Walker - End Of Time",
+    "Katy Perry - Unconditional" ]
+   },
+   study_vibes: {
+    title: 'study_vibes',
+    list: [
+    "Billie Elish Feat Khalid - Lovely",
+    "Nidji - Laskar Pelangi [Rawi Beat]",
+    "Chainsmokers - All We Know",
+    "Abdurrahman M - Al Ankabut",
+    "Alan Walker - End Of Time",
+    "Katy Perry - Unconditional" ]
+   },
+   productive_vibes: {
+    title: 'productive_vibes',
+    list: [
+    "Billie Elish Feat Khalid - Lovely",
+    "Nidji - Laskar Pelangi [Rawi Beat]",
+    "Chainsmokers - All We Know",
+    "Abdurrahman M - Al Ankabut",
+    "Alan Walker - End Of Time",
+    "Katy Perry - Unconditional" ]
+   }
+  }
+ }
+}
+
 const separatedSong = songList.map(song => {
  const [artist, title] = song.split(' - ');
  return { artist, title };
 });
+
+function getPlaylist(json) {
+ const getJson = playlistJSON().songs;
+ const getPlaylist = getJson[json];
+ 
+ const { list, title } = getPlaylist;
+ 
+ console.log({ list: list, title: title })
+}
+
+//getPlaylist('productive_vibeas')
+
+function generateRandomSong(songs) {
+ const getRandom = Math.floor(Math.random() * songs.length);
+ console.log(songs[getRandom]);
+}
+
+//generateRandomSong(songList)

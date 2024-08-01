@@ -290,23 +290,87 @@ header .imgboxs img {
 
 .wrapper {
  width: 100%;
- display: flex;
- align-items: center;
- justify-content: center;
- flex-direction: column;
  left: 0;
  bottom: 0;
  z-index: 12;
+ display: flex;
  position: fixed;
+ align-items: center;
+ flex-direction: column;
  color: var(--shadowUser);
  background-color: var(--primaryBackground);
+ justify-content: space-between;
+}
+
+.wrapper.active {
+ height: 230px;
+ overflow: scroll;
+}
+.wrapper.active .container-list-action {
+ display: block;
+}
+
+.container-list-action {
+ overflow-x: scroll;
+ margin-top: 10px;
+ display: none;
+ width: 100%;
+}
+
+.wrapper-list-action:after {
+ top: 5px;
+ left: 50%;
+ width: 30px;
+ content: '';
+ height: 5px;
+ position: absolute;
+ border-radius: 10px;
+ background-color: var(--secondaryBorderColor);
+ transform: translate(-50%, -50%);
+}
+
+.wrapper-list-action {
+ gap: 15px;
+ z-index: -1;
+ height: auto;
+ display: flex;
+ padding: 7px 0;
+ flex-direction: column;
+}
+
+.items-action {
+ display: flex;
+ padding: 5px 10px;
+ align-items: center;
+ justify-content: space-between;
+}
+
+.items-action span {
+ width: 65%;
+ display: flex;
+ align-items: center;
+}
+
+.items-action ion-icon {
+ font-size: 20px;
+ color: var(--primaryTextColor);
+}
+
+.items-action .description_text {
+ font-size: 13px;
+ font-weight: 500;
+}
+
+.items-action > .description_text:before {
+ content: '/';
 }
 
 .container .wrapper .containerInput {
+ gap: 7px;
  width: 100%;
  display: flex;
  align-items: flex-start;
- justify-content: center;
+ justify-content: space-between;
 }
 
 .footer {
@@ -321,22 +385,24 @@ header .imgboxs img {
 }
 
 .input-jawaban {
- width: 85%;
+ width: 75%;
  height: 38px;
  display: flex;
  outline: none;
  font-size: 15px;
  font-weight: 410;
- padding: 10px 20px;
- border-radius: 35px;
+ padding: 10px;
  align-items: center;
  white-space: pre-wrap;
  word-break: break-word;
  justify-content: center;
  color: var(--primaryTextColor);
  caret-color: var(--secondaryColor);
- background: var(--primaryCards);
- border: 1.5px solid var(--primaryBorderColor);
+ background: var(--primaryBackground);
+}
+
+#btnMenuChat.hover #menuChat {
+ transform: rotate(360deg);
 }
 
 ::-webkit-input-placeholder {
@@ -351,17 +417,16 @@ header .imgboxs img {
 }
 
 .btn-bot {
+ gap: 5px;
  display: flex;
  justify-content: center;
  align-items: center;
- height: 35px;
- width: 35px;
- border: none;
+ padding: 6px 8px;
  outline: none;
- margin: 0 5px;
  font-size: 15px;
  font-weight: 500;
  border-radius: 10px;
+ color: var(--primaryTextColor);
  background: var(--primaryCards);
  border: 1.5px solid var(--primaryBorderColor);
 }

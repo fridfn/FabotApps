@@ -331,8 +331,15 @@ function handlingAction(params) {
     containerChat.removeChild(containerChat.firstChild);
    }
   break;
-  case 'default':
-   
+  case 'options':
+   loadingAnimation({
+    active: personality_page,
+    remove: pageChat,
+    conditional: defaultElem,
+    isRemove: defaultElem,
+    action: 'active'
+   });
+   btnBackPersonlity.onclick = () => { handlingAction({ action: null, event: 'options' }) };
   break;
   default:
  }
@@ -571,7 +578,7 @@ document.addEventListener('DOMContentLoaded', rotateWords);
 window.addEventListener('load', () => {
   const getUser = JSON.parse(localStorage.getItem('userJSON'));
   const isLogin = (getUser && getUser.flagLogin.isLogin === true);
-  const loaderTime = (getUser && isLogin) ? 50 : 100 ;
+  const loaderTime = (getUser && isLogin) ? 50000000 : 50000000 ;
  
  setTimeout(() => {
  loadingAnimation({
@@ -797,6 +804,267 @@ for (let version = 0; version < objectVersion.length - 1; version++) {
 
 
 
+function functionList(cases) {
+ startStored = true;
+ const getObject = dataAPI();
+ const getChat = getObject.list[cases].chat;
+ const getCommand = getObject.list[cases].command;
+ clonedTextJawaban.innerHTML = `/${getCommand}`;
+ 
+ document.getElementById('contentPertanyaan').appendChild(clonedElementJawaban.cloneNode(true));
+ 
+ setTimeout(() => {
+  clonedTextPertanyaan.textContent = cases;
+  document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+ }, 1000);
+}
+
+
+const dataAPI = () => {
+ return {
+   list: {
+    number_api: {
+     apiToken: null,
+     command: 'numberapi',
+     apiInfo: 'memberikan fakta menarik tentang angka',
+     chat: 'ini adalah numberapi',
+     typeResponse: 'text',
+     apiUrl: 'http://numbersapi.com',
+     apiParams: {
+      one: 'trivia',
+      two: 'math',
+      third: 'year',
+      four: 'date'
+     },
+     configFunction: {
+      isConfigUrl: false,
+      getDestruction: 'null, null',
+      bracketConfig: '["data"]',
+      useAnotherFunction: true
+     },
+     useCommand: functionList
+    },
+    cats_api: {
+     apiToken: 'live_Dxk8ET9b6eWXZU310i8mCO58h0YkXmQtWcmHTJZIFGvdfWbRuNemX9IBkocnDPyp',
+     command: 'catsapi',
+     apiInfo: 'foto random tentang kucing dan jenis nya',
+     chat: 'foto kucing',
+     typeResponse: 'json',
+     apiUrl: 'https://api.thecatapi.com/v1/images/search?',
+     apiParams: {
+      one: 'has_breeds=1',
+      two: '',
+      third: '',
+      four: ''
+     },
+     configFunction: {
+      isConfigUrl: true,
+      translate: true,
+      bracketConfig: '["data"][0]["breeds"][0]',
+      getDestruction: 'origin, name, description, life_span, alt_names, temperament',
+      useAnotherFunction: false
+     },
+     useCommand: functionList
+    },
+    gender_api: {
+     apiToken: null,
+     command: 'genderapi',
+     apiInfo: 'menebak berapa persen nama laki laki / perempuan',
+     chat: '100% laki',
+     typeResponse: 'json',
+     apiUrl: 'https://api.genderize.io?name',
+     apiParams: {
+      one: '["data"]',
+      two: '',
+      third: '',
+      four: ''
+     },
+     configFunction: {
+      isConfigUrl: true,
+      bracketConfig: '["data"]',
+      getDestruction: 'gender, name, probability',
+      useAnotherFunction: false
+     },
+     useCommand: functionList
+    },
+    translate_api: {
+     apiToken: null,
+     command: 'translateapi',
+     apiInfo: 'menerjemahkan bahasa jawa ke sunda dan sebalik nya',
+     chat: 'translate bahasa',
+     typeResponse: 'json',
+     apiUrl: 'https://translate.googleapis.com/translate_a/single?client=gtx&sl',
+     apiParams: {
+      one: 'en - id',
+      two: 'jv - sun',
+      third: 'sun - jv',
+      four: 'id - en'
+     },
+     configFunction: {
+      translate: true,
+      isConfigUrl: true,
+      getDestruction: 'null, null',
+      bracketConfig: '["data"][0][0][0]',
+      useAnotherFunction: false
+     },
+     useCommand: functionList
+    },
+    guess_name_api: {
+     apiToken: null,
+     command: 'nameapi',
+     apiInfo: 'menebak dari mana nama asli kamu berasal',
+     chat: 'menebak nama dari negara mna',
+     typeResponse: 'json',
+     apiUrl: 'https://api.nationalize.io/?name',
+     apiParams: {
+      one: '["data"]',
+      two: '',
+      third: '',
+      four: ''
+     },
+     configFunction: {
+      isConfigUrl: true,
+      bracketConfig: '["data"]',
+      getDestruction: 'name',
+      useAnotherFunction: false
+     },
+     useCommand: functionList
+    },
+    hadits_api: {
+     apiToken: null,
+     command: 'haditsapi',
+     apiInfo: 'memberikan hadits riwayat muslim',
+     chat: 'memberikan hadits',
+     typeResponse: 'json',
+     apiUrl: 'https://api.hadith.gading.dev/books/muslim',
+     apiParams: {
+      one: '["data"]',
+      two: '',
+      third: '',
+      four: ''
+     },
+     configFunction: {
+      isConfigUrl: true,
+      bracketConfig: '["data"]["data"]',
+      getDestruction: 'name, contents',
+      useAnotherFunction: false
+     },
+     useCommand: functionList
+    },
+    playlist_api: {
+     apiToken: null,
+     command: 'playlistapi',
+     apiInfo: 'playlist lagu dan random lagu sesuai mood',
+     chat: 'give me your forever',
+     useCommand: functionList
+    },
+    apod_api: {
+     apiToken: null,
+     command: 'apodapi',
+     apiInfo: 'memberikan foto galaksi di tahun kelahiran kamu',
+     chat: 'lawak',
+     typeResponse: 'json',
+     apiUrl: 'https://api.nasa.gov/planetary/apod?api_key=RxWr06sg9Xh1ejYt4ZpNjRYKnHD97iTabRGD8jmL&date',
+     apiParams: {
+      one: '',
+      two: '',
+      third: '',
+      four: ''
+     },
+     configFunction: {
+      translate: true,
+      isConfigUrl: true,
+      bracketConfig: '["data"]',
+      getDestruction: 'date, title, explanation, url',
+      useAnotherFunction: false
+     },
+     useCommand: functionList
+    }
+   }
+  }
+}
+
+const storedApi_command = [];
+const storedApi_object = [];
+const getApiJSON = dataAPI();
+const getApiList = getApiJSON.list;
+
+const commandToParentMap = {};
+
+for (let key in getApiList) {
+ if (getApiList.hasOwnProperty(key)) {
+  const api = getApiList[key];
+  
+  if (!commandToParentMap[api.command]) {
+   commandToParentMap[api.command] = [];
+  }
+  
+  commandToParentMap[api.command].push(key);
+  storedApi_object.push(key);
+  storedApi_command.push(getApiList[key].command);
+ }
+}
+
+document.addEventListener('DOMContentLoaded', ()  => {
+ const getObj = dataAPI().list;
+ const parens = document.querySelector('.wrapper-list-action');
+ const itemElement = document.querySelector('.items-action');
+ const first = parens.firstElementChild;
+ setTimeout(() => { first.style.display = 'none' }, 1500);
+ 
+ for (let key in getObj) {
+  if (getObj.hasOwnProperty(key)) {
+   const cloneItems = itemElement.cloneNode(true);
+   const getCommands = getObj[key].command;
+   const getDescriptions = getObj[key].apiInfo;
+   
+   const command = cloneItems.querySelector('.items-action #command');
+   const description = cloneItems.querySelector('.items-action span .description_text');
+   
+   command.textContent = getCommands;
+   description.textContent = getDescriptions;
+   cloneItems.setAttribute('onclick', `selectMenu({ cases: '${key}' })`);
+   
+   const getCommand = Object.keys(getObj);
+   
+   getCommand.forEach((items) => {
+    parens.appendChild(cloneItems);
+   });
+  }
+ }
+});
+
+function selectMenu(prompt) {
+ menuChat();
+ const { cases } = prompt;
+ const nameOfList = dataAPI().list;
+ const { chat, apiInfo } = nameOfList[cases];
+ 
+ console.log(chat, apiInfo)
+ nameOfList[cases].useCommand(cases);
+}
+
+
+
+
+function menuChat() {
+ const icon = document.querySelector('#menuChat');
+ const menu = document.getElementById('btnMenuChat');
+ 
+ const menuList = document.getElementById('container_input')
+ if (icon.name === 'menu') {
+  icon.name = 'close';
+ } else {
+  setTimeout(() => { icon.name = 'menu'; }, 340);
+ }
+ 
+ menu.classList.toggle('hover');
+ menuList.classList.toggle('active');
+}
+
+
+
+
 
 
 
@@ -832,6 +1100,7 @@ function autoResize() {
  value_email.style.height = 'auto';
  value_email.style.height = value_email.scrollHeight + 'px';
  inputJawaban.style.height = inputJawaban.scrollHeight + 'px';
+ inputJawaban.style.height = 'auto';
 }
 
 formEmail.addEventListener('submit', function(e) {
@@ -1264,7 +1533,7 @@ const themeJSON = () => {
   }
  }
  
-const defaultTheme = themeJSON().type.themeDark[4].keyColor;
+const defaultTheme = themeJSON().type.themeDark[1].keyColor;
 
  const outerLocalTheme = {
   theme: '',
@@ -1666,7 +1935,7 @@ function toggleLogin(event) {
     tsConfetti(4);
     notificationPopup({ icon: 'info', text: 'kamu sudah login' })
     login.flagLogin.isStart = true;
-    document.querySelector('#signup-text').innerHTML = `<button class="btn-login"><span><ion-icon name="person"></ion-icon>Full Login</span></button>`;;
+    document.querySelector('#signup-text').innerHTML = `<button class="btn-login"><span><ion-icon name="person"></ion-icon>Full Login</span></button>`;
     signUpPage.classList.remove('active');
    } else {
     let userName = input_name.value;
@@ -1851,6 +2120,7 @@ function togglePage(page) {
     isRemove: defaultElem,
     action: 'active'
    });
+   btnBackPersonlity.onclick = () => { togglePage('personal') };
   break;
   case 'email':
    showingEmail();
@@ -1975,18 +2245,9 @@ function loadingAnimation(pages) {
   }, 100);
 }
 
-function generateRandomSong(songs) {
- const getRandom = Math.floor(Math.random() * songs.length);
- cl(songs[getRandom]);
-}
-
 function getRamdomTimer() {
  const time = Math.floor(Math.random() * (2000 - 1000 + 1) + 1000)
- cl(time);
 }
-
-
-
 
 
 

@@ -1,4 +1,3 @@
-
 const csl = console.log.bind(console);
 
 let blurProfile = document.querySelectorAll('.blur-profile');
@@ -1193,3 +1192,23 @@ function fullScreen() {
     }
   }
 }
+
+// Mendapatkan user agent string
+// var userAgent = navigator.userAgent;
+// var userDevice = navigator.platform;
+// var userSystem = navigator.vendor;
+
+// Menampilkan user agent di konsol
+// console.log(userAgent);
+// console.log(userDevice);
+// console.log(userSystem);
+// console.log(navigator);
+// 
+// window.onload = function() {
+//   var deviceInfo = "Device: " + WURFL.complete_device_name + "<br>" +
+//   "Brand: " + WURFL.brand_name + "<br>" +
+//   "Model: " + WURFL.model_name + "<br>" +
+//   "OS: " + WURFL.os + " " + WURFL.os_version + "<br>" +
+//   "Browser: " + WURFL.browser + " " + WURFL.browser_version;
+// console.log(deviceInfo)
+// };
