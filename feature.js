@@ -578,12 +578,7 @@ document.addEventListener('DOMContentLoaded', rotateWords);
 window.addEventListener('load', () => {
   const getUser = JSON.parse(localStorage.getItem('userJSON'));
   const isLogin = (getUser && getUser.flagLogin.isLogin === true);
-  
-  setInterval(() => {
-   notificationPopup({ icon: 'alert', text: `under development until 15 august 2024` });
-  }, 11000);
-  
-  const loaderTime = (getUser && isLogin) ? 50000000 : 50000000 ;
+  const loaderTime = (getUser && isLogin) ? 50000000 : 5000000 ;
  
  setTimeout(() => {
  loadingAnimation({
@@ -603,7 +598,7 @@ window.addEventListener('load', () => {
   
   
   loaders.style.display = "none";
- // notificationPopup({ icon: 'love', text: `selamat ${sayTime(isLogin)} ${fullName}` });
+  //notificationPopup({ icon: 'love', text: `selamat ${sayTime(isLogin)} ${fullName}` });
  }, loaderTime);
 });
 
@@ -814,12 +809,13 @@ function functionList(cases) {
  const getObject = dataAPI();
  const getChat = getObject.list[cases].chat;
  const getCommand = getObject.list[cases].command;
+ 
  clonedTextJawaban.innerHTML = `/${getCommand}`;
  
  document.getElementById('contentPertanyaan').appendChild(clonedElementJawaban.cloneNode(true));
  
  setTimeout(() => {
-  clonedTextPertanyaan.textContent = cases;
+  clonedTextPertanyaan.innerHTML = cases;
   document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
  }, 1000);
 }
@@ -832,17 +828,20 @@ const dataAPI = () => {
      apiToken: null,
      command: 'numberapi',
      apiInfo: 'memberikan fakta menarik tentang angka',
-     chat: 'ini adalah numberapi',
+     chat: 'kamu sekarang menggunakan number_api berikut adalah contoh command nya :<br><br>1. "trivia" untuk hal-hal atau hal-hal yang sangat tidak penting<br>2. "matematika" untuk fakta menarik tentang matematika<br>3. "tahun" untuk fakta menarik tentang tahun<br>4. "tanggal" untuk fakta menarik tentang tanggal 1 - 30<br><br>untuk menggunakan cukup ketikan contoh seperti ini "77 trivia"<br><br>NOTE : perintah fakta menarik ini terkadang mengalami masalah jika terjadi ke gagalan coba ulang kembali',
+     keyLength: 2,
      typeResponse: 'text',
      apiUrl: 'http://numbersapi.com',
+     keyForUse: ["trivia", "matematika", "tahun", "tanggal"],
      apiParams: {
-      one: 'trivia',
-      two: 'math',
-      third: 'year',
-      four: 'date'
+      trivia: 'trivia',
+      matematika: 'math',
+      tahun: 'year',
+      tanggal: 'date'
      },
      configFunction: {
       isConfigUrl: false,
+      translate: false,
       getDestruction: 'null, null',
       bracketConfig: '["data"]',
       useAnotherFunction: true
@@ -852,15 +851,16 @@ const dataAPI = () => {
     cats_api: {
      apiToken: 'live_Dxk8ET9b6eWXZU310i8mCO58h0YkXmQtWcmHTJZIFGvdfWbRuNemX9IBkocnDPyp',
      command: 'catsapi',
-     apiInfo: 'foto random tentang kucing dan jenis nya',
-     chat: 'foto kucing',
+     apiInfo: 'memberikan foto random menarik tentang kucing',
+     chat: 'kamu sekarang menggunakan cats_api untuk memberikan foto kucing random berikut adalah contoh command nya :<br><br>1. "breeds" memberikan informasi lengkap tentang jenis kucing tersebut<br>2. "bengal" memberikan hanya foto kucing ber jenis bengal<br>3. "random" memberikan foto random kucing tidak termasuk informasi lengkap<br><br><br>untuk menggunakan cukup ketikan contoh kata diatas seperti ini " breeds "',
+     keyForUse: ["breeds", "bengal", "random"],
+     keyLength: 1,
      typeResponse: 'json',
-     apiUrl: 'https://api.thecatapi.com/v1/images/search?',
+     apiUrl: 'https://api.thecatapi.com/v1/images/',
      apiParams: {
-      one: 'has_breeds=1',
-      two: '',
-      third: '',
-      four: ''
+      breeds: 'search?has_breeds=1',
+      bengal: 'search?breed_ids=beng',
+      random: 'search?'
      },
      configFunction: {
       isConfigUrl: true,
@@ -874,15 +874,16 @@ const dataAPI = () => {
     gender_api: {
      apiToken: null,
      command: 'genderapi',
-     apiInfo: 'menebak berapa persen nama laki laki / perempuan',
-     chat: '100% laki',
+     apiInfo: 'menebak berapa persen laki laki / perempuan nama kamu',
+     chat: 'kamu sekarang menggunakan gender_api untuk menebak berapa persen nama kamu laki laki / perempuan berikut adalah contoh command nya :<br><br>1. "gender"<br>2. cewo<br>3. cewe<br><br>untuk menggunakan cukup ketikan contoh kata diatas dan nama panggilan / nama panjang seperti ini " gender burhan "',
+     keyForUse: ["gender", "cewe", "cowo"],
+     keyLength: 2,
      typeResponse: 'json',
      apiUrl: 'https://api.genderize.io?name',
      apiParams: {
-      one: '["data"]',
-      two: '',
-      third: '',
-      four: ''
+      gender: '["data"]',
+      cewe: '["data"]',
+      cowo: '["data"]'
      },
      configFunction: {
       isConfigUrl: true,
@@ -895,20 +896,22 @@ const dataAPI = () => {
     translate_api: {
      apiToken: null,
      command: 'translateapi',
-     apiInfo: 'menerjemahkan bahasa jawa ke sunda dan sebalik nya',
-     chat: 'translate bahasa',
+     apiInfo: 'menerjemahkan text ke dalam bahasa tertentu',
+     chat: 'kamu sekarang menggunakan cats_api untuk memberikan foto kucing random berikut adalah contoh command nya :<br><br>1. "gender"<br><br>untuk menggunakan cukup ketikan contoh kata diatas dan nama seperti ini " gender burhan "',
+     keyForUse: ["trivia", "math", "year", "date"],
+     keyLength: 2,
      typeResponse: 'json',
      apiUrl: 'https://translate.googleapis.com/translate_a/single?client=gtx&sl',
      apiParams: {
-      one: 'en - id',
+      indonesia: 'en - id',
       two: 'jv - sun',
       third: 'sun - jv',
       four: 'id - en'
      },
      configFunction: {
-      translate: true,
+      translate: false,
       isConfigUrl: true,
-      getDestruction: 'null, null',
+      getDestruction: 'translate',
       bracketConfig: '["data"][0][0][0]',
       useAnotherFunction: false
      },
@@ -917,15 +920,15 @@ const dataAPI = () => {
     guess_name_api: {
      apiToken: null,
      command: 'nameapi',
-     apiInfo: 'menebak dari mana nama asli kamu berasal',
-     chat: 'menebak nama dari negara mna',
+     apiInfo: 'menebak nama kamu banyak  di gunakan negara apa',
+     chat: 'kamu sekarang menggunakan guess_name_api untuk mengetahui dari mana / seberapa banyak nama kamu di gunakan di negara tersebut berikut adalah contoh command nya :<br><br>1. "country"<br><br>untuk menggunakan cukup ketikan contoh command diatas dan nama seperti ini " burhan negara "',
+     keyForUse: ["negara", "country"],
+     keyLength: 2,
      typeResponse: 'json',
      apiUrl: 'https://api.nationalize.io/?name',
      apiParams: {
-      one: '["data"]',
-      two: '',
-      third: '',
-      four: ''
+      negara: '["data"]',
+      country: '["data"]'
      },
      configFunction: {
       isConfigUrl: true,
@@ -939,14 +942,14 @@ const dataAPI = () => {
      apiToken: null,
      command: 'haditsapi',
      apiInfo: 'memberikan hadits riwayat muslim',
-     chat: 'memberikan hadits',
+     chat: 'kamu sekarang menggunakan hadits_api untuk memberikan hadits riwayat muslim berdasarkan angka yang kamu ketikan berikut adalah contoh command nya :<br><br>1. "muslim"<br><br>untuk menggunakan cukup ketikan contoh command diatas dan nama seperti ini " muslim 77 "',
+     keyForUse: ["muslim", "riwayat"],
+     keyLength: 2,
      typeResponse: 'json',
      apiUrl: 'https://api.hadith.gading.dev/books/muslim',
      apiParams: {
-      one: '["data"]',
-      two: '',
-      third: '',
-      four: ''
+      muslim: '["data"]',
+      riwayat: '["data"]'
      },
      configFunction: {
       isConfigUrl: true,
@@ -960,7 +963,9 @@ const dataAPI = () => {
      apiToken: null,
      command: 'playlistapi',
      apiInfo: 'playlist lagu dan random lagu sesuai mood',
-     chat: 'give me your forever',
+     chat: 'kamu sekarang menggunakan playlist_api untuk memberikan playlist playlist lagu sesuai pilihan kamu berikut adalah contoh command nya :<br><br>1. "slow" slow vibes playlist<br>2. "fast" fast vibes playlist<br>3. "sad" sad vibes playlist<br>4. "happy" happy vibes playlist<br>5. "chill" chill vibes playlist<br>6. "study" study vibes playlist<br>1. "productive" productive vibes playlist<br><br>untuk menggunakan cukup ketikan contoh command diatas  seperti ini " playlist study "',
+     keyForUse: ["plalist"],
+     keyLength: 2,
      useCommand: functionList
     },
     apod_api: {
@@ -993,6 +998,15 @@ const storedApi_command = [];
 const storedApi_object = [];
 const getApiJSON = dataAPI();
 const getApiList = getApiJSON.list;
+
+function getPropertyNameByValue(obj,value) {
+  for (const key in obj) {
+   if (obj[key] === value) {
+    return key;
+   }
+  }
+  return 'nama objek tidak di ketahui';
+}
 
 const commandToParentMap = {};
 
@@ -1040,13 +1054,35 @@ document.addEventListener('DOMContentLoaded', ()  => {
 });
 
 function selectMenu(prompt) {
- menuChat();
+ menuChat(); // menutup api list
  const { cases } = prompt;
  const nameOfList = dataAPI().list;
+ const getCommand = nameOfList[cases].command;
+ const chatTutorial = nameOfList[cases].chat
  const { chat, apiInfo } = nameOfList[cases];
  
- console.log(chat, apiInfo)
- nameOfList[cases].useCommand(cases);
+ const getHistory = JSON.parse(localStorage.getItem('historyChat'));
+ getHistory.inUseAPI = cases;
+ 
+ localStorage.setItem('historyChat', JSON.stringify(getHistory));
+ clonedTextJawaban.innerHTML = `/${getCommand}`;
+ 
+ document.getElementById('contentPertanyaan').appendChild(clonedElementJawaban.cloneNode(true));
+  
+  setTimeout(() => {
+   inUseAPI = cases;
+   isTutorial = true;
+   startStored = true;
+   clonedTextPertanyaan.innerHTML = `kamu sekarang mengganti ke ${cases}`;
+   
+   document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+   
+   setTimeout(() => {
+    clonedTextPertanyaan.innerHTML = chatTutorial;
+    
+    document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+   }, 1000);
+  }, 1000);
 }
 
 
@@ -1352,7 +1388,7 @@ const themeJSON = () => {
        backgroundPY: 'calc(100% + 80%)',
        backgroundImage: 'url("assets/background/dark_1.jpg")'
       }
-     },
+     }, // 0
      {
       templateName: 'PURPLE NIGHT',
       themeLoved: false,
@@ -1380,7 +1416,7 @@ const themeJSON = () => {
        backgroundPY: '70%',
        backgroundImage: 'url("assets/background/dark_2.jpg")'
       }
-     },
+     }, // 1
      {
       templateName: 'DEEP SUNSET',
       themeLoved: false,
@@ -1388,7 +1424,7 @@ const themeJSON = () => {
        primaryIconColor: '#ff5728',
        primaryTextColor: '#efbfaa',
        primaryColor: '#592605',
-       primaryCards: '#0c0c0c',
+       primaryCards: '#592705',
        primaryBorderColor: '#efbfaa',
        primaryBackground: '#000000',
        
@@ -1404,12 +1440,11 @@ const themeJSON = () => {
        shadowUser: '',
        shadowBot: '',
        tinyText: '#efbfaa',
-       primaryCards: '#592705',
        backgroundColor: '#000000',
        backgroundPY: '120%',
        backgroundImage: 'url("assets/background/dark_3.jpg")'
       }
-     },
+     }, // 2
      {
       templateName: 'CYAN FOREST',
       themeLoved: false,
@@ -1436,7 +1471,7 @@ const themeJSON = () => {
        backgroundPY: '25%',
        backgroundImage: 'url("assets/background/dark_4.jpg")'
       }
-     },
+     }, // 3
      {
       templateName: 'GREEN TEA',
       themeLoved: false,
@@ -1464,7 +1499,7 @@ const themeJSON = () => {
        backgroundPY: '50%',
        backgroundImage: 'url("assets/background/dark_5.jpg")'
       }
-     }
+     }  // 4
     ],
     themeLight: [
      {
@@ -1538,7 +1573,7 @@ const themeJSON = () => {
   }
  }
  
-const defaultTheme = themeJSON().type.themeDark[1].keyColor;
+const defaultTheme = themeJSON().type.themeDark[3].keyColor;
 
  const outerLocalTheme = {
   theme: '',
@@ -2252,6 +2287,7 @@ function loadingAnimation(pages) {
 
 function getRamdomTimer() {
  const time = Math.floor(Math.random() * (2000 - 1000 + 1) + 1000)
+ return time;
 }
 
 
@@ -2271,20 +2307,6 @@ function getRamdomTimer() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-//HTML CSS JSResult Skip Results Iframe
-//tsParticles library - https://github.com/matteobruni/tsparticles
-
-//tsParticles library - https://github.com/matteobruni/tsparticles
 
 
 function tsConfetti(start) {

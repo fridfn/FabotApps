@@ -2155,6 +2155,11 @@ textarea:focus {
  box-shadow: 5px -5px 4px var(--shadowBot);
 }
 
+.sticker-chat.image {
+ height: 200px;
+ width: 275px;
+}
+
 .time-sticker {
  position: absolute;
  z-index: 36;

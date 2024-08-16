@@ -245,21 +245,17 @@ let isCustomParticle = paramChat ? paramChat.isCustomParticle : false;
 let fullType = paramChat ? paramChat.fullType : [] ;
 let initSticker = paramChat ? paramChat.initSticker : 0;
 let initGuess = paramChat ? paramChat.initGuess : 0;
-let inUseAPI = paramChat ? paramChat.inUseAPI : null;
+let inUseAPI = paramChat ? 'cats_api' : null;
+let startUseApi = paramChat ? paramChat.startUseApi : false;
 
 
 //variabel untuk validasi angka
-
- let pesan;
- let angka;
- let kalimat;
- let umurTrue;
- let nilaiAngka;
- let intervalID;
+ let pesan, angka, kalimat, umurTrue, nilaiAngka, intervalID;
  let userSays = [];
  let umurT = false;
  let umurM = false;
  let chatParticle = 0;
+ let isTutorial = false;
  let startStored = false;
  let nilaiAngkaIs = false;
  let switchParticle = false;
@@ -802,7 +798,6 @@ if (switchParticle) {
           document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
          } else {
           chatRepeats = true;
-          alert("USER UDAH GAMAU LANJUT CHAT")
           clonedTextPertanyaan.innerHTML = `ok klo ${namaDepan} maunya itu`;
           
           document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
@@ -1327,9 +1322,9 @@ if (switchParticle) {
             document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
             }, 1000);
            } else {
+            mainChatIs = false;
             chatRepeats = false;
             jawabanBenar = false;
-            mainChatIs = false;
             clonedTextPertanyaan.innerHTML = `maaf ya ${namaDepan} jawaban kamu salah`;
             
             document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
@@ -3257,10 +3252,9 @@ if (switchParticle) {
    }, 1000);
   } else {
    init = 999;
+   let isSwitch;
    chatValue = userSay({ api: jawabanValue })[13];
    userDelay({ api: jawabanValue });
-   //notificationPopup({ icon: 'alert', text: 'chat dengan bot selesai, kamu bisa melihat guide untuk membaca panduan menanyakan sesuatu' });
-   
    
    clonedTextJawaban.innerHTML = userSay({ api: jawabanValue })[13];
    
@@ -3271,35 +3265,51 @@ if (switchParticle) {
     const getApi = commandToParentMap[matchingCommand];
     const resultApi = getApi[0];
     
+    isSwitch = true;
     inUseAPI = resultApi;
-    console.log({getApi: getApi})
-    console.log({matchingCommand: matchingCommand})
-    console.log({commandToParentMap: commandToParentMap})
    }
-   
-   if (inUseAPI) {
-    const configValue = {
-     'number_api': `${nilaiAngka}`,
-     'cats_api': `${jawabanValue}`,
-     'translate_api': ``,
-     'guess_name_api': ``,
-     'playlist_api': ``,
-     'hadits_api': ``,
-     'apod_api': ``
-    }
+  
+   const listAPI = dataAPI().list;
+   const getTutorial = listAPI[inUseAPI].chat;
+   const getApiParams = listAPI[inUseAPI].apiParams;
+   const keyForUse = listAPI[inUseAPI].keyForUse;
+   const keyLength = listAPI[inUseAPI].keyLength;
+   const inputValue = jawabanValue.split(' ');
+   const useParams = keyForUse.find((kata) => jawabanValue.includes(kata));
+   const getValue = inputValue.filter((kata) => !keyForUse.includes(kata));
+   const isValid = keyForUse.some((kata) => jawabanValue.includes(kata)) && inputValue.length === keyLength || inUseAPI === 'gender_api';
     
-    const value = configValue[inUseAPI];
-    functionApi(inUseAPI, value);
-    
-   } else {
-   
    setTimeout(() => {
     barier.style.display = 'none';
-    clonedElementPertanyaan.innerHTML = userSay({ api: jawabanValue })[13];
     
+    if (inUseAPI && !isSwitch) {
+     if (isValid) {
+     const sendParams = getApiParams[useParams];
+     console.table({ api: inUseAPI,         data: getValue, params: sendParams });
+     if (inUseAPI === 'number_api') return getNumberFact(getValue, sendParams);
+     functionApi({
+       api: inUseAPI,
+       data: getValue,
+       params: sendParams,
+       useChat: true,
+       again: false,
+       inputText: inUseAPI === 'gender_api' ? jawabanValue.replace(useParams, '') : jawabanValue
+      });
+      clonedTextPertanyaan.innerHTML = `ok tunggu sebentar yaa ${namaDepan}`;
+     } else {
+      clonedTextPertanyaan.innerHTML = 'UPS! tolong ikutin apa yang aku contohin tadi ya';
+      
+      setTimeout(() => {
+       clonedTextPertanyaan.innerHTML = 'jika kamu mau kamu bisa mengganti perintah nya di menu input';
+       
+       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
+      }, 1000);
+     }
+    } else {
+     clonedTextPertanyaan.innerHTML = isSwitch ? `${getTutorial}` : `tolong pilih terlebih dahulu API di menu input`;
+    }
     document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
    }, 1000);
-   }
   }
  }
 }/*kurawa end botStart*/
@@ -3353,7 +3363,7 @@ const observer = new MutationObserver((mutationsList, observer) => {
     textMengetik.innerHTML = 'Online';
     //notif.play();
     clearInterval(intervalID);
-
+    
     const storedChat = {};
     const containerChat = document.querySelector("#wrapper-item-chat");
     const allChat = containerChat.lastElementChild;
@@ -3394,6 +3404,7 @@ const observer = new MutationObserver((mutationsList, observer) => {
      'isRepeat',
      'isEnding',
      'inUseAPI',
+     'startUseApi',
      'isTantangan',
      'botAnswerExecuted'
     ];
@@ -3415,6 +3426,7 @@ const observer = new MutationObserver((mutationsList, observer) => {
       }
      }
      
+     //console.log(filteredTable['inUseAPI'])
      //console.table(filteredTable);
      
     }, 500);
