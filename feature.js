@@ -579,7 +579,9 @@ window.addEventListener('load', () => {
   const getUser = JSON.parse(localStorage.getItem('userJSON'));
   const isLogin = (getUser && getUser.flagLogin.isLogin === true);
   const loaderTime = (getUser && isLogin) ? 50000000 : 5000000 ;
- 
+ setInterval(() => {
+   notificationPopup({ icon: 'love', text: `development phase extended until 27 August 2024. sorry😸` });
+  }, 12000)
  setTimeout(() => {
  loadingAnimation({
    active: containerHome,
