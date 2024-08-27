@@ -99,7 +99,7 @@
     </div>
    </div>
    <audio id="audio-player" controls="true">
-    <source src="notif_1.mp3" type="audio/mpeg"/>
+    <source type="audio/mpeg"/>
    </audio>
    <div class="container-loader" id="loader-web">
      <div class="loader">
@@ -513,6 +513,19 @@
         <div class="boxOpsi">
          <p class="txtOpsi" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"><ion-icon name="share-social" id="ico"></ion-icon>&nbsp;Bagikan</p>
         </div>
+        <div class="boxOpsi" id="for-set-notif">
+         <label for='notif' class="txtOpsi" onclick="handlingAction({ action: null, event: 'switch-notif' })"><ion-icon name="musical-notes" id="ico"></ion-icon>&nbsp;Suara Notif</ion-icon></label>
+         <select id="notif" name="notif" onchange="handleSelectChange(event, this)">
+          <option value="senyap">0</option>
+          <option value="bubble">1</option>
+          <option value="circles">2</option>
+          <option value="watersplash">3</option>
+          <option value="nock">4</option>
+          <option value="purebell">5</option>
+          <option value="doraemon">6</option>
+          <option value="araara">7</option>
+         </select>
+        </div>
         <div class="boxOpsi">
          <p class="txtOpsi" onclick="handlingAction({ action: null, event: 'clear-message' })"><ion-icon name="trash" id="ico"></ion-icon>&nbsp;Bersihkan chat</ion-icon>
         </div>
@@ -543,19 +556,39 @@
          </div>
        </div>
       <div class="containerChat" id="contentPertanyaan">
-        <div id="chatPertanyaan" class="chatPertanyaans">
-         <div class="arrowQuest"></div>
-          <p id="textPertanyaan">pertanyaan kedua</p>
-          <p id="timeQuestion"></p>
-         </div>
-         <div class="sticker-chat">
-          <p class="time-sticker">05.06</p>
-         </div>
-         <div class="guess-picture">
-          <div class="forward-box">
-           <ion-icon name="arrow-redo"></ion-icon>
-          </div>
+       <div id="chatPertanyaan" class="chatPertanyaans">
+        <div class="arrowQuest"></div>
+         <p id="textPertanyaan">pertanyaan kedua</p>
+         <p id="timeQuestion"></p>
         </div>
+       <div class="sticker-chat">
+        <p class="time-sticker">05.06</p>
+       </div>
+       <div class="guess-picture">
+        <div class="forward-box">
+         <ion-icon name="arrow-redo"></ion-icon>
+        </div>
+       </div>
+       <div class="cta-btn-chat">
+        <div class="wrapper-cta">
+         <div class="wrapper-btn-chat">
+          <button class="items-btn-chat">
+           <p class="description_text">1</p>
+          </button>
+         </div>
+         <div class="wrapper-cta-chat">
+          <button class="items-btn-chat" id="undoList">
+           <p class="description_text">⬅️</p>
+          </button>
+          <button class="items-btn-chat">
+           <p class="description_text">❌</p>
+          </button>
+          <button class="items-btn-chat" id="nextList">
+           <p class="description_text">➡️</p>
+          </button>
+         </div>
+        </div>
+       </div>
       </div>
      </div>
        <div class="pathchat"></div>
@@ -569,7 +602,7 @@
      </div>
      <p class="title-explore" >Personal Settings</p>
      <div class="wrapper-header-icon">
-      <ion-icon name="moon" class="main-icon" class="main-icon" id="main-icon"></ion-icon>
+      <ion-icon name="musical-note" class="main-icon" class="main-icon" id="main-icon"></ion-icon>
       <ion-icon name="save" class="main-icon" class="main-icon" id="main-icon"onclick="savePersonality()"></ion-icon>
      </div>
     </div>

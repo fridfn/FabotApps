@@ -51,14 +51,17 @@ const originalTextPertanyaan = clonedElementPertanyaan.querySelector('#TextPerta
 
 let imgSticker = document.createElement('img');
 imgSticker.setAttribute('class','imgSticker');
-imgSticker.setAttribute('alt','sticker_images');
+imgSticker.setAttribute('alt','eror loading image, pls reload the page!');
 
 let imgPicture = document.createElement('img');
 imgPicture.setAttribute('class','imgPicture');
-imgPicture.setAttribute('alt','stickers');
+imgPicture.setAttribute('alt','eror loading image, pls reload the page!');
 
 let stickers = clonedContentPertanyaan.querySelector('.sticker-chat');
 let guessPicture = clonedContentPertanyaan.querySelector('.guess-picture');
+
+let btnChatAction = clonedContentPertanyaan.querySelector('.cta-btn-chat');
+console.log(clonedContentPertanyaan)
 let clonedTimeSticker = stickers.querySelector('.time-sticker');
 let clonedTimeGuess = stickers.querySelector('.time-guess');
 
@@ -152,7 +155,7 @@ const userSay = (data) => {
  ];
 };
 
-const kataKasar = [`kontol`, `memek`, `anjing`, `bangsat`, `ngentot`, `bajingan`, `coli`, `asu`, `komtol`, `anjg`, `ajg`, `tolol`, `bacot`, `bacod`, `bacots`, `bego`, `goblok`, `coly`, `desah`, `colmek`, `colmex`, `kontil`, `babi`, `anjying`, `ngewe`, `sange`, `ashu`, `tholol`, `fuck`, `jancok`, `bangsad`, `begok`, `badjingan`, `memex`, `kontols`, `kontolz`, `sangean`, `colli`, `colly`, `babik`, `gay`, `ngegay`, `bokep`, `bokeps`, `porno`, `xnxx`, `porn`, `lesbian`, `lesbi`, `pornhub`, `yandex`, `hentai`, `ngentots`, `ngecrot`, `ngecrot`, `nyepong`, `kntl`, `kontl`, `kntol`, `ngocok`, `ngocoks`, `cabul`, 'memeq', 'memew', 'tholol', 'begok', 'LGBTQ', 'lesbian', 'ngegay', 'gay', 'transgender', 'biseksual', 'sex', `kintil`];
+const kataKasar = [`kontol`, `memek`, `anjing`, `bangsat`, `ngentot`, `bajingan`, `coli`, `komtol`, `anjg`, `ajg`, `tolol`, `bacot`, `bacod`, `bacots`, `bego`, `goblok`, `coly`, `desah`, `colmek`, `colmex`, `kontil`, `babi`, `anjying`, `ngewe`, `sange`, `ashu`, `tholol`, `fuck`, `jancok`, `bangsad`, `begok`, `badjingan`, `memex`, `kontols`, `kontolz`, `sangean`, `colli`, `colly`, `babik`, `gay`, `ngegay`, `bokep`, `bokeps`, `porno`, `xnxx`, `porn`, `lesbian`, `lesbi`, `pornhub`, `yandex`, `hentai`, `ngentots`, `ngecrot`, `ngecrot`, `nyepong`, `kntl`, `kontl`, `kntol`, `ngocok`, `ngocoks`, `cabul`, 'memeq', 'memew', 'tholol', 'begok', 'LGBTQ', 'lesbian', 'ngegay', 'gay', 'transgender', 'biseksual', 'sex', `kintil`, 'puki'];
 
 const kataGamau = [`gak`, `engga`, `apasi`, `kepo`, `sok asik`, `ga boleh`, `lah lu siapa`, `masalah`, `gamau`, `lu siapa`, `boong`, `bodo amat`, `gak mau`, `ga mau`, `ga peduli`, `tapi boong`, `boong`, `gamau`, `maksa`, `kamu siapa`, `udahan`, `lah ngancem`, `marah`, 'keberatan'];
 
@@ -245,7 +248,7 @@ let isCustomParticle = paramChat ? paramChat.isCustomParticle : false;
 let fullType = paramChat ? paramChat.fullType : [] ;
 let initSticker = paramChat ? paramChat.initSticker : 0;
 let initGuess = paramChat ? paramChat.initGuess : 0;
-let inUseAPI = paramChat ? 'cats_api' : null;
+let inUseAPI = paramChat ? 'playlist_api' : null;
 let startUseApi = paramChat ? paramChat.startUseApi : false;
 
 
@@ -266,6 +269,8 @@ function botStart(data) {
  startStored = true;
  sendBtn.disabled = true;
  jawaban.style.height = '38px';
+ const chatDelay = Math.floor(Math.random() * 3000) + 5000;
+ console.log(chatDelay)
  cekKata = jawaban.value.toLowerCase();
  jawabanValue = jawaban.value.toLowerCase();
  kalimat = jawabanValue;
@@ -3275,9 +3280,10 @@ if (switchParticle) {
    const keyForUse = listAPI[inUseAPI].keyForUse;
    const keyLength = listAPI[inUseAPI].keyLength;
    const inputValue = jawabanValue.split(' ');
-   const useParams = keyForUse.find((kata) => jawabanValue.includes(kata));
-   const getValue = inputValue.filter((kata) => !keyForUse.includes(kata));
-   const isValid = keyForUse.some((kata) => jawabanValue.includes(kata)) && inputValue.length === keyLength || inUseAPI === 'gender_api';
+   const useParams = keyForUse?.find((kata) => jawabanValue.includes(kata));
+   const getValue = inputValue?.filter((kata) => !keyForUse?.includes(kata));
+   const validationKeyLength = ['gender_api', 'guess_name_api', 'hadits_api', 'apod_api'];
+   const isValid = keyForUse?.some((kata) => jawabanValue.includes(kata)) && inputValue.length === keyLength || validationKeyLength.some((kata) => inUseAPI.includes(kata));
     
    setTimeout(() => {
     barier.style.display = 'none';
@@ -3287,13 +3293,21 @@ if (switchParticle) {
      const sendParams = getApiParams[useParams];
      console.table({ api: inUseAPI,         data: getValue, params: sendParams });
      if (inUseAPI === 'number_api') return getNumberFact(getValue, sendParams);
+     if (inUseAPI === 'playlist_api') {
+      endIndexList = 8;
+      startIndexList = 0;
+      previousStates = [];
+      return functionPlaylist({type: getValue[0], playlist: sendParams});
+     }
+     
      functionApi({
        api: inUseAPI,
        data: getValue,
        params: sendParams,
        useChat: true,
        again: false,
-       inputText: inUseAPI === 'gender_api' ? jawabanValue.replace(useParams, '') : jawabanValue
+       number: nilaiAngka,
+       inputText: validationKeyLength.some((kata) => inUseAPI.includes(kata)) ? jawabanValue.replace(useParams, '').trim() : jawabanValue
       });
       clonedTextPertanyaan.innerHTML = `ok tunggu sebentar yaa ${namaDepan}`;
      } else {
@@ -3361,7 +3375,6 @@ const observer = new MutationObserver((mutationsList, observer) => {
   for (let mutation of mutationsList) {
    if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
     textMengetik.innerHTML = 'Online';
-    //notif.play();
     clearInterval(intervalID);
     
     const storedChat = {};
@@ -3430,6 +3443,11 @@ const observer = new MutationObserver((mutationsList, observer) => {
      //console.table(filteredTable);
      
     }, 500);
+    const lastElementChat = document.getElementById('contentPertanyaan').lastElementChild;
+    const chatPertanyaanExists = document.getElementById('chatPertanyaan');
+    console.log(chatPertanyaanExists.id, lastElementChat.id, startStored)
+    if (chatPertanyaanExists.id === lastElementChat.id && startStored) notif.play();
+    
     setTimeout(() => document.querySelector('.pathchat').scrollIntoView({ behavior: 'smooth', block: 'end' }) , 250);
    }
   }
@@ -3627,8 +3645,5 @@ function rainLove() {
 rainLove();
 
 // putih oren oren, putih ijo biru, putih biru ijo, putih coklat coklat
-
-const spotifyUri = 'https://open.spotify.com/track/2ogKhhoMClkFXek7ZgxAhN?si=DM-cKNjtR1qrBjTNNYTvyA';
  
 //Buka aplikasi Spotify
-//window.location.href = spotifyUri;

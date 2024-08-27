@@ -74,7 +74,6 @@ const songList = [
   "Avicii - Tge Night Cv.Chlara",
   "Glass Animals - Heat Waves",
   "Dean Lewis - Be Alright",
-  "Vierra - Seandainya",
   "Maroon5 - Payphone",
   "Shawn Mendes - Treat You Better",
   "NIKI - Every Summertime",
@@ -200,9 +199,7 @@ const songList = [
   "Denny Caknan - Gak Pernah Cukup",
   "James Arthur - A Thousand Years",
   "Ghea Indrawati - Jiwa Yang Bersedih",
-  "Taylor Swift - Blank Space",
-  "Batas Senja - Nanti Kita Seperti Ini",
-  "Guyon Waton - Dumes",
+  "Taylor Swift - Blank Space","Guyon Waton - Dumes",
   "Hamabou no hana - Hamabou no hana",
   "James Arthur - A Year Ago",
   "Olivia Rodrigo - Traitor",
@@ -234,17 +231,44 @@ const playlistJSON = () => {
  return {
   songs: {
    slow_vibes: {
-    title: 'slow_vibes',
+    title: 'Slow Vibes',
+    pagination: {
+     previous: null,
+     page: null,
+    },
+    link: [
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+    ],
     list: [
-    "Alan Walker - Alone",
-    "Alan Walker - Unity",
-    "Alan Walker - On My Way",
-    "Marsmello - Happier",
-    "iLLenium - Take Away",
-    "Cash Cash - Hero" ]
+     "Alan Walker - Alone",
+     "Alan Walker - Unity",
+     "Alan Walker - On My Way",
+     "Marsmello - Happier",
+     "iLLenium - Take Away",
+     "Cash Cash - Hero",
+     "Nadhif Basalamah - Penjaga Hati",
+     "NIKI - lowkey"
+    ]
    },
-   fast_vibes: {
-    title: 'fast_vibes',
+   speed_vibes: {
+    title: 'Speed Vibes',
+    link: [
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+    ],
     list: [
     "One Republic - Conting Stars",
     "Cash Cash - Take Me Home",
@@ -254,17 +278,62 @@ const playlistJSON = () => {
     "One Direction - Story Of My Live" ]
    },
    sad_vibes: {
-    title: 'sad_vibes',
+    title: 'Sad Vibes',
+    link: [
+     "https://open.spotify.com/track/6Hii26x3qDErVitnGW8QtO?si=V_8D4OeuT5ijeyNRzCHAVg",
+     "https://open.spotify.com/track/2sULdMKWdBdK2ZtntuFvSb?si=pKHTVu2dS8-kGzL0siDz7A",
+     "https://open.spotify.com/track/0BYoWATcndOBcsCfKdTKRx?si=4dgGvcStTP6W_GIDenxPhw",
+     "https://open.spotify.com/track/1b0aDgrG775i4sPQgJGmkU?si=Wnl0-8aXQSWhBItrhGS8NQ",
+     "https://open.spotify.com/track/5MIpcd16T59wFeqAChSYwC?si=lI9YnjtfSQqdRhqoW2hKug",
+     "https://open.spotify.com/track/1mruWrUwAVe2XkksUQiaHK?si=yqkcPwR0SI6_zYwjl2Elkw",
+     "https://open.spotify.com/track/5NmjnghJGJRFg34KGGx8O0?si=ePwbdztrQw24dUMWy80TRA",
+     "https://open.spotify.com/track/0301DpIhbVSPDWceTO8i8I?si=cmIv0BBBSLCUx7YkeA8YvQ",
+     "https://open.spotify.com/track/3iszMeG87RxYujbKieNNRQ?si=k4DIRiZBSwuWRl5XR1vebw",
+     "https://open.spotify.com/track/4sJmv194lQKWjytpaxH1Vj?si=bTmqLCmcS3-ZtEwYUf9aRw",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=P0Xz3UjfTaaKd0OPiDyaaA",
+     "https://open.spotify.com/track/6XsFgTG4dY768oIB4Dmeu0?si=8kTKIWPwQ2KfERZM_pIx9g",
+    ],
     list: [
-    "Andra And Backbone - Sempurna",
-    "Daun Jatuh - Resah Jadi Luka",
-    "Miselia - Akhir Tak bahagia",
-    "HONNE - Location Unknown",
-    "Clean Bandit,Demi Lovato - Solo",
-    "Runtuh - Feby Putri ft.Fiersa" ]
+     "Feby Putri Ft. Fiersa Besari - Runtuh",
+     "Daun Jatuh - Resah Jadi Luka",
+     "Miselia - Akhir Tak bahagia",
+     "Keisya Levronka - Tak Ingin Usai",
+     "Last Child - Duka",
+     "Virgoun ft.Audy - Selamat Tinggal",
+     "Vierra - Seandainya",
+     "Feby Putri - Usik",
+     "Feby Putri - Halu",
+     "Noah - Separuh Aku",
+     "Noah - Separuh Aku",
+     "Noah - Separuh Aku",
+     "Noah - Separuh Aku",
+     "Noah - Separuh Aku",
+     "Noah - Separuh Aku",
+     "Noah - Separuh Aku",
+     "Noah - Separuh Aku",
+     "Noah - Separuh Aku",
+     "Noah - Separuh Aku",
+     "Noah - Separuh Aku",
+     "Noah - Separuh Aku",
+     "Noah - Separuh Aku",
+     "Noah - Separuh Aku",
+     "Noah - Separuh Aku",
+     "Nadhif Basalamah - Penjaga Hati",
+     "Ghea Indrawati - Jiwa Yang Bersedih"
+    ]
    },
    happy_vibes: {
-    title: 'happy_vibes',
+    title: 'Happy Vibes',
+    link: [
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+    ],
     list: [
     "Billie Elish Feat Khalid - Lovely",
     "Nidji - Laskar Pelangi [Rawi Beat]",
@@ -274,7 +343,17 @@ const playlistJSON = () => {
     "Katy Perry - Unconditional"]
    },
    chill_vibes: {
-    title: 'chill_vibes',
+    title: 'Chill Vibes',
+    link: [
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+    ],
     list: [
     "Billie Elish Feat Khalid - Lovely",
     "Nidji - Laskar Pelangi [Rawi Beat]",
@@ -284,7 +363,17 @@ const playlistJSON = () => {
     "Katy Perry - Unconditional" ]
    },
    study_vibes: {
-    title: 'study_vibes',
+    title: 'Study Vibes',
+    link: [
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+    ],
     list: [
     "Billie Elish Feat Khalid - Lovely",
     "Nidji - Laskar Pelangi [Rawi Beat]",
@@ -294,7 +383,17 @@ const playlistJSON = () => {
     "Katy Perry - Unconditional" ]
    },
    productive_vibes: {
-    title: 'productive_vibes',
+    title: 'Productive Vibes',
+    link: [
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+     "https://open.spotify.com/track/7F4tV8SiUy6itZTdAzdafO?si=2H3Mqhh2TE-la2HDuRUszg",
+    ],
     list: [
     "Billie Elish Feat Khalid - Lovely",
     "Nidji - Laskar Pelangi [Rawi Beat]",
@@ -316,16 +415,5 @@ function getPlaylist(json) {
  const getJson = playlistJSON().songs;
  const getPlaylist = getJson[json];
  
- const { list, title } = getPlaylist;
- 
- console.log({ list: list, title: title })
+ return { list, title } = getPlaylist;
 }
-
-//getPlaylist('productive_vibeas')
-
-function generateRandomSong(songs) {
- const getRandom = Math.floor(Math.random() * songs.length);
- console.log(songs[getRandom]);
-}
-
-//generateRandomSong(songList)

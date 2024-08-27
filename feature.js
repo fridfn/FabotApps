@@ -341,8 +341,35 @@ function handlingAction(params) {
    });
    btnBackPersonlity.onclick = () => { handlingAction({ action: null, event: 'options' }) };
   break;
+  case 'switch-notif':
+   console.log('switch notif')
+  break;
   default:
  }
+}
+
+function handleSelectChange(event) {
+ const userJSON = JSON.parse(localStorage.getItem('userJSON'));
+ const setType = event.target.id;
+ const getSelect = event.target.value;
+ userJSON.user.notification = event.target.value;
+ 
+ switch(setType) {
+  case 'notif':
+   const audio = document.getElementById('audio-player');
+   const source = audio.querySelector('source');
+   
+   source.src = `assets/sounds/${getSelect}.mp3`;
+   
+   notificationPopup({ icon: 'love', text: `mengubah suara notifikasi ke ${getSelect}`});
+   
+   audio.load();
+   setTimeout(500, audio.play());
+  break;
+  default:
+ }
+ 
+ localStorage.setItem('userJSON', JSON.stringify(userJSON));
 }
 
 let targetPopup = document.querySelector('.container-my-popup');
@@ -354,7 +381,7 @@ const observe = new MutationObserver((mutationsList, observe) => {
    setTimeout(() => {
     lastClonedMyPopup.style.opacity = '0';
     setTimeout(() => containerPopup.removeChild(lastClonedMyPopup), 500);
-   }, 3500);
+   }, 4100);
   }
  }
 });
@@ -578,13 +605,14 @@ document.addEventListener('DOMContentLoaded', rotateWords);
 window.addEventListener('load', () => {
   const getUser = JSON.parse(localStorage.getItem('userJSON'));
   const isLogin = (getUser && getUser.flagLogin.isLogin === true);
-  const loaderTime = (getUser && isLogin) ? 50000000 : 5000000 ;
- setInterval(() => {
-   notificationPopup({ icon: 'love', text: `development phase extended until 27 August 2024. sorry😸` });
-  }, 12000)
+  const loaderTime = (getUser && isLogin) ? 50000000 : 50000000 ;
+setInterval(() => {
+ notificationPopup({ icon: 'love', text: `sorry fabot websites is under development extended until september 6th 2024, sorry😸😺😇` });
+}, 10000);
+ 
  setTimeout(() => {
  loadingAnimation({
-   active: containerHome,
+   active: pageChat,
    remove: defaultElem,
    conditional: defaultElem,
    isRemove: defaultElem,
@@ -598,7 +626,15 @@ window.addEventListener('load', () => {
   
   document.querySelector('#signup-text').innerHTML = isLogin ? `<button class="btn-login"><span><ion-icon name="person"></ion-icon>${namaDepan}</span></button>` : `<button class="btn-login"><span><ion-icon name="person"></ion-icon>SIGN UP</span></button>`;
   
+  const savedNotif = JSON.parse(localStorage.getItem('userJSON'));
+  const useNotif = document.getElementById('notif');
+  savedNotif ? useNotif.value = savedNotif.user.notification : 'bubble';
+  const audio = document.getElementById('audio-player');
+  const source = audio.querySelector('source');
   
+  audio.load();
+  firstInitializationChat();
+  source.src = `assets/sounds/${savedNotif.user.notification}.mp3`;
   loaders.style.display = "none";
   //notificationPopup({ icon: 'love', text: `selamat ${sayTime(isLogin)} ${fullName}` });
  }, loaderTime);
@@ -900,15 +936,19 @@ const dataAPI = () => {
      command: 'translateapi',
      apiInfo: 'menerjemahkan text ke dalam bahasa tertentu',
      chat: 'kamu sekarang menggunakan cats_api untuk memberikan foto kucing random berikut adalah contoh command nya :<br><br>1. "gender"<br><br>untuk menggunakan cukup ketikan contoh kata diatas dan nama seperti ini " gender burhan "',
-     keyForUse: ["trivia", "math", "year", "date"],
+     keyForUse: ["indonesia", "inggris", "sundajawa", "jawasunda", "indojawa", "indosunda", "sundaindo", "jawaindo"],
      keyLength: 2,
      typeResponse: 'json',
      apiUrl: 'https://translate.googleapis.com/translate_a/single?client=gtx&sl',
      apiParams: {
       indonesia: 'en - id',
-      two: 'jv - sun',
-      third: 'sun - jv',
-      four: 'id - en'
+      jawasunda: 'jv - sun',
+      sundajawa: 'sun - jv',
+      inggris: 'id - en',
+      indojawa: 'id - jv',
+      indosunda: 'jv - id',
+      sundaindo: 'sun - id',
+      jawaindo: 'jv - id'
      },
      configFunction: {
       translate: false,
@@ -944,19 +984,26 @@ const dataAPI = () => {
      apiToken: null,
      command: 'haditsapi',
      apiInfo: 'memberikan hadits riwayat muslim',
-     chat: 'kamu sekarang menggunakan hadits_api untuk memberikan hadits riwayat muslim berdasarkan angka yang kamu ketikan berikut adalah contoh command nya :<br><br>1. "muslim"<br><br>untuk menggunakan cukup ketikan contoh command diatas dan nama seperti ini " muslim 77 "',
-     keyForUse: ["muslim", "riwayat"],
+     chat: 'kamu sekarang menggunakan hadits_api untuk memberikan hadits riwayat yang kamu inginkan berdasarkan angka yang kamu ketikan berikut adalah contoh command nya :<br><br>1. "muslim"<br>2. "bukhari"<br>3. "tirmidzi"<br>4. "nasai"<br>5. "abu-daud"<br>6. "ibnu-majah"<br>7. "ahmad"<br>8. "darimi"<br>9. "malik"<br><br>untuk menggunakan cukup ketikan contoh nama hadits diatas dan nomor seperti ini " muslim 77 "<br><br>NOTE : gunakan nama hadits seperti contoh diatas agar apa yang kamu ketikan valid',
+     keyForUse: ["muslim", "bukhari", "tirmidzi", "nasai", "abu-daud", "ibnu-majah", "ahmad", "darimi", "malik"],
      keyLength: 2,
      typeResponse: 'json',
-     apiUrl: 'https://api.hadith.gading.dev/books/muslim',
+     apiUrl: 'https://api.hadith.gading.dev/books',
      apiParams: {
-      muslim: '["data"]',
-      riwayat: '["data"]'
+      "muslim": '["data"]',
+      "bukhari": '["data"]',
+      "tirmidzi": '["data"]',
+      "nasai": '["data"]',
+      "abu-daud": '["data"]',
+      "ibnu-majah": '["data"]',
+      "ahmad": '["data"]',
+      "darimi": '["data"]',
+      "malik": '["data"]'
      },
      configFunction: {
       isConfigUrl: true,
       bracketConfig: '["data"]["data"]',
-      getDestruction: 'name, contents',
+      getDestruction: 'name, contents, available',
       useAnotherFunction: false
      },
      useCommand: functionList
@@ -965,23 +1012,31 @@ const dataAPI = () => {
      apiToken: null,
      command: 'playlistapi',
      apiInfo: 'playlist lagu dan random lagu sesuai mood',
-     chat: 'kamu sekarang menggunakan playlist_api untuk memberikan playlist playlist lagu sesuai pilihan kamu berikut adalah contoh command nya :<br><br>1. "slow" slow vibes playlist<br>2. "fast" fast vibes playlist<br>3. "sad" sad vibes playlist<br>4. "happy" happy vibes playlist<br>5. "chill" chill vibes playlist<br>6. "study" study vibes playlist<br>1. "productive" productive vibes playlist<br><br>untuk menggunakan cukup ketikan contoh command diatas  seperti ini " playlist study "',
-     keyForUse: ["plalist"],
+     chat: 'kamu sekarang menggunakan playlist_api untuk memberikan playlist playlist lagu sesuai pilihan kamu berikut adalah contoh playlist command nya :<br><br>1. slow<br>2. speed<br>3. sad <br>4. happy<br>5. chill<br>6. study <br>1. productive <br><br>untuk menggunakan cukup ketikan contoh command diatas  seperti ini "random productive" atau "list happy"',
+     keyForUse: ["slow", "speed", 'sad', "happy", "chill", "study", "productive"],
      keyLength: 2,
+     apiParams: {
+      sad: 'sad_vibes',
+      slow: 'slow_vibes',
+      happy: 'happy_vibes',
+      chill: 'chill_vibes',
+      study: 'study_vibes',
+      speed: 'speed_vibes',
+      productive: 'productive_vibes'
+     },
      useCommand: functionList
     },
     apod_api: {
-     apiToken: null,
+     apiToken: 'RxWr06sg9Xh1ejYt4ZpNjRYKnHD97iTabRGD8jmL',
      command: 'apodapi',
      apiInfo: 'memberikan foto galaksi di tahun kelahiran kamu',
-     chat: 'lawak',
+     chat: 'kamu sekarang menggunakan apod_api untuk memberikan gambar gambar menarik sesuai tanggal yang kamu kirimkan berikut adalah contoh command nya :<br><br>1. 2006-10-29<br><br>Untuk menggunakan cukup ketikan seperti contoh diatas dengan format tahun-bulan-tanggal<br><br>NOTE : tolong jangan lupa ketikan " - " di setiap angka nya',
      typeResponse: 'json',
-     apiUrl: 'https://api.nasa.gov/planetary/apod?api_key=RxWr06sg9Xh1ejYt4ZpNjRYKnHD97iTabRGD8jmL&date',
+     apiUrl: 'https://api.nasa.gov/planetary/apod?api_key',
+     keyForUse: ["galaxy"],
+     keyLength: 2,
      apiParams: {
-      one: '',
-      two: '',
-      third: '',
-      four: ''
+      galaxy: ''
      },
      configFunction: {
       translate: true,
@@ -996,8 +1051,8 @@ const dataAPI = () => {
   }
 }
 
-const storedApi_command = [];
 const storedApi_object = [];
+const storedApi_command = [];
 const getApiJSON = dataAPI();
 const getApiList = getApiJSON.list;
 
@@ -1575,7 +1630,7 @@ const themeJSON = () => {
   }
  }
  
-const defaultTheme = themeJSON().type.themeDark[3].keyColor;
+const defaultTheme = themeJSON().type.themeDark[1].keyColor;
 
  const outerLocalTheme = {
   theme: '',
