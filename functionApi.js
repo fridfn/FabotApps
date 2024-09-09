@@ -477,5 +477,3 @@ function codeToCountry(code) {
 
   return negaraDict[code.toUpperCase()] || "Kode negara tidak ditemukan";
 }
-let userAgent = navigator.userAgent;
-console.log(userAgent);

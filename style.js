@@ -621,7 +621,7 @@ const nextKoleksi = () => {
  initNext++
  deskripsiKoleksi1.style.opacity = "0";
  deskripsiKoleksi2.style.opacity = "0";
- let btnKoleksi = document.querySelector('.btn-koleksi');
+ let btnKoleksi = document.querySelector('.my-koleksi .cta-koleksi .btn-koleksi');
 
  if (initNext === 1) {
   setTimeout(() => {
@@ -630,7 +630,8 @@ const nextKoleksi = () => {
    deskripsiKoleksi2.innerHTML = "This website was created to fill my time when I'm bored playing games and want to try learning new things, this website was created using HTML, CSS and a little basic logic from javascript and this website was created at the end of October 2022";
    btnKoleksi.addEventListener('click', function () {
     window.location.href = "https://exfavorite-website-development.vercel.app/";
-   });
+    });
+    
 
    deskripsiKoleksi2.style.opacity = "1";
    deskripsiKoleksi1.style.opacity = "1";
@@ -660,13 +661,24 @@ const nextKoleksi = () => {
    deskripsiKoleksi1.style.opacity = "1";
   }, 300);
  } else if (initNext === 4) {
-
   setTimeout(() => {
    titleKoleksi.innerHTML = "Fandom Website";
    deskripsiKoleksi1.innerHTML = "This website is my version of the Vtuber fandom website which was created to learn to make interesting User Interface (UI)";
    deskripsiKoleksi2.innerHTML = "This Vtuber website fandom was created to learn how to make a user interface (UI) display with my imagination. This website is made with HTML, CSS and a little logic from vanilla javascript";
    btnKoleksi.addEventListener('click', function () {
     window.location.href = "https://exfandom.vercel.app/";
+   });
+
+   deskripsiKoleksi2.style.opacity = "1";
+   deskripsiKoleksi1.style.opacity = "1";
+  }, 300);
+ } else if (initNext === 5) {
+  setTimeout(() => {
+   titleKoleksi.innerHTML = "Cartluxe Shop";
+   deskripsiKoleksi1.innerHTML = "This is a website that was created to implement a Figma design into a web display.";
+   deskripsiKoleksi2.innerHTML = "FYI, this website is my first client website who asked me to do his work. This website is made with HTML, CSS and a little logic from vanilla javascript";
+   btnKoleksi.addEventListener('click', function () {
+    window.location.href = "https://clothing-shop-website.vercel.app/";
    });
 
    deskripsiKoleksi2.style.opacity = "1";
@@ -692,6 +704,7 @@ const nextKoleksi = () => {
 function undoKoleksi() {
  deskripsiKoleksi2.style.opacity = "0";
  deskripsiKoleksi1.style.opacity = "0";
+ let btnKoleksi = document.querySelector('.my-koleksi .cta-koleksi .btn-koleksi');
 
  if (initNext === 1) {
   setTimeout(() => {
@@ -735,9 +748,9 @@ function undoKoleksi() {
  } else if (initNext === 4) {
   setTimeout(() => {
    initNext = 3;
-   titleKoleksi.innerHTML = "Fake Shorts Website";
-   deskripsiKoleksi1.innerHTML = "this is a fake short video website similar to youtube short video version";
-   deskripsiKoleksi2.innerHTML = "fake shorts ini adalah website yang sangat saya sukai pada 2022. fake shorts ini di buat pada tanggal 10 Desember 2022 dan menggunakan HTML, CSS murni";
+   titleKoleksi.innerHTML = "Cartluxe Shop";
+   deskripsiKoleksi1.innerHTML = "This is a website that was created to implement a Figma design into a web display.";
+   deskripsiKoleksi2.innerHTML = "FYI, this website is my first client website who asked me to do his work. This website is made with HTML, CSS and a little logic from vanilla javascript";
    btnKoleksi.addEventListener('click', function () {
     window.location.href = "https://shorts-web.vercel.app/";
    });
@@ -745,9 +758,22 @@ function undoKoleksi() {
    deskripsiKoleksi2.style.opacity = "1";
    deskripsiKoleksi1.style.opacity = "1";
   }, 300);
- } else {
+ } else if (initNext === 5) {
   setTimeout(() => {
    initNext = 4;
+   titleKoleksi.innerHTML = "Fake Shorts Website";
+   deskripsiKoleksi1.innerHTML = "this is a fake short video website similar to youtube short video version";
+   deskripsiKoleksi2.innerHTML = "fake shorts ini adalah website yang sangat saya sukai pada 2022. fake shorts ini di buat pada tanggal 10 Desember 2022 dan menggunakan HTML, CSS murni";
+   btnKoleksi.addEventListener('click', function () {
+    window.location.href = "https://clothing-shop-website.vercel.app/";
+   });
+
+   deskripsiKoleksi2.style.opacity = "1";
+   deskripsiKoleksi1.style.opacity = "1";
+  }, 300);
+ } else {
+  setTimeout(() => {
+   initNext = 5;
    titleKoleksi.innerHTML = "Fandom Website";
    deskripsiKoleksi1.innerHTML = "This website is my version of the Vtuber fandom website which was created to learn to make interesting (UI)";
    deskripsiKoleksi2.innerHTML = "This Vtuber website fandom was created to learn how to make a user interface (UI) display with my imagination. This website is made with HTML, CSS and a little logic from vanilla javascript";
@@ -1190,23 +1216,3 @@ function fullScreen() {
     }
   }
 }
-
-// Mendapatkan user agent string
-// var userAgent = navigator.userAgent;
-// var userDevice = navigator.platform;
-// var userSystem = navigator.vendor;
-
-// Menampilkan user agent di konsol
-// console.log(userAgent);
-// console.log(userDevice);
-// console.log(userSystem);
-// console.log(navigator);
-// 
-// window.onload = function() {
-//   var deviceInfo = "Device: " + WURFL.complete_device_name + "<br>" +
-//   "Brand: " + WURFL.brand_name + "<br>" +
-//   "Model: " + WURFL.model_name + "<br>" +
-//   "OS: " + WURFL.os + " " + WURFL.os_version + "<br>" +
-//   "Browser: " + WURFL.browser + " " + WURFL.browser_version;
-// console.log(deviceInfo)
-// };

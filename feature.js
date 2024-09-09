@@ -631,7 +631,7 @@ document.getElementById('open-chat').addEventListener('click', goFullscreen);
 window.addEventListener('load', () => {
   const getUser = JSON.parse(localStorage.getItem('userJSON'));
   const isLogin = (getUser && getUser.flagLogin.isLogin === true);
-  const loaderTime = (getUser && isLogin) ? 80 : 24000 ;
+  const loaderTime = (getUser && isLogin) ? 7200 : 24000 ;
   const button = document.getElementById('open-chat');
  simulateClick(button);
   
