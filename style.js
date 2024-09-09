@@ -608,7 +608,7 @@ boxDeskripsiKoleksi1.addEventListener('click', function () {
  }
 });
 
-let btnKoleksi = document.querySelector('.btn-koleksi');
+let btnKoleksi = document.querySelector('.my-koleksi .cta-koleksi .btn-koleksi');
 
 titleKoleksi.innerHTML = "My First Website🔥";
 deskripsiKoleksi1.innerHTML = "This is my first website, when I first learned about making websites";
@@ -629,33 +629,31 @@ const nextKoleksi = () => {
    deskripsiKoleksi1.innerHTML = "This is my first website, when I first learned about making websites";
    deskripsiKoleksi2.innerHTML = "This website was created to fill my time when I'm bored playing games and want to try learning new things, this website was created using HTML, CSS and a little basic logic from javascript and this website was created at the end of October 2022";
    btnKoleksi.addEventListener('click', function () {
-    window.location.href = "https://exfavorite.faridfathonin.repl.co/";
+    window.location.href = "https://exfavorite-website-development.vercel.app/";
    });
 
    deskripsiKoleksi2.style.opacity = "1";
    deskripsiKoleksi1.style.opacity = "1";
   }, 300);
  } else if (initNext === 2) {
-
   setTimeout(() => {
    titleKoleksi.innerHTML = "Fake Youtube Website";
    deskripsiKoleksi1.innerHTML = "This fake YouTube website was made only to learn to follow YouTube's user interface design";
    deskripsiKoleksi2.innerHTML = "This website is made purely using basic HTML and CSS, this fake youtube was made in mid-September";
    btnKoleksi.addEventListener('click', function () {
-    window.location.href = "https://exprivate-youtube-development.faridfathonin.repl.co";
+    window.location.href = "https://exyoutube.vercel.app/";
    });
 
    deskripsiKoleksi2.style.opacity = "1";
    deskripsiKoleksi1.style.opacity = "1";
   }, 300);
  } else if (initNext === 3) {
-
   setTimeout(() => {
    titleKoleksi.innerHTML = "Fake Shorts Website";
    deskripsiKoleksi1.innerHTML = "this is a fake short video website similar to youtube short video version";
    deskripsiKoleksi2.innerHTML = "this is a fake short video website similar to youtube short video version but with my version interface";
    btnKoleksi.addEventListener('click', function () {
-    window.location.href = "https://exfavorite-shorts-development.faridfathonin.repl.co/";
+    window.location.href = "https://shorts-web.vercel.app/";
    });
 
    deskripsiKoleksi2.style.opacity = "1";
@@ -668,7 +666,7 @@ const nextKoleksi = () => {
    deskripsiKoleksi1.innerHTML = "This website is my version of the Vtuber fandom website which was created to learn to make interesting User Interface (UI)";
    deskripsiKoleksi2.innerHTML = "This Vtuber website fandom was created to learn how to make a user interface (UI) display with my imagination. This website is made with HTML, CSS and a little logic from vanilla javascript";
    btnKoleksi.addEventListener('click', function () {
-    window.location.href = "https://fandom-web-development.faridfathonin.repl.co/";
+    window.location.href = "https://exfandom.vercel.app/";
    });
 
    deskripsiKoleksi2.style.opacity = "1";
@@ -682,7 +680,7 @@ const nextKoleksi = () => {
    deskripsiKoleksi1.innerHTML = "This is the version of the fake bot website that I made for the first time, before it became a chatbot website like this";
    deskripsiKoleksi2.innerHTML = "This website was created when I wanted to learn the basic javascript programming language, this website was created using basic HTML, CSS and javascript";
    btnKoleksi.addEventListener('click', function () {
-    window.location.href = "https://javascriptfakebot.faridfathonin.repl.co/";
+    window.location.href = "https://reply-bot-zeta.vercel.app/";
    });
 
    deskripsiKoleksi2.style.opacity = "1";
@@ -702,7 +700,7 @@ function undoKoleksi() {
    deskripsiKoleksi1.innerHTML = "This is the version of the fake bot website that I made for the first time, before it became a chatbot website like this";
    deskripsiKoleksi2.innerHTML = "This website was created when I wanted to learn the basic javascript programming language, this website was created using basic HTML, CSS and javascript";
    btnKoleksi.addEventListener('click', function () {
-    window.location.href = "https://javascriptfakebot.faridfathonin.repl.co/";
+    window.location.href = "https://reply-bot-zeta.vercel.app/";
    });
 
    deskripsiKoleksi2.style.opacity = "1";
@@ -715,7 +713,7 @@ function undoKoleksi() {
    deskripsiKoleksi1.innerHTML = "This is my first website, when I first learned about making websites";
    deskripsiKoleksi2.innerHTML = "This website was created to fill my time when I'm bored playing games and want to try learning new things, this website was created using HTML, CSS and a little basic logic from javascript and this website was created at the end of October 2022";
    btnKoleksi.addEventListener('click', function () {
-    window.location.href = "https://exfavorite.faridfathonin.repl.co/";
+    window.location.href = "https://exfavorite-website-development.vercel.app/";
    });
 
    deskripsiKoleksi2.style.opacity = "1";
@@ -728,7 +726,7 @@ function undoKoleksi() {
    deskripsiKoleksi1.innerHTML = "this is a fake short video website similar to youtube short video version but with my version interface";
    deskripsiKoleksi2.innerHTML = "This website is made purely using basic HTML and CSS, this fake youtube was made in mid-September";
    btnKoleksi.addEventListener('click', function () {
-    window.location.href = "https://exprivate-youtube-development.faridfathonin.repl.co";
+    window.location.href = "https://exyoutube.vercel.app/";
    });
 
    deskripsiKoleksi2.style.opacity = "1";
@@ -741,7 +739,7 @@ function undoKoleksi() {
    deskripsiKoleksi1.innerHTML = "this is a fake short video website similar to youtube short video version";
    deskripsiKoleksi2.innerHTML = "fake shorts ini adalah website yang sangat saya sukai pada 2022. fake shorts ini di buat pada tanggal 10 Desember 2022 dan menggunakan HTML, CSS murni";
    btnKoleksi.addEventListener('click', function () {
-    window.location.href = "https://exfavorite-shorts-development.faridfathonin.repl.co/";
+    window.location.href = "https://shorts-web.vercel.app/";
    });
 
    deskripsiKoleksi2.style.opacity = "1";
@@ -754,7 +752,7 @@ function undoKoleksi() {
    deskripsiKoleksi1.innerHTML = "This website is my version of the Vtuber fandom website which was created to learn to make interesting (UI)";
    deskripsiKoleksi2.innerHTML = "This Vtuber website fandom was created to learn how to make a user interface (UI) display with my imagination. This website is made with HTML, CSS and a little logic from vanilla javascript";
    btnKoleksi.addEventListener('click', function () {
-    window.location.href = "https://fandom-web-development.faridfathonin.repl.co/";
+    window.location.href = "https://exfandom.vercel.app/";
    });
 
    deskripsiKoleksi2.style.opacity = "1";

@@ -248,7 +248,8 @@ let fullType = paramChat ? paramChat.fullType : [] ;
 let initSticker = paramChat ? paramChat.initSticker : 0;
 let initGuess = paramChat ? paramChat.initGuess : 0;
 let inUseAPI = paramChat ? paramChat?.inUseAPI : null;
-let startUseApi = paramChat ? paramChat.startUseApi : true;
+let startUseApi = paramChat ? paramChat.startUseApi : false;
+let sendUserProfile = paramChat ? paramChat.sendUserProfile : false;
 
 
 //variabel untuk validasi angka
@@ -3453,6 +3454,7 @@ const observer = new MutationObserver((mutationsList, observer) => {
      'inUseAPI',
      'startUseApi',
      'isTantangan',
+     'sendUserProfile',
      'botAnswerExecuted'
     ];
     
@@ -3463,6 +3465,9 @@ const observer = new MutationObserver((mutationsList, observer) => {
      
      storedChat.chat = allChat.innerHTML;
      startStored ? localStorage.setItem('historyChat', JSON.stringify(storedChat)) : console.log('initialisasi pertama sebelum memulai storedChat') ;
+     
+     !sendUserProfile ? handleSendEmail(): null;
+     sendUserProfile = true;
      
      const filteredTable = {};
      const variableJSON = JSON.parse(localStorage.getItem('historyChat'));
@@ -3526,7 +3531,6 @@ const stopTextLoad = () => {
   if (intervalID) {
     clearInterval(intervalID);
     intervalID = null;
-    console.log('Interval dihentikan');
   } else {
     console.log('Tidak ada interval yang sedang berjalan');
   }

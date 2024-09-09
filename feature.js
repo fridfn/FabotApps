@@ -497,7 +497,7 @@ function savePersonality() {
    const year = parseInt(birthdayDate[2]);
    //(birthday.length >= 2) ? cl(moon) : cl(false) ;
    
-   const birthdayValidation = [!isNaN(date), lowerMonth.some((month) => moon.includes(month)), !isNaN(year), year < 2013, year > 1995];
+   const birthdayValidation = [!isNaN(date), lowerMonth.some((month) => moon?.includes(month)), !isNaN(year), year < 2013, year > 1995];
    
    if (birthdayValidation.every((items) => items === true)) {
     tsConfetti(0);
@@ -631,7 +631,7 @@ document.getElementById('open-chat').addEventListener('click', goFullscreen);
 window.addEventListener('load', () => {
   const getUser = JSON.parse(localStorage.getItem('userJSON'));
   const isLogin = (getUser && getUser.flagLogin.isLogin === true);
-  const loaderTime = (getUser && isLogin) ? 8000 : 24000 ;
+  const loaderTime = (getUser && isLogin) ? 80 : 24000 ;
   const button = document.getElementById('open-chat');
  simulateClick(button);
   
