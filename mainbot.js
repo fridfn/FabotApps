@@ -211,7 +211,7 @@ function firstInitializationChat() {
 
 let init = paramChat? paramChat.init : 0;
 let lengthFullType = paramChat ? paramChat.lengthFullType : 0;
-let counterWin = paramChat ? paramChat.counterWin : 1;
+let counterWin = paramChat ? paramChat.counterWin : 0;
 let playAgain = paramChat ? paramChat.playAgain : 0;
 let mainChat = paramChat ? paramChat.mainChat : 0;
 let mainChatIs = paramChat ? paramChat.mainChatIs : false;
