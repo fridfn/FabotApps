@@ -997,9 +997,9 @@ function handleFooter(params) {
  window.scrollTo({ top: 0, behavior: 'smooth' });
 }*/
 
-let genderCwo = [`laki laki`, `laki-laki`, `cowok`, `cowo`, `cwo`, `cwok`, `jantan`, `lakik`, `kakek`, `om`, `bapa`, `ayah`];
+let genderCwo = [`laki laki`, `laki-laki`, `cowok`, `cowo`, `cwo`, `cwok`, `jantan`, `laki`, `kakek`, `om`, `bapa`, `ayah`];
 
-let genderCwe = [`cewe`, `cwe`, `cewek`, `cwek`, `perempuan`, `wanita`, `betina`, `woman`, `ibu ibu`, `ibu`, `nenek`, `emak`, `mama`, `tante`];
+let genderCwe = [`cewe`, `cwe`, `cewek`, `perempuan`, `wanita`, `betina`, `woman`, `ibu ibu`, `ibu`, `nenek`, `emak`, `mama`, `tante`];
 
 let genderIs;
 let genderSay;
@@ -1022,8 +1022,8 @@ let genderValidation = () => {
    img[1].src = 'https://iili.io/JHPVwKv.md.webp';
   } else {
    genderIs = "cowo/cewe";
-   img[0].src = 'assets/icon/at.webp';
-   img[1].src = 'assets/icon/at.webp';
+   img[0].src = 'assets/icon/boticon.webp';
+   img[1].src = 'assets/icon/boticon.webp';
    genderSay = 'ganteng/cantik';
   }
  }

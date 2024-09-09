@@ -561,7 +561,7 @@ header .imgboxs img {
  overflow: hidden;
  border-radius: 5px;
  border: 1.5px solid var(--primaryBorderColor);
- background: var(--primaryCards);
+ background: var(--primaryTextColor);
 }
 
 .img-user {
@@ -2181,6 +2181,10 @@ textarea:focus {
  height: auto;
  flex-wrap: wrap;
  justify-content: space-between;
+}
+
+.items-btn-chat.random {
+ width: 100%;
 }
 
 .items-btn-chat {

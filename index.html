@@ -2,10 +2,12 @@
 <html translate="no">
  <head>
   <meta charset="utf-8"/>
-  <link rel="icon" type="image/png" sizes="64x64" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/icon/favicon-32x32.png">
+  <link rel="manifest" href='manifest.json'>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
   <title>Chatting Bot</title>
   <meta name="author" content="Farid Fathoni N"/>
+  <meta name='theme-color' content='#000000'/>
   <link rel="stylesheet" href="style.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -69,7 +71,7 @@
      <div class="box-opsi" onclick="toggleLogin('closeCards_chat')" id="close-cards" style="position: absolute; top: 20px; left: 20px;">
       <ion-icon class="log-out" name="close" style="font-size: 25px;"></ion-icon>
      </div>
-     <p class ="article-text">do labore quis ipsum ea consequat excepteur pariatur ex ad labore mollit culpa aute esse laborum ullamco Lorem tempor aliquip ullamco Lorem reprehenderit pariatur ullamco</p>
+     <p class ="article-text">Ini adalah kartu tanda pengenal kamu di website chatbot Fabot, kartu ini sangat penting agar developer dan Fabot mengenal kamu, dan jangan lupa untuk mengikuti akun sosial media developer diatas.</p>
     </div>
    </div>
    <div class="container-cards-notif">
@@ -119,9 +121,9 @@
      <div class="arrow-button">
       <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="togglePage('guide')" ></ion-icon>
      </div>
-     <ion-icon name="moon" class="main-icon" id="main-icon" onclick="switchTheme()"></ion-icon>
+     <ion-icon name="moon" class="main-icon" id="main-icon" onclick="notificationPopup({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
      <ion-icon name="mail-sharp" class="main-icon"  class="main-icon" id="main-icon" onclick="togglePage('emails')"></ion-icon>
-     <ion-icon name="qr-code" class="main-icon" class="main-icon" id="main-icon" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
+     <ion-icon name="qr-code" class="main-icon" class="main-icon" id="main-icon" onclick="notificationPopup({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
     </div>
     <div class="profileSection" id="profileSection">
      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -267,9 +269,9 @@
      <div class="arrow-button">
       <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="togglePage('developer')" ></ion-icon>
      </div>
-     <ion-icon name="moon" class="main-icon" class="main-icon" id="main-icon"></ion-icon>
-     <ion-icon name="share-social" class="main-icon" class="main-icon" id="main-icon" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
-     <ion-icon name="qr-code" class="main-icon" class="main-icon" id="main-icon" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
+     <ion-icon name="moon" class="main-icon" class="main-icon" id="main-icon" onclick="notificationPopup({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
+     <ion-icon name="share-social" class="main-icon" class="main-icon" id="main-icon" onclick="notificationPopup({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
+     <ion-icon name="qr-code" class="main-icon" class="main-icon" id="main-icon" onclick="notificationPopup({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
     </div>
     <div class="profileSection" id="profileSection">
      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -511,7 +513,7 @@
         <p class="txtOpsi" onclick="handlingAction({ action: null, event: 'options' })"><ion-icon name="settings-sharp" id="ico"></ion-icon>&nbsp;Pengaturan</ion-icon>
         </div>
         <div class="boxOpsi">
-         <p class="txtOpsi" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"><ion-icon name="share-social" id="ico"></ion-icon>&nbsp;Bagikan</p>
+         <p class="txtOpsi" onclick="notificationPopup({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"><ion-icon name="share-social" id="ico"></ion-icon>&nbsp;Bagikan</p>
         </div>
         <div class="boxOpsi" id="for-set-notif">
          <label for='notif' class="txtOpsi" onclick="handlingAction({ action: null, event: 'switch-notif' })"><ion-icon name="musical-notes" id="ico"></ion-icon>&nbsp;Suara Notif</ion-icon></label>
@@ -580,7 +582,7 @@
           <button class="items-btn-chat" id="undoList">
            <p class="description_text">⬅️</p>
           </button>
-          <button class="items-btn-chat">
+          <button class="items-btn-chat" onclick="deleteListChat()" id="deleteList">
            <p class="description_text">❌</p>
           </button>
           <button class="items-btn-chat" id="nextList">
@@ -616,7 +618,7 @@
         <div class="wrapper-icon-avatar">
          <ion-icon name="heart" class="main-icon"></ion-icon>
          <ion-icon name="heart" class="main-icon"></ion-icon>
-         <ion-icon name="heart" class="main-icon" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
+         <ion-icon name="heart" class="main-icon" onclick="notificationPopup({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
         </div>
        </div>
        <div class="wrapper-input-personality">
@@ -731,9 +733,9 @@
      <div class="arrow-button">
       <ion-icon name="arrow-back-sharp" class="arrow-menu" onclick="togglePage('profile')" ></ion-icon>
      </div>
-     <ion-icon name="moon" class="main-icon" class="main-icon" id="main-icon" onclick="switchTheme()"></ion-icon>
+     <ion-icon name="moon" class="main-icon" class="main-icon" id="main-icon" onclick="notificationPopup({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
      <ion-icon name="pencil" class="main-icon" class="main-icon" id="main-icon" onclick="togglePage('personal')"></ion-icon>
-     <ion-icon name="qr-code" class="main-icon" class="main-icon" id="main-icon" onclick="notification({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
+     <ion-icon name="qr-code" class="main-icon" class="main-icon" id="main-icon" onclick="notificationPopup({ icon: 'alert', text: 'maaf fitur ini masih dalam tahap pengerjaan !' })"></ion-icon>
     </div>
     <div class="profileSection" id="profileSection">
      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -922,7 +924,7 @@
              <h1 class="title-header-home" style="font-size: 15px;" >welcome to my <span style="color: var(--secondaryTextColor);">chatbot </span>web <span style="color: var(--secondaryTextColor);">development</span> journey!</h1>
              <p class="article-text">website ini adalah sebuah web berbasis aplikasi chatbot, jadi website ini saya kembangkan untuk tujuan belajar membangun sebuah web yang memiliki banyak fitur dan interaksi pada bot sederhana yang saya kembangkan.</p>
             </div>
-            <div class="box-btn-article">
+            <div class="box-btn-article" id="open-chat">
              <button class="cta-article" onclick="toggleStart('start')"><p>START CHAT</p><ion-icon name="arrow-forward"></ion-icon></button>
              <button class="cta-article" onclick="togglePage('guideHome')"><p>GUIDE</p><ion-icon name="bulb"></ion-icon></ion-icon>
             </div>

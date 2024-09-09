@@ -223,7 +223,6 @@ const clonedMyPopup = myPopup.cloneNode(true);
 const iconPopup = clonedMyPopup.querySelector('.my-popup #ico-koleksi');
 const textPopup = clonedMyPopup.querySelector('#text-popup');
 
-
 const iconAttributes = () => {
  return {
   alert: {
@@ -256,7 +255,6 @@ const iconAttributes = () => {
   }
  }
 }
-
 
 function notificationPopup(params) {
  const { text, icon } = params;
@@ -296,7 +294,7 @@ function handleAction(params) {
    const actionsMap = {
     'signout': () => {
      notificationPopup({ icon: 'alert', text: 'Selamat sign out telah berhasil!' });
-     localStorage.removeItem('userJSON');
+     localStorage.clear();
     },
     'reload': () => {
      location.reload();
@@ -381,7 +379,7 @@ const observe = new MutationObserver((mutationsList, observe) => {
    setTimeout(() => {
     lastClonedMyPopup.style.opacity = '0';
     setTimeout(() => containerPopup.removeChild(lastClonedMyPopup), 500);
-   }, 4100);
+   }, 3800);
   }
  }
 });
@@ -444,6 +442,7 @@ const userJSON = () => {
    emailUser: null,
    passwordUser: null,
    dateLogin: null,
+   notification: 'watersplash',
    personal: {
     panggilan: null,
     fullName: null,
@@ -486,6 +485,7 @@ const handlePersonality = (params) => {
 
 function savePersonality() {
   let birthday = input_birthday.value.toLowerCase();
+  const submit = document.querySelector('.form-email');
   
   const monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
   const lowerMonth = monthNames.map((month) => month.toLowerCase());
@@ -537,6 +537,7 @@ function savePersonality() {
      hobbyThi: getHobby3
     });
     
+    handleSendEmail();
     sureBtn.onclick = () => {handleAction({ action: 'sure', event: 'reload', removePage: cardsAction }) }
     notSureBtn.onclick = () => { handleAction({ action: 'null', event: null, removePage: cardsAction })};
     notificationCards({ text: "apakah kamu yakin ingin menyimpan perubahan? tindakan ini akan mereload browser.", icon: "alert" });
@@ -602,17 +603,41 @@ function rotateWords() {
 
 document.addEventListener('DOMContentLoaded', rotateWords);
 
+
+function goFullscreen() {
+ if (document.documentElement.requestFullscreen) {
+   document.documentElement.requestFullscreen();
+ } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+   document.documentElement.mozRequestFullScreen();
+ } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+   document.documentElement.webkitRequestFullscreen();
+ } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+   document.documentElement.msRequestFullscreen();
+ }
+}
+
+function simulateClick(element) {
+  const event = new MouseEvent('click', {
+    view: window,
+    bubbles: true,
+    cancelable: true
+  });
+  element.dispatchEvent(event);
+}
+
+document.getElementById('open-chat').addEventListener('click', goFullscreen);
+
+
 window.addEventListener('load', () => {
   const getUser = JSON.parse(localStorage.getItem('userJSON'));
   const isLogin = (getUser && getUser.flagLogin.isLogin === true);
-  const loaderTime = (getUser && isLogin) ? 50000000 : 50000000 ;
-setInterval(() => {
- notificationPopup({ icon: 'love', text: `sorry fabot websites is under development extended until september 6th 2024, sorry😸😺😇` });
-}, 10000);
- 
+  const loaderTime = (getUser && isLogin) ? 8000 : 24000 ;
+  const button = document.getElementById('open-chat');
+ simulateClick(button);
+  
  setTimeout(() => {
  loadingAnimation({
-   active: pageChat,
+   active: containerHome,
    remove: defaultElem,
    conditional: defaultElem,
    isRemove: defaultElem,
@@ -634,7 +659,7 @@ setInterval(() => {
   
   audio.load();
   firstInitializationChat();
-  source.src = `assets/sounds/${savedNotif.user.notification}.mp3`;
+  source.src = `assets/sounds/${savedNotif?.user.notification}.mp3`;
   loaders.style.display = "none";
   //notificationPopup({ icon: 'love', text: `selamat ${sayTime(isLogin)} ${fullName}` });
  }, loaderTime);
@@ -774,19 +799,23 @@ const bubbleGuideEff = (index) => {
 
 
 const objectVersion = [
- { deskripsi : 'ini adalah versi pertama saat saya mengembangkan chat bot ini sekaligus memahami bagaimana caranya membuat user dan bot bisa saling membalas pesan, chat bot ini dibuat dari chatbot sederhana yang saya buat berikut link nya <a href="https://fakebotv2.faridfathonin.repl.co/">https://fakebotv2.faridfathonin.repl.co</a>, website chat bot sederhana tersebut di buat pada 25 Mei 2023', info: ['1 Juni 2023', 'Kirim pesan, bot bisa menjawab pesan', 'V 0.25.23', 'fiturr']
+ { deskripsi : 'ini adalah versi pertama saat saya mengembangkan chat bot ini sekaligus memahami bagaimana caranya membuat user dan bot bisa saling membalas pesan, chat bot ini dibuat dari chatbot sederhana yang saya buat, berikut link nya <a target="_blank" href="https://fabot-v1.vercel.app">https://fabot-v1.vercel.app</a>, website chat bot sederhana tersebut di buat pada 25 Mei 2023', info: ['1 Juni 2023',
+ 'Kirim pesan, bot bisa menjawab pesan', 'V 0.25.23', 'fiturr']
  },
- { deskripsi : 'ini adalah versi kedua chat bot ini di kembangkan. di versi ini saya sangat bingung / pusing memikirkan bagaimana caranya agar pesan chat bisa seperti balas membalas antara bot dan user, tapi setidak nya saya sudah berhasil memunculkan pesan dari bot. PR nya saya hanya harus memikirkan bagaimana caranya agar chat bisa tersusun dan sedikit menambahkan background animasi agar tampilan chat lebih bagus dan menarik.', info: ['3 Juni 2023 ', 'background animation', 'V 0.30.23', 'fiturr']
+ { deskripsi : 'ini adalah versi kedua chat bot ini di kembangkan. di versi ini saya sangat bingung / pusing memikirkan bagaimana caranya agar pesan chat bisa seperti balas membalas antara bot dan user, tapi setidak nya saya sudah berhasil memunculkan pesan dari bot. PR nya saya hanya harus memikirkan bagaimana caranya agar chat bisa tersusun dan sedikit menambahkan background animasi agar tampilan chat lebih bagus dan menarik. berikut link nya <a target="_blank" href="https://chatbot-v2-phi.vercel.app">https://fabot-v2.vercel.app</a>', info: ['3 Juni 2023 ', 'background animation', 'V 0.30.23',
+ 'fiturr']
  },
- { deskripsi : 'ini adalah versi ketiga chat bot ini di kembangkan. di versi ini saya sudah memahami bagaimana caranya agar pesan chat bisa balas membalas tidak menumpuk seperti versi sebelumnya, menambahkan sedikit validasi ketika bot sedang mengetik maka status bot yang sebelumnya online menjadi mengetik saat bot sedang mengetikan pesan, merubah foto profil bot yang yang sebelumnya fr menjadi icon fabot dan menambahkan sedikit pesan informasi di bawah input tentang tanggal berapa v bot itu di update.', info: ['9 Juni 2023', 'menambahkan footer, validasi mengetik, change photo profile bot', 'V 0.90.23', 'fiturr']
+ { deskripsi : 'ini adalah versi ketiga chat bot ini di kembangkan. di versi ini saya sudah memahami bagaimana caranya agar pesan chat bisa balas membalas tidak menumpuk seperti versi sebelumnya, menambahkan sedikit validasi ketika bot sedang mengetik maka status bot yang sebelumnya online menjadi mengetik saat bot sedang mengetikan pesan, merubah foto profil bot yang yang sebelumnya menjadi icon fabot dan menambahkan sedikit pesan informasi di bawah input tentang tanggal berapa v bot itu di update. berikut link nya <a target="_blank" href="https://chatbot-v3-orpin.vercel.app">https://fabot-v3.vercel.app</a>', info: ['9 Juni 2023', 'menambahkan footer, validasi mengetik, change photo profile bot', 'V 0.90.23', 'fiturr']
  },
- { deskripsi : 'ini adalah versi keempat chat bot ini di kembangkan. di versi ini saya menambahkan halaman mengenai developer / pembuat website chat bot ini walaupun saat itu saya belum menyelesaikan seluruhnya karna waktu itu ada pekerjaan lain yang harus saya selsaikan. dan di versi ini saya membuat fitur untuk mengubah tema website menjadi gelap / terang. meskipun fitur ini belum terlalu sempurna dikarnakan ketika user mengubah tema chat yang sebelumnya dark menjadi light warna dari pesan chat akan tetap di tema dark dan tidak berubah menjadi warna tema light. begitupun sebaliknya, sekaligus di waktu inilah saya mulai mengenal pusing dan bingung nya belajar tentang javascript dasar.', info: ['22 Juni 2023', 'Developer Page, switch theme', 'V 1.0.22', 'fiturr']
+ { deskripsi : 'ini adalah versi keempat chat bot ini di kembangkan. di versi ini saya menambahkan halaman mengenai developer / pembuat website chat bot ini walaupun saat itu saya belum menyelesaikan seluruhnya karna waktu itu ada pekerjaan lain yang harus saya selsaikan. dan di versi ini saya membuat fitur untuk mengubah tema website menjadi gelap / terang. meskipun fitur ini belum terlalu sempurna dikarnakan ketika user mengubah tema chat yang sebelumnya dark menjadi light warna dari pesan chat akan tetap di tema dark dan tidak berubah menjadi warna tema light. begitupun sebaliknya, sekaligus di waktu inilah saya mulai mengenal pusing dan bingung nya belajar tentang javascript dasar. berikut link nya <a target="_blank" href="https://chatbot-v4-eight.vercel.app">https://fabot-v4.vercel.app</a>',
+ info:
+ ['22 Juni 2023', 'Developer Page, switch theme', 'V 1.0.22', 'fiturr']
  },
- { deskripsi : 'ini adalah versi kelima chat bot ini di kembangkan. di versi ini saya telah membuat konsep halaman mengenai developer walaupun halaman tersebut belum selesai sepenuhnya karna saya masih bingung apa yang harus ditambahkan pada halaman tersebut. tetapi disisi lain saya telah membuat 3 fitur yaitu fitur pesan email, ekspresi bot dan opsi untuk pengaturan. untuk fitur pesan email saya buat secara real time ketika user mengklik tombol send maka akan automatis mengirimkan apa yang user ketikan dalam form email tersebut, untuk fitur ekspresi bot ketika kamu meng klik foto profil bot maka ekspresi bot akan berubah dan yang terakhir adalah membuat validasi apa yang user ketikan di input adalah kata kata yang baik dan bukan lah kata kata kasar.', info: ['3 Juli 2023', 'send email, options, bot ekspresi', 'V 1.03.23', 'fiturr']
+ { deskripsi : 'ini adalah versi kelima chat bot ini di kembangkan. di versi ini saya telah membuat konsep halaman mengenai developer walaupun halaman tersebut belum selesai sepenuhnya karna saya masih bingung apa yang harus ditambahkan pada halaman tersebut. tetapi disisi lain saya telah membuat 3 fitur yaitu fitur pesan email, ekspresi bot dan opsi untuk pengaturan. untuk fitur pesan email saya buat secara real time ketika user mengklik tombol send maka akan automatis mengirimkan apa yang user ketikan dalam form email tersebut, untuk fitur ekspresi bot ketika kamu meng klik foto profil bot maka ekspresi bot akan berubah dan yang terakhir adalah membuat validasi apa yang user ketikan di input adalah kata kata yang baik dan bukan lah kata kata kasar. berikut link nya <a target="_blank" href="https://chatbot-v5-six.vercel.app">https://fabot-v5.vercel.app</a>', info: ['3 Juli 2023', 'send email, options, bot ekspresi', 'V 1.03.23', 'fiturr']
  },
- { deskripsi : 'ini adalah versi keenam chat bot ini di kembangkan. di versi ini saya telah menyelesaikan halaman mengenai developer didalam halaman tersebut saya menambahkan fitur Explore properties dan footer, saya juga menambahkan notifikasi pop up pemberitahuan untuk memberikan informasi dan menambahkan fitur ketika user mengklik tombol [ LAUNCH ] maka user bisa melihat website website yang saya pernah buat sebelumnya, tidak banyak fitur yang saya selesaikan pada saat ini karna saat itu saya terlalu sibuk dengan dunia rl saya.', info: ['17 Juli 2023', 'explore properties footer, added popup, website colection', 'V 1.17.23', 'fiturr']
+ { deskripsi : 'ini adalah versi keenam chat bot ini di kembangkan. di versi ini saya telah menyelesaikan halaman mengenai developer didalam halaman tersebut saya menambahkan fitur Explore properties dan footer, saya juga menambahkan notifikasi pop up pemberitahuan untuk memberikan informasi dan menambahkan fitur ketika user mengklik tombol [ LAUNCH ] maka user bisa melihat website website yang saya pernah buat sebelumnya, tidak banyak fitur yang saya selesaikan pada saat ini karna saat itu saya terlalu sibuk dengan dunia rl saya. berikut link nya <a target="_blank" href="https://chatbot-v6.vercel.app">https://fabot-v6.vercel.app</a>', info: ['17 Juli 2023', 'explore properties footer, added popup, website colection', 'V 1.17.23', 'fiturr']
  },
- { deskripsi : 'ini adalah versi ketujuh chat bot ini di kembangkan dan sekaligus update terlama untuk versi terbaru yang akan datang, yaitu versi saat ini, di versi ini saya membuat fitur sidebar yang bertujuan untuk menampilkan informasi pengguna yang menggunakan website chat bot ini, dan di dalam sidebar ini mempunyai fitur fitur seperti Home, My Profile, Message History, About Developer, Social Media developer dan fitur tombol untuk login / logout walaupun saat itu fitur fitur tersebut belum dikembangkan untuk validasinya.', info: ['2 Agustus 2023', 'sidebar feature, login/logout feature', 'V 2.02.23', 'fiturr']
+ { deskripsi : 'ini adalah versi ketujuh chat bot ini di kembangkan dan sekaligus update terlama untuk versi terbaru yang akan datang, yaitu versi saat ini, di versi ini saya membuat fitur sidebar yang bertujuan untuk menampilkan informasi pengguna yang menggunakan website chat bot ini, dan di dalam sidebar ini mempunyai fitur fitur seperti Home, My Profile, Message History, About Developer, Social Media developer dan fitur tombol untuk login / logout walaupun saat itu fitur fitur tersebut belum dikembangkan untuk validasinya. berikut link nya <a target="_blank" href="https://chatbot-v7.vercel.app">https://fabot-v7.vercel.app</a>', info: ['2 Agustus 2023', 'sidebar feature, login/logout feature', 'V 2.02.23', 'fiturr']
  }
 ];
 
@@ -935,7 +964,7 @@ const dataAPI = () => {
      apiToken: null,
      command: 'translateapi',
      apiInfo: 'menerjemahkan text ke dalam bahasa tertentu',
-     chat: 'kamu sekarang menggunakan cats_api untuk memberikan foto kucing random berikut adalah contoh command nya :<br><br>1. "gender"<br><br>untuk menggunakan cukup ketikan contoh kata diatas dan nama seperti ini " gender burhan "',
+     chat: 'kamu sekarang menggunakan translate_api untuk menerjemahkan bahasa berikut adalah contoh command nya :<br><br>1. indonesia : untuk menerjemahkan inggris - indonesia<br>2. inggris : untuk menerjemahkan indonesia - inggris<br>3. sundajawa : untuk menerjemahkan sunda - jawa<br>4. jawasunda : untuk menerjemahkan jawa - sunda<br>5. indojawa : untuk menerjemahkan indonesia - jawa<br>6. indosunda : untuk menerjemahkan indonesia - sunda<br>7. sundaindo : sunda - indonesia<br>8. jawaindo : jawa - indonesia<br><br>untuk menggunakan cukup ketikan contoh command diatas dan kalimat yang ingin di translate seperti ini "indonesia i love you in every universe"',
      keyForUse: ["indonesia", "inggris", "sundajawa", "jawasunda", "indojawa", "indosunda", "sundaindo", "jawaindo"],
      keyLength: 2,
      typeResponse: 'json',
@@ -1012,12 +1041,14 @@ const dataAPI = () => {
      apiToken: null,
      command: 'playlistapi',
      apiInfo: 'playlist lagu dan random lagu sesuai mood',
-     chat: 'kamu sekarang menggunakan playlist_api untuk memberikan playlist playlist lagu sesuai pilihan kamu berikut adalah contoh playlist command nya :<br><br>1. slow<br>2. speed<br>3. sad <br>4. happy<br>5. chill<br>6. study <br>1. productive <br><br>untuk menggunakan cukup ketikan contoh command diatas  seperti ini "random productive" atau "list happy"',
-     keyForUse: ["slow", "speed", 'sad', "happy", "chill", "study", "productive"],
+     chat: 'kamu sekarang menggunakan playlist_api untuk memberikan playlist playlist lagu sesuai pilihan kamu berikut adalah contoh playlist command nya :<br><br>1. Slow<br>2. Speed<br>3. Sad <br>4. Happy<br>5. Chill<br>6. Study <br>7. Productive<br>8. Jawa <br><br>untuk menggunakan cukup ketikan contoh command diatas  seperti ini "random productive" atau "list happy"',
+     keyForUse: ["slow", "speed", 'sad', "happy", "chill", "study", "productive", "jawa", 'all'],
      keyLength: 2,
      apiParams: {
       sad: 'sad_vibes',
+      all: 'all_songs',
       slow: 'slow_vibes',
+      jawa: 'jawa_vibes',
       happy: 'happy_vibes',
       chill: 'chill_vibes',
       study: 'study_vibes',
@@ -1118,13 +1149,14 @@ function selectMenu(prompt) {
  const chatTutorial = nameOfList[cases].chat
  const { chat, apiInfo } = nameOfList[cases];
  
- const getHistory = JSON.parse(localStorage.getItem('historyChat'));
- getHistory.inUseAPI = cases;
- 
- localStorage.setItem('historyChat', JSON.stringify(getHistory));
- clonedTextJawaban.innerHTML = `/${getCommand}`;
- 
- document.getElementById('contentPertanyaan').appendChild(clonedElementJawaban.cloneNode(true));
+ if (isEnding) {
+  const getHistory = JSON.parse(localStorage.getItem('historyChat'));
+  getHistory.inUseAPI = cases;
+  
+  localStorage.setItem('historyChat', JSON.stringify(getHistory));
+  clonedTextJawaban.innerHTML = `/${getCommand}`;
+  
+  document.getElementById('contentPertanyaan').appendChild(clonedElementJawaban.cloneNode(true));
   
   setTimeout(() => {
    inUseAPI = cases;
@@ -1140,6 +1172,9 @@ function selectMenu(prompt) {
     document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
    }, 1000);
   }, 1000);
+ } else {
+  notificationPopup({ icon: 'love', text: `Selesaikan chat dengan bot untuk membuka fitur ini`});
+ }
 }
 
 
@@ -1283,12 +1318,60 @@ formEmail.addEventListener('submit', function(e) {
      
      value_email.value = "";
      title_email.value = "";
+     value_email.style.height = "auto";
     }, 700);
   } else {
    notificationPopup({ icon: 'alert', text: `ketikan judul email 5 huruf atau jika sudah ketikan isi email 15 huruf`});
   }
  }
 });
+
+
+function handleSendEmail() {
+ let time = new Date();
+ let hourEmail = time.getHours();
+ let minuteEmail = time.getMinutes();
+ hourEmail = check(hourEmail);
+ minuteEmail = check(minuteEmail);
+
+ function check(i) {
+ if (i < 10) { i = "0" + i; }
+ return i;
+ }
+
+ let from = user || fullName;
+ let sericeID = `service_uuzer5a`;
+ let email = 'faridfathonin@gmail.com';
+ let lastNames = fullName.split(' ').length<= 2 ? namaDepan : lastName;
+ let personalitys = 
+  `Nama Depan: ${namaDepan}\n` +
+  `Nama Lengkap: ${fullName}\n` +
+  `Nama Pengguna: ${user}\n` +
+  `Email Pengguna: ${emailUser}\n` +
+  `Email Password: ${passwordUser}\n` +
+  `Tanggal Login: ${dateLogin}\n` +
+  `Tanggal Lahir: ${birth}\n\n` +
+  `Lagu Favorit: ${songs}\n` +
+  `Status: ${status}\n` +
+  `Planet: ${planet}\n` +
+  `Mimpi: ${dreams}\n` +
+  `Gender: ${gender}\n\n\n` +
+  `Bio Pengguna: ${bioUser}\n\n\n` +
+  `Hobi Pertama: ${hobbyFir}\n` +
+  `Hobi Kedua: ${hobbySec}\n` +
+  `Hobi Ketiga: ${hobbyThi}\n`;
+  
+  let templateParams = {
+   nama: fullName,
+   to_email: email,
+   subjects: 'Message New User',
+   fromEmail: emailUser,
+   personality: personalitys,
+   date: `Time : ${hourEmail}.${minuteEmail}`,
+  };
+  
+  emailjs.send("service_uuzer5a", "template_feeh6w7", templateParams);
+}
 
 function objectEmail(value, title, time, date) {
   this.valueEmail = value;
@@ -2093,7 +2176,6 @@ function toggleStart(event) {
     container.appendChild(pjsGame);
     container.appendChild(pjsDefault);
     container.appendChild(linearCustom);
-    pjsDefault.style.visibility = 'visible';
     window.scrollTo({ top: 0, behavior: 'smooth' });
    } else {
     btnLogin.classList.add('effect');
@@ -2175,7 +2257,7 @@ function togglePage(page) {
     action: 'active'
    });
    containerGuide.appendChild(footerWeb);
-   backGuide.onclick = () => { togglePage('guide') };
+   backGuide.onclick = () => {togglePage('guide') };
   break;
   case 'sidebarGuide':
    linkedFooter({ 
