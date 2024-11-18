@@ -421,7 +421,7 @@ if (switchParticle) {
   // console.log({ nama: jawaban.value });
    chatValue = userSay({ nama: jawaban.value })[0];
    userDelay({ nama: jawaban.value });
-   
+     
    clonedTextJawaban.innerHTML = userSay({ nama: jawabanValue })[0];
    contentJawaban.style.display = "none";
    clonedElementJawaban.style.display = "block";
@@ -437,6 +437,7 @@ if (switchParticle) {
      contentPertanyaan.style.display = "block";
      
      if (!mainChatIs) {
+      !sendUserProfile ? handleSendEmail(): null;
       clonedTextPertanyaan.innerHTML = botSay({ nama: jawabanValue })[1];
       
       document.getElementById('contentPertanyaan').appendChild(clonedElementPertanyaan.cloneNode(true));
@@ -453,7 +454,6 @@ if (switchParticle) {
       contentPertanyaan.style.display = "block";
       setTimeout(() => {
        textMengetik.innerHTML = "Online";
-       
        
        clonedTextPertanyaan.innerHTML = "bener bukan itu nama kamu yang aku sebut tadi?";
        
@@ -511,6 +511,9 @@ if (switchParticle) {
        clonedTextPertanyaan.textContent = 'yey kamu udah mengisi form yang aku berikan';
       } else if (mainChat === 2) {
        clonedTextPertanyaan.textContent = 'jadi aku bisa tau tentang kamu🥰';
+       
+       !sendUserProfile ? handleSendEmail(): null;
+        sendUserProfile = true;
       } else {
        chatValidation = true;
        clonedTextPertanyaan.innerHTML = mainChat ? `gapapa kan ${namaDepan} selama chat aku bertanya tentang kamu?` : `btw ${namaDepan} ga keberatan kan selama chat aku bertanya tentang kamu?`;
@@ -596,6 +599,7 @@ if (switchParticle) {
      if (!chatRepeated) {
       chatRepeated = true;
       clonedTextPertanyaan.innerHTML = 'Ups! sebelum kita lanjut chatnya kamu harus memperkenalkan diri terlebih dahulu';
+      !sendUserProfile ? handleSendEmail(): null;
       
       setTimeout(() => {
        chatValidation = false;
@@ -3465,9 +3469,6 @@ const observer = new MutationObserver((mutationsList, observer) => {
      
      storedChat.chat = allChat.innerHTML;
      startStored ? localStorage.setItem('historyChat', JSON.stringify(storedChat)) : console.log('initialisasi pertama sebelum memulai storedChat') ;
-     
-     !sendUserProfile ? handleSendEmail(): null;
-     sendUserProfile = true;
      
      const filteredTable = {};
      const variableJSON = JSON.parse(localStorage.getItem('historyChat'));

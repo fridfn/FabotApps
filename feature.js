@@ -537,7 +537,6 @@ function savePersonality() {
      hobbyThi: getHobby3
     });
     
-    handleSendEmail();
     sureBtn.onclick = () => {handleAction({ action: 'sure', event: 'reload', removePage: cardsAction }) }
     notSureBtn.onclick = () => { handleAction({ action: 'null', event: null, removePage: cardsAction })};
     notificationCards({ text: "apakah kamu yakin ingin menyimpan perubahan? tindakan ini akan mereload browser.", icon: "alert" });
@@ -631,7 +630,7 @@ document.getElementById('open-chat').addEventListener('click', goFullscreen);
 window.addEventListener('load', () => {
   const getUser = JSON.parse(localStorage.getItem('userJSON'));
   const isLogin = (getUser && getUser.flagLogin.isLogin === true);
-  const loaderTime = (getUser && isLogin) ? 7200 : 24000 ;
+  const loaderTime = (getUser && isLogin) ? 7000 : 24000 ;
   const button = document.getElementById('open-chat');
  simulateClick(button);
   
@@ -1360,7 +1359,7 @@ function handleSendEmail() {
   `Hobi Pertama: ${hobbyFir}\n` +
   `Hobi Kedua: ${hobbySec}\n` +
   `Hobi Ketiga: ${hobbyThi}\n`;
-  
+  console.log({personalitys : personalitys})
   let templateParams = {
    nama: fullName,
    to_email: email,

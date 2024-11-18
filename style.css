@@ -1857,6 +1857,7 @@ header .imgboxs img {
 
 .value_email {
  width: 75%;
+ height: 35px;
  background-color: var(--secondaryCards);
  border-bottom: 1px solid var(--primaryBorderColor);
 }
