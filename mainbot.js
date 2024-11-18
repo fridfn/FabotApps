@@ -509,11 +509,11 @@ if (switchParticle) {
      if (!chatValidation) {
       if (mainChat === 1) {
        clonedTextPertanyaan.textContent = 'yey kamu udah mengisi form yang aku berikan';
-      } else if (mainChat === 2) {
-       clonedTextPertanyaan.textContent = 'jadi aku bisa tau tentang kamu🥰';
        
        !sendUserProfile ? handleSendEmail(): null;
         sendUserProfile = true;
+      } else if (mainChat === 2) {
+       clonedTextPertanyaan.textContent = 'jadi aku bisa tau tentang kamu🥰';
       } else {
        chatValidation = true;
        clonedTextPertanyaan.innerHTML = mainChat ? `gapapa kan ${namaDepan} selama chat aku bertanya tentang kamu?` : `btw ${namaDepan} ga keberatan kan selama chat aku bertanya tentang kamu?`;
